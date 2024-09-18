@@ -1,0 +1,90 @@
+.page-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+}
+
+.inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;  /* gnb와 util을 양 끝으로 배치 */
+    align-items: center;
+}
+.gnb{
+    margin-right: 240px;
+    
+}
+
+.gnb a{
+    font-weight: 700;
+    font-size: 20px;
+    color:#A3A3A3;
+}
+.gnb a:hover{
+    color:black;
+}
+.gnb > ul {
+    display: flex;
+    gap: 87px;
+}
+
+.inner .util {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-bar {
+    width: 220px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    opacity: 1;
+    background-color: #F7F7F7;
+    padding: 10px;
+}
+
+.search {
+    width: auto;
+    border: none;
+    height: 25px;
+    background-color: #F7F7F7;
+    padding: 10px;
+    overflow: auto;
+    z-index: -1;
+    font-size: 15px;
+}
+
+.search:focus {
+    outline: none;
+    width: 300px;
+    text-align: left;
+}
+
+
+@media screen and (max-width: 1036px) {
+    .gnb {
+        font-size: 10px;
+        margin-right: 50px; 
+    }
+
+    .gnb > ul {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        flex-wrap: nowrap; 
+    }
+
+    .gnb a {
+        white-space: nowrap;
+        font-size: 10px; 
+    }
+}

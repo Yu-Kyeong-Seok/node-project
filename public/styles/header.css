@@ -71,10 +71,10 @@
 
 
 @media screen and (max-width: 1036px) {
-    .gnb {
-        font-size: 10px;
+    /* .gnb {
+        font-size: 20px;
         margin-right: 50px; 
-    }
+    } */
 
     .gnb > ul {
         display: flex;
@@ -85,6 +85,6 @@
 
     .gnb a {
         white-space: nowrap;
-        font-size: 10px; 
+        font-size: 20px; 
     }
 }

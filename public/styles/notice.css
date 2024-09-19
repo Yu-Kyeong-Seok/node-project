@@ -8,22 +8,24 @@
 .notice-container {
   width: 100%;
   background-color: white;
-  padding:0 20px;
-  border-radius: 10px;
+  margin-bottom: 80px;
 }
 
 .notice-description {
-  margin: 50px 0;
+  margin: 120px 0 50px 0;
 }
 
-h2 {
-  font-size: 24px;
+.notice-description h2 {
+  font-size: 32px;
   color: #000000;
 }
 
-.notice {
-  margin: 10px 0;
+
+.notice-list li:not(:last-child) {
+  border-bottom: 1px solid #D3D3D3;
 }
+
+
 
 
 .notice-link {
@@ -31,13 +33,12 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-
-  padding: 20px 20px;
+  padding: 24px 16px;
   color: #000000;
 }
 
 .notice-link:hover {
-  background: #F7F8FF;
+  background: #F5F5F5;
   border-radius: 10px;
   width:100%
 }
@@ -50,10 +51,10 @@ h2 {
 }
 
 .notice-label {
-  background-color: #E8EBFF;
+  background-color: #2B3AA7;
   padding: 5px 10px;
   border-radius: 10px;
-  color: #2B3AA7;
+  color: #ffffff;
   font-size: 12px;
   margin-right: 10px;
 }

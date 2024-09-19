@@ -53,6 +53,10 @@ app.get('/notices', (req, res) => {
   res.render('notices/notice', { title: '공지사항' });
 });
 
+app.get('/notices/noticedetail', (req, res) => {
+  res.render('notices/noticedetail', { title: '공지사항' });
+});
+
 
 
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까

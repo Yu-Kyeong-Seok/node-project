@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/header.css" />
-    <link rel="stylesheet" href="/static/styles/reset.css"/>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-    <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-<body>
-<header class="page-header">
-
+<header class="pc-page-header">
     <div class="inner">
         <div class="logo">
-            <img src="/static/images/logo.png" alt="star" width="50" height="50" />
+            <a href="/">
+                <img src="/static/images/logo.png" alt="star" width="50" height="50" />
+            </a>
         </div>
-        <div class="gnb">
-            <ul class="menu">
-                <li>
-                    <a href="/">홈</a>
-                </li>
-                <li>
-                    <a href="/">카테고리</a>
-                </li>
-                <li>
-                    <a href="/">공지사항</a>
-                </li>
-                <li>
-                    <a href="/">FAQ</a>
-                </li>
-            </ul>
-        </div>
+        <div class="gnb-content">
+            <div class="gnb">
+                <ul class="menu">
+                    <li>
+                        <a href="/">홈</a>
+                    </li>
+                    <li>
+                        <a href="/">카테고리</a>
+                    </li>
+                    <li>
+                        <a href="/">공지사항</a>
+                    </li>
+                    <li>
+                        <a href="/">FAQ</a>
+                    </li>
+                </ul>
+            </div>
             <ul class="util">
                 <li>
                   <i class="fa-solid fa-moon"></i>
@@ -49,5 +38,71 @@
                 </li>
             </ul>
      
+        </div>
+       
+           
     </div>
 </header>
+<header class="mobile-page-header">
+    <div class="inner">
+        <div id="menuToggle">
+            <button class="hamburger-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="page_cover" onclick="history.back()"></div>
+            <div id="menu">
+                <ul class="side_nav">
+                    <button class="close-button">X</button>
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">동물</a></li>
+                    <li><a href="#">음식</a></li>
+                    <li><a href="#">영화</a></li>
+                    <li><a href="#">게임</a></li>
+                    <li><a href="#">육아</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="utils">
+            <a href="/">
+                <img src="/static/images/genesis.png" alt="logo" width="50" height="50" />
+            </a>
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+    </div>
+</header>
+
+<script>
+    // 페이지 로드 시 메뉴 버튼 클릭 이벤트 설정
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.querySelector('.hamburger-bar');
+        const closeButton = document.querySelector('.close-button');
+        const menu = document.getElementById('menu');
+        const pageCover = document.querySelector('.page_cover');
+
+        // 메뉴 열기
+        menuButton.addEventListener('click', function() {
+            menu.classList.add('open');
+            pageCover.classList.add('open');
+            document.documentElement.classList.add('open'); // open 클래스 추가
+        });
+
+        // 메뉴 닫기 (X 버튼 클릭 시)
+        closeButton.addEventListener('click', function() {
+            menu.classList.remove('open');
+            pageCover.classList.remove('open');
+            document.documentElement.classList.remove('open');
+        });
+
+        // 해시 값이 변경될 때 메뉴 닫기
+        window.addEventListener('hashchange', function() {
+            if (location.hash !== '#open') {
+                menu.classList.remove('open');
+                pageCover.classList.remove('open');
+                document.documentElement.classList.remove('open');
+            }
+        });
+    });
+</script>

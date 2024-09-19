@@ -1,18 +1,20 @@
+.content {
+  margin-top: 120px;
+  margin-bottom: 80px;
+}
+
 .wrap {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  background-color: #ffffff;
 }
 
 .notice-container {
   width: 100%;
-  background-color: white;
-  margin-bottom: 80px;
 }
 
 .notice-description {
-  margin: 120px 0 50px 0;
+  margin-bottom: 50px;
 }
 
 .notice-description h2 {
@@ -65,7 +67,7 @@
   color: #000000;
 }
 
-.notice-time {
+.notice-date {
   font-size: 16px;
   color: #A6A6A6;
   margin-top: 16px;

@@ -53,8 +53,8 @@ app.get('/notices', (req, res) => {
   res.render('notices/notice', { title: '공지사항' });
 });
 
-app.get('/notices/noticedetail', (req, res) => {
-  res.render('notices/noticedetail', { title: '공지사항' });
+app.get('/notices/:id', (req, res) => {
+  res.render('notices/noticedetail', { title: '공지사항상세' });
 });
 
 

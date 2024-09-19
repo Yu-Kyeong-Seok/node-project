@@ -1,4 +1,4 @@
-.page-header {
+.pc-page-header,.moblie-page-header {
     position: fixed;
     left: 0;
     top: 0;
@@ -6,36 +6,51 @@
     display: flex;
 }
 
-.inner {
+.pc-page-header .inner{
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     height: 70px;
     display: flex;
-    justify-content: space-between;  /* gnb와 util을 양 끝으로 배치 */
+    justify-content: space-between; 
     align-items: center;
 }
-.gnb{
+/* .gnb{
     margin-right: 240px;
     
+} */
+.gnb-content{
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    /* 부모 요소의 너비를 전체로 설정 */
 }
+.gnb {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center; 
+}
+
 
 .gnb a{
     font-weight: 700;
     font-size: 20px;
     color:#A3A3A3;
+    padding:0 20px;
 }
 .gnb a:hover{
     color:black;
+
+
 }
 .gnb > ul {
     display: flex;
-    gap: 87px;
+    gap: 20px;
 }
 
 .inner .util {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -69,6 +84,156 @@
     text-align: left;
 }
 
+/* .mobile-page-header .inner{
+    height: 70px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding:10px;
+
+} */
+.mobile-page-header .inner {
+    height: 70px;
+    display: flex;
+    justify-content: space-between; /* 사이의 공간을 자동으로 배분 */
+    align-items: center;
+    padding: 10px;
+}
+
+.mobile-page-header .utils {
+    /* 가운데 정렬을 위해 로고에 적절한 스타일 추가 */
+    flex: 1; /* 로고가 가운데에 위치하도록 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.mobile-page-header .fa-user {
+    font-size: 25px;
+    align-items: center;
+    /* 오른쪽 끝으로 배치 */
+}
+/* .mobile-page-header .utils{
+    display: flex;
+    align-items: center;
+
+} */
+
+#menuToggle{
+
+    align-items: center;
+}
+.hamburger-bar{
+    border:none;
+    font-size:15px;
+    background: #fff;
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+html.open {
+    overflow: hidden;
+  }
+  
+  #menu.open {
+    left: 0px;
+  }
+  .page_cover.open {
+    display: block;
+  }
+  .close {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-image: url("/static/images/circle.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+    cursor: pointer;
+  }
+  #menu {   
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -302px;
+    z-index: 10;
+    border: 1px solid #c9c9c9;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    transition: All 0.2s ease;
+    padding:50px 0 0 0;
+  }
+  #menu a{
+    padding:0;
+    text-decoration: none;
+    font-size: 18px;
+    color: #9674b9;
+    display: block;
+    transition: 0.3s;
+    }
+   
+   #menu.open {
+     left: 0px;
+   }
+   
+   
+   .page_cover {
+     width: 100%;
+     height: 100%;
+     right: 0px;
+     background-color: rgba(0,0,0, 0.4);
+     z-index: 4;
+     display: none;
+     position: fixed;
+    top:0;
+   }
+   .page_cover.open {
+    display: block;
+  }
+    #menu ul { 
+        width:100%; 
+        margin:0; 
+        padding:0;
+    }
+
+    #menu ul li {
+        position:relative; 
+        float:left; 
+        width:100%; 
+        list-style-type:none; 
+        font-size:18px;
+    }
+    #menu ul li a{
+        display:block; 
+        width:100%; 
+        height:100%; 
+        line-height:50px; 
+        text-indent:20px;
+        text-align: left;
+        color:#9674b9;
+        font-weight:bold; 
+        text-decoration:none;
+            }
+ #menu ul li a:hover {
+        background:#9674b9;
+        width:100%;
+        color:white;
+}
+                         
+.close-button{
+    margin-left: 200px;
+    border:0;
+}
+
 
 @media screen and (max-width: 1036px) {
     /* .gnb {
@@ -86,5 +251,15 @@
     .gnb a {
         white-space: nowrap;
         font-size: 20px; 
+    }
+}
+@media screen and (min-width: 769px) {
+    .mobile-page-header {
+        display: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .pc-page-header {
+        display: none;
     }
 }

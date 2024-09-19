@@ -5,6 +5,10 @@ import appRouter from "./routers/app.router";
 import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
+// import authViewRouter from "@/api/auth/router/auth.view.router";
+// import { ROUTES_INDEX } from "./routers";
+// import authRouter from "./api/auth/router/auth.router";
+
 const app = express();
 
 // /admin-api
@@ -35,6 +39,10 @@ app.set("view engine", "ejs");
 
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
+
+app.get('/',function(req,res){
+  res.render('index',{ title: '홈페이지' });
+})
 
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까
 // app.get("/star.png", (req, res) => {

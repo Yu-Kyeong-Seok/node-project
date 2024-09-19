@@ -8,6 +8,10 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
+viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
+  res.render(`profile`);
+});
+
 viewRouter.get(`${BASE_PATH}`, (req, res) => {
   res.render("index", {
     title: "홈",

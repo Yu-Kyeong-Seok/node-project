@@ -5,9 +5,9 @@ import appRouter from "./routers/app.router";
 import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
-import authViewRouter from "@/api/auth/router/auth.view.router";
-import { ROUTES_INDEX } from "./routers";
-import authRouter from "./api/auth/router/auth.router";
+// import authViewRouter from "@/api/auth/router/auth.view.router";
+// import { ROUTES_INDEX } from "./routers";
+// import authRouter from "./api/auth/router/auth.router";
 
 const app = express();
 
@@ -31,11 +31,6 @@ app.use(appRouter);
 app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
-
-/** -------- auth ---------  */
-app.use(ROUTES_INDEX.AUTH_API, authRouter);
-app.use(ROUTES_INDEX.AUTH_VIEW, authViewRouter);
-//app.use(ROUTES_INDEX.ADMIN_AUTH_VIEW, adminAuthViewRouter);
 
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));

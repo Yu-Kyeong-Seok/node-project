@@ -1,24 +1,22 @@
-<header class="pc-page-header">
-    <div class="inner">
-        <div class="logo">
-            <a href="/">
-                <img src="/static/images/logo.png" alt="star" width="50" height="50" />
-            </a>
-        </div>
+<header class="header">
+    <div class="inner pc">
+        <a href="index.ejs" class="logo">
+            <img src="/static/images/logo.png" alt="star">
+        </a>
         <div class="gnb-content">
             <div class="gnb">
                 <ul class="menu">
                     <li>
-                        <a href="/">홈</a>
+                        <a href="#">홈</a>
                     </li>
                     <li>
-                        <a href="/">카테고리</a>
+                        <a href="#">카테고리</a>
                     </li>
                     <li>
-                        <a href="/">공지사항</a>
+                        <a href="#">공지사항</a>
                     </li>
                     <li>
-                        <a href="/">FAQ</a>
+                        <a href="#">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -37,13 +35,43 @@
                     <input class="search" type="text" placeholder="질문을 검색해보세요."></input>
                 </li>
             </ul>
-     
         </div>
-       
-           
+    </div>
+
+    <div class="inner mobile">
+        <div id="menuToggle">
+            <button class="hamburger-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div class="nav">
+            <div class="page_cover" onclick="history.back()"></div>
+            <div id="menu">
+                <ul class="side_nav">
+                    <button class="close-button">X</button>
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">동물</a></li>
+                    <li><a href="#">음식</a></li>
+                    <li><a href="#">영화</a></li>
+                    <li><a href="#">게임</a></li>
+                    <li><a href="#">육아</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="utils">
+        </div> -->
+        <a href="#" class="m-logo">
+            <img src="/static/images/genesis.png" alt="logo">
+        </a>
+        <div class="user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
     </div>
 </header>
-<header class="mobile-page-header">
+<!-- <header class="mobile-page-header">
     <div class="inner">
         <div id="menuToggle">
             <button class="hamburger-bar">
@@ -72,7 +100,7 @@
         </div>
 
     </div>
-</header>
+</header> -->
 
 <script>
     // 페이지 로드 시 메뉴 버튼 클릭 이벤트 설정

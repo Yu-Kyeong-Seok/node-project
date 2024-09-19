@@ -32,6 +32,11 @@ app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
 
+/** -------- auth ---------  */
+// app.use(ROUTES_INDEX.AUTH_API, authRouter);
+// app.use(ROUTES_INDEX.AUTH_VIEW, authViewRouter);
+//app.use(ROUTES_INDEX.ADMIN_AUTH_VIEW, adminAuthViewRouter);
+
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
 // view engine 세팅

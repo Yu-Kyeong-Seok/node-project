@@ -29,7 +29,52 @@
       <%- include('../header') %>
 
       <div class="content">
-        <div class="main-category">h</div>
+        <div class="detail-category">
+          <h2 class="category-title">카테고리</h2>
+          <div class="detail-profile"></div>
+          <div class="detail-user">
+            <div class="detail-nickName">닉네임</div>
+            <div class="detail-date">등록날짜</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contents-container">
+        <div class="contents-title"></div>
+        <div class="contents"></div>
+        <div class="contents-bottom">
+          <button class="thumbs-up">
+            <!-- 색 있는거 -->
+            <i class="fa-solid fa-thumbs-up"></i>
+            <!-- 색 없는거  내일 물어봐야 함-->
+            <!-- <i class="fa-regular fa-thumbs-up"></i> -->
+          </button>
+
+          <button class="thumbs-down">
+            <!-- 색 있는거 -->
+            <i class="fa-solid fa-thumbs-down"></i>
+            <!-- 색 없는거  내일 물어봐야 함-->
+            <!-- <i class="fa-regular fa-thumbs-down"></i> -->
+          </button>
+        </div>
+      </div>
+
+      <div class="comment-container">
+        <div class="comment logout">
+          <div class="comment-profile"></div>
+          <div class="comment-contants">
+            <p>댓글을 등록하려면 <a href="#">로그인</a>이 필요합니다.</p>
+          </div>
+        </div>
+        <div class="comment login">
+          <div class="comment-profile"></div>
+          <div class="login-comment-contants">
+            <textarea name="" id=""></textarea>
+          </div>
+          <div class="comment-right">
+            <button type="submit">등록</button>
+          </div>
+        </div>
       </div>
 
       <footer><%- include('../footer') %></footer>

@@ -8,7 +8,16 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
-viewRouter.get(`${BASE_PATH}`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
+  res.render(`Post/Post`);
+});
+
+viewRouter.get(`${BASE_PATH}/Post/PostDetail`, (req, res) => {
+  res.render(`Post/PostDetail`);
+});
+//localhost:4000/views/Post/Post
+
+http: viewRouter.get(`${BASE_PATH}`, (req, res) => {
   res.render("index", {
     title: "홈",
   });

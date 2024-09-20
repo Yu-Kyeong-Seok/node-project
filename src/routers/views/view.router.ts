@@ -16,6 +16,9 @@ viewRouter.get(`${BASE_PATH}/Post/PostDetail`, (req, res) => {
   res.render(`Post/PostDetail`);
 });
 //localhost:4000/views/Post/Post
+viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
+  res.render(`profile/changeNumbers`);
+});
 
 http: viewRouter.get(`${BASE_PATH}`, (req, res) => {
   res.render("index", {

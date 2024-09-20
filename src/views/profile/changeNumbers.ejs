@@ -65,6 +65,19 @@
             $("#menu, .page_cover").removeClass("open");
           });
         });
+
+        const phoneNumberInput = document.querySelector(".change");
+        const confirmButton = document.querySelector(".checkbutton.pupple");
+
+        phoneNumberInput.addEventListener("input", () => {
+          if (phoneNumberInput.value.length >= 10) {
+            confirmButton.disabled = false;
+            confirmButton.style.backgroundColor = "purple";
+          } else {
+            confirmButton.disabled = true;
+            confirmButton.style.backgroundColor = "rgb(177,163,245)";
+          }
+        });
       </script>
     </div>
   </body>

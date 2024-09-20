@@ -3,7 +3,7 @@
   margin-bottom: 80px;
 }
 
-.wrap {
+.inner.pc {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -59,12 +59,16 @@
   color: #ffffff;
   font-size: 12px;
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .notice-title {
   flex-grow: 1;
   font-size: 20px;
   color: #000000;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
 }
 
 .notice-date {
@@ -73,3 +77,14 @@
   margin-top: 16px;
   margin-left: 50px;
 }
+
+/* @media screen and (min-width: 769px) {
+  .header .inner.mobile {
+      display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header .inner.pc {
+      display: none;
+  }
+} */

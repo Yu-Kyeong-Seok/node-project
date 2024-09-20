@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/header.css" />
+    <link rel="stylesheet" href="/static/styles/footer.css"/>
+    <link rel="stylesheet" href="/static/styles/reset.css"/>
+    <link rel="stylesheet" href="/static/styles/write.css" />
+    <link rel="stylesheet" href="/static/styles/signup.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+  <body>
+    <div class="page-container">
+      <%- include('../../header') %>
+      <div class="content">
+    <div id="signUp-wrap">
+      <div id="wrap-contents">
+        <form id="form">
+          <h1 class="Title">회원가입</h1>
+          
+          <!-- 아이디 입력 -->
+          <label for="ID" class="TextInputSet">
+            <span class="InputLabel">아이디</span>
+            <div class="TextInput">
+              <input type="email" name="ID" id="ID" placeholder="ID" />
+            </div>
+          </label>
+          <div class="success-message msg hide">사용할 수 있는 아이디입니다.</div>
+          <div class="failure-message msg hide">아이디는 최소 5글자 이상이어야 합니다.</div>
+          <div class="failure-message2 msg hide">영문, 숫자만 가능합니다.</div>
+
+          <!-- 패스워드 입력 -->
+          <label for="password" class="TextInputSet">
+            <span class="InputLabel">패스워드</span>
+            <div class="TextInput">
+              <input type="password" name="password" id="password" placeholder="Password" />
+            </div>
+          </label>
+          <div class="strongPassword-message msg hide">대문자 1개 이상, 특수문자 포함 10글자 이내여야 합니다.</div>
+
+          <!-- 패스워드 재확인 -->
+          <label for="confirmPwd" class="TextInputSet">
+            <span class="InputLabel">패스워드 재확인</span>
+            <div class="TextInput">
+              <input type="password" name="confirmPwd" id="confirmPwd" placeholder="Confirm Password" />
+            </div>
+          </label>
+          <div class="mismatch-message msg hide">비밀번호가 일치하지 않습니다.</div>
+
+          <label for="nicktName" class="TextInputSet">
+            <span class="InputLabel">닉네임</span>
+            <div class="TextInput">
+              <input
+                type="text"
+                name="nickName"
+                id="nickName"
+                placeholder="Name"
+              />
+            </div>
+          </label>
+          <label for="firstName" class="TextInputSet">
+            <span class="InputLabel">이름</span>
+            <div class="TextInput">
+              <input
+                type="name"
+                name="firstName"
+                id="firstName"
+                placeholder="이름을 입력해주세요."
+              />
+            </div>
+          </label>
+          <label for="birth" class="TextInputSet">
+            <span class="InputLabel">생년월일</span>
+            <div class="TextInput">
+              <input
+                type="text"
+                name="birth"
+                id="birth"
+                placeholder="19000101"
+              />
+            </div>
+          </label>
+          <label for="email" class="TextInputSet">
+            <span class="InputLabel">본인 확인 이메일</span>
+            <div class="TextInput">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="E-mail"
+              />
+            </div>
+          </label>
+          <label for="tel" class="TextInputSet">
+            <span class="InputLabel">휴대전화</span>
+            <div class="TextInput">
+              <input
+                type="text"
+                name="tel"
+                id="tel"
+                placeholder="Phone-number"
+              />
+            </div>
+          </label>
+
+          <button type="submit" class="completeBtn" disabled="true">완료</button>
+        </form>
+      </div>
+    </div>
+    </div>
+    </div>
+    <footer>
+      <%- include('../../footer') %>
+    </footer>
+
+    <script>
+    // 모든 코드가 DOM이 완전히 로드된 후 실행되도록 .
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById("form");
+        const submitBtn = form.querySelector(".completeBtn");
+        const idForm = form.querySelector("#ID");
+        const pwForm = form.querySelector("#password");
+        const confirm = form.querySelector("#confirmPwd");
+        
+
+        submitBtn.style.cursor = "not-allowed"
+
+        const successMsg = form.querySelector(".success-message");
+        const failureMsg = form.querySelector(".failure-message");
+        const failureMsg2 = form.querySelector(".failure-message2");
+
+        const mismatchMsg = form.querySelector('.mismatch-message');
+        const strongPasswordMsg = form.querySelector('.strongPassword-message');
+
+        //조건 미충족시 버튼 비활성화 
+        function handleInput(){
+          const idValue = idForm.value.trim();  // 공백을 제거한 값으로 확인
+        const pwValue = pwForm.value.trim();
+        const confirmValue = confirm.value.trim();
+
+        if(idValue.length >0 && pwValue.length >0){
+          submitBtn.disabled=false;
+          submitBtn.style.backgroundColor="#7E0DBD";
+          submitBtn.style.cursor="pointer";
+        }else{
+          submitBtn.disabled=true;
+          submitBtn.style.backgroundColor="gray";
+          submitBtn.style.cursor="not-allowed"
+        }
+        }
+        idForm.addEventListener('input',handleInput);
+        pwForm.addEventListener('input',handleInput);
+        // ID 유효성 검사
+        idForm.onkeyup = () => {
+            if (idForm.value.length !== 0) {
+                if (!onlyNumberAndEnglish(idForm.value)) {
+                    successMsg.classList.add('hide');
+                    failureMsg.classList.add('hide');
+                    failureMsg2.classList.remove('hide');
+                } else if (!idLength(idForm.value)) {
+                    successMsg.classList.add('hide');
+                    failureMsg.classList.remove('hide');
+                    failureMsg2.classList.add('hide');
+                } else {
+                    successMsg.classList.remove('hide');
+                    failureMsg.classList.add('hide');
+                    failureMsg2.classList.add('hide');
+                }
+            } else {
+                successMsg.classList.add('hide');
+                failureMsg.classList.add('hide');
+                failureMsg2.classList.add('hide');
+            }
+        };
+
+        //비번 유효성 검사
+        pwForm.onkeyup=()=>{
+          if(pwForm.value.length !== 0){
+            if(strongPassword(pwForm.value)){
+              strongPasswordMsg.classList.add('hide');
+            }
+            else{
+              strongPasswordMsg.classList.remove('hide');
+            }
+          }
+          //값이 아예 없을때.
+          else{
+            strongPasswordMsg.classList.add('hide');
+          }
+        }
+
+        //비밀번호 확인 검사
+        confirm.onkeyup=()=>{
+          if(confirm.value.length!==0){
+            if(isMatch(pwForm.value,confirm.value)){
+              mismatchMsg.classList.add('hide');
+            }
+            else{
+              mismatchMsg.classList.remove('hide');
+            }
+          }else{
+            mismatchMsg.classList.add('hide');
+          }
+        }
+
+        // 폼 유효성 검사 및 제출 방지
+        submitBtn.addEventListener('click', (e) => {
+          //처음에 값을 입력했다가 지웠을 경우에 버튼을 누르니까 alert창이 제대로 안뜸...
+          
+            if (idValue === "") {
+                e.preventDefault();  // 폼 전송 중지
+                alert('아이디를 입력해주세요.');
+                return;
+            }
+            if ( pwValue === "" || confirmValue  === "") {
+                e.preventDefault();  // 폼 전송 중지
+                alert('비밀번호를 입력해주세요.');
+                return;
+            }
+        });
+      
+     })
+    // 유틸리티 함수
+    function idLength(value) {
+        return value.length >= 5 && value.length <= 12;
+    }
+
+    function onlyNumberAndEnglish(str) {
+        return /^[A-Za-z0-9]*$/.test(str);
+    }
+
+    function strongPassword(str) {
+        return /^(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{1,10}$/.test(str);
+    }
+
+    function isMatch(password1, password2) {
+        return password1 === password2;
+    }
+  
+    </script>
+  </body>
+</html>

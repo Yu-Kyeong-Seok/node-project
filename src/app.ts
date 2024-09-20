@@ -5,7 +5,7 @@ import appRouter from "./routers/app.router";
 import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
-// import authViewRouter from "@/api/auth/router/auth.view.router";
+import authViewRouter from "@/api/auth/router/auth.view.router";
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -31,11 +31,7 @@ app.use(appRouter);
 app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
-
-/** -------- auth ---------  */
-// app.use(ROUTES_INDEX.AUTH_API, authRouter);
-// app.use(ROUTES_INDEX.AUTH_VIEW, authViewRouter);
-//app.use(ROUTES_INDEX.ADMIN_AUTH_VIEW, adminAuthViewRouter);
+app.use(authViewRouter);
 
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
@@ -45,9 +41,23 @@ app.set("view engine", "ejs");
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
 
-app.get('/',function(req,res){
-  res.render('index',{ title: '홈페이지' });
-})
+app.get("/", function (req, res) {
+  res.render("index", { title: "홈페이지" });
+});
+
+app.get('/notices', (req, res) => {
+  res.render('notices/notice', { title: '공지사항' });
+});
+
+app.get('/notices/:id', (req, res) => {
+  res.render('notices/noticedetail', { title: '공지사항상세' });
+});
+
+app.get('/faqs', (req, res) => {
+  res.render('faqs/faq', { title: 'FAQ' });
+});
+
+
 
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까
 // app.get("/star.png", (req, res) => {

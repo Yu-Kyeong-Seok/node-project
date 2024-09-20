@@ -1,5 +1,5 @@
  /* 전체 페이지가 화면을 가득 채우게 */
- html, body {
+  html, body {
     height: 100%;
     margin: 0;
     display: flex;
@@ -11,12 +11,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
-  
-  /* 컨텐츠가 페이지의 나머지 부분을 차지하게 */
-  .content {
-    flex: 1;
-    padding: 20px;
   }
   
   /* footer를 하단에 고정 */

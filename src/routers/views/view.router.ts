@@ -16,6 +16,20 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
 });
 
 
+viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
+  res.render(`profile`);
+});
+
+viewRouter.get(`${BASE_PATH}/profileUpdate`, (req, res) => {
+  res.render(`profileUpdate`);
+});
+
+viewRouter.get(`${BASE_PATH}/profileChangeEmail`, (req, res) => {
+  res.render(`profileChangeEmail`);
+});
+
+
+
 viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
   res.render(`Post/Post`);
 });
@@ -23,9 +37,8 @@ viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
 viewRouter.get(`${BASE_PATH}/Post/PostDetail`, (req, res) => {
   res.render(`Post/PostDetail`);
 });
-//localhost:4000/views/Post/Post
 
-http: viewRouter.get(`${BASE_PATH}`, (req, res) => {
+viewRouter.get(`${BASE_PATH}`, (req, res) => {
   res.render("index", {
     title: "홈",
   });

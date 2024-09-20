@@ -19,6 +19,12 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
+
+viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
+  res.render(`category/category`);
+});
+
+
 viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
   res.render(`profile`);
 });
@@ -45,12 +51,14 @@ viewRouter.get(`${BASE_PATH}`, (req, res) => {
   });
 });
 
-viewRouter.get(`${BASE_PATH}/write`, (req, res) => {
-  res.render("client/auth/question");
-});
-viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
-  res.render("profileSetting");
-});
+
+viewRouter.get(`${BASE_PATH}/write`,(req,res)=>{
+  res.render('client/auth/question')
+})
+viewRouter.get(`${BASE_PATH}/profile/setting`,(req,res)=>{
+  res.render('profileSetting')
+})
+
 viewRouter.get(`${BASE_PATH}/users`, (req, res) => {
   res.send("회원가입 완료");
 });

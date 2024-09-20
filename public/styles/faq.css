@@ -76,3 +76,22 @@ details[open] summary i.fa-angle-down {
   display: inline-block; 
   color: #2B3AA7;
 }
+
+@media screen and (max-width: 768px) {
+  /* 아이콘을 숨기는 부분 */
+  .faq summary i {
+    display: none; /* 아이콘 숨김 */
+  }
+
+  /* faq-answer 영역에 배경색 추가 */
+  .faq-answer {
+    background-color: #f5f7fa; /* 원하는 배경색 설정 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    padding: 16px; /* 내용과의 간격 */
+  }
+
+  .faq summary {
+    padding: 24px 16px;
+    line-height: 1.5; /* 줄간격 조정 */
+  }
+}

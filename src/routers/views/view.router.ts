@@ -15,6 +15,9 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
+viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
+  res.render(`category/category`);
+});
 
 viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
   res.render(`profile`);
@@ -43,7 +46,6 @@ viewRouter.get(`${BASE_PATH}`, (req, res) => {
     title: "홈",
   });
 });
-
 
 viewRouter.get(`${BASE_PATH}/write`,(req,res)=>{
   res.render('client/auth/question')

@@ -3,7 +3,7 @@
   margin-bottom: 80px;
 }
 
-.inner.pc {
+.wrap {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -77,14 +77,3 @@
   margin-top: 16px;
   margin-left: 50px;
 }
-
-/* @media screen and (min-width: 769px) {
-  .header .inner.mobile {
-      display: none;
-  }
-}
-@media screen and (max-width: 768px) {
-  .header .inner.pc {
-      display: none;
-  }
-} */

@@ -36,7 +36,7 @@
 
 .notice-content {
   text-align: left;
-  padding: 20px 20px 32px 20px;
+  padding: 20px 20px 120px 20px;
   border-bottom: 1px solid #D3D3D3;
 }
 
@@ -52,6 +52,7 @@
   flex-grow: 1;
   font-size: 20px;
   color: #000000;
+  text-align: left;
 }
 
 .notice-time {

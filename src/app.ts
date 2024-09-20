@@ -32,6 +32,7 @@ app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
 app.use(authViewRouter);
+
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
 // view engine 세팅
@@ -40,9 +41,9 @@ app.set("view engine", "ejs");
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
 
-app.get('/',function(req,res){
-  res.render('index',{ title: '홈페이지' });
-})
+app.get("/", function (req, res) {
+  res.render("index", { title: "홈페이지" });
+});
 
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까
 // app.get("/star.png", (req, res) => {

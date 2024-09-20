@@ -44,10 +44,10 @@
 .question-sideBar {
   width: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 80px;
-  margin-right: 50px;
+  margin-right: 160px;
 }
 .who {
   color: rgba(14, 125, 160, 1);
@@ -127,8 +127,8 @@
   outline: none;
   border: none;
   border-radius: 5px;
-  background-color: rgb(194, 163, 245);
-  color: white;
+  background-color: rgba(161, 109, 246, 0.5);
+  color: whitesmoke;
   padding: 8px;
   cursor: pointer;
 }
@@ -153,7 +153,7 @@
   box-shadow: 0px 2px 2px rgba(40, 39, 39, 1);
 }
 .banner-text {
-  font-size: 18px;
+  font-size: 16px;
   height: 85%;
   display: flex;
   justify-content: center;
@@ -167,4 +167,102 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
+}
+
+@media (min-width: 300px) and (max-width: 769px) {
+  .content {
+    padding: 0 15px;
+  }
+  .gray-bg {
+    padding: 20px 25px;
+    height: auto;
+  }
+  .gray-bg h3 {
+    font-size: 14px;
+  }
+  .gray-bg p {
+    font-size: 12px;
+  }
+  .question-bar {
+    width: 80%;
+    flex-direction: column;
+    padding: 0 20px;
+    text-align: center;
+    margin: 5px auto;
+  }
+  .question-button {
+    font-size: 10px;
+    margin-top: 10px;
+    width: 100%;
+    background-color: rgba(161, 109, 246, 0.5);
+    color: whitesmoke;
+  }
+  .question-sideBar {
+    margin-top: 10px;
+    width: 100%;
+    gap: 15px;
+    margin-right: 0;
+    flex-direction: column;
+  }
+  .post-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+  }
+  .post-container-left {
+    width: 100%;
+    padding: 10px;
+    box-shadow: none;
+  }
+  .posts-profile {
+    margin-right: 10px;
+  }
+  .posts {
+    align-items: start;
+  }
+  .profile {
+    width: 25px;
+    height: 25px;
+  }
+  .category-bar {
+    font-size: 11px;
+  }
+  .user {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .contents-title {
+    font-size: 16px;
+    padding: 0 30px;
+  }
+  .contents-bottom {
+    align-content: end;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .bottom-contents {
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0;
+  }
+  .answer {
+    margin-top: 50px;
+    padding: 6px;
+    font-size: 12px;
+  }
+  .post-right {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .right-banner {
+    padding: 15px;
+    display: none;
+  }
+  .banner-text {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .sign-up {
+    font-size: 10px;
+  }
 }

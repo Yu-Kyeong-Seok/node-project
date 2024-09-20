@@ -45,6 +45,20 @@ app.get("/", function (req, res) {
   res.render("index", { title: "홈페이지" });
 });
 
+app.get('/notices', (req, res) => {
+  res.render('notices/notice', { title: '공지사항' });
+});
+
+app.get('/notices/:id', (req, res) => {
+  res.render('notices/noticedetail', { title: '공지사항상세' });
+});
+
+app.get('/faqs', (req, res) => {
+  res.render('faqs/faq', { title: 'FAQ' });
+});
+
+
+
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까
 // app.get("/star.png", (req, res) => {
 //   res.sendFile(__dirname + "/views/star.png");

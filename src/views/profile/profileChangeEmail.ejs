@@ -17,27 +17,26 @@
 </head>
 <body>
     <div class="page-container">
-        <%- include('./header') %>
+        <%- include('../_layouts/header') %>
     <div class="content">
         <div class="profileUpdate-container">
-            <h1>멋진 프로필을 만들어보세요!</h1>
-            <h2>가이드에 맞춰, 프로필을 완성해 주세요</h2>
-            <img src="/static/images/profile.png" alt="profile">
+            <img class="iconEmail" src="/static/images/profile.png" alt="profile" >
+            <h1>이메일 변경</h1>
             <div class="textbox">
-                <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" class="title">
+                <label for="useEmail">사용 중인 이메일</label>
+                <input type="text" id="useEmail" value="test@naver.com" disabled class="disabled">
                 <br>
-                <label for="greeting">인사말</label>
-                <textarea type="text" id="greeting" placeholder="인사말을 입력해주세요." maxlength="60" rows="1"></textarea>
+                <label for="newEmail">새로운 이메일</label>
+                <input type="text" id="newEmail" placeholder="변경하실 이메일 주소를 입력해 주세요.">
             </div>
             <div class="buttonbox">
-                <button class="up cancle"><a href="/views/profile">취소</a></button>
-                <button class="up save completeBtn"><a href="/views/profile" aria-disabled="true">저장</a></button>
+                <button class="up cancle">취소</button>
+                <button class="up save">저장</button>
             </div>
         </div>
     </div>
-    <%- include('./footer') %>
-    <script>
+    <%- include('../_layouts/footer') %>
+        <script>
         $(document).ready(function() {
             $(".hamburger-bar").click(function() {
                 $("#menu, .page_cover").addClass("open");
@@ -47,7 +46,7 @@
                 $("#menu, .page_cover").removeClass("open");
             });
         });
-    </script>
+        </script>
     </div>
 </body>
 </html>

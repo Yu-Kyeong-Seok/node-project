@@ -1,7 +1,7 @@
 // index.ts
 
-// import "@/envs";
+import "@/envs";
 
-// import "@/db/mongoose";
+import "@/db/mongoose";
 
 import "@/app";

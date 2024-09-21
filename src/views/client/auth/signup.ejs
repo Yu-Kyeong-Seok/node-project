@@ -16,7 +16,7 @@
 </head>
   <body>
     <div class="page-container">
-      <%- include('../../header') %>
+      <%- include('../../_layouts/header') %>
       <div class="content">
     <div id="signUp-wrap">
       <div id="wrap-contents">
@@ -27,7 +27,7 @@
           <label for="ID" class="TextInputSet">
             <span class="InputLabel">아이디</span>
             <div class="TextInput">
-              <input type="email" name="ID" id="ID" placeholder="ID" />
+              <input type="text" name="ID" id="ID" placeholder="ID" />
             </div>
           </label>
           <div class="success-message msg hide">사용할 수 있는 아이디입니다.</div>
@@ -115,7 +115,7 @@
     </div>
     </div>
     <footer>
-      <%- include('../../footer') %>
+      <%- include('../../_layouts/footer') %>
     </footer>
 
     <script>
@@ -126,7 +126,9 @@
         const idForm = form.querySelector("#ID");
         const pwForm = form.querySelector("#password");
         const confirm = form.querySelector("#confirmPwd");
-        
+        const email = form.querySelector("#email");
+        const name=form.querySelector("#firstName")
+        const telNumber=form.querySelector("#tel")
 
         submitBtn.style.cursor = "not-allowed"
 
@@ -137,11 +139,50 @@
         const mismatchMsg = form.querySelector('.mismatch-message');
         const strongPasswordMsg = form.querySelector('.strongPassword-message');
 
+        //버튼 클릭시 정보가 db에 들어가게.
+      form.addEventListener("submit",async(e)=>{
+        e.preventDefault();
+        console.log('Form submitted!'); // 제출 이벤트가 발생하는지 확인
+
+      try{
+        const res=await fetch('/api/users',{
+          method:'POST',
+          headers:{
+            'Content-Type':"application/json",
+          },
+          body:JSON.stringify({
+            id:idForm.value,
+            password:pwForm.value,
+            email:email.value,
+            profile:{
+              firstName:name.value,
+              nickName:nickName.value,
+              telNumber:tel.value
+            }
+          })
+        });
+       // console.log('res',res.body)
+        console.log('Fetch request completed.'); // fetch가 완료되었는지 확인
+        const data= await res.json();  // JSON 대신 텍스트로 응답 확인
+      console.log('Response:', data); // 응답 내용을 출력
+        // console.log('data',data)
+        if(!res.ok){
+          throw new Error(data.details)
+        }
+        location.href="/login"
+      }catch (error) {
+          console.error(error.message);
+          alert(`회원가입에 실패했습니다. ${error.message}`);
+        }
+     })
+
         //조건 미충족시 버튼 비활성화 
         function handleInput(){
           const idValue = idForm.value.trim();  // 공백을 제거한 값으로 확인
+
         const pwValue = pwForm.value.trim();
         const confirmValue = confirm.value.trim();
+       
 
         if(idValue.length >0 && pwValue.length >0){
           submitBtn.disabled=false;
@@ -225,6 +266,8 @@
         });
       
      })
+
+     
     // 유틸리티 함수
     function idLength(value) {
         return value.length >= 5 && value.length <= 12;

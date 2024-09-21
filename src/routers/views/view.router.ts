@@ -41,6 +41,10 @@ viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
   res.render(`profile/changeNumbers`);
 });
 
+viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
+  res.render(`profile/changePassword`);
+});
+
 viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
   res.render(`Post/Post`);
 });

@@ -34,8 +34,20 @@ h1 {
     align-content: center;
     justify-content: center;
     align-items: flex-start;
-
     gap: 10px;
+}
+
+.fixed-box {
+    margin-top: 10px;
+    background-color: rgba(128, 128, 128, 0.5);
+    width: 100%;
+    padding: 12px 12px 12px 16px;
+    border-radius: 14px;
+}
+
+.fixed-text {
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .textbox input {
@@ -57,9 +69,7 @@ h1 {
     border-radius: 14px;
     background: rgb(255, 255, 255);
     box-shadow: rgb(229, 232, 235) 0px 0px 0px 1px inset;
-
 }
-
 
 .textbox textarea {
     width: 100%;
@@ -125,6 +135,10 @@ h1 {
     h2 {
         display: none;
     }
+    .buttonbox {
+        margin-top: 20px;
+    }
+
     .up {
         width: 130px;
         font-size: 14px;

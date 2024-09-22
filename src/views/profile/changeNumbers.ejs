@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles/header.css" />
+    <link rel="stylesheet" href="/static/styles/footer.css" />
+    <link rel="stylesheet" href="/static/styles/profileCss/changeNumbers.css" />
+    <link rel="stylesheet" href="/static/styles/reset.css" />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/5a10cda3a0.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="page-container">
+      <%- include('../header') %>
+      <div class="content">
+        <div class="changeNumbers-container">
+          <h2>휴대폰 번호 변경</h2>
+          <div class="number-container">
+            <div class="basic-number">
+              <h3>휴대폰 번호</h3>
+              <div class="number-box">
+                <p class="fixed-number">+1012341234</p>
+              </div>
+            </div>
+            <div class="change-number">
+              <h3 class="new-number">새로운 휴대폰 번호</h3>
+              <input
+                class="change"
+                type="text"
+                placeholder="변경하실 휴대폰 번호를 입력해 주세요."
+              />
+            </div>
+          </div>
+
+          <div class="button-bar">
+            <button class="checkbutton">취소</button>
+            <button class="checkbutton pupple">확인</button>
+          </div>
+        </div>
+      </div>
+
+      <footer><%- include('../footer') %></footer>
+      <script>
+        $(document).ready(function () {
+          $(".hamburger-bar").click(function () {
+            $("#menu, .page_cover").addClass("open");
+          });
+
+          $(".page_cover, .close").click(function () {
+            $("#menu, .page_cover").removeClass("open");
+          });
+        });
+
+        const phoneNumberInput = document.querySelector(".change");
+        const confirmButton = document.querySelector(".checkbutton.pupple");
+
+        phoneNumberInput.addEventListener("input", () => {
+          if (phoneNumberInput.value.length >= 10) {
+            confirmButton.disabled = false;
+            confirmButton.style.backgroundColor = "purple";
+          } else {
+            confirmButton.disabled = true;
+            confirmButton.style.backgroundColor = "rgb(177,163,245)";
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>

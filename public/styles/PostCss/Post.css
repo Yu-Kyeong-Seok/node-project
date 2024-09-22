@@ -3,10 +3,12 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
 .gray-bg {
+  margin: 0 auto;
   margin-top: 80px;
   max-width: 1280px;
-  width: 100%;
+  width: 98%;
   height: 100px;
   padding: 25px 40px;
   background-color: rgba(242, 242, 242, 1);
@@ -170,12 +172,32 @@
 }
 
 @media (min-width: 300px) and (max-width: 769px) {
+  .mobile-banner {
+    margin-top: 80px;
+    width: 100%;
+    height: 80px;
+    max-width: 1280px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(
+      45deg,
+      rgba(40, 39, 39, 1) 0%,
+      rgba(80, 40, 120, 0.9) 40%,
+      rgba(161, 109, 246, 0.7) 100%
+    );
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
   .content {
     padding: 0 15px;
   }
   .gray-bg {
     padding: 20px 25px;
     height: auto;
+    margin-top: 20px;
   }
   .gray-bg h3 {
     font-size: 14px;
@@ -201,8 +223,10 @@
     margin-top: 10px;
     width: 100%;
     gap: 15px;
-    margin-right: 0;
-    flex-direction: column;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-left: 40px;
+    font-size: 12px;
   }
   .post-container {
     flex-direction: column;
@@ -253,10 +277,10 @@
   .post-right {
     width: 100%;
     margin-top: 20px;
+    display: none;
   }
   .right-banner {
     padding: 15px;
-    display: none;
   }
   .banner-text {
     font-size: 14px;

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles/header.css" />
+    <link rel="stylesheet" href="/static/styles/footer.css" />
+    <link rel="stylesheet" href="/static/styles/PostCss/Post.css" />
+    <link rel="stylesheet" href="/static/styles/reset.css" />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/5a10cda3a0.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <%- include('../_layout/sheader') %>
+      <div class="content">
+        <div class="gray-bg">
+          <h3>언제든지 질문해보세요!</h3>
+          <p>나의 지식을 나누고, 의미 있는 질의응답을 확인해보세요.</p>
+        </div>
+
+        <div class="question-bar">
+          <button class="question-button">질문하기</button>
+          <div class="question-sideBar">
+            <a href="#">인기 질문</a>
+            <a href="#" class="who">누구나 답변하기</a>
+          </div>
+        </div>
+
+        <div class="post-container">
+          <div class="post-container-left">
+            <div class="posts">
+              <div class="profile">
+                <!-- 프로필 더미 아이콘 -->
+                <i class="fa-solid fa-user"></i>
+              </div>
+
+              <div class="category-bar">
+                <div class="category">카테고리</div>
+                <div class="user">
+                  <div class="nickName">닉네임</div>
+                  <div class="date">등록 날짜</div>
+                </div>
+              </div>
+            </div>
+            <div class="posts-contents">
+              <div class="contents-title">아이언 맨은 다시 부활하나요?</div>
+            </div>
+            <div class="contents-bottom">
+              <div class="bottom-contents">
+                <!-- 말풍선 아이콘 -->
+                <a href="#"><i class="fa-regular fa-comments"></i></a>
+                <p class="beautiful">
+                  아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
+                </p>
+              </div>
+              <button class="answer">나도 답변하기</button>
+            </div>
+          </div>
+
+          <div class="post-right">
+            <div class="right-banner">
+              <p class="banner-text">
+                나만의 <br />
+                질문 모음집을 <br />
+                생성해보세요!
+              </p>
+              <a href="" class="sign-up">회원가입</a>
+            </div>
+          </div>
+          <!--  로그인 시 만들어-->
+        </div>
+
+        <div class="post-container">
+          <div class="post-container-left">
+            <div class="posts">
+              <div class="profile">
+                <i class="fa-solid fa-user"></i>
+              </div>
+
+              <div class="category-bar">
+                <div class="category">카테고리</div>
+                <div class="user">
+                  <div class="nickName">닉네임</div>
+                  <div class="date">등록 날짜</div>
+                </div>
+              </div>
+            </div>
+            <div class="posts-contents">
+              <div class="contents-title">아이언 맨은 다시 부활하나요?</div>
+            </div>
+            <div class="contents-bottom">
+              <div class="bottom-contents">
+                <a href="#"><i class="fa-regular fa-comments"></i></a>
+                <p class="beautiful">
+                  아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
+                </p>
+              </div>
+              <button class="answer">나도 답변하기</button>
+            </div>
+          </div>
+
+          <div class="post-right"></div>
+        </div>
+      </div>
+
+      <footer><%- include('../footer') %></footer>
+      <script>
+        $(document).ready(function () {
+          $(".hamburger-bar").click(function () {
+            $("#menu, .page_cover").addClass("open");
+          });
+
+          $(".page_cover, .close").click(function () {
+            $("#menu, .page_cover").removeClass("open");
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>

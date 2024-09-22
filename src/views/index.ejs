@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/header.css" />
+    <link rel="stylesheet" href="/static/styles/footer.css"/>
+    <link rel="stylesheet" href="/static/styles/reset.css"/>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
+    
+    <title>GENESIS</title>
+</head>
+<body>
+  <div class="page-container">
+    <%- include('./_layouts/header') %>
+    <div class="content">
+        
+    </div>
+    
+    <footer>
+        <%- include('./_layouts/footer') %>
+    </footer>
+    <script>
+      $(document).ready(function() {
+          $(".hamburger-bar").click(function() {
+              $("#menu, .page_cover").addClass("open");
+          });
+
+          $(".page_cover, .close").click(function() {
+              $("#menu, .page_cover").removeClass("open");
+          });
+      });
+  </script>
+</div>
+</body>
+</html>

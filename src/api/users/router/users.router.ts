@@ -9,6 +9,8 @@ import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers/index"
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware"
 import { authRoleMiddleware } from "@/api/common/middlewares/authRole.middleware"
+import { validate } from "@/api/common/middlewares/validation.middleware";
+import { createUserValidator } from "../dto/validations/users.validation";
 
 const userRouter = express.Router();
 
@@ -32,6 +34,7 @@ const USER_ROUTES = {
 
 userRouter.post(
   extractPath(USER_ROUTES.SIGN_UP, ROUTES_INDEX.USERS_API),
+  validate(createUserValidator),
   usersController.signUp
 );
 userRouter.get(

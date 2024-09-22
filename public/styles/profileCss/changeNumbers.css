@@ -8,6 +8,7 @@
 
 .changeNumbers-container h2 {
   font-size: 25px;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -71,7 +72,31 @@
   .button-bar {
     flex-direction: column;
   }
-  .checkbutton {
+  /* .checkbutton {
     font-size: 14px;
+  } */
+}
+
+@media screen and (max-width:373px) {
+  .number-container {
+    margin: 5px;
+    width: 100%;
+  }
+  .changeNumbers-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .button-bar {
+    margin: 5px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .checkbutton {
+    min-height: 54px;
+    width: 130px;
+    height: 54px;
+    font-size: 14px;
+    padding: 0px;
   }
 }

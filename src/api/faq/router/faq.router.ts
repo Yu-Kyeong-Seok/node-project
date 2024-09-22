@@ -1,5 +1,7 @@
 import express from "express";
 import FaqController from "../controller/faq.controller";
+import { FaqServiceImpl } from '../service/faq.service';
+
 const faqRouter= express.Router();
 
 const FAQ_ROUTES={
@@ -9,7 +11,7 @@ const FAQ_ROUTES={
     GET_FAQ:`/api/faqs/:faqId`
 }as const;
 
-const faqController = new FaqController ()
+const faqController = new FaqController (new FaqServiceImpl());
 
 faqRouter.get(FAQ_ROUTES.GET_FAQS, faqController.getFaqs);
 faqRouter.get(FAQ_ROUTES.GET_FAQ, faqController.getFaqDetail);

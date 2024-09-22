@@ -3,15 +3,24 @@
 // NOTICE 상세 조회 - getNoticeDetail
 
 import { NextFunction,Request,Response } from "express";
+import { NoticeService } from "../service/notice.service.type";
 
 export default class NoticeController {
+
+  private readonly _noticeService: NoticeService;
+  constructor(_noticeService:NoticeService) {
+    this._noticeService = _noticeService;
+  }
+
   async getNotices(
     req: Request,
     res: Response,
     next: NextFunction 
     ) {
     try {
-      res.send("NOTICE 목록 조회(유저)");
+      const notices = await this._noticeService.getNotices();
+
+      res.send(notices);
     } catch (error){
       next(error);
     }
@@ -23,7 +32,9 @@ export default class NoticeController {
     next: NextFunction 
     ) {
     try {
-      res.send("NOTICE 상세 조회(유저)");
+      const notice = await this._noticeService.getNoticeDetail();
+
+      res.send(notice);
     } catch (error){
       next(error);
     }

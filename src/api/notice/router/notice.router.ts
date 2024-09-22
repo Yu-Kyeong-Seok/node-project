@@ -1,5 +1,7 @@
 import express from "express";
 import NoticeController from '../controller/notice.controller';
+import { NoticeServiceImpl } from "../service/notice.service";
+
 const noticeRouter= express.Router();
 
 const Notice_ROUTES={
@@ -9,7 +11,7 @@ const Notice_ROUTES={
     GET_NOTICE:`/api/notices/:noticeId`
 }as const;
 
-const noticeController = new NoticeController () 
+const noticeController = new NoticeController(new NoticeServiceImpl()); 
 
 noticeRouter.get(Notice_ROUTES.GET_NOTICES, noticeController.getNotices);
 noticeRouter.get(Notice_ROUTES.GET_NOTICE, noticeController.getNoticeDetail);

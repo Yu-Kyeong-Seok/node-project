@@ -1,5 +1,6 @@
 import express from 'express';
 import AdminNoticeController from '../controller/adminNotice.controller';
+import { NoticeServiceImpl } from '../service/notice.service';
 
 const adminNoticeRouter = express.Router();
 
@@ -17,7 +18,7 @@ const ADMIN_NOTICE_ROUTES={
     DELETE_NOTICE:`/admin-api/notices/:noticeId`
 } as const;
 
-const adminNoticeController = new AdminNoticeController () 
+const adminNoticeController = new AdminNoticeController(new NoticeServiceImpl()); 
 
 adminNoticeRouter.get(ADMIN_NOTICE_ROUTES.GET_NOTICES, adminNoticeController.getNotices);
 adminNoticeRouter.get(ADMIN_NOTICE_ROUTES.GET_NOTICE, adminNoticeController.getNoticeDetail);

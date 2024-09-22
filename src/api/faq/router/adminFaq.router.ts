@@ -1,5 +1,6 @@
 import express from 'express';
 import AdminFaqController from '../controller/adminFaq.controller';
+import { FaqServiceImpl } from '../service/faq.service';
 
 const adminFaqRouter = express.Router();
 
@@ -17,7 +18,7 @@ const ADMIN_FAQ_ROUTES={
     DELETE_FAQ:`/admin-api/faqs/:faqId`
 } as const;
 
-const adminFaqController = new AdminFaqController ()
+const adminFaqController = new AdminFaqController(new FaqServiceImpl());
 
 adminFaqRouter.get(ADMIN_FAQ_ROUTES.GET_FAQS, adminFaqController.getFaqs);
 adminFaqRouter.get(ADMIN_FAQ_ROUTES.GET_FAQ, adminFaqController.getFaqDetail);

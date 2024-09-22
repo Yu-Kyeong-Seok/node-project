@@ -2,10 +2,10 @@ import { REGEX } from "@/api/common/validations";
 import * as yup from "yup";
 
 const EMAIL_REGEX= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-// 비밀번호 8~16자 이상이고 영문 숫자 포함 하고 대문자 1개는 꼭 들어가있어야하고, 특수문자도 1개 들어가있어야해.
+// 비밀번호 8~10자 이상이고 영문 숫자 포함 하고 대문자 1개는 꼭 들어가있어야하고, 특수문자도 1개 들어가있어야해.
 
 const PASSWORD_REGEX =
-  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,16}$/;
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,10}$/;
 
 
 const createUserBodyValidator=yup.object({
@@ -17,7 +17,7 @@ const createUserBodyValidator=yup.object({
     password:yup
     .string()
     .required("비밀번호는 필수 입력값입니다.")
-    .matches(PASSWORD_REGEX,"비밀번호는 8~16자 이상이고, 대문자 1개 이상 그리고 영문 숫자 포함하고, 특수문자는 1개 이상이어야합니다."),
+    .matches(PASSWORD_REGEX,"비밀번호는 8~10자 이상이고, 대문자 1개 이상 그리고 영문 숫자 포함하고, 특수문자는 1개 이상이어야합니다."),
 
     profile:yup.object({
         birth:yup
@@ -41,7 +41,7 @@ export const createUserValidator = {
       .string()
       .matches(
         PASSWORD_REGEX,
-        "비밀번호는 8~16자 이상이고, 대문자 1개 이상 그리고 영문 숫자 포함하고, 특수문자는 1개 이상이어야합니다."
+        "비밀번호는 8~10자 이상이고, 대문자 1개 이상 그리고 영문 숫자 포함하고, 특수문자는 1개 이상이어야합니다."
       )
       .optional(),
       profile:yup.object({

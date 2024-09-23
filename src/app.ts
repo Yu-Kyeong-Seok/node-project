@@ -5,7 +5,7 @@ import appRouter from "./routers/app.router";
 import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
-import authViewRouter from "@/api/auth/router/auth.view.router";
+import authViewRouter from "./api/auth/router/auth.view.router";
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 

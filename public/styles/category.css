@@ -1,7 +1,7 @@
-@import url(../styles/common/reset.css);
-@import url(../styles/common/common.css);
-@import url(../styles/common/header.css);
-@import url(../styles/common/footer.css);
+@import url(../styles/reset.css);
+@import url(../styles/common.css);
+@import url(../styles/header.css);
+@import url(../styles/footer.css);
 
 .category-wrap{width:100%; max-width:1200px; padding:0 20px; margin:0 auto; display:flex; flex-direction: row; flex-wrap: wrap; gap:40px;}
 .category-wrap .category-container{flex: 3;}

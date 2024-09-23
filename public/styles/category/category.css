@@ -3,7 +3,7 @@
 @import url(../common/header.css);
 @import url(../common/footer.css);
 
-.category-wrap{width:100%; max-width:1200px; padding:0 20px; margin:0 auto; display:flex; flex-direction: row; flex-wrap: wrap; gap:40px;}
+.category-wrap{width:100%; max-width:1200px; padding:0 20px; margin:0 auto; display:flex; flex-direction: row; flex-wrap: wrap; gap:40px; height:100%; position: relative;}
 .category-wrap .category-container{flex: 3;}
 .category-wrap .category-aside-container{flex: 1;}
 
@@ -24,11 +24,18 @@
 .category-content .list li a.gran::before{ background: url(../../images/list_icon04.png) no-repeat center / cover;}
 .category-content .list li a.game::before{ background: url(../../images/list_icon05.png) no-repeat center / cover;}
 
+.banner {display:block; padding:50px 20px 20px 20px; background: linear-gradient(45deg, rgba(40, 39, 39, 1) 0%,   rgba(80, 40, 120, 0.9) 40%,rgba(161, 109, 246, 0.7) 100%); border-radius: 10px; color: white; box-shadow: 0px 2px 2px rgba(40, 39, 39, 1);}
+.banner-text {font-size: 22px; font-weight: 700; line-height: 1.5;}
+.banner-sign-up{display:flex; justify-content: right; align-items: center; margin-top:50px; font-size:16px; font-weight: 600; color:#ffffff; opacity: .7;}
+.banner-sign-up i{margin-left:10px;}
+
 .category-aside-container{display:flex; flex-direction: column; gap:50px;}
+.category-aside-container.fixed{position: fixed; top:0; right:0;}
 .category-aside-container .aside-content .dumm{width:100%; height:300px; background-color: gray;}
 .category-aside-container .aside-content .dumm + .top3{margin-top:50px;}
+.category-aside-container .aside-content .top3{background-color:#fff;}
 .category-aside-container .aside-content .top3 h3{font-size:20px; font-weight: 800; display:flex; align-items: center; justify-content: center;}
-.category-aside-container .aside-content .top3 h3::before{content:''; width:20px; height: 20px; background: url('../images/top3_icon.png') no-repeat center / 100% auto; margin-right:5px;}
+.category-aside-container .aside-content .top3 h3::before{content:''; width:20px; height: 20px; background: url('../../images/top3_icon.png') no-repeat center / 100% auto; margin-right:5px;}
 .category-aside-container .aside-content .top3 ul{margin-top:20px; border:1px solid #e3e3e3; border-radius: 20px; padding:30px; display:flex; flex-direction: column; gap: 20px;}
 .category-aside-container .aside-content .top3 ul li{display:flex; justify-content: center;}
 .category-aside-container .aside-content .top3 ul li a{display:block; padding:16px 50px; border-radius: 30px; font-size:16px; font-weight: 600; position: relative; color:#fff; transition: all .3s ease; overflow: hidden;}
@@ -52,11 +59,11 @@
     .category-aside-container .aside-content .top3 ul li a{padding:16px 30px; border-radius:24px;}
 }
 @media (max-width:768px){
-    .category-content .list li{width:25%;}
-
     .category-wrap{flex-direction: column; padding:0;}
     .category-wrap .category-container{flex:1}
     .category-wrap .category-aside-container{order:-1}
+
+    .category-content .list li{width:25%;}
 
     .category-aside-container .aside-content .top3 ul{flex-direction: row; padding:10px; justify-content: center; margin-top:10px;}
     .category-aside-container .aside-content .top3 ul li a{font-size:14px; padding:10px 30px; border-radius: 16px;}

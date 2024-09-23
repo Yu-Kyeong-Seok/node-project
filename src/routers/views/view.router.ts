@@ -15,6 +15,12 @@ const viewRouter = express.Router();
 // );
 const BASE_PATH = "/views";
 
+viewRouter.get(`${BASE_PATH}`, (req, res) => {
+  res.render("index", {
+    title: "홈",
+  });
+});
+
 viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
@@ -23,37 +29,45 @@ viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
   res.render(`category/category`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/profile`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
   res.render(`profile/profile`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/profileEdit`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/profile/edit`, (req, res) => {
   res.render(`profile/profileEdit`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/profileChangeEmail`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/profile/changeEmail`, (req, res) => {
   res.render(`profile/profileChangeEmail`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/profileChangeNumbers`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
   res.render(`profile/profileChangeNumbers`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/profileChangePassword`, (req, res) => {
+viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
   res.render(`profile/profileChangePassword`);
 });
 
-viewRouter.get(`${BASE_PATH}`, (req, res) => {
-  res.render("index", {
-    title: "홈",
-  });
+viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
+  res.render("profileSetting");
 });
 
 viewRouter.get(`${BASE_PATH}/write`, (req, res) => {
   res.render("client/auth/question");
 });
-viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
-  res.render("profileSetting");
+
+
+viewRouter.get(`${BASE_PATH}/notice`, (req, res) => {
+  res.render(`notice/notice`);
+});
+
+viewRouter.get(`${BASE_PATH}/notice/detail`, (req, res) => {
+  res.render(`notice/noticedetail`);
+});
+
+viewRouter.get(`${BASE_PATH}/faq`, (req, res) => {
+  res.render(`faq/faq`);
 });
 
 viewRouter.get(`${BASE_PATH}/users`, (req, res) => {

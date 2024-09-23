@@ -19,16 +19,30 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
-  res.render(`profile`);
+
+viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
+  res.render(`category/category`);
 });
 
-viewRouter.get(`${BASE_PATH}/profileUpdate`, (req, res) => {
-  res.render(`profileUpdate`);
+
+viewRouter.get(`${BASE_PATH}/profile/profile`, (req, res) => {
+  res.render(`profile/profile`);
 });
 
-viewRouter.get(`${BASE_PATH}/profileChangeEmail`, (req, res) => {
-  res.render(`profileChangeEmail`);
+viewRouter.get(`${BASE_PATH}/profile/profileUpdate`, (req, res) => {
+  res.render(`profile/profileUpdate`);
+});
+
+viewRouter.get(`${BASE_PATH}/profile/profileChangeEmail`, (req, res) => {
+  res.render(`profile/profileChangeEmail`);
+});
+
+viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
+  res.render(`profile/changeNumbers`);
+});
+
+viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
+  res.render(`profile/changePassword`);
 });
 
 viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
@@ -45,12 +59,14 @@ viewRouter.get(`${BASE_PATH}`, (req, res) => {
   });
 });
 
-viewRouter.get(`${BASE_PATH}/write`, (req, res) => {
-  res.render("client/auth/question");
-});
-viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
-  res.render("profileSetting");
-});
+
+viewRouter.get(`${BASE_PATH}/write`,(req,res)=>{
+  res.render('client/auth/question')
+})
+viewRouter.get(`${BASE_PATH}/profile/setting`,(req,res)=>{
+  res.render('profileSetting')
+})
+
 viewRouter.get(`${BASE_PATH}/users`, (req, res) => {
   res.send("회원가입 완료");
 });

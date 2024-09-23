@@ -1,4 +1,4 @@
-.profileUpdate-container {
+.profileEdit-container {
     width: 100%;
     max-width: 1200px;
     padding:0 20px;
@@ -124,7 +124,7 @@ h1 {
 
 
 @media screen and (max-width:373px) {
-    .profileUpdate-container {
+    .profileEdit-container {
         transform: translateY(70px);
         justify-content: flex-start;
         padding:0;

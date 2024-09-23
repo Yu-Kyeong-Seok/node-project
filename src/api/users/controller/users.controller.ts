@@ -67,11 +67,13 @@ export default class UsersController {
   /**로그아웃 */
   async logout(req:Request,res:Response,next:NextFunction){
         try{
-          res.setHeader(
-            "Set-Cookie",
-            "accessToken=; Path=/; HttpOnly: Max-Age=0"
-          )
-          res.redirect('/login')
+          // res.setHeader(
+          //   "Set-Cookie",
+          //   "accessToken=; Path=/; HttpOnly: Max-Age=0"
+          // )
+          res.clearCookie('accessToken',{path:'/'})
+          res.status(200).send()
+          res.redirect('/')
         }catch(error){
           next(error)
         }

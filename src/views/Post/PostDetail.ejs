@@ -27,7 +27,7 @@ contents<!DOCTYPE html>
   <body>
     @media (min-width: 300px) and (max-width: 890px)
     <div class="page-container">
-      <%- include('../header') %>
+      <%- include('../_layouts/header') %>
 
       <div class="content">
         <div class="detail-category">
@@ -76,7 +76,7 @@ contents<!DOCTYPE html>
             </div>
             <div class="comment-contants">
               <p>
-                댓글을 등록하려면 <a href="#" class="need-login">로그인</a>이
+                댓글을 등록하려면 <a href="/login" class="need-login">로그인</a>이
                 필요합니다.
               </p>
             </div>
@@ -101,8 +101,17 @@ contents<!DOCTYPE html>
         </div>
       </div>
 
-      <footer><%- include('../footer') %></footer>
+      <footer><%- include('../_layouts/footer') %></footer>
       <script>
+        const [cookies]=useCookies(['accessToken'])
+
+        const handleComment=()=>{
+          if(!cookies.accessToken){
+            alert("로그인필요");
+            return;
+          }
+          
+        }
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");

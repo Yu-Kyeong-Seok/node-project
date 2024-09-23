@@ -24,19 +24,19 @@ viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
 viewRouter.get(`${BASE_PATH}/profile/profile`, (req, res) => {
   res.render(`profile/profile`);
 });
-viewRouter.get(`${BASE_PATH}/profile/profileUpdate`, (req, res) => {
-  res.render(`profile/profileUpdate`);
+viewRouter.get(`${BASE_PATH}/profile/profileEdit`, (req, res) => {
+  res.render(`profile/profileEdit`);
 });
 viewRouter.get(`${BASE_PATH}/profile/profileChangeEmail`, (req, res) => {
   res.render(`profile/profileChangeEmail`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
-  res.render(`profile/changeNumbers`);
+viewRouter.get(`${BASE_PATH}/profile/profileChangeNumbers`, (req, res) => {
+  res.render(`profile/profileChangeNumbers`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
-  res.render(`profile/changePassword`);
+viewRouter.get(`${BASE_PATH}/profile/profileChangePassword`, (req, res) => {
+  res.render(`profile/profileChangePassword`);
 });
 
 viewRouter.get(`${BASE_PATH}`, (req, res) => {

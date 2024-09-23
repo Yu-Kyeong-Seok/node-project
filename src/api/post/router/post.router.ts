@@ -1,4 +1,5 @@
 import express from "express";
+import { link } from "node:fs";
 // import { ROUTES_INDEX } from "..";
 // import { extractPath } from "@/utils/path.util";
 // import UsersController from "@/api/users/controller/users.controller";
@@ -6,19 +7,22 @@ import express from "express";
 // import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 // import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
 
-const viewRouter = express.Router();
+const postRouter = express.Router();
 // const usersController = new UsersController(
 //   new UsersServiceImpl(
 //     new MongooseUserRepository(),
 //     new MongooseProfileRepository()
 //   )
 // );
+
 const BASE_PATH = "/views";
 
-viewRouter.get(`${BASE_PATH}/Post/Post`, (req, res) => {
-  res.render(`Post/Post`);
+postRouter.get(`${BASE_PATH}/post/post`, (req, res) => {
+  res.render(`post/post`);
 });
 
-viewRouter.get(`${BASE_PATH}/Post/PostDetail`, (req, res) => {
-  res.render(`Post/PostDetail`);
+postRouter.get(`${BASE_PATH}/post/postDetail`, (req, res) => {
+  res.render(`post/postDetail`);
 });
+
+export default postRouter;

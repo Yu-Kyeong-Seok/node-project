@@ -3,6 +3,7 @@ import path from "node:path";
 import morgan from "morgan";
 import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
+import postRouter from "../src/api/post/router/post.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import { ROUTES_INDEX } from "./routers";
@@ -37,6 +38,7 @@ app.use(appRouter);
 //app.use(userRouter);
 app.use(viewRouter);
 app.use(authViewRouter);
+app.use(postRouter);
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);

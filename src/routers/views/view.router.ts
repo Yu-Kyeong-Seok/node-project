@@ -30,11 +30,9 @@ viewRouter.get(`${BASE_PATH}/profile/profileUpdate`, (req, res) => {
 viewRouter.get(`${BASE_PATH}/profile/profileChangeEmail`, (req, res) => {
   res.render(`profile/profileChangeEmail`);
 });
-
 viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
   res.render(`profile/changeNumbers`);
 });
-
 viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
   res.render(`profile/changePassword`);
 });

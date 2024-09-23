@@ -6,7 +6,7 @@ contents<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/styles/header.css" />
     <link rel="stylesheet" href="/static/styles/footer.css" />
-    <link rel="stylesheet" href="/static/styles/PostCss/PostDetail.css" />
+    <link rel="stylesheet" href="/static/styles/post/postDetail.css" />
     <link rel="stylesheet" href="/static/styles/reset.css" />
     <link
       rel="stylesheet"
@@ -80,8 +80,8 @@ contents<!DOCTYPE html>
             </div>
             <div class="comment-contants">
               <p>
-                댓글을 등록하려면 <a href="/login" class="need-login">로그인</a>이
-                필요합니다.
+                댓글을 등록하려면
+                <a href="/login" class="need-login">로그인</a>이 필요합니다.
               </p>
             </div>
           </div>
@@ -107,15 +107,14 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
-        const [cookies]=useCookies(['accessToken'])
+        const [cookies] = useCookies(["accessToken"]);
 
-        const handleComment=()=>{
-          if(!cookies.accessToken){
+        const handleComment = () => {
+          if (!cookies.accessToken) {
             alert("로그인필요");
             return;
           }
-          
-        }
+        };
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");

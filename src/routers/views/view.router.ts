@@ -18,15 +18,19 @@ const BASE_PATH = "/views";
 viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
+
 viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
   res.render(`category/category`);
 });
+
 viewRouter.get(`${BASE_PATH}/profile/profile`, (req, res) => {
   res.render(`profile/profile`);
 });
+
 viewRouter.get(`${BASE_PATH}/profile/profileEdit`, (req, res) => {
   res.render(`profile/profileEdit`);
 });
+
 viewRouter.get(`${BASE_PATH}/profile/profileChangeEmail`, (req, res) => {
   res.render(`profile/profileChangeEmail`);
 });

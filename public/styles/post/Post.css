@@ -164,8 +164,8 @@
   padding: 5px;
   border-radius: 10px;
 }
-.sign-up {
-  display: flex;
+.post-sign-up {
+  display: none;
   justify-content: center;
   align-items: center;
   font-size: 12px;
@@ -286,7 +286,11 @@
     font-size: 14px;
     padding: 10px;
   }
-  .sign-up {
+  .post-sign-up {
     font-size: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
   }
 }

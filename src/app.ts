@@ -2,13 +2,14 @@ import express from "express";
 import path from "node:path";
 import morgan from "morgan";
 import appRouter from "./routers/app.router";
-import userRouter from "@/api/users/router/users.router"
+import userRouter from "@/api/users/router/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
+import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -39,8 +40,8 @@ app.use(viewRouter);
 app.use(adminViewRouter);
 app.use(authViewRouter);
 
-app.use(ROUTES_INDEX.USERS_API,userRouter)
-app.use(ROUTES_INDEX.AUTH_API,authRouter)
+app.use(ROUTES_INDEX.USERS_API, userRouter);
+app.use(ROUTES_INDEX.AUTH_API, authRouter);
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
 // view engine 세팅
@@ -53,19 +54,19 @@ app.get("/", function (req, res) {
   res.render("index", { title: "홈페이지" });
 });
 
-app.get('/notices', (req, res) => {
-  res.render('notices/notice', { title: '공지사항' });
+app.get("/notices", (req, res) => {
+  res.render("notices/notice", { title: "공지사항" });
 });
 
-app.get('/notices/:id', (req, res) => {
-  res.render('notices/noticedetail', { title: '공지사항상세' });
+app.get("/notices/:id", (req, res) => {
+  res.render("notices/noticedetail", { title: "공지사항상세" });
 });
 
-app.get('/faqs', (req, res) => {
-  res.render('faqs/faq', { title: 'FAQ' });
+app.get("/faqs", (req, res) => {
+  res.render("faqs/faq", { title: "FAQ" });
 });
 
-
+app.use(errorHandler);
 
 // 이제 더이상 안녕 안써도돼 express.static과 함께니까
 // app.get("/star.png", (req, res) => {

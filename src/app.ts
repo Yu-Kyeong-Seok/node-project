@@ -60,8 +60,8 @@ app.get("/notice/:id", (req, res) => {
   res.render("notice/noticedetail", { title: "공지사항상세" });
 });
 
-app.get("/faqs", (req, res) => {
-  res.render("faqs/faq", { title: "FAQ" });
+app.get("/faq", (req, res) => {
+  res.render("faq/faq", { title: "FAQ" });
 });
 
 app.use(errorHandler);

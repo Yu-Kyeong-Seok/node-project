@@ -1,5 +1,3 @@
-// import { ROUTES_INDEX } from "@/routers";
-// import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import express from "express";
@@ -10,13 +8,6 @@ import { UsersServiceImpl } from "@/api/users/service/users.service";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
 import { createUserValidator } from "@/api/users/dto/validations/users.validation"
 import {validate} from "@/api/common/middlewares/validation.middleware"
-// import AuthViewController from "../controller/auth.view.controller";
-// import { AuthServiceImpl } from "../service/auth.service";
-// import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
-// import { UsersServiceImpl } from "@/api/users/service/users.service";
-// import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
-// import { validate } from "@/api/common/middlewares/validation.middleware";
-// import { createUserValidator } from "@/api/users/dto/validations/adminUsers.validation";
 const authViewRouter = express.Router();
 
 const authViewController = new AuthViewController(

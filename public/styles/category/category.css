@@ -1,7 +1,7 @@
-@import url(../styles/common/reset.css);
-@import url(../styles/common/common.css);
-@import url(../styles/common/header.css);
-@import url(../styles/common/footer.css);
+@import url(../common/reset.css);
+@import url(../common/common.css);
+@import url(../common/header.css);
+@import url(../common/footer.css);
 
 .category-wrap{width:100%; max-width:1200px; padding:0 20px; margin:0 auto; display:flex; flex-direction: row; flex-wrap: wrap; gap:40px;}
 .category-wrap .category-container{flex: 3;}
@@ -18,11 +18,11 @@
 .category-content .list li{ color:#000; width:20%; text-align: center; padding:0 5px; }
 .category-content .list li a{display:block; padding:20px 0; font-size:16px; font-weight: 600; display:flex; align-items: center; justify-content: center; border-bottom:1px solid #ededed;}
 .category-content .list li a::before{content:''; width:20px; height:20px; margin-right:10px;}
-.category-content .list li a.animal::before{ background: url(../images/list_icon01.png) no-repeat center / cover;}
-.category-content .list li a.food::before{ background: url(../images/list_icon02.png) no-repeat center / cover;}
-.category-content .list li a.movie::before{ background: url(../images/list_icon03.png) no-repeat center / cover;}
-.category-content .list li a.gran::before{ background: url(../images/list_icon04.png) no-repeat center / cover;}
-.category-content .list li a.game::before{ background: url(../images/list_icon05.png) no-repeat center / cover;}
+.category-content .list li a.animal::before{ background: url(../../images/list_icon01.png) no-repeat center / cover;}
+.category-content .list li a.food::before{ background: url(../../images/list_icon02.png) no-repeat center / cover;}
+.category-content .list li a.movie::before{ background: url(../../images/list_icon03.png) no-repeat center / cover;}
+.category-content .list li a.gran::before{ background: url(../../images/list_icon04.png) no-repeat center / cover;}
+.category-content .list li a.game::before{ background: url(../../images/list_icon05.png) no-repeat center / cover;}
 
 .category-aside-container{display:flex; flex-direction: column; gap:50px;}
 .category-aside-container .aside-content .dumm{width:100%; height:300px; background-color: gray;}
@@ -35,15 +35,15 @@
 .category-aside-container .aside-content .top3 ul li a::before{content:''; position: absolute; left:0; top:0; right:0; bottom:0;  opacity: 0.12;}
 
 .category-aside-container .aside-content .top3 ul li a.animal{background-image: linear-gradient(to top right,rgba(255, 165, 0, 1),rgba(255, 255, 153, 1)); }
-.category-aside-container .aside-content .top3 ul li a.animal::before{background: url(../images/top3_animalBg.jpg) no-repeat center / cover;}
+.category-aside-container .aside-content .top3 ul li a.animal::before{background: url(../../images/top3_animalBg.jpg) no-repeat center / cover;}
 .category-aside-container .aside-content .top3 ul li a.gran{background-image: linear-gradient(to top right,rgba(0, 238, 255, 1),rgba(39, 60, 255, 1));}
-.category-aside-container .aside-content .top3 ul li a.gran::before{background: url(../images/top3_granBg.jpg) no-repeat center / cover;}
+.category-aside-container .aside-content .top3 ul li a.gran::before{background: url(../../images/top3_granBg.jpg) no-repeat center / cover;}
 .category-aside-container .aside-content .top3 ul li a.game{background-image: linear-gradient(to top right,rgb(255, 187, 187),rgba(255, 153, 153, 1));}
-.category-aside-container .aside-content .top3 ul li a.game::before{background: url(../images/top3_gameBg.jpg) no-repeat center / cover;}
+.category-aside-container .aside-content .top3 ul li a.game::before{background: url(../../images/top3_gameBg.jpg) no-repeat center / cover;}
 .category-aside-container .aside-content .top3 ul li a.food{background-image: linear-gradient(to top right,rgb(255, 161, 232),rgba(194, 4, 146, 1));}
-.category-aside-container .aside-content .top3 ul li a.food::before{background: url(../images/top3_foodBg.jpg) no-repeat center / cover;}
+.category-aside-container .aside-content .top3 ul li a.food::before{background: url(../../images/top3_foodBg.jpg) no-repeat center / cover;}
 .category-aside-container .aside-content .top3 ul li a.movie{background-image: linear-gradient(to top right,rgb(175, 255, 151),rgba(10, 194, 108, 1));}
-.category-aside-container .aside-content .top3 ul li a.movie::before{background: url(../images/top3_movieBg.jpg) no-repeat center / cover;}
+.category-aside-container .aside-content .top3 ul li a.movie::before{background: url(../../images/top3_movieBg.jpg) no-repeat center / cover;}
 
 
 @media (min-width:769px) and (max-width:1000px){

@@ -2,13 +2,13 @@ import { FaqResponseDTO } from "../dto/faqResponse.dto";
 
 export interface FaqService {
   /** FAQ 생성 */
-  createFaq(): Promise<FaqResponseDTO>;
+  createFaq(params: Omit<IFaq, "id">): Promise<FaqResponseDTO>;
   /** FAQ 목록 조회 */
   getFaqs(): Promise<FaqResponseDTO[]>;
-  /** FAQ 조회 */
-  getFaqDetail(): Promise<FaqResponseDTO>;
+  /** FAQ 상세 조회 */
+  getFaqDetail(id: string): Promise<FaqResponseDTO | null>;
   /** FAQ 수정 */
-  updateFaq(): Promise<void>;
+  updateFaq(id: string, params: Partial<IFaq>): Promise<void>;
   /** FAQ 삭제 */
-  deleteFaq(): Promise<void>;
+  deleteFaq(id: string): Promise<void>;
 } 

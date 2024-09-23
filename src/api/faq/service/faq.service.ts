@@ -1,20 +1,38 @@
 import { FaqResponseDTO } from "../dto/faqResponse.dto";
 import { FaqService } from "./faq.service.type";
+import { FaqRepository } from "../repository/faq.repository";
 
 export class FaqServiceImpl implements FaqService {
-  async createFaq(): Promise<FaqResponseDTO> {
-    throw new Error("method not implemented.")
+  constructor(
+    private readonly _faqRepository: FaqRepository
+  ) {}
+
+  async createFaq(faq: IFaq): Promise<FaqResponseDTO> {
+    const newFaq = await this._faqRepository.save({
+      ...faq,
+    });
+
+    return new FaqResponseDTO(newFaq);
   }
+
   async getFaqs(): Promise<FaqResponseDTO[]> {
-    throw new Error("method not implemented.")
+    const faps = await this._faqRepository.findAll();
+
+    return faps;
   }
-  async getFaqDetail(): Promise<FaqResponseDTO> {
-    throw new Error("method not implemented.")
+  async getFaqDetail(faqId: string): Promise<FaqResponseDTO | null> {
+    const faq = await this._faqRepository.findById(faqId);
+
+    return faq;
   }
-  async updateFaq(): Promise<void> {
-    throw new Error("method not implemented.")
+  async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
+    const findFaq = await this._faqRepository.findById(faqId);
+    
+    return; 
   }
-  async deleteFaq(): Promise<void> {
-    throw new Error("method not implemented.")
+  async deleteFaq(id: string): Promise<void> {
+    const findFaq = await this._faqRepository.findById(id);
+
+    return;
   }
 }

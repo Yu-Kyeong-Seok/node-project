@@ -4,7 +4,6 @@ import morgan from "morgan";
 import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
 import viewRouter from "./routers/views/view.router";
-import adminViewRouter from "./routers/views/adminView.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
@@ -37,7 +36,6 @@ app.use(cookieParser());
 app.use(appRouter);
 //app.use(userRouter);
 app.use(viewRouter);
-app.use(adminViewRouter);
 app.use(authViewRouter);
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
@@ -74,5 +72,5 @@ app.use(errorHandler);
 // });
 
 app.listen(4000, () => {
-  console.log(`Server is running on port 4000`);
+  console.log(`http://localhost:4000`);
 });

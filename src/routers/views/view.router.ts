@@ -60,4 +60,17 @@ viewRouter.get(`${BASE_PATH}/users`, (req, res) => {
   res.send("회원가입 완료");
 });
 
+viewRouter.get(`${BASE_PATH}/notice`, (req, res) => {
+  res.render(`notice/notice`);
+});
+
+viewRouter.get(`${BASE_PATH}/notice/noticedetail`, (req, res) => {
+  res.render(`notice/noticedetail`);
+});
+
+viewRouter.get(`${BASE_PATH}/faq`, (req, res) => {
+  res.render(`faq/faq`);
+});
+
+
 export default viewRouter;

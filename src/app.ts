@@ -2,15 +2,21 @@ import express from "express";
 import path from "node:path";
 import morgan from "morgan";
 import appRouter from "./routers/app.router";
-import userRouter from "./routers/users.router";
+import userRouter from "@/api/users/router/users.router"
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
+import { ROUTES_INDEX } from "./routers";
+import cookieParser from "cookie-parser";
+import authRouter from "./api/auth/router/auth.router";
+
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
 const app = express();
 
+app.use(express.json());
+app.use(cookieParser());
 // /admin-api
 
 // function sampleMiddleware(message: string) {
@@ -28,11 +34,13 @@ const app = express();
 // app.use(sampleMiddleware("미들웨어 동작"));
 
 app.use(appRouter);
-app.use(userRouter);
+//app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
 app.use(authViewRouter);
 
+app.use(ROUTES_INDEX.USERS_API,userRouter)
+app.use(ROUTES_INDEX.AUTH_API,authRouter)
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
 // view engine 세팅

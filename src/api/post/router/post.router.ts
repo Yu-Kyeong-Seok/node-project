@@ -17,8 +17,8 @@ const postRouter = express.Router();
 
 const BASE_PATH = "/views";
 
-postRouter.get(`${BASE_PATH}/post/post`, (req, res) => {
-  res.render(`post/post`);
+postRouter.get(`${BASE_PATH}/post`, (req, res) => {
+  res.render(`post/index`);
 });
 
 postRouter.get(`${BASE_PATH}/post/postDetail`, (req, res) => {

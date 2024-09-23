@@ -21,7 +21,7 @@ postRouter.get(`${BASE_PATH}/post`, (req, res) => {
   res.render(`post/index`);
 });
 
-postRouter.get(`${BASE_PATH}/post/postDetail`, (req, res) => {
+postRouter.get(`${BASE_PATH}/post/Detail`, (req, res) => {
   res.render(`post/postDetail`);
 });
 

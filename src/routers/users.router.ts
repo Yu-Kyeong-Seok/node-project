@@ -8,9 +8,9 @@ userRouter.get(`${BASE_PATH}`, (req, res) => {
   res.send("GET request to the users page");
 });
 
-userRouter.post(`${BASE_PATH}`, (req, res) => {
-  res.send("다영짱 POST request to the users");
-});
+// userRouter.post(`${BASE_PATH}`, (req, res) => {
+//   res.send("다영짱 POST request to the users");
+// });
 
 userRouter.put(`${BASE_PATH}`, (req, res) => {
   console.log("/users put");

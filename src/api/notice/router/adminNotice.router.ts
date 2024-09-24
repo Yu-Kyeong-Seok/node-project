@@ -1,7 +1,7 @@
 import express from 'express';
 import AdminNoticeController from '../controller/adminNotice.controller';
 import { NoticesServiceImpl } from '../service/notice.service';
-import { MemoryNoticeRepository } from '../repository/memoryNotice.repository';
+import {MongooseNoticeRepository } from '../repository/mongooseNotice.repository';
 
 const adminNoticeRouter = express.Router();
 
@@ -20,7 +20,7 @@ const ADMIN_NOTICE_ROUTES={
 } as const;
 
 const adminNoticeController = new AdminNoticeController(
-  new NoticesServiceImpl(new MemoryNoticeRepository())
+  new NoticesServiceImpl(new MongooseNoticeRepository())
 ); 
 
 adminNoticeRouter.get(ADMIN_NOTICE_ROUTES.GET_NOTICES, adminNoticeController.getNotices);

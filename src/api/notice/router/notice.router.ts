@@ -1,7 +1,7 @@
 import express from "express";
 import NoticeController from '../controller/notice.controller';
 import { NoticesServiceImpl } from "../service/notice.service";
-import { MemoryNoticeRepository } from '../repository/memoryNotice.repository';
+import { MongooseNoticeRepository } from '../repository/mongooseNotice.repository';
 
 const noticeRouter= express.Router();
 
@@ -13,7 +13,7 @@ const Notice_ROUTES={
 }as const;
 
 const noticeController = new NoticeController(
-  new NoticesServiceImpl(new MemoryNoticeRepository())
+  new NoticesServiceImpl(new MongooseNoticeRepository())
 ); 
 
 noticeRouter.get(Notice_ROUTES.GET_NOTICES, noticeController.getNotices);

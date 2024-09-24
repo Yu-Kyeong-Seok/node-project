@@ -1,7 +1,7 @@
 import express from 'express';
 import AdminFaqController from '../controller/adminFaq.controller';
 import { FaqsServiceImpl } from '../service/faq.service';
-import { MemoryFaqRepository } from '../repository/memoryFaq.repository';
+import { MongooseFaqRepository } from '../repository/mongooseFaq.repository';
 
 const adminFaqRouter = express.Router();
 
@@ -22,7 +22,7 @@ const ADMIN_FAQ_ROUTES={
 
 // Memory
 const adminFaqController = new AdminFaqController(
-  new FaqsServiceImpl(new MemoryFaqRepository())
+  new FaqsServiceImpl(new MongooseFaqRepository())
 );
 
 adminFaqRouter.get(ADMIN_FAQ_ROUTES.GET_FAQS, adminFaqController.getFaqs);

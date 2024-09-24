@@ -30,8 +30,8 @@ export class FaqServiceImpl implements FaqService {
     
     return; 
   }
-  async deleteFaq(id: string): Promise<void> {
-    const findFaq = await this._faqRepository.findById(id);
+  async deleteFaq(faqId: string): Promise<void> {
+    const findFaq = await this._faqRepository.findById(faqId);
 
     return;
   }

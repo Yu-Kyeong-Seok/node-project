@@ -19,15 +19,19 @@ export class NoticeServiceImpl implements NoticeService {
 
   return notices;
  }
- async getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO> {
+ async getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO | null> {
   const notice = await this._noticeRepository.findById(noticeId);
 
   return notice;
  }
- async updateNotice(): Promise<void> {
-  throw new Error("method not implemented.")
+ async updateNotice(noticeId: string, params: Partial<INotice>): Promise<void> {
+  const findFaq = await this._noticeRepository.findById(noticeId);
+    
+  return; 
  }
- async deleteNotice(): Promise<void> {
-  throw new Error("method not implemented.")
+ async deleteNotice(noticeId: string): Promise<void> {
+  const findNotice = await this._noticeRepository.findById(noticeId);
+
+  return;
  }
 }

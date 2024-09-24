@@ -35,7 +35,9 @@ async getNoticeDetail(
   next: NextFunction 
   ) {
   try {
-    const notice = await this._noticeService.getNoticeDetail();
+    const notice = await this._noticeService.getNoticeDetail(
+      req.params.noticeId
+    );
 
     res.send(notice);
   } catch (error){
@@ -49,7 +51,7 @@ async createNotice(
   next: NextFunction 
   ) {
   try {
-    const createdNotice = await this._noticeService.createNotice();
+    const createdNotice = await this._noticeService.createNotice(req.body);
 
     res.send(createdNotice);
   } catch (error){
@@ -62,13 +64,15 @@ async updateNotice(
   res: Response,
   next: NextFunction 
   ) {
+    const { noticeId } = req.params;
   try {
-    const updatedNotice = await this._noticeService.updateNotice();
+    const updatedNotice = await this._noticeService.updateNotice(noticeId, req.body);
 
     res.status(204).json();
   } catch (error){
     next(error);
   }
+
 }
 
 async deleteNotice(
@@ -77,7 +81,7 @@ async deleteNotice(
   next: NextFunction 
   ) {
   try {
-    const deletedNotice = await this._noticeService.deleteNotice();
+    const deletedNotice = await this._noticeService.deleteNotice(req.body);
 
     res.status(204).json();
   } catch (error){

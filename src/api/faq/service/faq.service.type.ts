@@ -9,7 +9,7 @@ export interface FaqService {
   /** FAQ 상세 조회 */
   getFaqDetail(faqId: string): Promise<FaqResponseDTO | null>;
   /** FAQ 수정 */
-  updateFaq(FaqId: string, params: Partial<IFaq>): Promise<void>;
+  updateFaq(faqId: string, params: Partial<IFaq>): Promise<void>;
   /** FAQ 삭제 */
-  deleteFaq(FaqId: string): Promise<void>;
+  deleteFaq(faqId: string): Promise<void>;
 } 

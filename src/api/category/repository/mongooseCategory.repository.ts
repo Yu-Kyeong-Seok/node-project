@@ -19,4 +19,14 @@ export class MongooseCategoryRepository implements CategoryRepository{
         }
        
     }
+    async findByName(categoryName:string):Promise<ICategory | null>{
+        try{
+            //요소 하나만 찾겠다.
+            const findCategoryName = await MongooseCategory.findOne({ name: categoryName } )
+            return findCategoryName;
+        }catch(error){
+            console.log(error)
+            return null;
+        }
+    }
 }

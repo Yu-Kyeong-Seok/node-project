@@ -14,11 +14,11 @@ export default class CategoryController{
         getCategoriesRequest["params"]>,
         res:Response,next:NextFunction){
         try{
-           
             const categories=await this._categoryService.getCategory();
-            res.json(categories)
+            res.json(categories);
         }catch(error){
-            console.log(error)
+            console.log(error);
+            next(error);
         }
     }
     async getCategoryDetail(
@@ -28,9 +28,10 @@ export default class CategoryController{
         res:Response,next:NextFunction){
         try{
             const category=await this._categoryService.getCategoryDetail(req.params.categoryId);
-            res.json(category)
+            res.json(category);
         }catch(error){
-            console.log(error)
+            console.log(error);
+            next(error);
         }
     }
 }

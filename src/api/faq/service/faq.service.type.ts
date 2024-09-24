@@ -1,7 +1,7 @@
 import { FaqResponseDTO } from "../dto/faqResponse.dto";
-import { FaqServiceImpl } from './faq.service';
+import { FaqsServiceImpl } from './faq.service';
 
-export interface FaqService {
+export interface FaqsService {
   /** FAQ 생성 */
   createFaq(params: Omit<IFaq, "id">): Promise<FaqResponseDTO>;
   /** FAQ 목록 조회 */

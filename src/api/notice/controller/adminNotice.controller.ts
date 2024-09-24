@@ -6,40 +6,51 @@
 // NOTICE 삭제 -deleteNotice
 
 import { NextFunction, Request, Response } from "express";
-import { NoticeService } from "../service/notice.service.type";
+import { NoticesService } from "../service/notice.service.type";
 
-export default class AdminNoticeController {
+export default class AdminNoticesController {
 
-  private readonly _noticeService: NoticeService;
-  constructor(_noticeService:NoticeService) {
-    this._noticeService = _noticeService;
+  // private readonly _noticeService: NoticeService;
+  // constructor(_noticeService:NoticeService) {
+  //   this._noticeService = _noticeService;
+  // }
+
+  private readonly _noticesService: NoticesService;
+  constructor(_noticesService: NoticesService) {
+    this._noticesService = _noticesService;
+    this.getNotices = this.getNotices.bind(this);
+    this.getNoticeDetail = this.getNoticeDetail.bind(this);
+    this.createNotice = this.createNotice.bind(this);
+    this.updateNotice = this.updateNotice.bind(this);
+    this.deleteNotice = this.deleteNotice.bind(this);
   }
 
 async getNotices(
-  req: Request,
-  res: Response,
-  next: NextFunction 
+  req: Request<getNoticesRequest["path"],
+  getNoticesRequest["body"],
+  getNoticesRequest["params"]>,
+  res: Response, next: NextFunction 
   ) {
   try {
-      const notices = await this._noticeService.getNotices();
+      const notices = await this._noticesService.getNotices();
 
       res.send(notices);
   } catch (error){
-    next(error);
+    console.log(error);
   }
 }
 
 async getNoticeDetail(
-  req: Request,
+  req: Request<getNoticesRequest["path"],
+  getNoticesRequest["body"],
+  getNoticesRequest["params"]>,
   res: Response,
   next: NextFunction 
   ) {
   try {
-    const notice = await this._noticeService.getNoticeDetail(
-      req.params.noticeId
-    );
-
-    res.send(notice);
+    const noticeDetail = await this._noticesService.getNoticeDetail(
+      req.params.noticeId);
+    res.send(noticeDetail);
   } catch (error){
     next(error);
   }
@@ -51,7 +62,7 @@ async createNotice(
   next: NextFunction 
   ) {
   try {
-    const createdNotice = await this._noticeService.createNotice(req.body);
+    const createdNotice = await this._noticesService.createNotice(req.body);
 
     res.send(createdNotice);
   } catch (error){
@@ -66,7 +77,7 @@ async updateNotice(
   ) {
     const { noticeId } = req.params;
   try {
-    const updatedNotice = await this._noticeService.updateNotice(noticeId, req.body);
+    const updatedNotice = await this._noticesService.updateNotice(noticeId, req.body);
 
     res.status(204).json();
   } catch (error){
@@ -81,7 +92,7 @@ async deleteNotice(
   next: NextFunction 
   ) {
   try {
-    const deletedNotice = await this._noticeService.deleteNotice(req.body);
+    const deletedNotice = await this._noticesService.deleteNotice(req.body);
 
     res.status(204).json();
   } catch (error){

@@ -1,7 +1,7 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
-import { NoticeServiceImpl } from "./notice.service";
+import { NoticesServiceImpl } from "./notice.service";
 
-export interface NoticeService {
+export interface NoticesService {
   /** NOTICE 생성 */
   createNotice(params: Omit<INotice, "id">): Promise<NoticeResponseDTO>;
   /** NOTICE 목록 조회 */

@@ -3,13 +3,15 @@
 // FAQ 상세 조회 - getFaqDetail
 
 import { NextFunction,Request,Response } from "express";
-import { FaqService } from "../service/faq.service.type";
+import { FaqsService } from "../service/faq.service.type";
 
 export default class FaqController {
 
-  private readonly _faqService: FaqService;
-  constructor(_faqService: FaqService) {
-    this._faqService = _faqService;
+  private readonly _faqsService: FaqsService;
+  constructor(_faqsService: FaqsService) {
+    this._faqsService = _faqsService;
+    this.getFaqs = this.getFaqs.bind(this);
+    this.getFaqDetail = this.getFaqDetail.bind(this);
   }
 
   async getFaqs(
@@ -18,7 +20,7 @@ export default class FaqController {
     next: NextFunction 
     ) {
     try {
-      const faqs = await this._faqService.getFaqs();
+      const faqs = await this._faqsService.getFaqs();
 
       res.send(faqs);
     } catch (error){
@@ -33,7 +35,7 @@ export default class FaqController {
     ) {
     const { faqId } = req.params;
     try {
-      const faq = await this._faqService.getFaqDetail(faqId);
+      const faq = await this._faqsService.getFaqDetail(faqId);
 
       res.send(faq);
     } catch (error){

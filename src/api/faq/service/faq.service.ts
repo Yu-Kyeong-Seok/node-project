@@ -1,11 +1,17 @@
-import { FaqResponseDTO } from "../dto/faqResponse.dto";
-import { FaqService } from "./faq.service.type";
+import { FaqResponseDTO } from '../dto/faqResponse.dto';
+import { FaqsService } from "./faq.service.type";
 import { FaqRepository } from "../repository/faq.repository";
+import HttpException from "@/api/common/exceptions/http.exception";
 
-export class FaqServiceImpl implements FaqService {
-  constructor(
-    private readonly _faqRepository: FaqRepository
-  ) {}
+export class FaqsServiceImpl implements FaqsService {
+  // constructor(
+  //   private readonly _faqRepository: FaqRepository
+  // ) {}
+  private readonly _faqRepository: FaqRepository;
+  constructor(faqRepository: FaqRepository) {
+    this._faqRepository = faqRepository;
+  }
+
 
   async createFaq(faq: IFaq): Promise<FaqResponseDTO> {
     const newFaq = await this._faqRepository.save({
@@ -16,14 +22,19 @@ export class FaqServiceImpl implements FaqService {
   }
 
   async getFaqs(): Promise<FaqResponseDTO[]> {
-    const faps = await this._faqRepository.findAll();
+    const faqs = await this._faqRepository.findAll();
 
-    return faps;
+    return await Promise.all(faqs.map((faq) => new FaqResponseDTO(faq)));
   }
+
   async getFaqDetail(faqId: string): Promise<FaqResponseDTO | null> {
     const faq = await this._faqRepository.findById(faqId);
 
-    return faq;
+    if (!faq) {
+      throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+    }
+
+    return new FaqResponseDTO(faq);
   }
   async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);

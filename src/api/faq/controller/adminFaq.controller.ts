@@ -41,8 +41,11 @@ export default class AdminFaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;  
     try {
-      const faq = await this._faqService.getFaqDetail();
+      const faq = await this._faqService.getFaqDetail(
+        req.params.faqId
+        );
 
       res.send(faq);
     } catch (error){
@@ -56,7 +59,7 @@ export default class AdminFaqController {
     next: NextFunction 
     ) {
     try {
-      const createdFaq = await this._faqService.createFaq();
+      const createdFaq = await this._faqService.createFaq(req.body);
 
       res.send(createdFaq);
     } catch (error){
@@ -69,8 +72,9 @@ export default class AdminFaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;  
     try {
-      const updatedFaq = await this._faqService.updateFaq();
+      const updatedFaq = await this._faqService.updateFaq(faqId, req.body);
 
       res.status(204).json();
     } catch (error){
@@ -83,8 +87,9 @@ export default class AdminFaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;
     try {
-      const deletedFaq = await this._faqService.deleteFaq();
+      const deletedFaq = await this._faqService.deleteFaq(req.body);
 
      res.status(204).json();
     } catch (error){

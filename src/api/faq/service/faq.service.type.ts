@@ -1,4 +1,5 @@
 import { FaqResponseDTO } from "../dto/faqResponse.dto";
+import { FaqServiceImpl } from './faq.service';
 
 export interface FaqService {
   /** FAQ 생성 */
@@ -6,9 +7,9 @@ export interface FaqService {
   /** FAQ 목록 조회 */
   getFaqs(): Promise<FaqResponseDTO[]>;
   /** FAQ 상세 조회 */
-  getFaqDetail(id: string): Promise<FaqResponseDTO | null>;
+  getFaqDetail(faqId: string): Promise<FaqResponseDTO | null>;
   /** FAQ 수정 */
-  updateFaq(id: string, params: Partial<IFaq>): Promise<void>;
+  updateFaq(FaqId: string, params: Partial<IFaq>): Promise<void>;
   /** FAQ 삭제 */
-  deleteFaq(id: string): Promise<void>;
+  deleteFaq(FaqId: string): Promise<void>;
 } 

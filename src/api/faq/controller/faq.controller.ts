@@ -31,8 +31,9 @@ export default class FaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;
     try {
-      const faq = await this._faqService.getFaqDetail();
+      const faq = await this._faqService.getFaqDetail(faqId);
 
       res.send(faq);
     } catch (error){

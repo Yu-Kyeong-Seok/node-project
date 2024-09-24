@@ -10,9 +10,26 @@ export default class CategoryViewController {
 
     // 카테고리 목록을 EJS에 전달
     async getCategoryView(req: Request, res: Response, next: NextFunction) {
+        const categoryNameMapping: { [key: string]: string } = {
+            "animal": "동물",
+            "food": "음식",
+            "movie": "영화",
+            "gran": "육아",
+            "game": "게임",
+            // Add more mappings as needed
+        };
+
         try {
             const categories = await this._categoryService.getCategory();
-            res.render('category/category', { categories });
+
+            // Map the categories to include Korean names and keep English names for classes
+            const categoriesWithKoreanNames = categories.map(category => ({
+                ...category,
+                koreanName: categoryNameMapping[category.name] || category.name, // Korean name for rendering
+                className: category.name // English name for class attribute
+            }));
+
+            res.render('category/category', { category: categoriesWithKoreanNames });
         } catch (error) {
             console.error(error);
             next(error);
@@ -22,8 +39,8 @@ export default class CategoryViewController {
     // 카테고리 상세 정보 EJS에 전달
     async getCategoryDetailView(req: Request, res: Response, next: NextFunction) {
         try {
-            const category = await this._categoryService.getCategoryDetail(req.params.categoryId);
-            res.render('category/:categoryName', { category });
+            const category = await this._categoryService.getCategoryDetail(req.params.categoryName);
+            res.render('category/categoryDetail', { category });
         } catch (error) {
             console.error(error);
             next(error);

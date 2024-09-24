@@ -42,9 +42,9 @@
                     </ul>
                     <ul class="list">
                         <% category.forEach(function(cat) { %>
-                        <li>
-                            <a href="#" class="<%= cat.name %>"><%= cat.name %></a>
-                        </li>
+                            <li>
+                                <a href="./category/<%= cat.id %>" class="<%= cat.className %>"><%= cat.koreanName %></a>
+                            </li>
                         <% }); %>
                     </ul>
                 </article>
@@ -94,18 +94,18 @@
     </footer>
     <script>
         $(document).ready(function(){
-        const $sideContent = $('.category-aside-container');
+            const $sideContent = $('.category-aside-container');
 
-        $(window).on('scroll', function() {
-            const scrollTop = $(this).scrollTop();
+            $(window).on('scroll', function() {
+                const scrollTop = $(this).scrollTop();
 
-            if (scrollTop > 50) {
-                $sideContent.addClass('fixed');
-            } else {
-                $sideContent.removeClass('fixed');
-            }
+                if (scrollTop > 50) {
+                    $sideContent.addClass('fixed');
+                } else {
+                    $sideContent.removeClass('fixed');
+                }
+            });
         });
-    });
     </script>
 </div>
 </body>

@@ -8,8 +8,12 @@ const categoryViewController = new CategoryViewController(new CategoriesServiceI
 
 const BASE_PATH = "/views";
 
-categoryViewRouter.get(`${BASE_PATH}/category`,categoryViewController.getCategoryView.bind(CategoryViewController));
+categoryViewRouter.get(`${BASE_PATH}/category`, (req, res, next) => {
+    categoryViewController.getCategoryView(req, res, next); 
+});
 
-categoryViewRouter.get(`${BASE_PATH}/category/:categoryId`,categoryViewController.getCategoryDetailView.bind(CategoryViewController));
+categoryViewRouter.get(`${BASE_PATH}/category/:categoryName`, (req, res, next) => {
+    categoryViewController.getCategoryDetailView(req, res, next); 
+});
 
 export default categoryViewRouter;

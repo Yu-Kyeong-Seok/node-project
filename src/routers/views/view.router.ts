@@ -50,13 +50,12 @@ viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
 });
 
 viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
-  res.render("profileSetting");
+  res.render("profile/profileSetting");
 });
 
 viewRouter.get(`${BASE_PATH}/write`, (req, res) => {
   res.render("client/auth/question");
 });
-
 
 viewRouter.get(`${BASE_PATH}/notice`, (req, res) => {
   res.render(`notice/notice`);

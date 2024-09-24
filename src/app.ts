@@ -10,6 +10,7 @@ import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
+import profileRouter from "./api/profile/router/profile.router";
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -40,6 +41,7 @@ app.use(viewRouter);
 app.use(authViewRouter);
 app.use(postRouter);
 
+app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 // view 파일들 모아놓는 위치 설정

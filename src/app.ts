@@ -65,6 +65,8 @@ app.set("view engine", "ejs");
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
 
+
+
 app.get("/", function (req, res) {
   res.render("index", { title: "홈페이지" });
 });

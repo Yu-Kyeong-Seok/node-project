@@ -29,7 +29,6 @@ export default class CategoryController{
         try{
             const category=await this._categoryService.getCategoryDetail(req.params.categoryName);
             res.json(category);
-
         }catch(error){
             console.log(error);
             next(error);

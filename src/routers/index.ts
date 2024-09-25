@@ -41,9 +41,15 @@ const UPLOAD_ROUTES = {
   UPLOAD_VIEW: "/upload",
 } as const;
 
+/** 프로필 라우터 */
+const PROFILE_ROUTER = {
+  PROFILE: "/profile",
+} as const;
+
 export const ROUTES_INDEX = {
   ...POST_ROUTES,
   ...AUTH_ROUTES,
   ...USER_ROUTES,
   ...UPLOAD_ROUTES,
+  ...PROFILE_ROUTER,
 } as const;

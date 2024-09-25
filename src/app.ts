@@ -48,7 +48,7 @@ app.use(categoryViewRouter);
 app.use(authViewRouter);
 
 app.use(postViewRotuer);
-app.use(postRouter);
+// app.use(postRouter);
 app.use(categoryRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);

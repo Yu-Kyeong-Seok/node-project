@@ -27,8 +27,8 @@ export default class CategoryController{
         getCategoryDetailRequest["params"]>,
         res:Response,next:NextFunction){
         try{
-            const category=await this._categoryService.getCategoryDetail(req.params.categoryId);
-            res.json(category);
+            // const category=await this._categoryService.getCategoryDetail(req.params.categoryId);
+            // res.json(category);
 
         }catch(error){
             console.log(error);

@@ -3,6 +3,7 @@ import PostController from "@/api/post/controller/post.controller";
 import { PostsServiceImpl } from "@/api/post/service/post.service";
 import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repository";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 const postRouter = express.Router();
 
@@ -46,6 +47,7 @@ postRouter.get(
   );
   postRouter.post(
     (POST_ROUTER.CREATE_POST),
+    authUserMiddleware,
     postsController.createPost
   );
   postRouter.put(

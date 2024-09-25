@@ -70,7 +70,7 @@ export default class PostController {
     res: Response,
     next: NextFunction
   ) {
-    const { title, content } = req.body;
+    const { title, content,category,image } = req.body;
     try {
       const post = await this._postService.createPost(req.user.userId, {
         title,
@@ -98,7 +98,7 @@ export default class PostController {
     next: NextFunction
   ) {
     const { postId } = req.params;
-    const { title, content } = req.body;
+    const { title, content,category,image } = req.body;
     try {
       const post = await this._postService.updatePost(postId, {
         title,

@@ -2,13 +2,13 @@ interface IPost {
        /** 게시글 ID */
     id: string;
        /** 게시글 카테고리 */
-    category: string;
+    category?: string;
 
        /** 게시글 제목 */
     title : string;
   
         /** 게시글 이미지 */
-    image : string;
+    image? : string;
 
          /** 게시글 내용 */
     content : string;

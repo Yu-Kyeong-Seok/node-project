@@ -1,20 +1,49 @@
-import { FaqResponseDTO } from "../dto/faqResponse.dto";
-import { FaqService } from "./faq.service.type";
+import { FaqResponseDTO } from '../dto/faqResponse.dto';
+import { FaqsService } from "./faq.service.type";
+import { FaqRepository } from "../repository/faq.repository";
+import HttpException from "@/api/common/exceptions/http.exception";
 
-export class FaqServiceImpl implements FaqService {
-  async createFaq(): Promise<FaqResponseDTO> {
-    throw new Error("method not implemented.")
+export class FaqsServiceImpl implements FaqsService {
+  // constructor(
+  //   private readonly _faqRepository: FaqRepository
+  // ) {}
+  private readonly _faqRepository: FaqRepository;
+  constructor(faqRepository: FaqRepository) {
+    this._faqRepository = faqRepository;
   }
+
+
+  async createFaq(faq: IFaq): Promise<FaqResponseDTO> {
+    const newFaq = await this._faqRepository.save({
+      ...faq,
+    });
+
+    return new FaqResponseDTO(newFaq);
+  }
+
   async getFaqs(): Promise<FaqResponseDTO[]> {
-    throw new Error("method not implemented.")
+    const faqs = await this._faqRepository.findAll();
+
+    return await Promise.all(faqs.map((faq) => new FaqResponseDTO(faq)));
   }
-  async getFaqDetail(): Promise<FaqResponseDTO> {
-    throw new Error("method not implemented.")
+
+  async getFaqDetail(faqId: string): Promise<FaqResponseDTO | null> {
+    const faq = await this._faqRepository.findById(faqId);
+
+    if (!faq) {
+      throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+    }
+
+    return new FaqResponseDTO(faq);
   }
-  async updateFaq(): Promise<void> {
-    throw new Error("method not implemented.")
+  async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
+    const findFaq = await this._faqRepository.findById(faqId);
+    
+    return; 
   }
-  async deleteFaq(): Promise<void> {
-    throw new Error("method not implemented.")
+  async deleteFaq(faqId: string): Promise<void> {
+    const findFaq = await this._faqRepository.findById(faqId);
+
+    return;
   }
 }

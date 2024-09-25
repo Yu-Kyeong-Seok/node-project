@@ -6,45 +6,49 @@
 // FAQ 삭제 -deleteFaq
 
 import { NextFunction, Request, Response } from "express";
-import { FaqService } from "../service/faq.service.type";
+import { FaqsService } from "../service/faq.service.type";
 
-export default class AdminFaqController {
-  // 컨트롤러에 DI 구조 잡아주는 것
+export default class AdminFaqsController {
 
-  // 정석 방식
-  private readonly _faqService: FaqService;
-  constructor(_faqService: FaqService) {
-    this._faqService = _faqService;
+  // private readonly _faqService: FaqService;
+  // constructor(_faqService: FaqService) {
+  //   this._faqService = _faqService;
+
+  private readonly _faqsService: FaqsService;
+  constructor(_faqsService: FaqsService) {
+    this._faqsService = _faqsService;
+    this.getFaqs = this.getFaqs.bind(this);
+    this.getFaqDetail = this.getFaqDetail.bind(this);
+    this.createFaq = this.createFaq.bind(this);
+    this.updateFaq = this.updateFaq.bind(this);
+    this.deleteFaq = this.deleteFaq.bind(this);
   }
 
-  // 편리한 방식(위에랑 동일하게 작동)
-  // constructor(private readonly _faqService: faqService) {
-
-  // }
-
   async getFaqs(
-    req: Request,
-    res: Response,
-    next: NextFunction 
-    ) {
+    req: Request<getFaqsRequest["path"],
+    getFaqsRequest["body"],
+    getFaqsRequest["params"]>,
+  res: Response,next: NextFunction) {
     try {
-      const faqs = await this._faqService.getFaqs();
+      const faqs = await this._faqsService.getFaqs();
 
       res.send(faqs);
     } catch (error){
-      next(error);
+      console.log(error);
     }
   }
   
   async getFaqDetail(
-    req: Request,
+    req: Request<getFaqsRequest["path"],
+    getFaqsRequest["body"],
+    getFaqsRequest["params"]>,
     res: Response,
     next: NextFunction 
     ) {
     try {
-      const faq = await this._faqService.getFaqDetail();
-
-      res.send(faq);
+      const faqDetail = await this._faqsService.getFaqDetail(
+        req.params.faqId);
+       res.send(faqDetail);
     } catch (error){
       next(error);
     }
@@ -56,7 +60,7 @@ export default class AdminFaqController {
     next: NextFunction 
     ) {
     try {
-      const createdFaq = await this._faqService.createFaq();
+      const createdFaq = await this._faqsService.createFaq(req.body);
 
       res.send(createdFaq);
     } catch (error){
@@ -69,8 +73,9 @@ export default class AdminFaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;  
     try {
-      const updatedFaq = await this._faqService.updateFaq();
+      const updatedFaq = await this._faqsService.updateFaq(faqId, req.body);
 
       res.status(204).json();
     } catch (error){
@@ -83,8 +88,9 @@ export default class AdminFaqController {
     res: Response,
     next: NextFunction 
     ) {
+    const { faqId } = req.params;
     try {
-      const deletedFaq = await this._faqService.deleteFaq();
+      const deletedFaq = await this._faqsService.deleteFaq(req.body);
 
      res.status(204).json();
     } catch (error){

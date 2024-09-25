@@ -33,6 +33,8 @@ declare type createPostRequestPath = {};
 declare type createPostRequestBody = {
   title: string;
   content: string;
+  category:string;
+  image?:string;
 };
 declare type createPostRequestParams = {};
 
@@ -53,6 +55,8 @@ declare type updatePostRequestPath = {
 declare type updatePostRequestBody = {
   title: string;
   content: string;
+  category?: string; //카테고리 수정여부는 사용자 마음..
+  image?:string; 
 };
 declare type updatePostRequestParams = {};
 

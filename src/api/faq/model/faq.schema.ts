@@ -9,6 +9,11 @@ const faqSchema = new mongoose.Schema<IFaq>({
     type:String,
     required:true,
     
+  },
+  content:{
+    type:String,
+    required:true,
+    
   }
 });
 

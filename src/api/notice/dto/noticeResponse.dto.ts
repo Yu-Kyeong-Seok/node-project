@@ -1,6 +1,6 @@
 //공통 응답 DTO 만들어둔 것
 export class NoticeResponseDTO {
-  id: string;
+  noticeId: string;
   title: string;
   content: string;
   createdAt?: Date;
@@ -8,7 +8,7 @@ export class NoticeResponseDTO {
   // author: IUser;
 
   constructor(params: INotice) {
-    this.id = params.id;
+    this.noticeId = params.id;
     this.title = params.title;
     this.content = params.content;
     this.createdAt = params.createdAt;

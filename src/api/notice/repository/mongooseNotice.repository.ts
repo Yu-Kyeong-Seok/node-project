@@ -35,7 +35,7 @@ export class MongooseNoticeRepository implements NoticeRepository{
         updateNoticeInfo
       );
       if (!results) {
-        throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+        throw new HttpException(404, "공지사항을 찾을 수 없습니다.");
       }
   
       return results;

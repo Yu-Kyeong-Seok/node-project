@@ -3,13 +3,15 @@
 // NOTICE 상세 조회 - getNoticeDetail
 
 import { NextFunction,Request,Response } from "express";
-import { NoticeService } from "../service/notice.service.type";
+import { NoticesService } from "../service/notice.service.type";
 
 export default class NoticeController {
 
-  private readonly _noticeService: NoticeService;
-  constructor(_noticeService:NoticeService) {
+  private readonly _noticeService: NoticesService;
+  constructor(_noticeService:NoticesService) {
     this._noticeService = _noticeService;
+    this.getNotices = this.getNotices.bind(this);
+    this.getNoticeDetail = this.getNoticeDetail.bind(this); 
   }
 
   async getNotices(
@@ -31,8 +33,9 @@ export default class NoticeController {
     res: Response,
     next: NextFunction 
     ) {
+    const { noticeId } = req.params; 
     try {
-      const notice = await this._noticeService.getNoticeDetail();
+      const notice = await this._noticeService.getNoticeDetail(noticeId);
 
       res.send(notice);
     } catch (error){

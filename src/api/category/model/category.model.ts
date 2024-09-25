@@ -3,7 +3,7 @@ export class Category implements ICategory{
     name:string;
 
     constructor(params:ICategory){
-        this.id=params.id;
-        this.name=params.name;
+        this.id = params.id;
+        this.name = params.name;
     }
 }

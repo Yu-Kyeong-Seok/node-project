@@ -1,6 +1,7 @@
 import express from "express";
 import FaqController from "../controller/faq.controller";
-import { FaqServiceImpl } from '../service/faq.service';
+import { FaqsServiceImpl } from '../service/faq.service';
+import { MongooseFaqRepository } from '../repository/mongooseFaq.repository';
 
 const faqRouter= express.Router();
 
@@ -8,12 +9,14 @@ const FAQ_ROUTES={
     /*FAQ 목록 조회*/
     GET_FAQS:`/api/faqs`,
     /*FAQ 상세 조회*/
-    GET_FAQ:`/api/faqs/:faqId`
+    GET_FAQDETAIL:`/api/faqs/:faqId`
 }as const;
 
-const faqController = new FaqController (new FaqServiceImpl());
+const faqController = new FaqController (
+  new FaqsServiceImpl(new MongooseFaqRepository())
+  );
 
 faqRouter.get(FAQ_ROUTES.GET_FAQS, faqController.getFaqs);
-faqRouter.get(FAQ_ROUTES.GET_FAQ, faqController.getFaqDetail);
+faqRouter.get(FAQ_ROUTES.GET_FAQDETAIL, faqController.getFaqDetail);
 
 export default faqRouter;

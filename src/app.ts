@@ -10,8 +10,13 @@ import categoryViewRouter from "@/api/category/router/category.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
+import adminFaqRouter from './api/faq/router/adminFaq.router';
+import faqRouter from './api/faq/router/faq.router';
+import adminNoticeRouter from "./api/notice/router/adminNotice.router";
+import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
+
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -41,7 +46,12 @@ app.use(viewRouter);
 app.use(categoryViewRouter);
 app.use(authViewRouter);
 app.use(postRouter);
-app.use(categoryRouter); 
+app.use(categoryRouter);
+app.use(adminFaqRouter);
+app.use(faqRouter);
+app.use(adminNoticeRouter);
+app.use(noticeRouter);
+
 
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);

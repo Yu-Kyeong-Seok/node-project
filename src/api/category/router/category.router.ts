@@ -9,7 +9,7 @@ const CATEGORY_ROUTES={
     /**카테고리 조회 */
     GET_CATEGORIES:`/api/category`,
     /**상세 카테고리 조회 */
-    GET_CATEGORYDETAIL:`/api/category/:categoryId`
+    GET_CATEGORYDETAIL:`/api/:categoryName`
 }as const;
 
 

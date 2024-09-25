@@ -6,7 +6,7 @@ export interface NoticeRepository {
   /** ID로 NOTICE 조회 */
   findById(id: string): Promise<INotice | null>;
     /** NOTICE 수정 */
-  update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<void>;
+  update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<INotice>;
     /** NOTICE 삭제 */
   delete(noticeId: string): Promise<void>;
 }

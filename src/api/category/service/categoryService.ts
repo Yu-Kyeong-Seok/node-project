@@ -20,8 +20,8 @@ export class CategoriesServiceImpl implements CategoriesService{
         return newCategory;
        // throw new HttpException(401,'카테고리 없음.')
     }
-    async getCategoryDetail(categoryId:string):Promise<categoryResponseDTO | null>{
-        const category=await this._categoryRepository.findById(categoryId);
+    async getCategoryDetail(categoryName:string):Promise<categoryResponseDTO | null>{
+        const category=await this._categoryRepository.findByName(categoryName);
 
         if(!category) 
             throw new HttpException(404,'해당 카테고리 없음.');
@@ -30,4 +30,12 @@ export class CategoriesServiceImpl implements CategoriesService{
         return dtoCategory;
     }   
 
+    async getCategoryName(categoryName: string): Promise<categoryResponseDTO | null> {
+        const category=await this._categoryRepository.findByName(categoryName);
+
+        if(!category){
+            throw new HttpException(404,"해당 카테고리가 없습니다.")
+            
+        }return new categoryResponseDTO(category);
+    }   
 }

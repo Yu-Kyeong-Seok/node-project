@@ -43,13 +43,13 @@ app.use(cookieParser());
 // app.use(sampleMiddleware("미들웨어 동작"));
 
 app.use(appRouter);
-//app.use(userRouter);
+app.use(userRouter);
 app.use(viewRouter);
 app.use(categoryViewRouter);
 app.use(authViewRouter);
 
 app.use(postViewRotuer);
-// app.use(postRouter);
+app.use(postRouter);
 app.use(categoryRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);

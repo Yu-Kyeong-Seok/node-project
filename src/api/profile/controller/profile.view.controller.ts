@@ -62,6 +62,9 @@ export default class ProfileController {
     async profileSetting(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
+        // 유저 정보 넘겨줄때 사용
+        console.log(req.user.userId);
+
         const profile = await this._profileService.getProfile(id);
 
         res.render("profile/profileSetting", { profile });

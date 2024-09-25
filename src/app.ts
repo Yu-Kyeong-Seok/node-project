@@ -53,15 +53,16 @@ app.use(authViewRouter);
 
 app.use(postViewRotuer);
 app.use(postRouter);
-app.use(categoryRouter);
-app.use(adminFaqRouter);
-app.use(faqRouter);
+// app.use(categoryRouter);
+// app.use(adminFaqRouter);
+// app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
-app.use(ROUTES_INDEX.ADMIN_FAQS_API, faqRouter);
+// app.use(ROUTES_INDEX.ADMIN_FAQS_API, faqRouter);
+app.use(ROUTES_INDEX.FAQS_API, faqRouter);
 app.use(ROUTES_INDEX.ADMIN_NOTICES_API, faqRouter);
 
 app.use(ROUTES_INDEX.ADMIN_FAQ_VIEW, adminFaqViewRouter);

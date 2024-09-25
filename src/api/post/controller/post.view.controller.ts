@@ -22,23 +22,30 @@ export default class PostViewController {
             offset,
             limit
         }); 
+ 
+        res.render(`post/index`, {post});
+        
     }
 
     /**게시글 상세 페이지 부분 */
     async postDetailPage(req:Request, res:Response, next: NextFunction) {
-        const post = await this._postService.getPostDetail(req.params.postId);
+      
+      const { id } = req.params;
+      
 
+      const post = await this._postService.getPostDetail(id);
+    
         const authorId = post?.author.id;
     
-        res.render("client/posts/postDetail", {
-          post,
-          isMe: authorId === req.user.userId,
+        res.render("client/post/postDetail", {
+          post
+      
         });
     }
 
       /** 게시글 작성 페이지 */
   async postWritePage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/posts/postWrite");
+    res.render("client/post/postWrite");
     }
 
    /** 게시글 수정 페이지 */

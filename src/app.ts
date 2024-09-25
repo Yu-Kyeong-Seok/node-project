@@ -18,6 +18,7 @@ import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
+import profileRouter from "./api/profile/router/profile.view.router";
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -55,6 +56,9 @@ app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
 
+app.use(categoryRouter); 
+
+app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 // view 파일들 모아놓는 위치 설정

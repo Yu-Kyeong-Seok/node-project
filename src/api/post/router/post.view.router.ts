@@ -11,19 +11,19 @@ const BASE_PATH = "/views";
 
 const  POST_VIEW_ROUTER = {
   /**글 목록 조회 */
-  GET_POSTS: `/api/post`,
+  GET_POSTS: `/post`,
 
   /**글 상세 조회  */
-  GET_POST: `/api/posts/:postId`,
+  GET_POST: `/posts/:postId`,
 
   /**글 생성  */
-  CREATE_POST: `/api/post`,
+  CREATE_POST: `/post`,
 
   /**글 수정 */
-  UPDATE_POST: `/api/posts/:postId`,
+  UPDATE_POST: `/posts/:postId`,
 
   /**글 삭제  */
-  DELETE_POST: `/api/posts/:postId`,
+  DELETE_POST: `/posts/:postId`,
 } as const;
 
 const postViewController = new PostViewController(
@@ -36,12 +36,22 @@ const postViewController = new PostViewController(
 
 postViewRotuer.get(`${BASE_PATH}/post`, (req, res, next) => {
   postViewController.postListPage(req, res, next)
-  res.render(`post/index`);
 });
 
-postViewRotuer.get(`${BASE_PATH}/post/detail`, (req, res, next) => {
-  postViewController.postDetailPage(req, res, next)
+
+
+// postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res, next) => {
+//   postViewController.postDetailPage(req, res, next)
+//   });
+
+ postViewRotuer.get(`${BASE_PATH}/post/detail`, (req, res) => {
+    res.render(`post/postDetail`);
   });
+
+  // postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res) => {
+  //   res.render(`post/postDetail`);
+  // });
+
 
 export default postViewRotuer;
 

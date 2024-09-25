@@ -1,20 +1,48 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
-import { NoticeService } from './notice.service.type';
+import { NoticesService } from './notice.service.type';
+import { NoticeRepository } from "../repository/notice.repository";
+import HttpException from "@/api/common/exceptions/http.exception";
 
-export class NoticeServiceImpl implements NoticeService {
- async createNotice(): Promise<NoticeResponseDTO> {
-  throw new Error("method not implemented.")
+export class NoticesServiceImpl implements NoticesService {
+  // constructor(
+  //   private readonly _noticeRepository: NoticeRepository
+  // ) {}
+  private readonly _noticeRepository: NoticeRepository;
+  constructor(noticeRepository: NoticeRepository) {
+    this._noticeRepository = noticeRepository;
+  }
+
+
+ async createNotice(notice: INotice): Promise<NoticeResponseDTO> {
+  const newNotice = await this._noticeRepository.save({
+    ...notice,
+  });
+
+  return new NoticeResponseDTO(newNotice);
  }
  async getNotices(): Promise<NoticeResponseDTO[]> {
-  throw new Error("method not implemented.")
+  const notices = await this._noticeRepository.findAll();
+
+  return await Promise.all(notices.map((notice) => new NoticeResponseDTO(notice)));
  }
- async getNoticeDetail(): Promise<NoticeResponseDTO> {
-  throw new Error("method not implemented.")
+ async getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO | null> {
+  const notice = await this._noticeRepository.findById(noticeId);
+
+  if (!notice) {
+    throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+  }
+
+  return new NoticeResponseDTO(notice);
+}
+
+ async updateNotice(noticeId: string, params: Partial<INotice>): Promise<void> {
+  const findNotice = await this._noticeRepository.findById(noticeId);
+    
+  return; 
  }
- async updateNotice(): Promise<void> {
-  throw new Error("method not implemented.")
- }
- async deleteNotice(): Promise<void> {
-  throw new Error("method not implemented.")
+ async deleteNotice(noticeId: string): Promise<void> {
+  const findNotice = await this._noticeRepository.findById(noticeId);
+
+  return;
  }
 }

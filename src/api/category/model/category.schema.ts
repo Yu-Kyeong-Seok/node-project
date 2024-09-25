@@ -8,8 +8,7 @@ const categorySchema = new mongoose.Schema<ICategory>({
   },
   name:{
     type:String,
-    requried:true,
-    
+    required:true,
   }
 });
 

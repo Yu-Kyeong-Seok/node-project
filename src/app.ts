@@ -3,12 +3,18 @@ import path from "node:path";
 import morgan from "morgan";
 import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
-import postRouter from "../src/api/post/router/post.router";
+
+import postViewRotuer from "../src/api/post/router/post.view.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
+import categoryViewRouter from "@/api/category/router/category.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
+import adminFaqRouter from './api/faq/router/adminFaq.router';
+import faqRouter from './api/faq/router/faq.router';
+import adminNoticeRouter from "./api/notice/router/adminNotice.router";
+import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
 import profileRouter from "./api/profile/router/profile.view.router";
@@ -38,8 +44,17 @@ app.use(cookieParser());
 app.use(appRouter);
 //app.use(userRouter);
 app.use(viewRouter);
+app.use(categoryViewRouter);
 app.use(authViewRouter);
+
+app.use(postViewRotuer);
 app.use(postRouter);
+app.use(categoryRouter);
+app.use(adminFaqRouter);
+app.use(faqRouter);
+app.use(adminNoticeRouter);
+app.use(noticeRouter);
+
 app.use(categoryRouter); 
 
 app.use(profileRouter);

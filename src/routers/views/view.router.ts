@@ -25,14 +25,6 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
-viewRouter.get(`${BASE_PATH}/category`, (req, res) => {
-  res.render(`category/category`);
-});
-
-viewRouter.get(`${BASE_PATH}/category/:categoryId`, (req, res) => {
-  res.render(`category/categoryDetail`);
-});
-
 viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
   res.render(`profile/profile`);
 });

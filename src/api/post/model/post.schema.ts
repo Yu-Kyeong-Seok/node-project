@@ -21,9 +21,8 @@ const postSchema = new mongoose.Schema<IPost>(
         length: 500,
     },
     author: {
-        type: String,
-        required: true,
-        length: 20,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },},
 
     {

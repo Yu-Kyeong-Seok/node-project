@@ -39,7 +39,7 @@ export class FaqsServiceImpl implements FaqsService {
   async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);
     
-    return; 
+    return;
   }
   async deleteFaq(faqId: string): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);

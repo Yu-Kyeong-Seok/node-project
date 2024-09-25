@@ -38,6 +38,10 @@ postViewRotuer.get(`${BASE_PATH}/post`, (req, res, next) => {
   postViewController.postListPage(req, res, next)
 });
 
+postViewRotuer.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
+ res.render('post/postEdit')
+});
+
 
 
 // postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res, next) => {
@@ -45,7 +49,7 @@ postViewRotuer.get(`${BASE_PATH}/post`, (req, res, next) => {
 //   });
 
  postViewRotuer.get(`${BASE_PATH}/post/detail`, (req, res) => {
-    res.render(`post/postDetail`);
+    res.render(`post/PostDetail`);
   });
 
   // postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res) => {

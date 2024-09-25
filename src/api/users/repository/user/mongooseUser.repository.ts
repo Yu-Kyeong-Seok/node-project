@@ -16,8 +16,6 @@ export class MongooseUserRepository implements UserRepository {
 
   async findById(id: string): Promise<IUser | null> {
     try {
-      console.log("112");
-      console.log(id);
       const findUser = await MongooseUser.findById(id)
         .populate({
           path: "posts",

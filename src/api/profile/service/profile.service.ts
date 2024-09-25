@@ -11,7 +11,6 @@ export class ProfileServiceImpl implements ProfileService {
     ) {}
 
     async getProfile(id: string): Promise<GetUserResponseDTO | null> {
-        console.log("24");
         const profile = await this._userRepository.findById(id);
         
         if (!profile) throw new HttpException(404, "유저를 찾을 수 없습니다.");

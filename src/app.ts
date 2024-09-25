@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
-import profileRouter from "./api/profile/router/profile.router";
+import profileRouter from "./api/profile/router/profile.view.router";
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -41,7 +41,6 @@ app.use(viewRouter);
 app.use(authViewRouter);
 app.use(postRouter);
 app.use(categoryRouter); 
-
 
 app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);

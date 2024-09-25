@@ -1,7 +1,7 @@
 import express from "express";
 import { ROUTES_INDEX } from "@/routers";
 import { ProfileServiceImpl } from "@/api/profile/service/profile.service";
-import ProfileController from "../controller/profile.controller";
+import ProfileController from "../controller/profile.view.controller";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
 import { extractPath } from "@/utils/path.util";
@@ -20,9 +20,7 @@ const PROFILE_VIEW_ROUTERS = {
     // 패스워드 수정
     CHANGE_PASSWORD: "/profile/changePassword",
     // 계정설정
-    SETTING: "/profile/setting:id",
-
-    SETTUBG_TMP: "/profile/setting",
+    SETTING: "/profile/setting/:id",
 } as const;
 
 const profileController = new ProfileController(
@@ -33,18 +31,32 @@ const profileController = new ProfileController(
 );
 
 profileRouter.get(
-    extractPath(PROFILE_VIEW_ROUTERS.PROFILE, ROUTES_INDEX.PROFILE),
-    profileController.tmpMyProfile
-);
+    PROFILE_VIEW_ROUTERS.PROFILE,
+    profileController.profile
+)
 
 profileRouter.get(
-    extractPath(PROFILE_VIEW_ROUTERS.SETTUBG_TMP, ROUTES_INDEX.PROFILE),
-    profileController.MyProfile2
-);
+    PROFILE_VIEW_ROUTERS.PROFILE_EDIT,
+    profileController.profileEdit
+)
 
 profileRouter.get(
-    extractPath(PROFILE_VIEW_ROUTERS.SETTING, ROUTES_INDEX.PROFILE),
-    profileController.myProfile
+    PROFILE_VIEW_ROUTERS.CHANGE_EMAIL,
+    profileController.profileChangeEmail
+)
+
+profileRouter.get(
+    PROFILE_VIEW_ROUTERS.CHANGE_NUMBER,
+    profileController.profileChangeNumber
+)
+
+profileRouter.get(
+    PROFILE_VIEW_ROUTERS.CHANGE_PASSWORD,
+    profileController.profileChangePassword
+)
+profileRouter.get(
+    PROFILE_VIEW_ROUTERS.SETTING,
+    profileController.profileSetting
 );
 
 export default profileRouter;

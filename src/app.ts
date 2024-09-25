@@ -48,12 +48,14 @@ app.use(viewRouter);
 app.use(categoryViewRouter);
 app.use(authViewRouter);
 app.use(postViewRotuer);
-app.use(postRouter);
+// app.use(postRouter);
 app.use(categoryRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
+app.use(categoryRouter); 
+
 app.use(categoryRouter); 
 
 app.use(profileRouter);

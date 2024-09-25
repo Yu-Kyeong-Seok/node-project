@@ -27,15 +27,15 @@ export class FaqsServiceImpl implements FaqsService {
     return await Promise.all(faqs.map((faq) => new FaqResponseDTO(faq)));
   }
 
-  async getFaqDetail(faqId: string): Promise<FaqResponseDTO | null> {
-    const faq = await this._faqRepository.findById(faqId);
+  // async getFaqDetail(faqId: string): Promise<FaqResponseDTO | null> {
+  //   const faq = await this._faqRepository.findById(faqId);
 
-    if (!faq) {
-      throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
-    }
+  //   if (!faq) {
+  //     throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+  //   }
 
-    return new FaqResponseDTO(faq);
-  }
+  //   return new FaqResponseDTO(faq);
+  // }
   async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);
     

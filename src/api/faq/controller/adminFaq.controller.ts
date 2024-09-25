@@ -18,7 +18,7 @@ export default class AdminFaqsController {
   constructor(_faqsService: FaqsService) {
     this._faqsService = _faqsService;
     this.getFaqs = this.getFaqs.bind(this);
-    this.getFaqDetail = this.getFaqDetail.bind(this);
+    // this.getFaqDetail = this.getFaqDetail.bind(this);
     this.createFaq = this.createFaq.bind(this);
     this.updateFaq = this.updateFaq.bind(this);
     this.deleteFaq = this.deleteFaq.bind(this);
@@ -38,21 +38,21 @@ export default class AdminFaqsController {
     }
   }
   
-  async getFaqDetail(
-    req: Request<getFaqsRequest["path"],
-    getFaqsRequest["body"],
-    getFaqsRequest["params"]>,
-    res: Response,
-    next: NextFunction 
-    ) {
-    try {
-      const faqDetail = await this._faqsService.getFaqDetail(
-        req.params.faqId);
-       res.send(faqDetail);
-    } catch (error){
-      next(error);
-    }
-  }
+  // async getFaqDetail(
+  //   req: Request<getFaqsRequest["path"],
+  //   getFaqsRequest["body"],
+  //   getFaqsRequest["params"]>,
+  //   res: Response,
+  //   next: NextFunction 
+  //   ) {
+  //   try {
+  //     const faqDetail = await this._faqsService.getFaqDetail(
+  //       req.params.faqId);
+  //      res.send(faqDetail);
+  //   } catch (error){
+  //     next(error);
+  //   }
+  // }
   
   async createFaq(
     req: Request,

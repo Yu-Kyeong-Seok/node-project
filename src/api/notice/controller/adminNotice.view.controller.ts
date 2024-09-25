@@ -5,22 +5,22 @@ export default class AdminNoticesViewController {
   private readonly _noticesService: NoticesService;
   constructor(_noticesService: NoticesService) {
     this._noticesService = _noticesService;
-    this.noticeListPage = this.noticeListPage.bind(this);
-    this.noticeDetailPage = this.noticeDetailPage.bind(this);
-    this.noticeWritePage = this.noticeWritePage.bind(this);
-    this.noticeEditPage = this.noticeEditPage.bind(this);
+    this.getNoticesView = this.getNoticesView.bind(this);
+    this.getNoticeDetailView = this.getNoticeDetailView.bind(this);
+    this.createNoticeView = this.createNoticeView.bind(this);
+    this.updateNoticeView = this.updateNoticeView.bind(this);
   }
 
   /** NOTICE 목록 페이지 */
-async noticeListPage(req: Request, res: Response, next: NextFunction) {
+async getNoticesView(req: Request, res: Response, next: NextFunction) {
     const notices = await this._noticesService.getNotices();
-    res.render("admin/notices/noticeList", {
+    res.render("admin/notices", {
       notices,
     });
   }
 
   /** NOTICE 상세 페이지 */
-async noticeDetailPage(req: Request, res: Response, next: NextFunction) {
+async getNoticeDetailView(req: Request, res: Response, next: NextFunction) {
     try {
       const { noticeId } = req.params;
       const notice = await this._noticesService.getNoticeDetail(noticeId);
@@ -28,22 +28,23 @@ async noticeDetailPage(req: Request, res: Response, next: NextFunction) {
         notice,
       });
     } catch (error: any) {
-      res.send(`<script>alert('${error.message}');
-          location.href='/admin/notices/noticeDetail';</script>`);
+      next(error);
     }
   }
 
    /** NOTICE 작성 페이지 */
-async noticeWritePage(req: Request, res: Response, next: NextFunction) {
-    res.render("admin/notices/noticeWrite");
+async createNoticeView(req: Request, res: Response, next: NextFunction) {
+    res.render("admin/notices/write");
   }
 
   /** NOTICE 수정 페이지 */
-async noticeEditPage(req: Request, res: Response, next: NextFunction) {
-    const { noticeId } = req.params;
-
-    const notice = await this._noticesService.getNoticeDetail(noticeId);
-
-    res.render("admin/notices/noticeEdit", { notice });
+  async updateNoticeView(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { noticeId } = req.params;
+      const notice = await this._noticesService.updateNotice(noticeId, req.body);
+      res.render("admin/notices/edit", { notice });
+    } catch (error: any) {  
+      next(error);  
+    }
   }
-}
+}  

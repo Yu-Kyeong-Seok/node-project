@@ -16,21 +16,21 @@ type getFaqsRequest={
 }
 
 /**FAQ 목록 조회(사용자) 응답 */
-type getFaqsResponse=IFaq[];
+// type getFaqsResponse=IFaq[];
 
-/**FAQ 세부 조회 */
-type getFaqDetailRequestPath={
-    faqId:string;
-};
-type getFaqDetailRequestParams={
-}
-type getFaqDetailRequestBody={};
+// /**FAQ 세부 조회 */
+// type getFaqDetailRequestPath={
+//     faqId:string;
+// };
+// type getFaqDetailRequestParams={
+// }
+// type getFaqDetailRequestBody={};
 
 
-type getFaqDetailRequest={
-    path:getFaqDetailRequestPath;
-    params?:getFaqDetailRequestParams,
-    body?:getFaqDetailRequestBody
-}
+// type getFaqDetailRequest={
+//     path:getFaqDetailRequestPath;
+//     params?:getFaqDetailRequestParams,
+//     body?:getFaqDetailRequestBody
+// }
 /**FAQ 세부 조회(사용자) 응답 */
 type getFaqDetailResponse=IFaq | null;

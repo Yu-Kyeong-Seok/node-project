@@ -1,6 +1,6 @@
 export class PostResponseDTO {
     postId: string;
-    category: string;
+    category?: string;
     title: string;
     content: string;
     author: {
@@ -8,7 +8,7 @@ export class PostResponseDTO {
       userName: string;
     };
     createdAt: Date;
-    image : string;
+    image ?: string;
     
     constructor(params: IPost) {
       this.postId = params.id;

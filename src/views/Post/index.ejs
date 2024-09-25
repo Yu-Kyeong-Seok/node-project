@@ -44,7 +44,6 @@
           <a href="/views/write">
             <button class="question-button">질문하기</button>
           </a>
-         
         </div>
 
         <div class="question-bar">
@@ -94,8 +93,6 @@
               </div>
             </div>
             <% } %>
-            
-
           </div>
 
           <div class="post-right">
@@ -119,7 +116,7 @@
       <script>
         $(document).ready(function () {
           const banner= $(".banner")
-           const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
+          const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
           const isLoggedIn=!!accessToken;
           console.log('is??',isLoggedIn)
 

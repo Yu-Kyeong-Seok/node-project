@@ -31,15 +31,15 @@ export default class PostViewController {
     async postDetailPage(req:Request, res:Response, next: NextFunction) {
       
       const { id } = req.params;
-      
 
       const post = await this._postService.getPostDetail(id);
     
-        const authorId = post?.author.id;
+      const authorId = post?.author.id;
     
-        res.render("client/post/postDetail", {
+      // res.render("Post/PostDetail")
+      // console.log(post);
+      res.render("Post/PostDetail", {
           post
-      
         });
     }
 
@@ -49,7 +49,7 @@ export default class PostViewController {
     }
 
    /** 게시글 수정 페이지 */
-   async postEditPage(req: Request, res: Response, next: NextFunction) {
+  async postEditPage(req: Request, res: Response, next: NextFunction) {
     const { postId } = req.params;
 
     const userId = req.user.userId;

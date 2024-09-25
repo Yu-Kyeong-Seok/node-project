@@ -33,20 +33,17 @@ const postViewController = new PostViewController(
   )
 );
 
-
 postViewRotuer.get(`${BASE_PATH}/post`, (req, res, next) => {
   postViewController.postListPage(req, res, next)
 });
 
-
-
-// postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res, next) => {
-//   postViewController.postDetailPage(req, res, next)
-//   });
-
- postViewRotuer.get(`${BASE_PATH}/post/detail`, (req, res) => {
-    res.render(`post/postDetail`);
+postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res, next) => {
+  postViewController.postDetailPage(req, res, next)
   });
+
+// postViewRotuer.get(`${BASE_PATH}/post/detail`, (req, res) => {
+//     res.render(`post/postDetail`);
+//   });
 
   // postViewRotuer.get(`${BASE_PATH}/post/detail/:id`, (req, res) => {
   //   res.render(`post/postDetail`);

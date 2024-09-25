@@ -25,30 +25,6 @@ viewRouter.get(`${BASE_PATH}/login`, (req, res) => {
   res.render(`login`);
 });
 
-viewRouter.get(`${BASE_PATH}/profile`, (req, res) => {
-  res.render(`profile/profile`);
-});
-
-viewRouter.get(`${BASE_PATH}/profile/edit`, (req, res) => {
-  res.render(`profile/profileEdit`);
-});
-
-viewRouter.get(`${BASE_PATH}/profile/changeEmail`, (req, res) => {
-  res.render(`profile/profileChangeEmail`);
-});
-
-viewRouter.get(`${BASE_PATH}/profile/changeNumbers`, (req, res) => {
-  res.render(`profile/profileChangeNumbers`);
-});
-
-viewRouter.get(`${BASE_PATH}/profile/changePassword`, (req, res) => {
-  res.render(`profile/profileChangePassword`);
-});
-
-viewRouter.get(`${BASE_PATH}/profile/setting`, (req, res) => {
-  res.render("profile/profileSetting");
-});
-
 viewRouter.get(`${BASE_PATH}/write`, (req, res) => {
   res.render("client/auth/question");
 });

@@ -39,7 +39,7 @@ export default class CategoryViewController {
     // 카테고리 상세 정보 EJS에 전달
     async getCategoryDetailView(req: Request, res: Response, next: NextFunction) {
         try {
-            const category = await this._categoryService.getCategoryDetail(req.params.categoryName);
+            const category = await this._categoryService.getCategoryDetail(req.params.categoryId);
             res.render('category/categoryDetail', { category });
         } catch (error) {
             console.error(error);

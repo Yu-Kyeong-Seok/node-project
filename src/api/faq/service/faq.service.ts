@@ -36,13 +36,22 @@ export class FaqsServiceImpl implements FaqsService {
 
   //   return new FaqResponseDTO(faq);
   // }
+
   async updateFaq(faqId: string, params: Partial<IFaq>): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);
     
+    if (!findFaq) throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+
+    await this._faqRepository.update(faqId,{...params});
+        
     return;
   }
   async deleteFaq(faqId: string): Promise<void> {
     const findFaq = await this._faqRepository.findById(faqId);
+
+    if (!findFaq) throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+    
+    await this._faqRepository.delete(faqId);
 
     return;
   }

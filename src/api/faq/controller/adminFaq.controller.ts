@@ -77,7 +77,7 @@ export default class AdminFaqsController {
     try {
       const updatedFaq = await this._faqsService.updateFaq(faqId, req.body);
 
-      res.status(204).json();
+      res.status(200).json(updatedFaq);
     } catch (error){
       next(error);
     }
@@ -90,7 +90,7 @@ export default class AdminFaqsController {
     ) {
     const { faqId } = req.params;
     try {
-      const deletedFaq = await this._faqsService.deleteFaq(req.body);
+      const deletedFaq = await this._faqsService.deleteFaq(faqId);
 
      res.status(204).json();
     } catch (error){

@@ -10,11 +10,6 @@ import { NoticesService } from "../service/notice.service.type";
 
 export default class AdminNoticesController {
 
-  // private readonly _noticeService: NoticeService;
-  // constructor(_noticeService:NoticeService) {
-  //   this._noticeService = _noticeService;
-  // }
-
   private readonly _noticesService: NoticesService;
   constructor(_noticesService: NoticesService) {
     this._noticesService = _noticesService;
@@ -34,7 +29,7 @@ async getNotices(
   try {
       const notices = await this._noticesService.getNotices();
 
-      res.send(notices);
+      res.json(notices);
   } catch (error){
     console.log(error);
   }
@@ -45,13 +40,13 @@ async getNoticeDetail(
   getNoticesRequest["body"],
   getNoticesRequest["params"]>,
   res: Response,
-  next: NextFunction 
-  ) {
+  next: NextFunction ) {
   try {
     const noticeDetail = await this._noticesService.getNoticeDetail(
       req.params.noticeId);
-    res.send(noticeDetail);
+    res.json(noticeDetail);
   } catch (error){
+    console.log(error);
     next(error);
   }
 }
@@ -64,7 +59,7 @@ async createNotice(
   try {
     const createdNotice = await this._noticesService.createNotice(req.body);
 
-    res.send(createdNotice);
+    res.json(createdNotice);
   } catch (error){
     next(error);
   }
@@ -79,7 +74,7 @@ async updateNotice(
   try {
     const updatedNotice = await this._noticesService.updateNotice(noticeId, req.body);
 
-    res.status(204).json();
+    res.status(200).json(noticeId);
   } catch (error){
     next(error);
   }

@@ -16,14 +16,9 @@
 </head>
 <body>
   <div class="page-container">
-    <%- include('./_layouts/header') %>
     <div class="content">
-        
+        <%- include('./Post/index') %>
     </div>
-    
-    <footer>
-        <%- include('./_layouts/footer') %>
-    </footer>
     <script>
       $(document).ready(function() {
           $(".hamburger-bar").click(function() {
@@ -33,7 +28,7 @@
           $(".page_cover, .close").click(function() {
               $("#menu, .page_cover").removeClass("open");
           });
-      });
+     });
   </script>
 </div>
 </body>

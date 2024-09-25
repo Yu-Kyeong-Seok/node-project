@@ -1,14 +1,15 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
+import { NoticesServiceImpl } from "./notice.service";
 
-export interface NoticeService {
-  /** FAQ 생성 */
-  createNotice(): Promise<NoticeResponseDTO>;
-  /** FAQ 목록 조회 */
+export interface NoticesService {
+  /** NOTICE 생성 */
+  createNotice(params: Omit<INotice, "id">): Promise<NoticeResponseDTO>;
+  /** NOTICE 목록 조회 */
   getNotices(): Promise<NoticeResponseDTO[]>;
-  /** FAQ 조회 */
-  getNoticeDetail(): Promise<NoticeResponseDTO>;
-  /** FAQ 수정 */
-  updateNotice(): Promise<void>;
-  /** FAQ 삭제 */
-  deleteNotice(): Promise<void>;
+  /** NOTICE 상세 조회 */
+  getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO | null>;
+  /** NOTICE 수정 */
+  updateNotice(noticeId: string, params: Partial<INotice>): Promise<void>;
+  /** NOTICE 삭제 */
+  deleteNotice(noticeId: string): Promise<void>;
 } 

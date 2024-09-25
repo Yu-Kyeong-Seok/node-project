@@ -18,7 +18,7 @@ type getCategoriesResponse=ICategory[];
 
 /**카테고리 세부 조회 */
 type getCategoryDetailRequestPath={
-    categoryId:string;
+    categoryName:string;
 };
 type getCategoryDetailRequestParams={
 }

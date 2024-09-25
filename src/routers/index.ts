@@ -41,9 +41,35 @@ const UPLOAD_ROUTES = {
   UPLOAD_VIEW: "/upload",
 } as const;
 
+/** FAQ 라우터 */
+const FAQ_ROUTES = {
+  /** 관리자 FAQ API */
+  ADMIN_FAQS_API: "/admin-api/faqs",
+  /** FAQ API */
+  FAQS_API: "/api/faqs",
+  /** 관리자 FAQ 뷰 */
+  ADMIN_FAQ_VIEW: "/admin/faqs",
+  /** FAQ 뷰 */
+  FAQ_VIEW: "/faqs",
+} as const;
+
+/** NOTICE 라우터 */
+const NOTICE_ROUTES = {
+  /** 관리자 NOTICE API */
+  ADMIN_NOTICES_API: "/admin-api/notices",
+  /** NOTICE API */
+  NOTICES_API: "/api/notices",
+  /** 관리자 NOTICE 뷰 */
+  ADMIN_NOTICE_VIEW: "/admin/notices",
+  /** NOTICE 뷰 */
+  NOTICE_VIEW: "/notices",
+} as const;
+
 export const ROUTES_INDEX = {
   ...POST_ROUTES,
   ...AUTH_ROUTES,
   ...USER_ROUTES,
   ...UPLOAD_ROUTES,
+  ...FAQ_ROUTES,
+  ...NOTICE_ROUTES,
 } as const;

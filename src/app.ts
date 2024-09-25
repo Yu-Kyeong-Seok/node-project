@@ -8,12 +8,16 @@ import postViewRotuer from "../src/api/post/router/post.view.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import categoryViewRouter from "@/api/category/router/category.view.router";
+import adminFaqViewRouter from "./api/faq/router/adminFaq.view.router";
+import faqViewRouter from "./api/faq/router/faq.view.router";
+import adminNoticeViewRouter from "./api/notice/router/adminNotice.view.router";
+import noticeViewRouter from "./api/notice/router/notice.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
 import adminFaqRouter from './api/faq/router/adminFaq.router';
 import faqRouter from './api/faq/router/faq.router';
-import adminNoticeRouter from "./api/notice/router/adminNotice.router";
+import adminNoticeRouter from './api/notice/router/adminNotice.router';
 import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
@@ -57,6 +61,16 @@ app.use(noticeRouter);
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
+app.use(ROUTES_INDEX.ADMIN_FAQS_API, faqRouter);
+app.use(ROUTES_INDEX.ADMIN_NOTICES_API, faqRouter);
+
+app.use(ROUTES_INDEX.ADMIN_FAQ_VIEW, adminFaqViewRouter);
+app.use(ROUTES_INDEX.FAQ_VIEW, faqViewRouter);
+
+app.use(ROUTES_INDEX.ADMIN_NOTICE_VIEW, adminNoticeRouter);
+app.use(ROUTES_INDEX.NOTICE_VIEW, noticeViewRouter);
+
+
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
 // view engine 세팅

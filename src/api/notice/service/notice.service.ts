@@ -20,7 +20,9 @@ export class NoticesServiceImpl implements NoticesService {
     return new NoticeResponseDTO(newNotice);
   }
   async getNotices(): Promise<NoticeResponseDTO[]> {
+    console.log("getNotices 호출됨");
     const notices = await this._noticeRepository.findAll();
+    console.log("조회된 notices:", notices);
 
     return await Promise.all(
       notices.map((notice) => new NoticeResponseDTO(notice))

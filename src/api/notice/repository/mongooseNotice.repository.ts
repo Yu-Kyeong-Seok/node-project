@@ -11,6 +11,7 @@ export class MongooseNoticeRepository implements NoticeRepository {
     return newNotice;
   }
 
+  
   async findAll(): Promise<INotice[]> {
     const notices = await MongooseNotice.find();
     return notices;

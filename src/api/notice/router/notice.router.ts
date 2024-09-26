@@ -5,7 +5,7 @@ import { MongooseNoticeRepository } from '../repository/mongooseNotice.repositor
 
 const noticeRouter= express.Router();
 
-const NOTICE_ROUTES={
+const NOTICE_ROUTES = {
     /*Notice 목록 조회*/
     GET_NOTICES:`/api/notice`,
     /*Notice 상세 조회*/

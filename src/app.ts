@@ -59,7 +59,7 @@ app.use(authViewRouter);
 
 app.use(postViewRotuer);
 // app.use(postRouter);
-app.use(categoryRouter);
+
 
 app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);

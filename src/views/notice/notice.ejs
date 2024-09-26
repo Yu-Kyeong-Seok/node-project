@@ -18,7 +18,35 @@
 <body>
   <div class="page-container">
     <%- include('../_layouts/header') %>
+    
     <div class="content">
+      <div class="wrap">
+          <div class="notice-description">
+              <h2>공지사항</h2>
+          </div>
+          
+          <div class="notice-container">
+              <ul class="notice-list">
+                <% if (notices && notices.length > 0) { %>
+                  <% notices.forEach(function(notice) { %> <!-- notices 배열을 순회 -->
+                    <li class="notice">
+                      <a href="/notice/<%= notice.id %>" class="notice-link"> <!-- 동적으로 id 추가 -->
+                        <div class="title-area">
+                          <span class="notice-label">공지</span>
+                          <span class="notice-title"><%= notice.title %></span> <!-- 공지 제목 -->
+                        </div>
+                        <span class="notice-date"><%= notice.date %></span> <!-- 공지 날짜 -->
+                      </a>
+                    </li>
+                  <% }) %>
+                  <% } else { %>
+                    <p>공지사항이 없습니다.</p>
+                <% } %>
+              </ul>
+          </div>
+      </div>
+  </div>
+    <!-- <div class="content">
 
         <div class="wrap">
         <div class="notice-description">
@@ -70,7 +98,8 @@
         </div>
 
     
-    </div>
+    </div> -->
+  
 
     
     <footer>

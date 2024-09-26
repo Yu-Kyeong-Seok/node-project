@@ -38,7 +38,7 @@ export class MongooseFaqRepository implements FaqRepository{
       return results;
     }
     async delete(faqId: string): Promise<void> {
-      await MongooseFaq.deleteOne({ _id: faqId });
+      await MongooseFaq.deleteOne({ id: faqId });
   
       return;
     }

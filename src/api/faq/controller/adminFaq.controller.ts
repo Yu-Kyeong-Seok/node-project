@@ -90,7 +90,7 @@ export default class AdminFaqsController {
     ) {
     const { faqId } = req.params;
     try {
-      const deletedFaq = await this._faqsService.deleteFaq(faqId);
+      await this._faqsService.deleteFaq(req.params.faqId);
 
      res.status(204).json();
     } catch (error){

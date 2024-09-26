@@ -22,18 +22,18 @@ export class CommentsServiceImpl implements CommentService{
         if (!comments) {
             return []; // comments가 null일 경우 빈 배열 반환
         }
-       
+        return comments.map(comment => ({
+           // commentId: comment._id,
+            content: comment.content,
+            image: comment.image,
+            author:comment.postId.author._id,
+            createdAt: comment.createdAt,
+            postId: comment.postId._id, // postId의 _id만 포함
+        }));
 
-        console.log('comments service',comments)
-        return []
-        // return comments.map(comment => ({
-        //     commentId: comment.id,
-        //     content: comment.content,
-        //     image: comment.image,
-        //     author:comment.postId.author._id,
-        //     createdAt: comment.createdAt,
-        //     postId: comment.postId._id, // postId의 _id만 포함
-        // }));
+       //console.log('comments service',comments)
+        // return comments;
+      
      
   
     }
@@ -61,7 +61,7 @@ export class CommentsServiceImpl implements CommentService{
         
         createdAt: new Date(), // 생성 시간 추가
     });
-
+ 
     // 4. 저장
     const savedComment = await this._commentRepository.save(newComment);
     return new commentResponseDTO(savedComment); 

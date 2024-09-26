@@ -29,10 +29,13 @@ export class MongooseCommentRepository implements CommentRepository{
         const comment=await MongooseComment.find({postId}).populate({
             path:"postId",
             populate:{
-                path:"author"
+                path:"author",
+                // select:"userName"
             }
         })
+        console.log('commentMongodse',comment);
         return comment; 
+   
     }catch(error:any){
         const message = error.message.toString();
           if (message.includes("Cast to ObjectId failed")) {

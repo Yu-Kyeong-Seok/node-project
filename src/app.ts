@@ -56,8 +56,6 @@ app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
 
-app.use(categoryRouter); 
-
 app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);

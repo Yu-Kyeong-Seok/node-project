@@ -16,20 +16,32 @@ export class MongooseNoticeRepository implements NoticeRepository{
         const notices=await MongooseNotice.find();
         return notices;
     }
-    async findById(noticeId: string): Promise<INotice | null> {
-        try{
-            const findNotice=await MongooseNotice.findById(noticeId)
-            return findNotice;
-        }catch(error:any){
-            const message = error.message.toString();
-            if (message.includes("Cast to ObjectId failed")) {
-              return null;
-            }
-            throw error;
-        }
+
+
+  async findById(noticeId:string):Promise<INotice | null>{
+      try{
+          const findNoticeId = await MongooseNotice.findOne({ id: noticeId } )
+          return findNoticeId;
+      }catch(error){
+          console.log(error)
+          return null;
+      }
+  }  
+//findById 수정하니까 postman 작동됨 뭐지?
+  // async findById(noticeId: string): Promise<INotice | null> {
+  //       try{
+  //           const findNoticeId=await MongooseNotice.findById(noticeId)
+  //           return findNoticeId;
+  //       }catch(error:any){
+  //           const message = error.message.toString();
+  //           if (message.includes("Cast to ObjectId failed")) {
+  //             return null;
+  //           }
+  //           throw error;
+  //       }
        
-    }
-    async update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<INotice> {
+  //   }
+  async update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<INotice> {
       const results = await MongooseNotice.findByIdAndUpdate(
         noticeId, 
         updateNoticeInfo
@@ -40,7 +52,7 @@ export class MongooseNoticeRepository implements NoticeRepository{
   
       return results;
     }
-    async delete(noticeId: string): Promise<void> {
+  async delete(noticeId: string): Promise<void> {
       await MongooseNotice.deleteOne({ _id: noticeId });
   
       return;

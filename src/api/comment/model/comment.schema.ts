@@ -17,12 +17,10 @@ const commentSchema=new mongoose.Schema<IComment>({
     },
     author:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required: true
+        ref:'User'
     },
     image:{
-        type:String,
-        required: false,
+        type:String
     },},
    
     {

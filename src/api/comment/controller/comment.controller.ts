@@ -20,25 +20,16 @@ export default class CommentController{
         res:Response,
         next:NextFunction){
             try{
-            //     const comments=await this._commentService.getComments(req.params.postId);
-            //     console.log('commentssss',comments)
-            //     return comments.map(comment => ({
-            //         //id: comment.postId.id,
-            //         content: comment.content,
-            //         image: comment.image,
-            //         createdAt: comment.createdAt,
-            //         postId: comment.postId._id, 
-            //    }));
-            const comments = await this._commentService.getComments(req.params.postId);
-            //console.log('comments', comments);
-            // const formattedComments = comments.map(comment => ({
-            //     _id: comment._id,
-            //     content: comment.content,
-            //     image: comment.image,
-            //     updatedAt: comment.updatedAt,
-            //     postId: comment.postId._id, 
-            // }));
-            //     res.send(comments)
+                const comments=await this._commentService.getComments(req.params.postId);
+                console.log('commentssss',comments)
+                // return comments.map(comment => ({
+                //     id: comment.postId.id,
+                //     content: comment.content,
+                //     image: comment.image,
+                //     updatedAt: comment.updatedAt,
+                //     postId: comment.postId._id, // postId의 _id만 반환
+              //  }));
+                res.send(comments)
             }catch(error){
                 next(error)
             }
@@ -53,7 +44,17 @@ export default class CommentController{
             next:NextFunction){
                 const postId=req.params.postId;
                 const { content,image } = req.body;
-         
+                // const body = {
+                //     ...req.body,
+                //     userId: req.user.userId,
+                //   };
+                // const {content,image}=req.body;
+               
+    
+                // if(!postId){
+                //     return res.status(400).send('postId is required');
+                // }
+               
                 try{
                     const newComment=await this._commentService.createComment(req.user.userId,{
             

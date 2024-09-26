@@ -2,9 +2,9 @@
 export interface CommentRepository{
      /*댓글 목록 조회*/
      findAll():Promise<IComment[]>;
-     
-     findByPostId(postId:string):Promise<IComment[]>;
+    findById(postId:string):Promise<IComment | null>;
  
+
     /*댓글 생성*/
     save(comment:Omit<IComment,"commentId">):Promise<IComment>;
    

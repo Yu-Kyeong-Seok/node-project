@@ -2,7 +2,6 @@ import HttpException from "@/api/common/exceptions/http.exception";
 import { MongooseComment } from "../model/comment.schema";
 import { CommentRepository } from "./comment.respository";
 
-
 export class MongooseCommentRepository implements CommentRepository{
     async save(comment:Omit<IComment,"commentId">):Promise<IComment>{
         try{
@@ -24,24 +23,19 @@ export class MongooseCommentRepository implements CommentRepository{
         .populate("author");  
         return values;
     }
-    async findByPostId(postId:string):Promise<IComment[]>{
-        console.log('postId/???',postId)
-       
+    async findById(postId:string):Promise<IComment | null >{
         try{
-        const comments=await MongooseComment.find({ postId: postId }).populate({
-            // path:"postId",
-            // populate:{
-            //     path:"author"
-            // }
-             path:"author"
-        });
-        console.log('commentsMongo',comments);
-        //return comments; 
-        return [];
+        const comment=await MongooseComment.findById(postId).populate({
+            path:"postId",
+            populate:{
+                path:"author"
+            }
+        })
+        return comment; 
     }catch(error:any){
         const message = error.message.toString();
           if (message.includes("Cast to ObjectId failed")) {
-            return [];
+            return null;
           }
           throw error;
     }

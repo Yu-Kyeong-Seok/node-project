@@ -1,55 +1,44 @@
 import { Request, Response, NextFunction } from "express";
 import { PostService } from "@/api/post/service/post.service.type";
 
-
 export default class PostViewController {
-    private readonly _postService: PostService;
-    constructor(_postService: PostService) {
-        this._postService = _postService;
-    
-        this.postListPage = this.postListPage.bind(this);
-        this.postDetailPage = this.postDetailPage.bind(this);
-        this.postWritePage = this.postWritePage.bind(this);
-        this.postEditPage = this.postEditPage.bind(this);
-      }
+  private readonly _postService: PostService;
+  constructor(_postService: PostService) {
+    this._postService = _postService;
+    this.postListPage = this.postListPage.bind(this);
+    this.postDetailPage = this.postDetailPage.bind(this);
+    this.postWritePage = this.postWritePage.bind(this);
+    this.postEditPage = this.postEditPage.bind(this);
+  }
 
-      /**게시글 목록 페이지 부분  보이게 할거 */
-    async postListPage(req:Request, res:Response, next: NextFunction) {
-        const offset = Number(req.query.offset) || 0;
-        const limit = Number(req.query.limit) || 3; 
+  /**게시글 목록 페이지 부분  보이게 할거 */
+  async postListPage(req: Request, res: Response, next: NextFunction) {
+    const offset = Number(req.query.offset) || 0;
+    const limit = Number(req.query.limit) || 5;
+    const post = await this._postService.getPosts({
+      offset,
+      limit,
+    });
+    console.log(post.results[3].postId);
+    res.render(`post/index`, { post });
+  }
 
-        const post = await this._postService.getPosts({
-            offset,
-            limit
-        }); 
+  /**게시글 상세 페이지 부분 */
+  async postDetailPage(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const post = await this._postService.getPostDetail(id);
+    const authorId = post?.author.id;
+    res.render("post/postDetail", { post });
  
-        res.render(`post/index`, {post});
-        
-    }
+  }
 
-    /**게시글 상세 페이지 부분 */
-    async postDetailPage(req:Request, res:Response, next: NextFunction) {
-      
-      const { id } = req.params;
-      
-
-      const post = await this._postService.getPostDetail(id);
-    
-        const authorId = post?.author.id;
-    
-        res.render("client/post/postDetail", {
-          post
-      
-        });
-    }
-
-      /** 게시글 작성 페이지 */
+  /** 게시글 작성 페이지 */
   async postWritePage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/post/postWrite");
-    }
+    res.render("post/postWrite");
+  }
 
-   /** 게시글 수정 페이지 */
-   async postEditPage(req: Request, res: Response, next: NextFunction) {
+  /** 게시글 수정 페이지 */
+  async postEditPage(req: Request, res: Response, next: NextFunction) {
     const { postId } = req.params;
 
     const userId = req.user.userId;
@@ -64,6 +53,6 @@ export default class PostViewController {
         </script>`);
     }
 
-    res.render("client/posts/postEdit", { post });
+    res.render("posts/postEdit", { post });
   }
 }

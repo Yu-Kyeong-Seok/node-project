@@ -28,10 +28,10 @@
 .comment-profile { border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; background-color: rgba(214, 214, 214, 0.5); margin: 10px 15px 0px 10px; } 
 
 .comment-contants { margin-top: 15px; font-size: 14px; color: rgb(195, 195, 195); } 
-.comment-contants p { padding-left: 17px; } 
+.comment-contants p { padding-left: 17px;} 
 
 .need-login { color: rgb(41, 131, 213); } 
-.comment-login { border: 1px solid rgb(240, 240, 240); width: 96%; height: 80px; margin: 10px auto 0 auto; border-radius: 10px; } 
+.comment-login { border: 1px solid rgb(240, 240, 240); width: 96%; height: 80px; margin: 10px auto 0 auto; border-radius: 10px; display: none;} 
 .commet-login-up { display: flex; justify-content: start; align-items: start; } 
 .comment-login-down { display: flex; justify-content: end; align-items: end; } 
 .login-comment-contants { width: 70%; height: 80px; } 

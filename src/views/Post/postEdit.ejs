@@ -6,7 +6,7 @@ contents<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/styles/common/header.css" />
     <link rel="stylesheet" href="/static/styles/common/footer.css" />
-    <link rel="stylesheet" href="/static/styles/post/postDetail.css" />
+    <link rel="stylesheet" href="/static/styles/post/postEdit.css" />
     <link rel="stylesheet" href="/static/styles/common/reset.css" />
     <link
       rel="stylesheet"
@@ -25,7 +25,7 @@ contents<!DOCTYPE html>
   </head>
 
   <body>
-    @media (min-width: 300px) and (max-width: 890px)
+   
     <div class="page-container">
       <%- include('../_layouts/header') %>
 
@@ -47,16 +47,21 @@ contents<!DOCTYPE html>
           </div>
         </div>
 
-        <div class="contents-container">
-
+        <form class="contents-container">
           <div class="contents-title">
-            <h3><input type="text" value="전에 쓴거"></h3>
+            <input class="title-input" type="text" value="전에 쓴거 전에 쓴거 id 가져와서 제목 불러오기">
           </div>
 
           <div class="contents">
-            <textarea name="" id="" value="전에 쓴거"></textarea>
+            <input class="contents-input" type="text" value="전에 쓴거 id 가져와서 내용 불러오기">
+            
+            <div class="save-bar">
+            <button type="submit" class="save">저장</button>
           </div>
-        </div>
+          </div>
+
+
+        </form>
       </div>
 
       <footer><%- include('../_layouts/footer') %></footer>

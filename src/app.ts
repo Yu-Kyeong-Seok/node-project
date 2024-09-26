@@ -4,7 +4,7 @@ import morgan from "morgan";
 import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
 
-import postViewRotuer from "../src/api/post/router/post.view.router";
+import postViewRouter from "../src/api/post/router/post.view.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import categoryViewRouter from "@/api/category/router/category.view.router";
@@ -41,14 +41,15 @@ app.use(cookieParser());
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
-
+app.use(express.json())
+app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
 //app.use(userRouter);
 app.use(viewRouter);
 app.use(categoryViewRouter);
 app.use(authViewRouter);
-app.use(postViewRotuer);
-// app.use(postRouter);
+app.use(postViewRouter);
+app.use(postRouter);
 app.use(categoryRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);

@@ -30,7 +30,7 @@ const COMMENT_ROUTES = {
 
 commentRouter.get(COMMENT_ROUTES.GET_COMMENTS, commentController.getComments.bind(commentController));
 commentRouter.post(COMMENT_ROUTES.CREATE_COMMENT, authUserMiddleware, commentController.createComment.bind(commentController) as any);
-commentRouter.put(COMMENT_ROUTES.EDIT_COMMENT, commentController.editComment.bind(commentController));
+commentRouter.put(COMMENT_ROUTES.EDIT_COMMENT, authUserMiddleware,commentController.editComment.bind(commentController) as any);
 // commentRouter.post(COMMENT_ROUTES.CREATE_COMMENT),authUserMiddleware,commentController.createComment.bind(commentController);
 
 commentRouter.delete(COMMENT_ROUTES.DELETE_COMMENT),authUserMiddleware, commentController.deleteComment.bind(commentController);

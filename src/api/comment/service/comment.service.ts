@@ -23,7 +23,7 @@ export class CommentsServiceImpl implements CommentService{
             return []; // comments가 null일 경우 빈 배열 반환
         }
         return comments.map(comment => ({
-           // commentId: comment._id,
+            _id: comment._id,
             content: comment.content,
             image: comment.image,
             author:comment.postId.author._id,
@@ -37,7 +37,7 @@ export class CommentsServiceImpl implements CommentService{
      
   
     }
-    async createComment(userId:string,params:Omit<IComment,"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
+    async createComment(userId:string,params:Omit<IComment,"_id" |"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
          // 1. 작성자 찾기
     const author = await this._userRepository.findById(userId);
     

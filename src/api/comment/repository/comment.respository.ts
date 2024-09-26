@@ -6,7 +6,7 @@ export interface CommentRepository{
    // findById(commentId:string):Promise<IComment>;
     findById(commentId:string):Promise<IComment | null>;
     /*댓글 생성*/
-    save(comment:Omit<IComment,"commentId">):Promise<IComment>;
+    save(comment:Omit<IComment,"_id" |"commentId">):Promise<IComment>;
    
     /**댓글 수정 */
     update(commentId:string,updateCommentInfo:Partial<IComment>):Promise<IComment>;

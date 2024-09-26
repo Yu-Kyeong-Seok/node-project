@@ -1,6 +1,7 @@
 interface IComment {
     /** 댓글 ID */
     commentId: string;
+   _id:string;
     /**부모 게시글 ID */
     // postId:IPost;
     postId: ObjectId;

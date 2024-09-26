@@ -77,7 +77,7 @@ declare type updateCommentRequestPath={
     commentId:string;
 };
 declare type updateCommentRequestBody=//{content:string;image?:string;};
-        Omit<IComment,  "commentId"| "postId" | "author" | "createdAt">;
+        Omit<IComment,"_id" | "commentId"| "postId" | "author" | "createdAt">;
 declare type updateCommentRequestParams={};
 declare type updateCommentRequest={
     path:updateCommentRequestPath;

@@ -3,7 +3,7 @@ import { MongooseComment } from "../model/comment.schema";
 import { CommentRepository } from "./comment.respository";
 
 export class MongooseCommentRepository implements CommentRepository{
-    async save(comment:Omit<IComment,"commentId">):Promise<IComment>{
+    async save(comment:Omit<IComment,"_id" | "commentId">):Promise<IComment>{
         try{
             const newComment= new MongooseComment(comment)
             return await newComment.save();
@@ -73,12 +73,12 @@ export class MongooseCommentRepository implements CommentRepository{
         const results = await MongooseComment.findByIdAndUpdate(
           commentId,
           updateCommentInfo,
-          { new: true } //새로운 내용으로 업뎃.
+         // { new: true } //새로운 내용으로 업뎃.
         );
-        
+        console.log('results',results)
     
         if (!results) {
-          throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+          throw new HttpException(404, "댓글을 찾을 수 없습니다.");
         }
     
         return results;

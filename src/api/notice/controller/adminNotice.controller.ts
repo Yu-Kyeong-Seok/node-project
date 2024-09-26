@@ -69,7 +69,6 @@ export default class AdminNoticesController {
 
   async updateNotice(req: Request, res: Response, next: NextFunction) {
     const { noticeId } = req.params;
-    console.log(noticeId);
     try {
       const updatedNotice = await this._noticesService.updateNotice(
         noticeId,

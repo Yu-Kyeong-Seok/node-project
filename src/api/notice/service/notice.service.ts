@@ -47,7 +47,6 @@ export class NoticesServiceImpl implements NoticesService {
     return;
   }
   async deleteNotice(noticeId: string): Promise<void> {
-    console.log({ noticeId });
     const findNotice = await this._noticeRepository.findById(noticeId);
 
     await this._noticeRepository.delete(findNotice?.id ?? "");

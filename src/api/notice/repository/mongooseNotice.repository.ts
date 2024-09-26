@@ -53,7 +53,6 @@ export class MongooseNoticeRepository implements NoticeRepository {
     return results;
   }
   async delete(noticeId: string): Promise<void> {
-    console.log({ noticeId });
     await MongooseNotice.deleteOne({ id: noticeId });
 
     return;

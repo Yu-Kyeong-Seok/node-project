@@ -13,7 +13,7 @@ export default class NoticesViewController {
   async getNoticesView(req: Request, res: Response, next: NextFunction) {
     const notices = await this._noticesService.getNotices();
 
-    res.render("notices/notices", { notices });
+    res.render("notices/notice", { notices });
   }
 
   /** NOTICE 상세 페이지 */
@@ -21,7 +21,7 @@ export default class NoticesViewController {
     try {
       const { noticeId } = req.params;
       const notice = await this._noticesService.getNoticeDetail(noticeId);
-      res.render("notices/noticeDetail", {
+      res.render("notice/noticeDetail", {
         notice,
       });
     } catch (error: any) {  

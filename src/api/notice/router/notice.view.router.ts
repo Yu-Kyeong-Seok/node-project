@@ -9,11 +9,11 @@ const noticesViewController = new NoticesViewController(new NoticesServiceImpl(n
 
 const BASE_PATH = "/views";
 
-noticeViewRouter.get(`${BASE_PATH}/admin/notices`, (req, res, next) => {
+noticeViewRouter.get(`${BASE_PATH}/notice`, (req, res, next) => {
   noticesViewController.getNoticesView(req, res, next); 
 });
 
-noticeViewRouter.get(`${BASE_PATH}/admin/notices`, (req, res, next) => {
+noticeViewRouter.get(`${BASE_PATH}/notice/:noticeId`, (req, res, next) => {
   noticesViewController.getNoticeDetailView(req, res, next); 
 });
 

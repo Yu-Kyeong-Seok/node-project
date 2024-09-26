@@ -14,7 +14,7 @@ export default class AdminNoticesViewController {
   /** NOTICE 목록 페이지 */
 async getNoticesView(req: Request, res: Response, next: NextFunction) {
     const notices = await this._noticesService.getNotices();
-    res.render("admin/notices", {
+    res.render("admin/notice", {
       notices,
     });
   }
@@ -24,7 +24,7 @@ async getNoticeDetailView(req: Request, res: Response, next: NextFunction) {
     try {
       const { noticeId } = req.params;
       const notice = await this._noticesService.getNoticeDetail(noticeId);
-      res.render("client/notices/noticeDetail", {
+      res.render("admin/notice/noticeDetail", {
         notice,
       });
     } catch (error: any) {
@@ -34,7 +34,7 @@ async getNoticeDetailView(req: Request, res: Response, next: NextFunction) {
 
    /** NOTICE 작성 페이지 */
 async createNoticeView(req: Request, res: Response, next: NextFunction) {
-    res.render("admin/notices/write");
+    res.render("admin/notice/write");
   }
 
   /** NOTICE 수정 페이지 */
@@ -42,7 +42,7 @@ async createNoticeView(req: Request, res: Response, next: NextFunction) {
     try {
       const { noticeId } = req.params;
       const notice = await this._noticesService.updateNotice(noticeId, req.body);
-      res.render("admin/notices/edit", { notice });
+      res.render("admin/notice/edit", { notice });
     } catch (error: any) {  
       next(error);  
     }

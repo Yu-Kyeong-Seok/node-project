@@ -61,13 +61,13 @@ const FAQ_ROUTES = {
 /** NOTICE 라우터 */
 const NOTICE_ROUTES = {
   /** 관리자 NOTICE API */
-  ADMIN_NOTICES_API: "/admin-api/notices",
+  ADMIN_NOTICES_API: "/admin-api/notice",
   /** NOTICE API */
-  NOTICES_API: "/api/notices",
+  NOTICES_API: "/api/notice",
   /** 관리자 NOTICE 뷰 */
-  ADMIN_NOTICE_VIEW: "/admin/notices",
+  ADMIN_NOTICE_VIEW: "/admin/notice",
   /** NOTICE 뷰 */
-  NOTICE_VIEW: "/notices",
+  NOTICE_VIEW: "/notice",
 }
 
 

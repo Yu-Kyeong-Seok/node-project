@@ -10,19 +10,19 @@ const adminNoticesViewController = new AdminNoticesViewController(new NoticesSer
 
   const BASE_PATH = "/views";
 
-  adminNoticeViewRouter.get(`${BASE_PATH}/admin/notices`, (req, res, next) => {
+  adminNoticeViewRouter.get(`${BASE_PATH}/admin/notice`, (req, res, next) => {
     adminNoticesViewController.getNoticesView(req, res, next); 
 });
 
-  adminNoticeViewRouter.get(`${BASE_PATH}/admin/notices`, (req, res, next) => {
+  adminNoticeViewRouter.get(`${BASE_PATH}/admin/notice`, (req, res, next) => {
     adminNoticesViewController.getNoticeDetailView(req, res, next); 
 });
 
-adminNoticeViewRouter.get(`${BASE_PATH}/admin/notices/write`, (req, res, next) => {
+adminNoticeViewRouter.get(`${BASE_PATH}/admin/notice/write`, (req, res, next) => {
   adminNoticesViewController.createNoticeView(req, res, next); 
 });
 
-adminNoticeViewRouter.get(`${BASE_PATH}/admin/notices/:noticeId/edit`, (req, res, next) => {
+adminNoticeViewRouter.get(`${BASE_PATH}/admin/notice/:noticeId/edit`, (req, res, next) => {
   adminNoticesViewController.updateNoticeView(req, res, next); 
 });
 

@@ -7,10 +7,11 @@ export class MongooseCommentRepository implements CommentRepository{
         try{
             const newComment= new MongooseComment(comment)
             return await newComment.save();
-        }
-        catch(error){
+            }
+            catch(error){
+            console.error(error)
             throw new HttpException(404, "댓글을 등록할 수 없습니다.");
-        }
+            }
     }
 
     async findAll():Promise<IComment[]>{
@@ -23,9 +24,9 @@ export class MongooseCommentRepository implements CommentRepository{
         .populate("author");  
         return values;
     }
-    async findById(postId:string):Promise<IComment | null >{
+    async findByAllPostId(postId:string):Promise<IComment[] >{
         try{
-        const comment=await MongooseComment.findById(postId).populate({
+        const comment=await MongooseComment.find({postId}).populate({
             path:"postId",
             populate:{
                 path:"author"
@@ -35,10 +36,34 @@ export class MongooseCommentRepository implements CommentRepository{
     }catch(error:any){
         const message = error.message.toString();
           if (message.includes("Cast to ObjectId failed")) {
-            return null;
+            return [];
           }
           throw error;
     }
+    }
+    async findById(commentId: string): Promise<IComment | null> {
+        try {
+            const comment = await MongooseComment.findById(commentId).populate({
+                path: "postId",
+                populate: {
+                    path: "author"
+                }
+            });
+    
+            // 찾은 댓글이 없으면 null 반환
+            if (!comment) {
+                return null; 
+            }
+            
+            return comment; // 찾은 댓글 반환
+        } catch (error:any) {
+            const message = error.message.toString();
+            if (message.includes("Cast to ObjectId failed")) {
+                return null; // 잘못된 ObjectId일 경우 null 반환
+            }
+            throw error; // 다른 에러는 throw
+        }
+       
     }
 
     async update(commentId: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {

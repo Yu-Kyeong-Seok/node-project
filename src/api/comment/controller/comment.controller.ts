@@ -57,7 +57,7 @@ export default class CommentController{
                
                 try{
                     const newComment=await this._commentService.createComment(req.user.userId,{
-            
+                        postId,
                         content,
                         image,
                     })

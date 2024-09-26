@@ -18,13 +18,14 @@ export class CommentsServiceImpl implements CommentService{
     
     
      async getComments(postId:string): Promise<commentResponseDTO[]> {
-        const comments = await this._commentRepository.findAll();
+        const comments = await this._commentRepository.findByAllPostId(postId);
         if (!comments) {
             return []; // comments가 null일 경우 빈 배열 반환
         }
-        return comments;
+       
 
         console.log('comments service',comments)
+        return []
         // return comments.map(comment => ({
         //     commentId: comment.id,
         //     content: comment.content,
@@ -39,12 +40,14 @@ export class CommentsServiceImpl implements CommentService{
     async createComment(userId:string,params:Omit<IComment,"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
          // 1. 작성자 찾기
     const author = await this._userRepository.findById(userId);
+    
     if (!author) {
         throw new HttpException(404, "작성자를 찾을 수 없습니다.");
     }
 
     // 2. 부모 글 찾기
     const post = await this._postRepository.findById(params.postId);
+    
     if (!post) {
         throw new HttpException(404, "해당 게시물이 없습니다.");
     }

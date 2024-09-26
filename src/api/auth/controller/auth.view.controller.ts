@@ -51,5 +51,5 @@ export default class AuthViewController {
     }catch(error){
       throw new HttpException(400,'회원가입 중 오류 발생하였습니다.')
     }
-  }
+  } 
 }

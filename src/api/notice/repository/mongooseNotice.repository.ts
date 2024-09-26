@@ -42,9 +42,10 @@ export class MongooseNoticeRepository implements NoticeRepository {
     noticeId: string,
     updateNoticeInfo: Partial<INotice>
   ): Promise<INotice> {
-    const results = await MongooseNotice.findByIdAndUpdate(
-      noticeId,
-      updateNoticeInfo
+    const results = await MongooseNotice.findOneAndUpdate(
+      { id: noticeId },
+      updateNoticeInfo,
+      { new: true }
     );
     if (!results) {
       throw new HttpException(404, "공지사항을 찾을 수 없습니다.");

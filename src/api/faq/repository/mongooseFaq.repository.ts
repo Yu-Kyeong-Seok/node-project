@@ -26,17 +26,21 @@ export class MongooseFaqRepository implements FaqRepository{
       }
        
     }
-    async update(faqId: string, updateFaqInfo: Partial<IFaq>): Promise<IFaq> {
-      const results = await MongooseFaq.findByIdAndUpdate(
-        faqId, 
-        updateFaqInfo
-      );
-      if (!results) {
-        throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
-      }
-  
-      return results;
+    async update(
+    faqId: string,
+    updateFaqInfo: Partial<IFaq>
+  ): Promise<IFaq> {
+    const results = await MongooseFaq.findOneAndUpdate(
+      { id: faqId },
+      updateFaqInfo,
+      { new: true }
+    );
+    if (!results) {
+      throw new HttpException(404, "공지사항을 찾을 수 없습니다.");
     }
+
+    return results;
+  }
     async delete(faqId: string): Promise<void> {
       await MongooseFaq.deleteOne({ id: faqId });
   

@@ -41,6 +41,7 @@ const UPLOAD_ROUTES = {
   UPLOAD_VIEW: "/upload",
 } as const;
 
+<<<<<<< HEAD
 /** FAQ 라우터 */
 const FAQ_ROUTES = {
   /** 관리자 FAQ API */
@@ -63,6 +64,11 @@ const NOTICE_ROUTES = {
   ADMIN_NOTICE_VIEW: "/admin/notices",
   /** NOTICE 뷰 */
   NOTICE_VIEW: "/notices",
+=======
+/** 프로필 라우터 */
+const PROFILE_ROUTER = {
+  PROFILE: "/profile",
+>>>>>>> develop
 } as const;
 
 export const ROUTES_INDEX = {
@@ -70,6 +76,10 @@ export const ROUTES_INDEX = {
   ...AUTH_ROUTES,
   ...USER_ROUTES,
   ...UPLOAD_ROUTES,
+<<<<<<< HEAD
   ...FAQ_ROUTES,
   ...NOTICE_ROUTES,
+=======
+  ...PROFILE_ROUTER,
+>>>>>>> develop
 } as const;

@@ -26,11 +26,12 @@
                                 <div class="content1">
                                     <div class="left">
                                         <p>이메일</p>
-                                        <p>bj999@nananan.com</p>
+                                        <!-- <p>bj999@nananan.com</p> -->
+                                        <p><%= profile.email %></p>
                                     </div>
                                     <div class="right">
                                         <button class="change">
-                                        <a href="#">변경</a>
+                                        <a href="/profile/changeEmail/<%= profile.id %>">변경</a>
                                         </button>
                                     </div>
                                 </div>
@@ -38,11 +39,11 @@
                         <div class="tel">
                             <div class="left">
                                 <p>휴대폰 번호</p>
-                                <p>010-0000-0000</p>
+                                <p><%= profile.profile.telNumber %></p>
                             </div>
                             <div class="right">
                                 <button class="change">
-                                    <a href="#">변경</a>
+                                    <a href="/profile/changeNumbers/<%= profile.id %>">변경</a>
                                 </button>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
                             </div>
                             <div>
                                 <button class="change">
-                                    <a href="#">변경</a>
+                                    <a href="/profile/changePassword/<%= profile.id %>">변경</a>
                                 </button>
                             </div>
                         </div>

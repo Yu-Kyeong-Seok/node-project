@@ -9,6 +9,7 @@ export class GetUserResponseDTO {
     firstName: string;
     thumbnail?: string;
     telNumber:string;
+    nickName:string;
   };
  // posts?: PostResponseDTO[];
 
@@ -21,7 +22,8 @@ export class GetUserResponseDTO {
       birth: user.profile.birth,
       firstName: user.profile.firstName,
       thumbnail: user.profile.thumbnail,
-      telNumber:user.profile.telNumber
+      telNumber:user.profile.telNumber,
+      nickName:user.profile.nickName
     };
   }
 }

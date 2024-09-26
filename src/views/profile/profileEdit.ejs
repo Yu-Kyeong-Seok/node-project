@@ -22,7 +22,10 @@
         <div class="profileEdit-container">
             <h1>멋진 프로필을 만들어보세요!</h1>
             <h2>가이드에 맞춰, 프로필을 완성해 주세요</h2>
-            <img src="/static/images/profile.png" alt="profile">
+            <label for="form">
+                <img src="/static/images/profile.png" alt="profile" id="profile_thumbnail">
+                <input type="file" id="filename" name="filename" hidden/>
+            </label>
             <div class="textbox">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" class="title" value="<%= profile.profile.nickName %>">
@@ -32,12 +35,91 @@
             </div>
             <div class="buttonbox">
                 <button class="up cancle"><a href="/profile/Edit/<%= profile.id %>">취소</a></button>
-                <button class="up save completeBtn"><a href="/profile/Edit/<%= profile.id %>" aria-disabled="true">저장</a></button>
+                <button class="up save completeBtn"><a href="/profile/Edit/<%= profile.id %>">저장</a></button>
+                <!-- <button class="up save completeBtn"><a href="/profile/Edit/<%= profile.id %>" aria-disabled="true">저장</a></button> -->
             </div>
         </div>
     </div>
     <%- include('../_layouts/footer') %>
     <script>
+
+        const $form = document.querySelector("#form");
+        const $filename = document.querySelector("#filename");
+        const $profileThumbnail = document.getElementById("profile_thumbnail");
+
+        // 업로드 버튼이 사라짐 -> 이미지를 클릭했을때, 파일 선택을 띄워준다
+        $profileThumbnail.addEventListener("click", () => {
+            $filename.click();
+        });
+
+        // input file이 바뀌는걸 감지한다.
+        $filename.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            // 업로드되어있는 이미지로 src를 교체한다.
+            $profileThumbnail.src = URL.createObjectURL(file);
+            $profileThumbnail.onload = function () {
+            URL.revokeObjectURL($profileThumbnail.src);
+            };
+        });
+
+        const handleSubmit = async (e) => {
+            try {
+            e.preventDefault();
+
+            const firstName = e.currentTarget.firstName.value;
+            const file = e.currentTarget.filename.files[0];
+
+            const formData = new FormData();
+
+            formData.append("filename", file);
+
+            const uploadRes = await fetch("/api/upload/image", {
+                method: "post",
+                body: formData,
+            });
+
+            const data = await uploadRes.json();
+
+            const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+                const [key, value] = cookie.split("=");
+                acc[key.trim()] = decodeURIComponent(value);
+                return acc;
+            }, {});
+
+            const token = `${cookies.accessToken}`;
+
+            const res = await fetch("/api/users/me", {
+                method: "put",
+                body: JSON.stringify({
+                profile: {
+                    thumbnail: data.url,
+                    firstName,
+                },
+                }),
+                headers: {
+                "Content-Type": "application/json",
+                authorization: token,
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error(
+                "프로필 수정에 실패했습니다.",
+                await res.json()["details"]
+                );
+                return;
+            }
+
+            alert("프로필 수정에 성공했습니다.");
+            } catch (error) {
+            console.error(error);
+            alert(error.message);
+            }
+        };
+
+        $form.addEventListener("submit", handleSubmit);
+
         $(document).ready(function() {
             $(".hamburger-bar").click(function() {
                 $("#menu, .page_cover").addClass("open");

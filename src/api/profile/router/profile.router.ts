@@ -1,23 +1,24 @@
 import express from "express";
 import { ROUTES_INDEX } from "@/routers";
 import { ProfileServiceImpl } from "@/api/profile/service/profile.service";
-import ProfileController from "../controller/profile.view.controller";
+import ProfileController from "../controller/profile.controller";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
+import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
 
 const profileRouter = express.Router();
 
 const PROFILE_ROUTERS = {
     /** 글 목록 조회 */
-    GET_POSTS: `/api/profile`,
+    GET_PROFILES: `/api/profile`,
     /** 글 싱세 조회 */
-    GET_POST: `/api/profile/:id`,
+    GET_PROFILE: `/api/profile/:id`,
     /** 글 생성 */
-    CREATE_POST: `/api/profile`,
+    CREATE_PROFILE: `/api/profile`,
     /** 글 수정 */
-    UPDATE_POST: `/api/profile/:id`,
+    UPDATE_PROFILE: `/api/profile/:id`,
     /** 글 삭제 */
-    DELETE_POST: `/api/profile/:id`,
+    DELETE_PROFILE: `/api/profile/:id`,
 } as const;
 
 const profileController = new ProfileController(
@@ -27,39 +28,30 @@ const profileController = new ProfileController(
     )
 );
 
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.PROFILE,
-    authCookieViewMiddleware(false),
-    profileController.profile
-)
-
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.PROFILE_EDIT,
-    authCookieViewMiddleware(false),
-    profileController.profileEdit
-)
-
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.CHANGE_EMAIL,
-    authCookieViewMiddleware(false),
-    profileController.profileChangeEmail
-)
-
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.CHANGE_NUMBER,
-    authCookieViewMiddleware(false),
-    profileController.profileChangeNumber
-)
-
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.CHANGE_PASSWORD,
-    authCookieViewMiddleware(false),
-    profileController.profileChangePassword
-)
-profileRouter.get(
-    PROFILE_VIEW_ROUTERS.SETTING,
-    authCookieViewMiddleware(false),
-    profileController.profileSetting
-);
-
+    profileRouter.get(
+    PROFILE_ROUTERS.GET_PROFILES,
+    // validate(getPostsValidator),
+    profileController.getProfile
+    );
+    profileRouter.get(
+        PROFILE_ROUTERS.GET_PROFILE,
+        // validate(getPostDetailValidator),
+        // authCookieViewMiddleware,
+        profileController.getProfileDetail
+    );
+    profileRouter.post(
+        PROFILE_ROUTERS.CREATE_PROFILE,
+        // authUserMiddleware,
+        profileController.createProfile
+    );
+    profileRouter.put(
+        PROFILE_ROUTERS.UPDATE_PROFILE,
+        // authUserMiddleware,
+        profileController.updateProfile
+    );
+    profileRouter.delete(
+        PROFILE_ROUTERS.DELETE_PROFILE,
+        // authUserMiddleware,
+        profileController.deleteProfile
+    );
 export default profileRouter;

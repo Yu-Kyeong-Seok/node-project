@@ -1,7 +1,7 @@
 import express from "express";
 import { ROUTES_INDEX } from "@/routers";
 import { ProfileServiceImpl } from "@/api/profile/service/profile.service";
-import ProfileController from "../controller/profile.view.controller";
+import ProfileViewController from "../controller/profile.view.controller";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
 import { extractPath } from "@/utils/path.util";
@@ -24,7 +24,7 @@ const PROFILE_VIEW_ROUTERS = {
     SETTING: "/profile/setting/:id",
 } as const;
 
-const profileController = new ProfileController(
+const profileController = new ProfileViewController(
     new ProfileServiceImpl(
         new MongooseUserRepository(),
         new MongooseProfileRepository()

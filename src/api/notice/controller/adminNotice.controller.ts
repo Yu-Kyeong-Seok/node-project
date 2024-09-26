@@ -71,6 +71,7 @@ async updateNotice(
   next: NextFunction 
   ) {
     const { noticeId } = req.params;
+    console.log(noticeId)
   try {
     const updatedNotice = await this._noticesService.updateNotice(noticeId, req.body);
 
@@ -86,6 +87,7 @@ async deleteNotice(
   res: Response,
   next: NextFunction 
   ) {
+
   try {
     const deletedNotice = await this._noticesService.deleteNotice(req.body);
 

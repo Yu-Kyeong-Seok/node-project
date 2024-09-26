@@ -28,8 +28,8 @@ const adminNoticeController = new AdminNoticeController(
 adminNoticeRouter.get(ADMIN_NOTICE_ROUTES.GET_NOTICES,adminNoticeController.getNotices.bind(adminNoticeController))
 adminNoticeRouter.get(ADMIN_NOTICE_ROUTES.GET_NOTICEDETAIL,adminNoticeController.getNoticeDetail.bind(adminNoticeController))
 adminNoticeRouter.post(ADMIN_NOTICE_ROUTES.CREATE_NOTICE,adminNoticeController.createNotice.bind(adminNoticeController))
-adminNoticeRouter.put(ADMIN_NOTICE_ROUTES.UPDATE_NOTICE,adminNoticeController.createNotice.bind(adminNoticeController))
-adminNoticeRouter.delete(ADMIN_NOTICE_ROUTES.DELETE_NOTICE,adminNoticeController.createNotice.bind(adminNoticeController))
+adminNoticeRouter.put(ADMIN_NOTICE_ROUTES.UPDATE_NOTICE,adminNoticeController.updateNotice.bind(adminNoticeController))
+adminNoticeRouter.delete(ADMIN_NOTICE_ROUTES.DELETE_NOTICE,adminNoticeController.deleteNotice.bind(adminNoticeController))
 
 
 export default adminNoticeRouter;

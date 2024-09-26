@@ -16,17 +16,14 @@ export class MongooseFaqRepository implements FaqRepository{
         const faqs=await MongooseFaq.find();
         return faqs;
     }
-    async findById(faqId: string): Promise<IFaq | null> {
-        try{
-            const findFaq=await MongooseFaq.findById(faqId)
-            return findFaq;
-        }catch(error:any){
-            const message = error.message.toString();
-            if (message.includes("Cast to ObjectId failed")) {
-              return null;
-            }
-            throw error;
-        }
+    async findById(faqId:string):Promise<IFaq | null>{
+      try{
+          const findFaqId = await MongooseFaq.findOne({ id: faqId } )
+          return findFaqId;
+      }catch(error){
+          console.log(error)
+          return null;
+      }
        
     }
     async update(faqId: string, updateFaqInfo: Partial<IFaq>): Promise<IFaq> {

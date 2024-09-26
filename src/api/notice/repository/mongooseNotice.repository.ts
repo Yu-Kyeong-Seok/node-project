@@ -27,20 +27,19 @@ export class MongooseNoticeRepository implements NoticeRepository{
           return null;
       }
   }  
-//findById 수정하니까 postman 작동됨 뭐지?
-  // async findById(noticeId: string): Promise<INotice | null> {
-  //       try{
-  //           const findNoticeId=await MongooseNotice.findById(noticeId)
-  //           return findNoticeId;
-  //       }catch(error:any){
-  //           const message = error.message.toString();
-  //           if (message.includes("Cast to ObjectId failed")) {
-  //             return null;
-  //           }
-  //           throw error;
-  //       }
+//   // async findById(noticeId: string): Promise<INotice | null> {
+//   //       try{
+//   //           const findNoticeId=await MongooseNotice.findById(noticeId)
+//   //           return findNoticeId;
+//   //       }catch(error:any){
+//   //           const message = error.message.toString();
+//   //           if (message.includes("Cast to ObjectId failed")) {
+//   //             return null;
+//   //           }
+//   //           throw error;
+//   //       }
        
-  //   }
+//   //   }
   async update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<INotice> {
       const results = await MongooseNotice.findByIdAndUpdate(
         noticeId, 
@@ -53,9 +52,14 @@ export class MongooseNoticeRepository implements NoticeRepository{
       return results;
     }
   async delete(noticeId: string): Promise<void> {
+    console.log(noticeId)
       await MongooseNotice.deleteOne({ _id: noticeId });
   
       return;
     }
 
 }
+
+
+
+

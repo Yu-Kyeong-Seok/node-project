@@ -37,7 +37,9 @@ export class NoticesServiceImpl implements NoticesService {
 
  async updateNotice(noticeId: string, params: Partial<INotice>): Promise<void> {
   const findNotice = await this._noticeRepository.findById(noticeId);
-    
+  await this._noticeRepository.update(noticeId, {
+    ...params,
+});
   return; 
  }
  async deleteNotice(noticeId: string): Promise<void> {

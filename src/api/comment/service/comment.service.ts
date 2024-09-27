@@ -23,6 +23,7 @@ export class CommentsServiceImpl implements CommentService{
         if (!comments) {
             return []; // comments가 null일 경우 빈 배열 반환
         }
+       // console.log('9/25commentssss',comments)
         return comments.map(comment => ({
             _id: comment._id,
             content: comment.content,
@@ -30,13 +31,8 @@ export class CommentsServiceImpl implements CommentService{
             author:comment.postId.author._id,
             createdAt: comment.createdAt,
             postId: comment.postId._id, // postId의 _id만 포함
+         
         }));
-
-       //console.log('comments service',comments)
-        // return comments;
-      
-     
-  
     }
     async createComment(userId:string,params:Omit<IComment,"_id" |"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
          // 1. 작성자 찾기
@@ -78,7 +74,7 @@ export class CommentsServiceImpl implements CommentService{
        
     }
     async editComment(commentId: string,
-        updatedComment: Omit<IComment, "id" |"commentId"| "postId" | "author" | "createdAt">): Promise<void> {
+        updatedComment: Omit<IComment, "_id" |"commentId"| "postId" | "author" | "createdAt">): Promise<void> {
         //  await this._commentRepository.update(commentId,updatedComment);
           const updatedResult = await this._commentRepository.update(commentId, updatedComment);
 

@@ -47,6 +47,8 @@ app.use(cookieParser());
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
+app.use(noticeViewRouter);
+app.use(faqViewRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);

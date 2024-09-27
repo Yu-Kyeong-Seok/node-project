@@ -30,7 +30,7 @@
                 <% if (notices && notices.length > 0) { %>
                   <% notices.forEach(function(notice) { %> 
                     <li class="notice">
-                      <a href="/notice/<%= notice.id %>" class="notice-link"> 
+                      <a href="/views/notice/<%= notice.noticeId %>" class="notice-link"> 
                         <div class="title-area">
                           <span class="notice-label">공지</span>
                           <span class="notice-title"><%= notice.title %></span>

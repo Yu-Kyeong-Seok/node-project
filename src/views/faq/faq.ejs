@@ -25,6 +25,38 @@
         </div>
         <div class="faq-container">
           <ul class="faq-list">
+            <% if (faqs && faqs.length > 0) { %> <!-- faqs 배열이 존재하고 길이가 0 이상일 경우 -->
+              <% faqs.forEach(function(faq) { %> <!-- faqs 배열 순회 -->
+                <li class="faq">
+                  <details>
+                    <summary>
+                      <div>
+                        <span class="question">Q.</span>
+                        <span class="faq-title"><%= faq.title %></span> <!-- MongoDB에서 받은 제목 데이터 -->
+                      </div>
+                      <i class="fa-solid fa-angle-down"></i>
+                    </summary>
+                    <div class="faq-answer">
+                      <span><%= faq.content %></span> <!-- MongoDB에서 받은 내용 데이터 -->
+                    </div>
+                  </details>
+                </li>
+              <% }) %>
+            <% } else { %>
+              <p>FAQ가 없습니다.</p>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <div class="content">
+      <div class="wrap">
+        <div class="faq-description">
+          <h2>FAQ</h2>
+        </div>
+        <div class="faq-container">
+          <ul class="faq-list">
             <li class="faq">
               <details>
                 <summary>
@@ -126,7 +158,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <footer>
         <%- include('../_layouts/footer') %>

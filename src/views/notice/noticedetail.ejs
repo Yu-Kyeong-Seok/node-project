@@ -19,6 +19,33 @@
   <div class="page-container">
     <%- include('../_layouts/header') %>
     <div class="content">
+      <div class="wrap">
+        <div class="notice-description">
+          <h2>공지사항</h2>
+        </div>
+        <div class="notice-detail">
+  
+          <div class="notice-top">
+            <span class="notice-label">공지</span>
+            <!-- 제목 및 날짜를 동적으로 표시 -->
+            <span class="notice-title"><%= notice.title %></span>
+            <span class="notice-time"><%= notice.date %></span>
+          </div>
+  
+          <div class="notice-content">
+            <!-- 공지사항 내용을 동적으로 표시 -->
+            <span>
+              <%= notice.content %>
+            </span>
+          </div>
+  
+          <a href="/notice" class="button-list">목록</a>
+  
+        </div>
+      </div>
+  </div>
+  
+    <!-- <div class="content">
         <div class="wrap">
           <div class="notice-description">
             <h2>공지사항</h2>
@@ -46,7 +73,7 @@
 
           </div>
         </div>
-    </div>
+    </div> -->
     
     <footer>
         <%- include('../_layouts/footer') %>

@@ -38,9 +38,31 @@ export default class CategoryViewController {
 
     // 카테고리 상세 정보 EJS에 전달
     async getCategoryDetailView(req: Request, res: Response, next: NextFunction) {
+        const categoryNameMapping: { [key: string]: string } = {
+            "animal": "동물",
+            "food": "음식",
+            "movie": "영화",
+            "gran": "육아",
+            "game": "게임",
+            // Add more mappings as needed
+        };
         try {
             const category = await this._categoryService.getCategoryDetail(req.params.categoryName);
-            res.render('category/categoryDetail', { category });
+
+            if (category) {
+                // 한글 이름으로 변환
+                const koreanName = categoryNameMapping[category.name] || category.name;
+
+                // 카테고리 상세 정보를 EJS로 전달
+                res.render('category/categoryDetail', { 
+                    category: {
+                        ...category,
+                        koreanName // 한글 이름 추가
+                    }
+                });
+            } else {
+                res.status(404).send("Category not found");
+            }
         } catch (error) {
             console.error(error);
             next(error);

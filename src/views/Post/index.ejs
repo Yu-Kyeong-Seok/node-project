@@ -37,6 +37,22 @@
           </p>
           <a href="/signup" class="banner-sign-up mobile-sign-up">회원가입 → </a>
         </div>
+        <div class="mobile-top3">
+          <div class="top3">
+            <h3>TOP 3</h3>
+            <ul>
+                <li>
+                    <a href="#" class="animal">동물</a>
+                </li>
+                <li>
+                    <a href="#" class="gran">육아</a>
+                </li>
+                <li>
+                    <a href="#" class="game">게임</a>
+                </li>
+            </ul>
+        </div>
+        </div>
 
         <div class="gray-bg">
           <h3>언제든지 질문해보세요!</h3>
@@ -44,8 +60,8 @@
           <a href="/views/write">
             <button class="question-button">질문하기</button>
           </a>
-         
         </div>
+
 
         <div class="question-bar">
           <a href="#">인기</a>
@@ -54,46 +70,35 @@
 
         <div class="post-container">
           <div class="post-container-left">
+            <% for(i = 0; i < post.results.length ; i++) { %>
             <div class="posts">
               <div class="category-bar">
                 <div class="profile">
-                  <!-- 프로필 더미 아이콘 -->
+                  <!-- 프로필 아이콘 -->
                   <i class="fa-solid fa-user"></i>
                 </div>
-                <div class="category">카테고리</div>
+                <div class="category">
+                  <%= post.results[i].category %>
+                </div>
                 <div class="user">
-                  <div class="nickName">닉네임</div>
-                  <div class="date">등록 날짜</div>
+                  <div class="nickName">
+                    닉네임
+                  </div>
+                  <div class="date">
+                    <% 
+                    const formattedDate = new Date(post.results[i].createdAt).toISOString().slice(0, 10); 
+                  %>
+                  
+                  <p>작성일: <%= formattedDate %></p>
+                  </div>
                 </div>
               </div>
               <div class="posts-contents">
+                <a href="/views/post/detail/<%= post.results[i].postId %>">
                 <div class="contents-title">
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요?
+                  <%= post.results[i].title %>
                 </div>
+              </a>
               </div>
               <div class="contents-bottom">
                 <div class="bottom-contents">
@@ -109,61 +114,9 @@
                 </div>
               </div>
             </div>
-            <div class="posts">
-              <div class="category-bar">
-                <div class="profile">
-                  <!-- 프로필 더미 아이콘 -->
-                  <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="category">카테고리</div>
-                <div class="user">
-                  <div class="nickName">닉네임</div>
-                  <div class="date">등록 날짜</div>
-                </div>
-              </div>
-              <div class="posts-contents">
-                <div class="contents-title">
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                  아이언 맨은 다시 부활하나요?
-                </div>
-              </div>
-              <div class="contents-bottom">
-                <div class="bottom-contents">
-                  <div class="icon">
-                    <!-- 말풍선 아이콘 -->
-                    <a href="#"><i class="fa-regular fa-comments"></i></a>
-                    <p class="beautiful">
-                      아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
-                    </p>
-                    <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
-                  </div>
-                  <button class="answer">나도 답변하기</button>
-                </div>
-              </div>
-            </div>
+            <% } %>
+            
+
           </div>
 
           <div class="post-right">
@@ -178,22 +131,48 @@
                 <i class="fa-solid fa-arrow-right-long"></i>
               </span>
             </a>
+
+            <div class="top3">
+              <h3>TOP 3</h3>
+              <ul>
+                  <li>
+                      <a href="#" class="animal">동물</a>
+                  </li>
+                  <li>
+                      <a href="#" class="gran">육아</a>
+                  </li>
+                  <li>
+                      <a href="#" class="game">게임</a>
+                  </li>
+              </ul>
           </div>
+
+
+          </div>
+
+
+
+
+
+
           <!--  로그인 시 만들어-->
-        </div>
+       
       </div>
 
       <footer><%- include('../_layouts/footer.ejs') %></footer>
       <script>
         $(document).ready(function () {
           const banner= $(".banner")
+          const mobanner=$(".mobile-banner")
            const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
           const isLoggedIn=!!accessToken;
           console.log('is??',isLoggedIn)
 
+          //로그인시 이렇게 됩니다
           if (isLoggedIn) {
-            banner.css('visibility', 'hidden');
-          } 
+            banner.css('visibility', 'hidden'); 
+            mobanner.css('display', 'none'); 
+            }
           
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");
@@ -202,6 +181,8 @@
           $(".page_cover, .close").click(function () {
             $("#menu, .page_cover").removeClass("open");
           });
+
+
         });
       </script>
     </div>

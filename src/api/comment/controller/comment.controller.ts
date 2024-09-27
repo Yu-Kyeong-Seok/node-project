@@ -86,10 +86,12 @@ export default class CommentController{
            try{
             // 댓글 수정 로직 작성
             const updatedComment = await this._commentService.editComment(commentId, {content,image});
-            if (!updatedComment) {
-                return res.status(404).json({ message: "댓글 수정 실패" });
-            }
-            res.send(updatedComment)
+           console.log('commentControllerupdate: ',updatedComment)
+            // if (!updatedComment) {
+            //     return res.status(404).json({ message: "댓글 수정 실패" });
+            // }
+           res.send(updatedComment)
+          //  res.status(200).json({ message: "댓글이 성공적으로 수정되었습니다." });
            }catch(error){
             next(error);
            }

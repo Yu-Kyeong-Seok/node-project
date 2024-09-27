@@ -10,5 +10,5 @@ export interface CommentService{
     editComment(
         commentId:string,
         updatedComment:Omit<IComment,"_id" |"commentId"|"postId"| "author"|"createdAt">
-        ):Promise<commentResponseDTO | null>
+        ):Promise<void>
 }

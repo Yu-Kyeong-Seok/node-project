@@ -4,6 +4,7 @@ import { CommentService } from "./comment.service.type";
 import { CommentRepository } from "../repository/comment.respository";
 import { UserRepository } from "@/api/users/repository/user/user.repository";
 import { PostRepository } from "@/api/post/repository/post.repository";
+import { MongooseComment } from "../model/comment.schema";
 
 export class CommentsServiceImpl implements CommentService{
     private readonly _commentRepository:CommentRepository;
@@ -77,12 +78,18 @@ export class CommentsServiceImpl implements CommentService{
        
     }
     async editComment(commentId: string,
-        updatedComment: Omit<IComment, "id" | "postId" | "author" | "createdAt">): Promise<commentResponseDTO | null> {
-        const comment=await this._commentRepository.findById(commentId);
-        if(!comment){
-            throw new HttpException(401,'댓글 없음.')
-        }
-        const updated=await this._commentRepository.update(commentId, updatedComment);
-        return updated;
+        updatedComment: Omit<IComment, "id" |"commentId"| "postId" | "author" | "createdAt">): Promise<void> {
+        //  await this._commentRepository.update(commentId,updatedComment);
+          const updatedResult = await this._commentRepository.update(commentId, updatedComment);
+
+          if (!updatedResult) {
+            throw new Error("댓글 수정에 실패했습니다.");
+          }
+        
+          // 업데이트된 결과를 commentResponseDTO로 변환하여 반환
+         
+          return; // 수정된 댓글을 반환
+        //return ;
+       
     }
 }

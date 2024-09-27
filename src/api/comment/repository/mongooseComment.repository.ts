@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongooseComment } from "../model/comment.schema";
 import { CommentRepository } from "./comment.respository";
+import mongoose from "mongoose";
 
 export class MongooseCommentRepository implements CommentRepository{
     async save(comment:Omit<IComment,"_id" | "commentId">):Promise<IComment>{
@@ -70,21 +71,36 @@ export class MongooseCommentRepository implements CommentRepository{
     }
 
     async update(commentId: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
-        const results = await MongooseComment.findByIdAndUpdate(
-          commentId,
-          updateCommentInfo,
-         // { new: true } //새로운 내용으로 업뎃.
-        );
-        console.log('results',results)
-    
-        if (!results) {
+        console.log("Updating comment with ID:", commentId); 
+        const objectId = new mongoose.Types.ObjectId(commentId); // ID 변환
+
+        const updatedComment = await MongooseComment.findByIdAndUpdate(objectId, updateCommentInfo, { new: true });
+      
+        if (!updatedComment) {
           throw new HttpException(404, "댓글을 찾을 수 없습니다.");
         }
-    
-        return results;
+      
+        return updatedComment; // 수정된 댓글을 반환
       }
+        // try {
+        //     const results = await MongooseComment.findByIdAndUpdate(
+        //       commentId,
+        //       updateCommentInfo,
+        //       { new: true } 
+        //     );
+        //     console.log('results',updateCommentInfo);
+        //     if (!results) {
+        //       throw new HttpException(404, "댓글을 찾을 수 없습니다.");
+        //     }
+        //     return results;
+        // } catch (error) {
+        //     console.error('Update Error:', error);
+        //     throw new HttpException(500, '댓글 업데이트 중 오류 발생');
+        // }
+
 
       async delete(commentId:string): Promise<void>{
+        console.log('delete',{_id:commentId})
         const result=await MongooseComment.deleteOne({_id:commentId})
         if (result.deletedCount === 0) {
             throw new HttpException(404, "댓글을 찾을 수 없습니다.");

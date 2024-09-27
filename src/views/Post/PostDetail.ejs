@@ -40,8 +40,16 @@ contents<!DOCTYPE html>
             <div class="detail-user">
               <div class="detail-nickName">닉네임</div>
               <div class="detail-date">
-                <% const formattedDate = new
-                Date(post.createdAt).toISOString().slice(0, 10);%>
+                <% 
+                  const createdAt = post.createdAt;
+                  let formattedDate = "날짜 없음"; // 기본값 설정
+                  if (createdAt) {
+                    const date = new Date(createdAt);
+                    if (!isNaN(date)) {
+                      formattedDate = date.toISOString().slice(0, 10);
+                    }
+                  }
+                %>
                 <p>작성일: <%= formattedDate %></p>
               </div>
             </div>
@@ -176,8 +184,10 @@ contents<!DOCTYPE html>
             .split("; ")
             .find((index) => index.startsWith("accessToken="));
           const isLoggedIn = !!accessToken;
-      //로그인시 이렇게 됩니다
-      if (isLoggedIn) {
+        
+
+          //로그인시 이렇게 됩니다
+          if (isLoggedIn) {
             login.css("display", "block");
             logout.css("display", "none");
           }

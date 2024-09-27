@@ -23,9 +23,6 @@ const  POST_ROUTER = {
 
     /**글 삭제  */
     DELETE_POST: `/api/posts/:postId`,
-
-    /** 더미데이터 생성 */
-    CREATE_DUMMY: `/api/post/dummy`,
   } as const;
 
   const postController = new PostController(
@@ -40,21 +37,25 @@ postRouter.get(
     authUserMiddleware,
     postController.getPost
   );
+
   postRouter.get(
     (POST_ROUTER.GET_POST),
     authUserMiddleware,
     postController.getPostDetail
   );
+
   postRouter.post(
     (POST_ROUTER.CREATE_POST),
     authUserMiddleware,
     postController.createPost
   );
+
   postRouter.put(
     (POST_ROUTER.UPDATE_POST),
     authUserMiddleware,
     postController.updatePost
   );
+
   postRouter.delete(
     (POST_ROUTER.DELETE_POST),
     authUserMiddleware,

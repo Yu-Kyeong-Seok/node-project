@@ -1,13 +1,11 @@
 import express from "express";
-import { ROUTES_INDEX } from "@/routers";
 import { ProfileServiceImpl } from "@/api/profile/service/profile.service";
 import ProfileViewController from "../controller/profile.view.controller";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
-import { extractPath } from "@/utils/path.util";
 import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
 
-const profileRouter = express.Router();
+const profileViewRouter = express.Router();
 
 const PROFILE_VIEW_ROUTERS = {
     // 프로필
@@ -31,39 +29,39 @@ const profileController = new ProfileViewController(
     )
 );
 
-profileRouter.get(
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.PROFILE,
     authCookieViewMiddleware(false),
     profileController.profile
-)
+);
 
-profileRouter.get(
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.PROFILE_EDIT,
     authCookieViewMiddleware(false),
     profileController.profileEdit
-)
+);
 
-profileRouter.get(
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.CHANGE_EMAIL,
     authCookieViewMiddleware(false),
     profileController.profileChangeEmail
-)
+);
 
-profileRouter.get(
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.CHANGE_NUMBER,
     authCookieViewMiddleware(false),
     profileController.profileChangeNumber
-)
+);
 
-profileRouter.get(
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.CHANGE_PASSWORD,
     authCookieViewMiddleware(false),
     profileController.profileChangePassword
-)
-profileRouter.get(
+);
+profileViewRouter.get(
     PROFILE_VIEW_ROUTERS.SETTING,
     authCookieViewMiddleware(false),
     profileController.profileSetting
 );
 
-export default profileRouter;
+export default profileViewRouter;

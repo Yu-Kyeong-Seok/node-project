@@ -27,7 +27,7 @@ export class ProfileServiceImpl implements ProfileService {
     async getProfileDetail(id: string): Promise<GetProfileResponseDTO | null> {
         const profile = await this._profileRepository.findById(id);
     
-        if (!profile) throw new HttpException(404, "장치를 찾을 수 없습니다.");
+        if (!profile) throw new HttpException(404, "프로필을 찾을 수 없습니다.");
     
         const dtoProfile = await new GetProfileResponseDTO(profile);
     
@@ -36,7 +36,7 @@ export class ProfileServiceImpl implements ProfileService {
     async updateProfile(id: string, updateProfileInfo: Partial<IProfile>): Promise<void> {
         const findProfile = await this._profileRepository.findById(id);
     
-        if (!findProfile) throw new HttpException(404, "장치를 찾을 수 없습니다.");
+        if (!findProfile) throw new HttpException(404, "프로필을 찾을 수 없습니다.");
         
         await this._profileRepository.update(id, {
             ...updateProfileInfo,
@@ -47,7 +47,7 @@ export class ProfileServiceImpl implements ProfileService {
     async deleteProfile(id: string): Promise<void> {
         const findProfile = await this._profileRepository.findById(id);
     
-        if (!findProfile) throw new HttpException(404, "장치를 찾을 수 없습니다.");
+        if (!findProfile) throw new HttpException(404, "프로필을 찾을 수 없습니다.");
     
         await this._profileRepository.delete(id);
     

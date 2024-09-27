@@ -19,7 +19,7 @@ export default class ProfileViewController {
     async profile(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profile", { profile });
     }
@@ -28,7 +28,7 @@ export default class ProfileViewController {
     async profileEdit(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
         
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profileEdit", { profile });
     }
@@ -37,7 +37,7 @@ export default class ProfileViewController {
     async profileChangeEmail(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profileChangeEmail", { profile });
     }
@@ -46,7 +46,7 @@ export default class ProfileViewController {
     async profileChangeNumber(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profileChangeNumbers", { profile });
     }
@@ -54,7 +54,7 @@ export default class ProfileViewController {
     async profileChangePassword(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profileChangePassword", { profile });
     }
@@ -65,7 +65,7 @@ export default class ProfileViewController {
         // 유저 정보 넘겨줄때 사용
         console.log(req.user.userId);
 
-        const profile = await this._profileService.getProfileDetail(id);
+        const profile = await this._profileService.getUser(id);
 
         res.render("profile/profileSetting", { profile });
     }

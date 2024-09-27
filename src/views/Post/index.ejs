@@ -86,7 +86,14 @@
                   </div>
                   <div class="date">
                     <% 
-                    const formattedDate = new Date(post.results[i].createdAt).toISOString().slice(0, 10); 
+                    const createdAt = post.results[i].createdAt;
+                    let formattedDate = "날짜 없음"; // 기본값
+                    if (createdAt) {
+                      const date = new Date(createdAt);
+                      if (!isNaN(date)) {
+                        formattedDate = date.toISOString().slice(0, 10);
+                      }
+                    }
                   %>
                   
                   <p>작성일: <%= formattedDate %></p>
@@ -159,7 +166,7 @@
           const mobanner=$(".mobile-banner")
            const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
           const isLoggedIn=!!accessToken;
-          console.log('is??',isLoggedIn)
+          
 
           //로그인시 이렇게 됩니다
           if (isLoggedIn) {

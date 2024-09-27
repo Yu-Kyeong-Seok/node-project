@@ -6,6 +6,7 @@ import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 import PostViewController from "../controller/post.view.controller";
 import { db } from "@/db/mongoose";
+import { date } from "yup";
 const { ObjectId } = require("mongodb");
 const { MongoClient } = require("mongodb");
 
@@ -40,21 +41,24 @@ postViewRouter.get(`${BASE_PATH}/post`, (req, res, next) => {
 postViewRouter.get(`${BASE_PATH}/post/detail/:id`,  (req, res, next) => {
   postViewController.postDetailPage(req, res, next);
 });
+
 /**작성 */
 postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
  postViewController.postWritePage(req, res, next);
 });
-
-postViewRouter.post("/add", async (req, res) => {
+postViewRouter.post("/post/write", async (req, res) => {
+  const currentTime = new Date();
   (await db)
-    .collection("POST")
-    .insertOne({ title: req.body.title, content: req.body.content });
+    .collection("posts")
+    .insertOne({ title: req.body.title, content: req.body.content, createAt: currentTime});
+    res.redirect('/views/post')
+
+
 });
 
 /**수정 */
 postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
   postViewController.postEditPage(req, res, next);
 });
-/**삭제  */
 
 export default postViewRouter;

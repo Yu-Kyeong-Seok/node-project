@@ -26,9 +26,11 @@ export default class PostViewController {
   async postDetailPage(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     const post = await this._postService.getPostDetail(id);
-   
+    console.log(id)
+
+    const authorId = post?.author.id;
+    console.log(authorId)
     res.render("post/postDetail", { post });
-    console.log(post)
   }
 
     /** 게시글 수정 페이지 */

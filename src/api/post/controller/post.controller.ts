@@ -50,10 +50,10 @@ export default class PostController {
     next: NextFunction
   ) {
     const { postId } = req.params;
+   
     try {
       const post = await this._postService.getPostDetail(postId);
-
-      res.send(post);
+      res.send(post);  
     } catch (error) {
       next(error);
     }

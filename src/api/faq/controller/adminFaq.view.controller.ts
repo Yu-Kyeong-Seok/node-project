@@ -14,7 +14,7 @@ export default class AdminFaqsViewController {
   /** FAQ 목록 페이지 */
 async getFaqsView(req: Request, res: Response, next: NextFunction) {
     const faqs = await this._faqsService.getFaqs();
-    res.render("admin/faqs", {
+    res.render("admin/faq", {
       faqs,
     });
   }
@@ -24,18 +24,18 @@ async getFaqsView(req: Request, res: Response, next: NextFunction) {
 //     try {
 //       const { faqId } = req.params;
 //       const faq = await this._faqsService.getFaqDetail(faqId);
-//       res.render("client/faqs/faqDetail", {
+//       res.render("client/faq/faqDetail", {
 //         faq,
 //       });
 //     } catch (error: any) {
 //       res.send(`<script>alert('${error.message}');
-//           location.href='/admin/faqs/faqDetail';</script>`);
+//           location.href='/admin/faq/faqDetail';</script>`);
 //     }
 //   }
 
    /** FAQ 작성 페이지 */
 async createFaqView(req: Request, res: Response, next: NextFunction) {
-    res.render("admin/faqs/write");
+    res.render("admin/faq/write");
   }
 
   /** FAQ 수정 페이지 */
@@ -43,7 +43,7 @@ async createFaqView(req: Request, res: Response, next: NextFunction) {
     try {
       const { faqId } = req.params;
       const faq = await this._faqsService.updateFaq(faqId, req.body);
-      res.render("admin/faqs/edit", { faq });
+      res.render("admin/faq/edit", { faq });
     } catch (error: any) {  
       next(error);  
     }

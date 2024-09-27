@@ -49,13 +49,13 @@ const PROFILE_ROUTER = {
 /** FAQ 라우터 */
 const FAQ_ROUTES = {
   /** 관리자 FAQ API */
-  ADMIN_FAQS_API: "/admin-api/faqs",
+  ADMIN_FAQS_API: "/admin-api/faq",
   /** FAQ API */
-  FAQS_API: "/api/faqs",
+  FAQS_API: "/api/faq",
   /** 관리자 FAQ 뷰 */
-  ADMIN_FAQ_VIEW: "/admin/faqs",
+  ADMIN_FAQ_VIEW: "/admin/faq",
   /** FAQ 뷰 */
-  FAQ_VIEW: "/faqs",
+  FAQ_VIEW: "/faq",
 } as const;
 
 /** NOTICE 라우터 */

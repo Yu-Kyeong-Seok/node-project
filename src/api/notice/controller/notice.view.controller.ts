@@ -13,9 +13,10 @@ export default class NoticesViewController {
   async getNoticesView(req: Request, res: Response, next: NextFunction) {
     try {
     const notices = await this._noticesService.getNotices();
+    console.log("Notices 데이터:", notices);
     res.render("notice/notice", { notices });
-
-  } catch (error: any) {
+  } catch (error) {
+    console.error("Render 오류:", error);
     next(error);
   }
   }

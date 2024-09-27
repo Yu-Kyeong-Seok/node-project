@@ -12,7 +12,7 @@ export default class FaqsViewController {
   /** FAQ 목록 페이지 */
   async getFaqsView(req: Request, res: Response, next: NextFunction) {
     const faqs = await this._faqsService.getFaqs();
-    res.render("faqs/faqs", {
+    res.render("faq/faq", {
       faqs,
     });
   }
@@ -22,12 +22,12 @@ export default class FaqsViewController {
   //   try {
   //     const { faqId } = req.params;
   //     const faq = await this._faqsService.getFaqDetail(faqId);
-  //     res.render("client/faqs/faqDetail", {
+  //     res.render("client/faq/faqDetail", {
   //       faq,
   //     });
   //   } catch (error: any) {
   //     res.send(`<script>alert('${error.message}');
-  //         location.href='/client/faqs';</script>`);
+  //         location.href='/client/faq';</script>`);
   //   }
   // }
 }

@@ -28,14 +28,14 @@
           <div class="notice-container">
               <ul class="notice-list">
                 <% if (notices && notices.length > 0) { %>
-                  <% notices.forEach(function(notice) { %> <!-- notices 배열을 순회 -->
+                  <% notices.forEach(function(notice) { %> 
                     <li class="notice">
-                      <a href="/notice/<%= notice.id %>" class="notice-link"> <!-- 동적으로 id 추가 -->
+                      <a href="/notice/<%= notice.id %>" class="notice-link"> 
                         <div class="title-area">
                           <span class="notice-label">공지</span>
-                          <span class="notice-title"><%= notice.title %></span> <!-- 공지 제목 -->
+                          <span class="notice-title"><%= notice.title %></span>
                         </div>
-                        <span class="notice-date"><%= notice.date %></span> <!-- 공지 날짜 -->
+                        <span class="notice-date"><%= notice.date %></span>
                       </a>
                     </li>
                   <% }) %>

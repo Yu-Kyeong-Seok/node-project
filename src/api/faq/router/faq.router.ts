@@ -8,9 +8,9 @@ const faqRouter= express.Router();
 
 const FAQ_ROUTES={
     /*FAQ 목록 조회*/
-    GET_FAQS:`/api/faqs`,
+    GET_FAQS:`/api/faq`,
     /*FAQ 상세 조회*/
-    // GET_FAQDETAIL:`/api/faqs/:faqId`
+    // GET_FAQDETAIL:`/api/faq/:faqId`
 }as const;
 
 

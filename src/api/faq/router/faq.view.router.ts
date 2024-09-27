@@ -10,9 +10,9 @@ const faqsViewController = new FaqsViewController(new FaqsServiceImpl(new Mongoo
 
 // const FAQ_VIEW_ROUTES = {
 //     /** FAQ 목록 */
-//     FAQ_LIST: "/faqs",
+//     FAQ_LIST: "/faq",
 //     /** FAQ 상세 */
-//     // FAQ_DETAIL: "/faqs/detail/:faqId",
+//     // FAQ_DETAIL: "/faq/detail/:faqId",
 // } as const;
 
 // const faqsViewController = new FaqsViewController(

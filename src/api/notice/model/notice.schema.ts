@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { INotice } from "../@types/notice.type";
+
 
 const noticeSchema = new mongoose.Schema<INotice>({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    auto: true,
   },
   title: {
     type: String,

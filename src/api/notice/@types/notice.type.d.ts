@@ -1,6 +1,8 @@
-interface INotice {
+import { ObjectId } from "mongoose";
+
+export interface INotice {
       /** NOTICE ID */
-      id: string;
+      _id: ObjectId | string;
       /** NOTICE 제목 */
       title: string;
       /** NOTICE 내용 */

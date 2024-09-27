@@ -1,6 +1,7 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
 import { NoticesService } from "./notice.service.type";
 import { NoticeRepository } from "../repository/notice.repository";
+import { INotice } from "../@types/notice.type";
 import HttpException from "@/api/common/exceptions/http.exception";
 
 export class NoticesServiceImpl implements NoticesService {
@@ -52,7 +53,7 @@ export class NoticesServiceImpl implements NoticesService {
   async deleteNotice(noticeId: string): Promise<void> {
     const findNotice = await this._noticeRepository.findById(noticeId);
 
-    await this._noticeRepository.delete(findNotice?.id ?? "");
+    await this._noticeRepository.delete(findNotice?._id ?? "");
 
     return;
   }

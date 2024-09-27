@@ -1,6 +1,9 @@
 import { MongooseNotice } from "../model/notice.schema";
 import { NoticeRepository } from "./notice.repository";
+import { INotice } from '../@types/notice.type';
 import HttpException from "@/api/common/exceptions/http.exception";
+import mongoose from "mongoose";
+
 
 export class MongooseNoticeRepository implements NoticeRepository {
   async save(notice: Omit<INotice, "id">): Promise<INotice> {
@@ -19,13 +22,14 @@ export class MongooseNoticeRepository implements NoticeRepository {
 
   async findById(noticeId: string): Promise<INotice | null> {
     try {
-      const findNoticeId = await MongooseNotice.findOne({ id: noticeId });
+      const findNoticeId = await MongooseNotice.findById(noticeId);
       return findNoticeId;
     } catch (error) {
       console.log(error);
       return null;
     }
   }
+  
   //   // async findById(noticeId: string): Promise<INotice | null> {
   //   //       try{
   //   //           const findNoticeId=await MongooseNotice.findById(noticeId)

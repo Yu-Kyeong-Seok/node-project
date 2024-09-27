@@ -28,13 +28,13 @@
     <div class="page-container">
       <%- include('../_layouts/header') %>
       <div class="content">
-        <div class="changeNumbers-container">
+        <form class="changeNumbers-container" id="form">
           <h2>휴대폰 번호 변경</h2>
           <div class="number-container">
             <div class="basic-number">
               <h3>휴대폰 번호</h3>
               <div class="number-box">
-                <p class="fixed-number"><%= profile.profile.telNumber %></p>
+                <p class="fixed-number"><%= user.profile.telNumber %></p>
               </div>
             </div>
             <div class="change-number">
@@ -43,19 +43,72 @@
                 class="change"
                 type="text"
                 placeholder="변경하실 휴대폰 번호를 입력해 주세요."
+                id="newNumber"
               />
             </div>
           </div>
 
           <div class="button-bar">
-            <button class="checkbutton">취소</button>
-            <button class="checkbutton pupple">확인</button>
+            <button class="checkbutton cancleBtn">취소</button>
+            <button class="checkbutton pupple completeBtn" type="submit" disabled="true">확인</button>
           </div>
-        </div>
+        </form>
       </div>
 
       <%- include('../_layouts/footer') %>
       <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const form = document.getElementById("form");
+          const phoneNumberInput = document.querySelector(".change");
+          // const confirmButton = document.querySelector(".checkbutton.pupple");
+
+          const newNumber = form.querySelector("#newNumber");
+          const completeBtn = form.querySelector(".completeBtn");
+          const cancleBtn = form.querySelector(".cancleBtn");
+
+          cancleBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            location.href = "/profile/setting/<%= user.id %>";
+          });
+
+
+          completeBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              const res = await fetch("/api/profile/<%= user.profile.id %>", {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  telNumber: newNumber.value,
+                    }),
+                  });
+
+              if (!res.ok) {
+                console.error("Error:", res.status, res.statusText);
+                const errorText = await res.text(); // 오류 메시지 확인
+                console.error("Response body:", errorText);
+              }
+
+              location.href = "/profile/setting/<%= user.id %>";
+            } catch (error) {
+              console.error(error.message);
+            }
+          });
+
+          phoneNumberInput.addEventListener("input", () => {
+          if (phoneNumberInput.value.length <= 10) {
+            completeBtn.disabled = true;
+            completeBtn.style.backgroundColor = "purple";
+          } else {
+            completeBtn.disabled = false;
+            completeBtn.style.backgroundColor = "rgb(177,163,245)";
+          }
+        });
+      });
+
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");
@@ -66,18 +119,6 @@
           });
         });
 
-        const phoneNumberInput = document.querySelector(".change");
-        const confirmButton = document.querySelector(".checkbutton.pupple");
-
-        phoneNumberInput.addEventListener("input", () => {
-          if (phoneNumberInput.value.length >= 10) {
-            confirmButton.disabled = false;
-            confirmButton.style.backgroundColor = "purple";
-          } else {
-            confirmButton.disabled = true;
-            confirmButton.style.backgroundColor = "rgb(177,163,245)";
-          }
-        });
       </script>
     </div>
   </body>

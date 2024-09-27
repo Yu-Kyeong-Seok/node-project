@@ -19,7 +19,7 @@
     <div class="page-container">
         <%- include('../_layouts/header') %>
     <div class="content">
-        <div class="profileEdit-container">
+        <div class="profileEdit-container" id="form">
             <h1>멋진 프로필을 만들어보세요!</h1>
             <h2>가이드에 맞춰, 프로필을 완성해 주세요</h2>
             <label for="form">
@@ -28,21 +28,34 @@
             </label>
             <div class="textbox">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" class="title" value="<%= profile.profile.nickName %>">
+                <input type="text" id="nickname" placeholder="닉네임을 입력해주세요" class="title" value="<%= user.profile.nickName %>">
                 <br>
                 <label for="greeting">인사말</label>
                 <textarea type="text" id="greeting" placeholder="인사말을 입력해주세요." maxlength="60" rows="1"></textarea>
             </div>
             <div class="buttonbox">
-                <button class="up cancle"><a href="/profile/Edit/<%= profile.id %>">취소</a></button>
-                <button class="up save completeBtn"><a href="/profile/Edit/<%= profile.id %>">저장</a></button>
-                <!-- <button class="up save completeBtn"><a href="/profile/Edit/<%= profile.id %>" aria-disabled="true">저장</a></button> -->
+                <button class="up cancle"><a href="/profile/<%= user.id %>">취소</a></button>
+                <button class="up save completeBtn"><a href="/profile/Edit/<%= user.id %>" id="btnSave" type="submit">저장</a></button>
+                <!-- <button class="up save completeBtn"><a href="/profile/Edit/<%= user.id %>" aria-disabled="true">저장</a></button> -->
             </div>
         </div>
     </div>
     <%- include('../_layouts/footer') %>
     <script>
+        // 프로필 수정
+        async function editProfile(id, params) {
+            console.log("프로필 수정 시작");
+            const res = await fetch("/api/profile/${id}", {
+                method: "put",
+                body : JSON.stringify(params),
+            });
 
+        if (!res.ok) {
+            throw new Error("프로필 수정에 실패했습니다.");
+        }
+        };
+
+        // 이미지 업로드
         const $form = document.querySelector("#form");
         const $filename = document.querySelector("#filename");
         const $profileThumbnail = document.getElementById("profile_thumbnail");
@@ -112,11 +125,26 @@
             }
 
             alert("프로필 수정에 성공했습니다.");
+
             } catch (error) {
             console.error(error);
             alert(error.message);
             }
+
+            // 수정 버튼 
+            try {
+                console.log("수정이벤트");
+                const nickName = $form.nickName.value;
+                
+                await editProfile("<%= user.profile.id %>", { nickName });
+                
+                location.href = "/profile/<%= user.id %>";
+            } catch (ex) {
+                console.error(ex);
+                alert("프로필 수정에 실패했습니다.", ex.message);
+            }
         };
+
 
         $form.addEventListener("submit", handleSubmit);
 

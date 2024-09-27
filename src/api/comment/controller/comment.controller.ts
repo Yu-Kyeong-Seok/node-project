@@ -80,16 +80,19 @@ export default class CommentController{
         next:NextFunction){
            const {commentId}=req.params;
            const {content,image}=req.body;
+           console.log('body',req.body)
            if (!commentId) {
             return res.status(400).send('commentId is required');
         }
 
            try{
             // 댓글 수정 로직 작성
-            const updatedComment = await this._commentService.editComment(commentId, {content,image});
+            console.log({content,image});
+            const updatedComment = await this._commentService.editComment(commentId, req.body);
             // if (!updatedComment) {
             //     return res.status(404).json({ message: "댓글 수정 실패" });
             // }
+            console.log('updaedContro',updatedComment)
             res.send(updatedComment)
            }catch(error){
             next(error);

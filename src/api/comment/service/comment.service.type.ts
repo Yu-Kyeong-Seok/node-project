@@ -9,6 +9,6 @@ export interface CommentService{
     /**댓글 수정 */
     editComment(
         commentId:string,
-        updatedComment:Omit<IComment,"_id" |"commentId"|"postId"| "author"|"createdAt">
-        ):Promise<void>
+        updatedComment:Partial<IComment>
+        ):Promise<IComment>
 }

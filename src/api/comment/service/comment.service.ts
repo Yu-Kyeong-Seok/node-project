@@ -74,19 +74,14 @@ export class CommentsServiceImpl implements CommentService{
         return comment;
        
     }
-    async editComment(commentId: string,
-        updatedComment: Omit<IComment, "_id" |"commentId"| "postId" | "author" | "createdAt">): Promise<void> {
-        //  await this._commentRepository.update(commentId,updatedComment);
-          const updatedResult = await this._commentRepository.update(commentId, updatedComment);
-
-          if (!updatedResult) {
+    async editComment(commentId: string, updatedComment: Partial<IComment>): Promise<IComment> {
+        const updatedResult = await this._commentRepository.update(commentId, updatedComment);
+    
+        if (!updatedResult) {
             throw new Error("댓글 수정에 실패했습니다.");
-          }
-        
-          // 업데이트된 결과를 commentResponseDTO로 변환하여 반환
-         
-          return; // 수정된 댓글을 반환
-        //return ;
-       
+        }
+
+        return updatedResult; // 수정된 댓글을 반환
     }
+    
 }

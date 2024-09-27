@@ -7,6 +7,9 @@ import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware
 import PostViewController from "../controller/post.view.controller";
 import { db } from "@/db/mongoose";
 import { date } from "yup";
+import CommentViewController from "@/api/comment/controller/comment.view.controller";
+import { CommentsServiceImpl } from "@/api/comment/service/comment.service";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 const { ObjectId } = require("mongodb");
 const { MongoClient } = require("mongodb");
 
@@ -33,6 +36,16 @@ const postViewController = new PostViewController(
     new MongooseUserRepository()
   )
 );
+const commentViewController=new CommentViewController(
+  new CommentsServiceImpl(
+      new MongooseCommentRepository(),
+      new MongooseUserRepository (), 
+
+      new MongoosePostRepository(),   
+
+  )
+)
+
 /**목록조회 */
 postViewRouter.get(`${BASE_PATH}/post`, (req, res, next) => {
   postViewController.postListPage(req, res, next);
@@ -61,4 +74,16 @@ postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
   postViewController.postEditPage(req, res, next);
 });
 
-export default postViewRouter;
+
+const COMMENT_VIEW_ROUTER={
+  /**댓긂 목록 조회 */
+  COMMENT_LIST:`/views/post/detail/:postId`
+ 
+}
+
+postViewRouter.get(COMMENT_VIEW_ROUTER.COMMENT_LIST,(req,res,next)=>{
+
+
+  commentViewController.commentListPage(req,res,next)});
+
+  export default postViewRouter;

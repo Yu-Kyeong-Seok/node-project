@@ -8,8 +8,9 @@ import { MongooseComment } from "../model/comment.schema";
 
 export class CommentsServiceImpl implements CommentService{
     private readonly _commentRepository:CommentRepository;
-    private readonly _userRepository:UserRepository;
     private readonly _postRepository:PostRepository;
+    private readonly _userRepository:UserRepository;
+  
 
     constructor(commentRepository:CommentRepository,userRepository:UserRepository,postRepository:PostRepository){
         this._commentRepository=commentRepository;

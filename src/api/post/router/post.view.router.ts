@@ -14,19 +14,16 @@ const BASE_PATH = "/views";
 
 const POST_VIEW_ROUTER = {
   /**글 목록 조회 */
-  GET_POSTS: `/post`,
+  POST_LIST: `/post`,
 
   /**글 상세 조회  */
-  GET_POST: `/posts/:postId`,
+  POST_DETAIL: `/posts/:postId`,
 
   /**글 작성  */
-  CREATE_POST: `/post`,
+  POST_WRITE: `/post/wirte`,
 
   /**글 수정 */
-  UPDATE_POST: `/posts/:postId`,
-
-  /**글 삭제  */
-  DELETE_POST: `/posts/:postId`,
+  POST_EDIT: `/posts/:postId`,
 } as const;
 
 const postViewController = new PostViewController(
@@ -43,12 +40,9 @@ postViewRouter.get(`${BASE_PATH}/post`, (req, res, next) => {
 postViewRouter.get(`${BASE_PATH}/post/detail/:id`,  (req, res, next) => {
   postViewController.postDetailPage(req, res, next);
 });
-
-
-
 /**작성 */
 postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
-  res.render("post/postWrite");
+ postViewController.postWritePage(req, res, next);
 });
 
 postViewRouter.post("/add", async (req, res) => {
@@ -59,7 +53,7 @@ postViewRouter.post("/add", async (req, res) => {
 
 /**수정 */
 postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
-  res.render("post/postEdit");
+  postViewController.postEditPage(req, res, next);
 });
 /**삭제  */
 

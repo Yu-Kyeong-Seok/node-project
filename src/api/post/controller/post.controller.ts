@@ -78,8 +78,8 @@ export default class PostController {
         category,
         image,
       });
-
       res.send(post);
+
     } catch (error) {
       console.error(error);
       next(error);

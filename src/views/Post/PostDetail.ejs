@@ -109,14 +109,58 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
-        const [cookies] = useCookies(["accessToken"]);
+       // const [cookies] = useCookies(["accessToken"]);
+       document.addEventListener("DOMContentLoaded", () => {
+  const comment = document.getElementById('comment-textarea');
+  const commentBtn = document.querySelector('.registration');
 
-        const handleComment = () => {
-          if (!cookies.accessToken) {
-            alert("로그인필요");
-            return;
-          }
-        };
+  // 댓글 텍스트박스가 제대로 선택되었는지 확인
+  if (comment) {
+    console.log('댓글 입력 텍스트박스:', comment);
+  } else {
+    console.error('댓글 입력 텍스트박스를 찾을 수 없습니다.');
+  }
+
+  // 버튼 이벤트 리스너 설정
+  commentBtn.addEventListener("click", async (event) => {
+    event.preventDefault();  // 기본 동작을 막음
+    console.log('댓글 등록 버튼 클릭됨');
+    
+    try {
+      const url = window.location.pathname; // "/views/post/detail/66f497c2f7319653c4f4505f"
+    const postId = url.split("/").pop();  // 마지막 값을 추출
+
+      const res = await fetch(`/api/posts/${postId}/comments`, {
+        method: "POST",
+        body: JSON.stringify({
+          content: comment.value,
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      
+      const data = await res.json();
+      console.log('서버 응답 데이터:', data);
+      
+      if (!res.ok) {
+        throw new Error(data.details);
+      }
+
+      alert('댓글이 성공적으로 등록되었습니다.');
+    } catch (error) {
+      alert('댓글 등록에 실패하였습니다. ' + error.message);
+    }
+  });
+});
+
+
+        // const handleComment = () => {
+        //   if (!cookies.accessToken) {
+        //     alert("로그인필요");
+        //     return;
+        //   }
+        // };
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");
@@ -125,7 +169,29 @@ contents<!DOCTYPE html>
           $(".page_cover, .close").click(function () {
             $("#menu, .page_cover").removeClass("open");
           });
+          //로그인 관련
+          const login = $(".comment-login");
+          const logout = $(".comment-logOut");
+          const accessToken = document.cookie
+            .split("; ")
+            .find((index) => index.startsWith("accessToken="));
+          const isLoggedIn = !!accessToken;
+      //로그인시 이렇게 됩니다
+      if (isLoggedIn) {
+            login.css("display", "block");
+            logout.css("display", "none");
+          }
         });
+
+        const [cookies] = useCookies(["accessToken"]);
+
+        const handleComment = () => {
+          if (!cookies.accessToken) {
+            alert("로그인필요");
+            return;
+          }
+        }
+  
     
       </script>
     </div>

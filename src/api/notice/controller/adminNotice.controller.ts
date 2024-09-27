@@ -9,12 +9,6 @@ import { NextFunction, Request, Response } from "express";
 import { NoticesService } from "../service/notice.service.type";
 
 export default class AdminNoticesController {
-
-  // private readonly _noticeService: NoticeService;
-  // constructor(_noticeService:NoticeService) {
-  //   this._noticeService = _noticeService;
-  // }
-
   private readonly _noticesService: NoticesService;
   constructor(_noticesService: NoticesService) {
     this._noticesService = _noticesService;
@@ -25,82 +19,78 @@ export default class AdminNoticesController {
     this.deleteNotice = this.deleteNotice.bind(this);
   }
 
-async getNotices(
-  req: Request<getNoticesRequest["path"],
-  getNoticesRequest["body"],
-  getNoticesRequest["params"]>,
-  res: Response, next: NextFunction 
+  async getNotices(
+    req: Request<
+      getNoticesRequest["path"],
+      getNoticesRequest["body"],
+      getNoticesRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
   ) {
-  try {
+    try {
       const notices = await this._noticesService.getNotices();
 
-      res.send(notices);
-  } catch (error){
-    console.log(error);
+      res.json(notices);
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
 
-async getNoticeDetail(
-  req: Request<getNoticesRequest["path"],
-  getNoticesRequest["body"],
-  getNoticesRequest["params"]>,
-  res: Response,
-  next: NextFunction 
+  async getNoticeDetail(
+    req: Request<
+      getNoticesRequest["path"],
+      getNoticesRequest["body"],
+      getNoticesRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
   ) {
-  try {
-    const noticeDetail = await this._noticesService.getNoticeDetail(
-      req.params.noticeId);
-    res.send(noticeDetail);
-  } catch (error){
-    next(error);
+    try {
+      const noticeDetail = await this._noticesService.getNoticeDetail(
+        req.params.noticeId
+      );
+      res.json(noticeDetail);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
-}
 
-async createNotice(
-  req: Request,
-  res: Response,
-  next: NextFunction 
-  ) {
-  try {
-    const createdNotice = await this._noticesService.createNotice(req.body);
+  async createNotice(req: Request, res: Response, next: NextFunction) {
+    try {
+      const createdNotice = await this._noticesService.createNotice(req.body);
 
-    res.send(createdNotice);
-  } catch (error){
-    next(error);
+      res.json(createdNotice);
+    } catch (error) {
+      next(error);
+    }
   }
-}
 
-async updateNotice(
-  req: Request,
-  res: Response,
-  next: NextFunction 
-  ) {
+  async updateNotice(req: Request, res: Response, next: NextFunction) {
     const { noticeId } = req.params;
-  try {
-    const updatedNotice = await this._noticesService.updateNotice(noticeId, req.body);
+    try {
+      const updatedNotice = await this._noticesService.updateNotice(
+        noticeId,
+        req.body
+      );
 
-    res.status(204).json();
-  } catch (error){
-    next(error);
+      res.status(200).json(noticeId);
+    } catch (error) {
+      next(error);
+    }
   }
 
-}
+  async deleteNotice(req: Request, res: Response, next: NextFunction) {
+    try {
+      await this._noticesService.deleteNotice(req.params.noticeId);
 
-async deleteNotice(
-  req: Request,
-  res: Response,
-  next: NextFunction 
-  ) {
-  try {
-    const deletedNotice = await this._noticesService.deleteNotice(req.body);
-
-    res.status(204).json();
-  } catch (error){
-    next(error);
+      res.status(204).json();
+    } catch (error) {
+      next(error);
+    }
   }
 }
-}
-
 
 // NOTICE 목록 조회 - getNotices
 
@@ -119,4 +109,3 @@ async deleteNotice(
 // export const deleteNotice = (req:Request,res: Response,next:NextFunction)=>{
 //     res.send("NOTICE 삭제(관리자)")
 // }
-

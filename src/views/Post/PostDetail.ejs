@@ -31,7 +31,7 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
-          <h2 class="category-title">카테고리</h2>
+          <h2 class="category-title"><%= post.category %></h2>
           <div class="profile-bar">
             <div class="detail-profile">
               <!-- 프로필 더미 2배 키움 -->
@@ -39,7 +39,11 @@ contents<!DOCTYPE html>
             </div>
             <div class="detail-user">
               <div class="detail-nickName">닉네임</div>
-              <div class="detail-date">등록날짜</div>
+              <div class="detail-date">
+                <% const formattedDate = new
+                Date(post.createdAt).toISOString().slice(0, 10);%>
+                <p>작성일: <%= formattedDate %></p>
+              </div>
             </div>
           </div>
           <div class="tool">
@@ -50,12 +54,10 @@ contents<!DOCTYPE html>
 
         <div class="contents-container">
           <div class="contents-title">
-            <h3>트와일라잇 영화 보셨나요?</h3>
+            <h3><%= post.title %></h3>
           </div>
           <div class="contents">
-            <p>
-              꿀잼이죠~ 뱀파이어 가족끼리 야구하는 장면을 인상깊게 봤습니다.
-            </p>
+            <p><%= post.content %></p>
           </div>
           <div class="contents-bottom">
             <button class="thumbs-up hello">
@@ -107,43 +109,14 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
-        document.addEventListener("DOMContentLoaded", () => {
-       // const [cookies] = useCookies(["accessToken"]);
+        const [cookies] = useCookies(["accessToken"]);
 
-        const comment = document.getElementById("comment-textarea");
-        const commentBtn=document.querySelector('.registration');
-
-        console.log('커멘트버튼임',commentBtn)
-        commentBtn.addEventListener("click",async ()=>{
-          event.preventDefault(); 
-           console.log('clickcccc')
-          try{
-            const res=await fetch("/api/posts/:postId/comments",{
-              method:"POST",
-              body:JSON.stringify({
-                content:comment.value,
-                
-              }),
-              headers:{
-                "Content-Type":"application/json"
-              }
-            });
-            const data=await res.json();
-            console.log('data:',data)
-            if(!res.ok){
-              throw new Error(data.details);
-            }
-          }catch(error){
-            alert('댓글 등록에 실패하였습니다.',error.message)
+        const handleComment = () => {
+          if (!cookies.accessToken) {
+            alert("로그인필요");
+            return;
           }
-        })
-        // const handleComment = () => {
-        //   if (!cookies.accessToken) {
-        //     alert("로그인필요");
-        //     return;
-        //   }
-        // };
-      })
+        };
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");

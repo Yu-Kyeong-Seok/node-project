@@ -1,4 +1,10 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 /* 컨텐츠가 페이지의 나머지 부분을 차지하게 */
+html{
+    font-family: 'Pretendard', sans-serif;
+}
+
 .content {
     flex: 1;
     padding: 20px;

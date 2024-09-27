@@ -107,14 +107,43 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
-        const [cookies] = useCookies(["accessToken"]);
+        document.addEventListener("DOMContentLoaded", () => {
+       // const [cookies] = useCookies(["accessToken"]);
 
-        const handleComment = () => {
-          if (!cookies.accessToken) {
-            alert("로그인필요");
-            return;
+        const comment = document.getElementById("comment-textarea");
+        const commentBtn=document.querySelector('.registration');
+
+        console.log('커멘트버튼임',commentBtn)
+        commentBtn.addEventListener("click",async ()=>{
+          event.preventDefault(); 
+           console.log('clickcccc')
+          try{
+            const res=await fetch("/api/posts/:postId/comments",{
+              method:"POST",
+              body:JSON.stringify({
+                content:comment.value,
+                
+              }),
+              headers:{
+                "Content-Type":"application/json"
+              }
+            });
+            const data=await res.json();
+            console.log('data:',data)
+            if(!res.ok){
+              throw new Error(data.details);
+            }
+          }catch(error){
+            alert('댓글 등록에 실패하였습니다.',error.message)
           }
-        };
+        })
+        // const handleComment = () => {
+        //   if (!cookies.accessToken) {
+        //     alert("로그인필요");
+        //     return;
+        //   }
+        // };
+      })
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");
@@ -124,6 +153,7 @@ contents<!DOCTYPE html>
             $("#menu, .page_cover").removeClass("open");
           });
         });
+    
       </script>
     </div>
   </body>

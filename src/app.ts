@@ -4,7 +4,7 @@ import morgan from "morgan";
 import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
 
-import postViewRotuer from "../src/api/post/router/post.view.router";
+import postViewRouter from "../src/api/post/router/post.view.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import categoryViewRouter from "@/api/category/router/category.view.router";
@@ -18,7 +18,9 @@ import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
+import commentRouter from "./api/comment/router/comment.router";
 import profileRouter from "./api/profile/router/profile.view.router";
+
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -41,20 +43,24 @@ app.use(cookieParser());
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
-
+app.use(express.json())
+app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
 //app.use(userRouter);
 app.use(viewRouter);
 app.use(categoryViewRouter);
 app.use(authViewRouter);
 
-app.use(postViewRotuer);
-// app.use(postRouter);
+app.use(commentRouter);
+app.use(postViewRouter);
+
+app.use(postRouter);
 app.use(categoryRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
+app.use(categoryRouter); 
 
 app.use(profileRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
@@ -66,6 +72,8 @@ app.set("view engine", "ejs");
 
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
+
+
 
 app.get("/", function (req, res) {
   res.render("index", { title: "홈페이지" });
@@ -93,3 +101,4 @@ app.use(errorHandler);
 app.listen(4000, () => {
   console.log(`http://localhost:4000`);
 });
+

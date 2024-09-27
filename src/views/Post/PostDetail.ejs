@@ -31,7 +31,7 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
-          <h2 class="category-title">카테고리</h2>
+          <h2 class="category-title"><%= post.category %></h2>
           <div class="profile-bar">
             <div class="detail-profile">
               <!-- 프로필 더미 2배 키움 -->
@@ -39,7 +39,19 @@ contents<!DOCTYPE html>
             </div>
             <div class="detail-user">
               <div class="detail-nickName">닉네임</div>
-              <div class="detail-date">등록날짜</div>
+              <div class="detail-date">
+                <% 
+                  const createdAt = post.createdAt;
+                  let formattedDate = "날짜 없음"; // 기본값 설정
+                  if (createdAt) {
+                    const date = new Date(createdAt);
+                    if (!isNaN(date)) {
+                      formattedDate = date.toISOString().slice(0, 10);
+                    }
+                  }
+                %>
+                <p>작성일: <%= formattedDate %></p>
+              </div>
             </div>
           </div>
           <div class="tool">
@@ -50,12 +62,10 @@ contents<!DOCTYPE html>
 
         <div class="contents-container">
           <div class="contents-title">
-            <h3>트와일라잇 영화 보셨나요?</h3>
+            <h3><%= post.title %></h3>
           </div>
           <div class="contents">
-            <p>
-              꿀잼이죠~ 뱀파이어 가족끼리 야구하는 장면을 인상깊게 봤습니다.
-            </p>
+            <p><%= post.content %></p>
           </div>
           <div class="contents-bottom">
             <button class="thumbs-up hello">
@@ -107,6 +117,22 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
+        $(document).ready(function () {
+          const login = $(".comment-login");
+          const logout = $(".comment-logOut");
+          const accessToken = document.cookie
+            .split("; ")
+            .find((index) => index.startsWith("accessToken="));
+          const isLoggedIn = !!accessToken;
+        
+
+          //로그인시 이렇게 됩니다
+          if (isLoggedIn) {
+            login.css("display", "block");
+            logout.css("display", "none");
+          }
+        });
+
         const [cookies] = useCookies(["accessToken"]);
 
         const handleComment = () => {
@@ -115,6 +141,7 @@ contents<!DOCTYPE html>
             return;
           }
         };
+
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");

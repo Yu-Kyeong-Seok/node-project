@@ -32,15 +32,21 @@ const POST_VIEW_ROUTER = {
 
 const postViewController = new PostViewController(
   new PostsServiceImpl(
-    new MongoosePostRepository(),
-    new MongooseUserRepository()
-  )
-);
+  new MongoosePostRepository(),
+  new MongooseUserRepository()
+  ),
+
+
+new CommentsServiceImpl(
+  new MongooseCommentRepository(),
+  new MongooseUserRepository(),
+  new MongoosePostRepository()
+));
+
 const commentViewController=new CommentViewController(
   new CommentsServiceImpl(
       new MongooseCommentRepository(),
       new MongooseUserRepository (), 
-
       new MongoosePostRepository(),   
 
   )
@@ -77,13 +83,13 @@ postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
 
 const COMMENT_VIEW_ROUTER={
   /**댓긂 목록 조회 */
-  COMMENT_LIST:`/views/post/detail/:postId`
+  COMMENT_LIST:`${BASE_PATH}/post/detail/:postId`
  
 }
 
 postViewRouter.get(COMMENT_VIEW_ROUTER.COMMENT_LIST,(req,res,next)=>{
 
 
-  commentViewController.commentListPage(req,res,next)});
+  commentViewController.commentListPage.bind(commentViewController)})
 
   export default postViewRouter;

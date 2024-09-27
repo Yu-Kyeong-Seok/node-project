@@ -46,10 +46,38 @@ const PROFILE_ROUTER = {
   PROFILE: "/profile",
 } as const;
 
+/** FAQ 라우터 */
+const FAQ_ROUTES = {
+  /** 관리자 FAQ API */
+  ADMIN_FAQS_API: "/admin-api/faq",
+  /** FAQ API */
+  FAQS_API: "/api/faq",
+  /** 관리자 FAQ 뷰 */
+  ADMIN_FAQ_VIEW: "/admin/faq",
+  /** FAQ 뷰 */
+  FAQ_VIEW: "/faq",
+} as const;
+
+/** NOTICE 라우터 */
+const NOTICE_ROUTES = {
+  /** 관리자 NOTICE API */
+  ADMIN_NOTICES_API: "/admin-api/notice",
+  /** NOTICE API */
+  NOTICES_API: "/api/notice",
+  /** 관리자 NOTICE 뷰 */
+  ADMIN_NOTICE_VIEW: "/admin/notice",
+  /** NOTICE 뷰 */
+  NOTICE_VIEW: "/notice",
+}
+
+
+
 export const ROUTES_INDEX = {
   ...POST_ROUTES,
   ...AUTH_ROUTES,
   ...USER_ROUTES,
   ...UPLOAD_ROUTES,
   ...PROFILE_ROUTER,
+  ...FAQ_ROUTES,
+  ...NOTICE_ROUTES,
 } as const;

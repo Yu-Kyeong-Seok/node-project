@@ -29,7 +29,7 @@
       <div class="content">
         <div id="wrap">
           <div id="wrap-contents">
-            <form id="questionForm" action="/add" method="POST">
+            <form id="questionForm" action="/post/write" method="POST">
               <h1 class="title">질문하기</h1>
               <div class="form-container">
                 <label for="title" class="TextInputSet">
@@ -108,8 +108,7 @@
 
           contentInput.onkeyup = () => {
             const len2 = contentInput.value.length;
-            console.log(len2);
-
+       
             if (len2 !== 0 && len2 < 50) {
               contentMsg.classList.remove("hide");
             } else {

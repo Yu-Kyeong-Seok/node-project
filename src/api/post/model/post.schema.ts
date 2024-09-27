@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema<IPost>(
     content : {
         type: String,
         required: true,
-        length: 500,
+        length: 50,
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,

@@ -52,7 +52,7 @@ app.use(categoryViewRouter);
 app.use(authViewRouter);
 
 app.use(commentRouter);
-app.use(postViewRotuer);
+app.use(postViewRouter);
 
 app.use(postRouter);
 app.use(categoryRouter);
@@ -101,3 +101,4 @@ app.use(errorHandler);
 app.listen(4000, () => {
   console.log(`http://localhost:4000`);
 });
+

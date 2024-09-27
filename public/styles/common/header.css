@@ -44,7 +44,7 @@
 }
 
 .gnb a {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 20px;
   color: #a3a3a3;
   padding: 0 20px;
@@ -62,6 +62,10 @@
   gap: 20px;
   align-items: center;
 }
+
+.user-icon{position: relative;}
+.user-icon .user-dropdown{position: absolute; left:50%; top:40px; background-color: #fff; border-radius: 10px; box-shadow: 0 1px 10px rgba(0,0,0,0.3); display:flex; flex-direction: column; gap:25px; flex-wrap: wrap; width:115px; transform: translateX(-50%); padding:20px; display: none;}
+.user-icon .user-dropdown li a{display:block; font-size:16px; font-weight: 600;}
 
 .search-bar {
   width: 220px;

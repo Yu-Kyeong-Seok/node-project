@@ -5,6 +5,7 @@ import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repos
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
+
 const postRouter = express.Router();
 
 const  POST_ROUTER = {
@@ -27,36 +28,37 @@ const  POST_ROUTER = {
     CREATE_DUMMY: `/api/post/dummy`,
   } as const;
 
-  const postsController = new PostController(
+  const postController = new PostController(
     new PostsServiceImpl(
       new MongoosePostRepository(),
       new MongooseUserRepository()
     )
   );
 
-
-
-
 postRouter.get(
     (POST_ROUTER.GET_POSTS),
-    postsController.getPost
+    authUserMiddleware,
+    postController.getPost
   );
   postRouter.get(
     (POST_ROUTER.GET_POST),
-    postsController.getPostDetail
+    authUserMiddleware,
+    postController.getPostDetail
   );
   postRouter.post(
     (POST_ROUTER.CREATE_POST),
     authUserMiddleware,
-    postsController.createPost
+    postController.createPost
   );
   postRouter.put(
     (POST_ROUTER.UPDATE_POST),
-    postsController.updatePost
+    authUserMiddleware,
+    postController.updatePost
   );
   postRouter.delete(
     (POST_ROUTER.DELETE_POST),
-    postsController.deletePost
+    authUserMiddleware,
+    postController.deletePost
   );
 
 export default postRouter

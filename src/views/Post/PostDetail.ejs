@@ -111,22 +111,36 @@ contents<!DOCTYPE html>
             <div class="comment-login-down">
               <button type="submit" class="registration">등 록</button>
             </div>
-            <% if (comments && comments.length > 0) { %>
-              <% comments.forEach(function(comment) { %>
-                <div class="comment">
-                  <p><%= comment.content %></p>
-                </div>
-              <% }); %>
-            <% } else { %>
-              <p>댓글이 없습니다.</p>
-            <% } %>
-            
-            
           </div>
+            <div class="commentList" style="display: block;">
+              <% if (comments && comments.length > 0) { %>
+                <% for(i=0; i<comments.length; i++){ %>
+                  <div class="commentss" data-comment-id="<%= comments[i]._id %>">
+                    <div class="comment-login-up">
+                    <div class="comment-profile">
+                      <i class="fa-solid fa-user"></i><p><%= comments[i].author %></p>
+                    </div>
+                    <div class="login-comment-contants">
+                      <p><%=comments[i].content %></p>
+                    </div>
+                    </div>
+                    
+                    <div class="comment-login-down">
+                    <button type="button" class="edit">수정</button>
+                  </div>
+                  </div>
+                <% } %>
+              <% } else { %>
+                <p>댓글이 없습니다.</p>
+              <% } %>
+            </div>
+            
+            
+        
         </div>
       </div>
 
-      <footer><%- include('../_layouts/footer') %></footer>
+      <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
   $(document).ready(function () {
     // 햄버거 메뉴 관련
@@ -138,23 +152,36 @@ contents<!DOCTYPE html>
       $("#menu, .page_cover").removeClass("open");
     });
 
-    // 로그인 관련
-    const login = $(".comment-login");
+
+    // 현재 포스트 ID 가져오기
+    const url = window.location.pathname;
+    const postId = url.split("/").pop();
+
+ // 로그인 관련
+ const login = $(".comment-login");
     const logout = $(".comment-logOut");
+    const commentList=$(".commentList")
     const accessToken = document.cookie
       .split("; ")
       .find((index) => index.startsWith("accessToken="));
       console.log('acees',accessToken)
     const isLoggedIn = !!accessToken;
+    console.log('isLLL',isLoggedIn)
+      // 로그인 상태에 따라 표시 제어
+      if (isLoggedIn) {
+        login.css("display", "block"); //댓글 등록하라는 div
+        logout.css("display", "none"); //로그인 하라는 div 
+        //commentList.css("display","block");
 
-    // 로그인 상태에 따라 표시 제어
-    if (isLoggedIn) {
-      login.css("display", "block");
-      logout.css("display", "none");
-    }
+        } else {
+        login.css("display", "none");
+        logout.css("display", "block");
+       // commentList.css("display","block !important;")
+      }
 
-    // 댓글 등록 버튼 이벤트 리스너
-    $(".registration").click(async function (event) {
+
+     // 댓글 등록 버튼 이벤트 리스너
+     $(".registration").click(async function (event) {
       event.preventDefault(); // 기본 동작 막기
 
       // 로그인 체크
@@ -166,9 +193,6 @@ contents<!DOCTYPE html>
       // 댓글 내용 가져오기
       const commentContent = $("#comment-textarea").val();
 
-      // 현재 포스트 ID 가져오기
-      const url = window.location.pathname;
-      const postId = url.split("/").pop();
 
       try {
         const res = await fetch(`/api/posts/${postId}/comments`, {
@@ -196,7 +220,68 @@ contents<!DOCTYPE html>
         alert("댓글 등록에 실패하였습니다: " + error.message);
       }
     });
+
+    //댓글 수정 관련
+    $(".edit").click(function(){
+      const commentEle=$(this).closest(".comment-login");
+      const commentContent=commentEle.find(".login-comment-contants p").text();
+      // const commentId=commentEle.data('comment-id')
+     console.log('commentContent:',commentContent)
+      const editText=`
+      <div class="edit-container">
+        <textarea class="edit-textarea">${commentContent}</textarea>
+        <button class="save-edit">저장</button>
+        <button class="cancel-edit">취소</button>
+        </div>
+      `
+
+      commentEle.find(".login-comment-contants").hide();
+      commentEle.find(".comment-login-down").hide();
+      commentEle.append(editText);
+
+      commentEle.find(".save-edit").click(async ()=>{
+        const updatedComment=commentEle.find(".edit-textarea").val();
+        console.log('updated',updatedComment)
+        const commentId=commentEle.data("comment-id");
+        console.log('commentEle',commentEle.data("comment-id"));
+
+        try{
+          const res=await fetch(`/api/${postId}/comments/${commentId}`,{
+            method:"PUT",
+            body:JSON.stringify({content:updatedComment}),
+            headers:{
+              "Content-Type": "application/json",
+             "Authorization": `${accessToken}`,
+            }
+          });
+          const data=await res.json();
+          if(!res.ok) {
+          throw new Error(data.details);
+        }
+
+       commentEle.find(".login-comment-contants p").text(updatedComment);
+        commentEle.find(".edit-container").remove();
+        commentEle.find(".login-comment-contants").show(); // 기존 댓글 다시 표시
+        commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
+        alert("댓글이 성공적으로 수정되었습니다.");
+      } catch (error) {
+        alert("댓글 수정에 실패하였습니다: " + error.message);
+      }
+    });
+
+    // 수정 취소 버튼 클릭 이벤트
+    commentEle.find(".cancel-edit").click(function () {
+      commentEle.find(".edit-container").remove(); // 수정 영역 제거
+      commentEle.find(".login-comment-contants").show(); // 기존 댓글 다시 표시
+      commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
+    });
   });
+    })
+  
+   
+
+  
+
       </script>
     </div>
   </body>

@@ -37,3 +37,5 @@
 .login-comment-contants { width: 70%; height: 80px; } 
 #comment-textarea { padding: 10px 20px; width: 100%; height: 80%; border: none; } 
 .registration { margin-top: 5px; border: none; outline: none; padding: 5px 15px; font-size: 12px; background-color: rgba(161, 109, 246, 0.5); color: rgb(239, 239, 239); cursor: pointer; } 
+
+.commentss{ border: 1px solid rgb(240, 240, 240); width: 96%; height: 80px; margin: 10px auto 0 auto; border-radius: 10px; width:100%} 

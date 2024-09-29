@@ -11,7 +11,8 @@ export default class UsersController {
     this.signUp = this.signUp.bind(this);
     this.getMyInfo = this.getMyInfo;
     this.updateMyInfo = this.updateMyInfo.bind(this);
-    this.logout=this.logout.bind(this)
+    this.logout=this.logout.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
   /** 회원가입 (사용자페이지) */
@@ -83,5 +84,23 @@ export default class UsersController {
     // res.status(200).send(`<script>alert('로그아웃됨.나가!');
     // location.href='/login';</script>`);
    
+  }
+  
+  /** 패스워드 수정 */
+  async updatePassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const { password } = req.body;
+      const { hashedPassword, salt } = CryptoService.encryptPassword(password);
+
+      const user = await this._userService.updateUser(userId, {
+        password: hashedPassword,
+        salt,
+      });
+
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
   }
 }

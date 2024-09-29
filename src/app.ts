@@ -25,6 +25,7 @@ import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
 import profileViewRouter from "./api/profile/router/profile.view.router";
 import profileRouter from "./api/profile/router/profile.router";
+import adminUsersRouter from "./api/users/router/adminUsers.router";
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -68,7 +69,6 @@ app.use(noticeRouter);
 app.use(express.json())
 app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
-app.use(userRouter);
 app.use(viewRouter);
 
 app.use(profileViewRouter);
@@ -81,12 +81,10 @@ app.use(commentRouter);
 app.use(postViewRouter);
 app.use(postRouter);
 app.use(categoryRouter);
-app.use(categoryRouter); 
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
+app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
-
-
 
 app.use(errorHandler);
 

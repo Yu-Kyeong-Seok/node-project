@@ -29,7 +29,7 @@
             <span class="notice-label">공지</span>
             <!-- 제목 및 날짜를 동적으로 표시 -->
             <span class="notice-title"><%= notice.title %></span>
-            <span class="notice-time"><%= notice.date %></span>
+            <span class="notice-date"><%= new Date(notice.createdAt).toLocaleDateString() %></span>
           </div>
   
           <div class="notice-content">

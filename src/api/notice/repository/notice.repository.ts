@@ -4,7 +4,7 @@ export interface NoticeRepository {
   /** NOTICE 목록 조회 */
   findAll(): Promise<INotice[]>;
   /** ID로 NOTICE 조회 */
-  findById(id: string): Promise<INotice | null>;
+  findById(noticeId: string): Promise<INotice | null>;
     /** NOTICE 수정 */
   update(noticeId: string, updateNoticeInfo: Partial<INotice>): Promise<INotice>;
     /** NOTICE 삭제 */

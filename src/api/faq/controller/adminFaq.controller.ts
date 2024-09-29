@@ -18,7 +18,7 @@ export default class AdminFaqsController {
   constructor(_faqsService: FaqsService) {
     this._faqsService = _faqsService;
     this.getFaqs = this.getFaqs.bind(this);
-    this.getFaqDetail = this.getFaqDetail.bind(this);
+    // this.getFaqDetail = this.getFaqDetail.bind(this);
     this.createFaq = this.createFaq.bind(this);
     this.updateFaq = this.updateFaq.bind(this);
     this.deleteFaq = this.deleteFaq.bind(this);
@@ -38,21 +38,21 @@ export default class AdminFaqsController {
     }
   }
   
-  async getFaqDetail(
-    req: Request<getFaqsRequest["path"],
-    getFaqsRequest["body"],
-    getFaqsRequest["params"]>,
-    res: Response,
-    next: NextFunction 
-    ) {
-    try {
-      const faqDetail = await this._faqsService.getFaqDetail(
-        req.params.faqId);
-       res.send(faqDetail);
-    } catch (error){
-      next(error);
-    }
-  }
+  // async getFaqDetail(
+  //   req: Request<getFaqsRequest["path"],
+  //   getFaqsRequest["body"],
+  //   getFaqsRequest["params"]>,
+  //   res: Response,
+  //   next: NextFunction 
+  //   ) {
+  //   try {
+  //     const faqDetail = await this._faqsService.getFaqDetail(
+  //       req.params.faqId);
+  //      res.send(faqDetail);
+  //   } catch (error){
+  //     next(error);
+  //   }
+  // }
   
   async createFaq(
     req: Request,
@@ -77,7 +77,7 @@ export default class AdminFaqsController {
     try {
       const updatedFaq = await this._faqsService.updateFaq(faqId, req.body);
 
-      res.status(204).json();
+      res.status(200).json(updatedFaq);
     } catch (error){
       next(error);
     }
@@ -90,7 +90,7 @@ export default class AdminFaqsController {
     ) {
     const { faqId } = req.params;
     try {
-      const deletedFaq = await this._faqsService.deleteFaq(req.body);
+      await this._faqsService.deleteFaq(req.params.faqId);
 
      res.status(204).json();
     } catch (error){

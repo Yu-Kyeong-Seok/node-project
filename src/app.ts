@@ -8,12 +8,16 @@ import postViewRouter from "../src/api/post/router/post.view.router";
 import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import categoryViewRouter from "@/api/category/router/category.view.router";
+import adminFaqViewRouter from "./api/faq/router/adminFaq.view.router";
+import faqViewRouter from "./api/faq/router/faq.view.router";
+import adminNoticeViewRouter from "./api/notice/router/adminNotice.view.router";
+import noticeViewRouter from "./api/notice/router/notice.view.router";
 import { ROUTES_INDEX } from "./routers";
 import cookieParser from "cookie-parser";
 import authRouter from "./api/auth/router/auth.router";
 import adminFaqRouter from './api/faq/router/adminFaq.router';
 import faqRouter from './api/faq/router/faq.router';
-import adminNoticeRouter from "./api/notice/router/adminNotice.router";
+import adminNoticeRouter from './api/notice/router/adminNotice.router';
 import noticeRouter from "./api/notice/router/notice.router";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
@@ -55,7 +59,14 @@ app.set("view engine", "ejs");
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
-
+app.use(noticeViewRouter);
+app.use(faqViewRouter);
+app.use(adminFaqRouter);
+app.use(faqRouter);
+app.use(adminNoticeRouter);
+app.use(noticeRouter);
+app.use(express.json())
+app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
 app.use(userRouter);
 app.use(viewRouter);
@@ -70,14 +81,12 @@ app.use(commentRouter);
 app.use(postViewRouter);
 app.use(postRouter);
 app.use(categoryRouter);
-app.use(adminFaqRouter);
-app.use(faqRouter);
-app.use(adminNoticeRouter);
-app.use(noticeRouter);
 app.use(categoryRouter); 
 
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
+
+
 
 app.use(errorHandler);
 
@@ -89,3 +98,4 @@ app.use(errorHandler);
 app.listen(4000, () => {
   console.log(`http://localhost:4000`);
 });
+

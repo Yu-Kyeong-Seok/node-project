@@ -16,32 +16,33 @@ export class MongooseFaqRepository implements FaqRepository{
         const faqs=await MongooseFaq.find();
         return faqs;
     }
-    async findById(faqId: string): Promise<IFaq | null> {
-        try{
-            const findFaq=await MongooseFaq.findById(faqId)
-            return findFaq;
-        }catch(error:any){
-            const message = error.message.toString();
-            if (message.includes("Cast to ObjectId failed")) {
-              return null;
-            }
-            throw error;
-        }
+    async findById(faqId:string):Promise<IFaq | null>{
+      try{
+          const findFaqId = await MongooseFaq.findOne({ id: faqId } )
+          return findFaqId;
+      }catch(error){
+          console.log(error)
+          return null;
+      }
        
     }
-    async update(faqId: string, updateFaqInfo: Partial<IFaq>): Promise<IFaq> {
-      const results = await MongooseFaq.findByIdAndUpdate(
-        faqId, 
-        updateFaqInfo
-      );
-      if (!results) {
-        throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
-      }
-  
-      return results;
+    async update(
+    faqId: string,
+    updateFaqInfo: Partial<IFaq>
+  ): Promise<IFaq> {
+    const results = await MongooseFaq.findOneAndUpdate(
+      { id: faqId },
+      updateFaqInfo,
+      { new: true }
+    );
+    if (!results) {
+      throw new HttpException(404, "공지사항을 찾을 수 없습니다.");
     }
+
+    return results;
+  }
     async delete(faqId: string): Promise<void> {
-      await MongooseFaq.deleteOne({ _id: faqId });
+      await MongooseFaq.deleteOne({ id: faqId });
   
       return;
     }

@@ -46,37 +46,37 @@
             const completeBtn = form.querySelector(".save");
             const cancleBtn = form.querySelector(".cancle");
 
-        cancleBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-
-            location.href = "/profile/setting/<%= user.id %>";
-            });
-
-        completeBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            try {
-                const res = await fetch("/admin-api/users/<%= user.id %>", {
-                method: "put",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: newEmail.value,
-                    }),
-                });
-
-                if (!res.ok) {
-                console.error("Error:", res.status, res.statusText);
-                const errorText = await res.text(); // 오류 메시지 확인
-                console.error("Response body:", errorText);
-                }
+            cancleBtn.addEventListener("click", (e) => {
+                e.preventDefault();
 
                 location.href = "/profile/setting/<%= user.id %>";
-            } catch (error) {
-                console.error(error.message);
-            }
+                });
+
+            completeBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                try {
+                    const res = await fetch("/admin-api/users/<%= user.id %>", {
+                    method: "put",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: newEmail.value,
+                        }),
+                    });
+
+                    if (!res.ok) {
+                    console.error("Error:", res.status, res.statusText);
+                    const errorText = await res.text(); // 오류 메시지 확인
+                    console.error("Response body:", errorText);
+                    }
+
+                    location.href = "/profile/setting/<%= user.id %>";
+                } catch (error) {
+                    console.error(error.message);
+                }
+            });
         });
-    });
 
         $(document).ready(function() {
             $(".hamburger-bar").click(function() {

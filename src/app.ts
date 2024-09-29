@@ -26,6 +26,7 @@ import commentRouter from "./api/comment/router/comment.router";
 import profileViewRouter from "./api/profile/router/profile.view.router";
 import profileRouter from "./api/profile/router/profile.router";
 import adminUsersRouter from "./api/users/router/adminUsers.router";
+import uploadRouter from "./api/upload/router/upload.router";
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -34,7 +35,6 @@ const app = express();
 
 app.use(morgan("dev")); // 클로져
 app.use("/static", express.static(path.join(__dirname, "../public")));
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -60,31 +60,32 @@ app.set("view engine", "ejs");
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
+
+app.use(ROUTES_INDEX.AUTH_API, authRouter);
+app.use(ROUTES_INDEX.USERS_API, userRouter);
+app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
+app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
+
+
 app.use(noticeViewRouter);
 app.use(faqViewRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
-app.use(express.json())
-app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
 app.use(viewRouter);
 
 app.use(profileViewRouter);
 app.use(profileRouter);
 
-app.use(categoryViewRouter);
 app.use(authViewRouter);
 
 app.use(commentRouter);
 app.use(postViewRouter);
 app.use(postRouter);
+app.use(categoryViewRouter);
 app.use(categoryRouter);
-
-app.use(ROUTES_INDEX.USERS_API, userRouter);
-app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
-app.use(ROUTES_INDEX.AUTH_API, authRouter);
 
 app.use(errorHandler);
 

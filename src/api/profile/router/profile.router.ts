@@ -7,15 +7,15 @@ import { MongooseProfileRepository } from "@/api/users/repository/profile/mongoo
 const profileRouter = express.Router();
 
 const PROFILE_ROUTERS = {
-    /** 글 목록 조회 */
+    /** 프로필 목록 조회 */
     GET_PROFILES: "/api/profile",
-    /** 글 상세 조회 */
+    /** 프로필 상세 조회 */
     GET_PROFILE: "/api/profile/:id",
-    /** 글 생성 */
+    /** 프로필 생성 */
     CREATE_PROFILE: "/api/profile",
-    /** 글 수정 */
+    /** 프로필 수정 */
     UPDATE_PROFILE: "/api/profile/:id",
-    /** 글 삭제 */
+    /** 프로필 삭제 */
     DELETE_PROFILE: "/api/profile/:id",
 } as const;
 

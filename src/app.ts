@@ -24,6 +24,7 @@ import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
 import profileRouter from "./api/profile/router/profile.view.router";
+import postSearchRouter from "./api/postSearch/router/postSearch.router";
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -47,6 +48,7 @@ app.use(cookieParser());
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
+app.use(postSearchRouter);
 app.use(noticeViewRouter);
 app.use(faqViewRouter);
 app.use(adminFaqRouter);

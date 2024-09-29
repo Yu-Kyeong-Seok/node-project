@@ -27,16 +27,19 @@ export class MongooseCommentRepository implements CommentRepository{
     }
     async findByAllPostId(postId:string):Promise<IComment[] >{
         try{
-        const comment=await MongooseComment.find({postId}).populate({
-            path:"postId",
-            populate:{
-                path:"author",
-                // select:"userName"
-            }
-        })
-     //   console.log('commentMongodse',comment);
-        return comment; 
-   
+            const comments = await MongooseComment.find({ postId })
+            .populate({
+              path: "postId",  // 댓글 작성자 정보
+              populate: {
+                path: "author",  // 프로필 정보 불러오기
+                
+              },
+           
+            })
+        
+            
+        return comments; 
+        
     }catch(error:any){
         const message = error.message.toString();
           if (message.includes("Cast to ObjectId failed")) {
@@ -75,7 +78,7 @@ export class MongooseCommentRepository implements CommentRepository{
         const objectId = new mongoose.Types.ObjectId(commentId); // ID 변환
 
         const updatedComment = await MongooseComment.findByIdAndUpdate(objectId, updateCommentInfo, { new: true });
-      
+        console.log('updateMOngekse',updatedComment)
         if (!updatedComment) {
           throw new HttpException(404, "댓글을 찾을 수 없습니다.");
         }

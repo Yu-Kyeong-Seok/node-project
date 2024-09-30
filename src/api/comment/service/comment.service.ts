@@ -17,6 +17,7 @@ export class CommentsServiceImpl implements CommentService{
         this._postRepository=postRepository;
         this._userRepository=userRepository;
     }
+
     
     
      async getComments(postId:string): Promise<commentResponseDTO[]> {
@@ -83,5 +84,11 @@ export class CommentsServiceImpl implements CommentService{
 
         return updatedResult; // 수정된 댓글을 반환
     }
-    
+
+    async getMyComments(id: string): Promise<IComment[]> {
+        const comments = await this._commentRepository.findByAllAuthor(id);
+
+        return comments;
+        
+    }
 }

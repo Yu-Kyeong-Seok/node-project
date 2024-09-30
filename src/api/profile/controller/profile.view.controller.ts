@@ -3,14 +3,16 @@ import { ProfileService } from "@/api/profile/service/profile.service.type";
 // import { ProfileService } from "@/api/profile/service/profile.service.type";
 import { User } from "@/api/users/model/user.model";
 import { PostService } from "@/api/post/service/post.service.type";
+import { CommentService } from "@/api/comment/service/comment.service.type";
 
 export default class ProfileViewController {
     private readonly _profileService: ProfileService;
     private readonly _postService: PostService;
-
-    constructor(profileService: ProfileService , postService: PostService) {
+    private readonly _commentService: CommentService;
+    constructor(profileService: ProfileService , postService: PostService, commentService: CommentService) {
         this._profileService = profileService;
         this._postService = postService;
+        this._commentService = commentService;
 
         this.profile = this.profile.bind(this);
         this.profileEdit = this.profileEdit.bind(this);
@@ -27,7 +29,11 @@ export default class ProfileViewController {
 
         const post = await this._postService.getMyPost(req.user.userId);
 
-        res.render("profile/profile", { user, post });
+        const comment = await this._commentService.getMyComments(req.user.userId);
+        
+        console.log(comment);
+
+        res.render("profile/profile", { user, post, comment });
     }
 
     /** 프로필 수정*/

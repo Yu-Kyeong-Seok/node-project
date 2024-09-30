@@ -12,5 +12,7 @@ export interface CommentRepository{
     update(commentId:string,updateCommentInfo:Partial<IComment>):Promise<IComment>;
     /*댓글 삭제*/
     delete(commentId:string): Promise<void>;
+    /** 내 댓글 조회 */
+    findByAllAuthor(id:string): Promise<IComment[]>;
  
 }

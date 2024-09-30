@@ -24,7 +24,7 @@ import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
 import profileRouter from "./api/profile/router/profile.view.router";
-
+//import {commentViewRouter} from "@/api/comment/router/comment.view.router"
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
@@ -63,7 +63,7 @@ app.use(authViewRouter);
 
 app.use(commentRouter);
 app.use(postViewRouter);
-
+//app.use(commentViewRouter);
 app.use(postRouter);
 app.use(categoryRouter);
 app.use(categoryRouter); 

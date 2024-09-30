@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { PostService } from "@/api/post/service/post.service.type";
+import { CommentService } from "@/api/comment/service/comment.service.type";
 
 export default class PostViewController {
   private readonly _postService: PostService;
-  constructor(_postService: PostService) {
+  private readonly _commentService: CommentService;
+  constructor(_postService: PostService,_commentService:CommentService) {
     this._postService = _postService;
+    this._commentService=_commentService;
+
     this.postListPage = this.postListPage.bind(this);
     this.postDetailPage = this.postDetailPage.bind(this);
     this.postWritePage = this.postWritePage.bind(this);
@@ -26,11 +30,12 @@ export default class PostViewController {
   async postDetailPage(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     const post = await this._postService.getPostDetail(id);
-    console.log(id)
+    const comments=await this._commentService.getComments(id)
+    //console.log(id)
 
     const authorId = post?.author.id;
-    console.log(authorId)
-    res.render("post/postDetail", { post });
+    //console.log(authorId)
+    res.render("post/postDetail", { post ,comments});
   }
 
     /** 게시글 수정 페이지 */

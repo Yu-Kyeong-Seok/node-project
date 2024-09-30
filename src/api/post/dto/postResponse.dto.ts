@@ -9,6 +9,7 @@ export class PostResponseDTO {
     };
     createdAt: Date;
     image ?: string;
+    likeCount:number;
     
     constructor(params: IPost) {
       this.postId = params.id;
@@ -21,6 +22,7 @@ export class PostResponseDTO {
         userName: params.author?.profile?.firstName,
       };
       this.createdAt = params.createdAt;
+      this.likeCount=params.likeCount
     }
   }
   

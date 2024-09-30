@@ -33,7 +33,7 @@ commentRouter.post(COMMENT_ROUTES.CREATE_COMMENT, authUserMiddleware, commentCon
 commentRouter.put(COMMENT_ROUTES.EDIT_COMMENT, authUserMiddleware,commentController.editComment.bind(commentController) as any);
 // commentRouter.post(COMMENT_ROUTES.CREATE_COMMENT),authUserMiddleware,commentController.createComment.bind(commentController);
 
-commentRouter.delete(COMMENT_ROUTES.DELETE_COMMENT),authUserMiddleware, commentController.deleteComment.bind(commentController);
+commentRouter.delete(COMMENT_ROUTES.DELETE_COMMENT,authUserMiddleware, commentController.deleteComment.bind(commentController)as any);
 
 
 export default commentRouter;

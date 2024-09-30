@@ -1,4 +1,5 @@
-import express from "express";
+import express, { request, response, NextFunction } from "express";
+
 import PostController from "@/api/post/controller/post.controller";
 import { PostsServiceImpl } from "@/api/post/service/post.service";
 import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repository";
@@ -45,15 +46,6 @@ postViewRouter.get(`${BASE_PATH}/post/detail/:id`,  (req, res, next) => {
 /**작성 */
 postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
  postViewController.postWritePage(req, res, next);
-});
-postViewRouter.post("/post/write", async (req, res) => {
-  const currentTime = new Date();
-  (await db)
-    .collection("posts")
-    .insertOne({ title: req.body.title, content: req.body.content, createAt: currentTime});
-    res.redirect('/views/post')
-
-
 });
 
 /**수정 */

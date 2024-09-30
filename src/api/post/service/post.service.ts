@@ -42,6 +42,7 @@ export class PostsServiceImpl implements PostService {
 
     return new PostResponseDTO(newPost);
   }
+  
   async getPosts({
     limit,
     offset,

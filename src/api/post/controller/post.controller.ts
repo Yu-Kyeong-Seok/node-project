@@ -59,6 +59,34 @@ export default class PostController {
       next(error);
     }
   }
+  /** 게시글 수정 */
+  async updatePost(
+    req: Request<
+      updatePostRequest["path"],
+      updatePostResponse,
+      updatePostRequest["body"],
+      updatePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params;
+    const { title, content, category, image, likeCount } = req.body;
+    try {
+      const post = await this._postService.updatePost(req.user.userId,{
+        title,
+        content,
+        category,
+        image,
+        likeCount,
+      });
+      
+      res.send(post);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 
   /** 게시글 작성 */
   async createPost(
@@ -104,34 +132,7 @@ export default class PostController {
       next(error);
     }
   }
-  /** 게시글 수정 */
-  async updatePost(
-    req: Request<
-      updatePostRequest["path"],
-      updatePostResponse,
-      updatePostRequest["body"],
-      updatePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
-    const { postId } = req.params;
-    const { title, content, category, image, likeCount } = req.body;
-    try {
-      const post = await this._postService.updatePost(postId, {
-        title,
-        content,
-        category,
-        image,
-        likeCount,
-      });
-
-      res.send(post);
-    } catch (error) {
-      next(error);
-    }
-  }
-
+  
   /** 게시글 삭제 */
   async deletePost(
     req: Request<

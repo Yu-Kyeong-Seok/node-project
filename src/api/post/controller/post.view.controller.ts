@@ -42,25 +42,12 @@ export default class PostViewController {
 
   /** 게시글 수정 페이지 */
   async postEditPage(req: Request, res: Response, next: NextFunction) {
-    // const { postId } = req.params;
-    // const userId = req.user.userId;
-    // const post = await this._postService.getPostDetail(postId);
-    // const isMe = userId === post?.author.id;
-
-    // if (!isMe) {
-    //   res.send(`<script>
-    //         alert("권한이 없습니다."); location.href="/posts/${postId}";
-    //       </script>`);
-    // }
-
     res.render("post/postEdit");
   }
 
   /** 게시글 작성 페이지 */
   async postWritePage(req: Request, res: Response, next: NextFunction) {
     // const currentTime = new Date();
-
-  
     // (await db)
     //   .collection("posts")
     //   .insertOne({ title: req.body.title, content: req.body.content, createAt: currentTime});

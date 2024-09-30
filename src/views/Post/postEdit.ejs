@@ -25,7 +25,6 @@ contents<!DOCTYPE html>
   </head>
 
   <body>
-   
     <div class="page-container">
       <%- include('../_layouts/header') %>
 
@@ -42,30 +41,54 @@ contents<!DOCTYPE html>
               <div class="detail-date">등록날짜</div>
             </div>
           </div>
-          <div class="tool">
-
-          </div>
+          <div class="tool"></div>
         </div>
 
-        <form class="contents-container">
+        <form class="contents-container" action="api/posts/<%= post.postId %>">
           <div class="contents-title">
-            <input class="title-input" type="text" value="전에 쓴거 전에 쓴거 id 가져와서 제목 불러오기">
+            <input
+              class="title-input"
+              type="text"
+              value="전에 쓴거 전에 쓴거 id 가져와서 제목 불러오기"
+            />
           </div>
 
           <div class="contents">
-            <input class="contents-input" type="text" value="전에 쓴거 id 가져와서 내용 불러오기">
-            
+            <input
+              class="contents-input"
+              type="text"
+              value="전에 쓴거 id 가져와서 내용 불러오기"
+            />
+
             <div class="save-bar">
-            <button type="submit" class="save">저장</button>
+              <button type="submit" class="save">저장</button>
+            </div>
           </div>
-          </div>
-
-
         </form>
       </div>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
+        /** 글을 생성해온다 */
+        const url = window.location.pathname;
+        const postId = url.split("/").pop();
+
+        const savePost = async () => {
+          const title = $(".title-input").val();
+          const content = $(".contents-input").val();
+
+          const res = await fetch(`api/posts/${postId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, content }),
+          });
+        };
+        const data = await res.json()
+        
+
+
+
+
         const [cookies] = useCookies(["accessToken"]);
 
         const handleComment = () => {

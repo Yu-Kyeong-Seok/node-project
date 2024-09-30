@@ -68,7 +68,7 @@ postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
 });
 
 /**수정 */
-postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
+postViewRouter.get(`${BASE_PATH}/post/edit/:id`, (req, res, next) => {
   postViewController.postEditPage(req, res, next);
 });
 

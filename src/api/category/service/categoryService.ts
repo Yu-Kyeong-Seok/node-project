@@ -1,11 +1,13 @@
 import HttpException from "@/api/common/exceptions/http.exception";
-import { categoryResponseDTO } from "../dto/categoryResponse.dto";
-import { CategoriesService } from "./categoryService.type";
-import { CategoryRepository } from "../repository/category.repository";
+import { categoryResponseDTO } from "@/api/category/dto/categoryResponse.dto";
+import { CategoriesService } from "@/api/category/service/categoryService.type";
+import { CategoryRepository } from "@/api/category/repository/category.repository";
+import { PostRepository } from "@/api/post/repository/post.repository";
 
 export class CategoriesServiceImpl implements CategoriesService{
     constructor(
-        private readonly _categoryRepository:CategoryRepository
+        private readonly _categoryRepository:CategoryRepository,
+        private readonly _postRepository: PostRepository
     ){}
 
     async getCategory():Promise<categoryResponseDTO[]>{

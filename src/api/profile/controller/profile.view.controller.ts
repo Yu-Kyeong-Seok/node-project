@@ -3,7 +3,7 @@ import { ProfileService } from "@/api/profile/service/profile.service.type";
 // import { ProfileService } from "@/api/profile/service/profile.service.type";
 import { User } from "@/api/users/model/user.model";
 
-export default class ProfileController {
+export default class ProfileViewController {
     private readonly _profileService: ProfileService;
     constructor(profileService: ProfileService) {
         this._profileService = profileService;
@@ -19,51 +19,54 @@ export default class ProfileController {
     async profile(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfile(id);
+        const user = await this._profileService.getUser(id);
 
-        res.render("profile/profile", { profile });
+        res.render("profile/profile", { user });
     }
 
     /** 프로필 수정*/
     async profileEdit(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
         
-        const profile = await this._profileService.getProfile(id);
+        const user = await this._profileService.getUser(id);
 
-        res.render("profile/profileEdit", { profile });
+        res.render("profile/profileEdit", { user });
     }
 
     /** 이메일 수정*/
     async profileChangeEmail(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfile(id);
+        const user = await this._profileService.getUser(id);
 
-        res.render("profile/profileChangeEmail", { profile });
+        res.render("profile/profileChangeEmail", { user });
     }
 
     /** 휴대폰번호 수정*/
     async profileChangeNumber(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfile(id);
+        const user = await this._profileService.getUser(id);
 
-        res.render("profile/profileChangeNumbers", { profile });
+        res.render("profile/profileChangeNumbers", { user });
     }
     /** 패스워드 수정*/
     async profileChangePassword(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfile(id);
+        const user = await this._profileService.getUser(id);
 
-        res.render("profile/profileChangePassword", { profile });
+        res.render("profile/profileChangePassword", { user });
     }
 
     async profileSetting(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params;
 
-        const profile = await this._profileService.getProfile(id);
+        // 유저 정보 넘겨줄때 사용
+        console.log(req.user.userId);
 
-        res.render("profile/profileSetting", { profile });
+        const user = await this._profileService.getUser(id);
+
+        res.render("profile/profileSetting", { user });
     }
 }

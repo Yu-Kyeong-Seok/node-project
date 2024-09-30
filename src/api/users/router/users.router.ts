@@ -29,7 +29,9 @@ const USER_ROUTES = {
   /** 내 정보 수정 */
   UPDATE_MY_INFO: `/api/users/me`,
   /**로그아웃 */
-  LOGOUT:`/api/users/logout`
+  LOGOUT:`/api/users/logout`,
+  /** 패스워드 수정 */
+  UPDATE_PASSWORD: '/api/users/password',
 } as const;
 
 userRouter.post(
@@ -52,5 +54,9 @@ userRouter.post(
   extractPath(USER_ROUTES.LOGOUT,ROUTES_INDEX.USERS_API),
   usersController.logout
 )
-
+userRouter.put(
+  extractPath(USER_ROUTES.UPDATE_PASSWORD, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  usersController.updatePassword
+);
 export default userRouter;

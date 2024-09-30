@@ -122,34 +122,40 @@
           const form = document.getElementById("questionForm");
 
           form.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
+            e.preventDefault(); // 폼 기본 동작 방지
             const title = document.querySelector("#title").value;
             const content = document.querySelector("#content").value;
             const category = document.querySelector("#categoryInput").value;
             const accessToken = document.cookie
               .split("; ")
               .find((index) => index.startsWith("accessToken="))
-              ?.split("=")[1]; // 토큰 값만 가져옴
+              ?.split("=")[1];
 
-            // FormData 대신 JSON으로 데이터를 보내기 위해 JSON.stringify 사용
-            const res =  await fetch("/api/post", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: accessToken, // Bearer 방식으로 전달
-              },
-              body: JSON.stringify({
-                title: title,
-                content: content,
-                category: category,
-              }),
-          
-            });
-            const data = res.body()
-            
-            location.replace('/views/post')
+            try {
+              const res = await fetch("/api/post", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: accessToken,
+                },
+                body: JSON.stringify({
+                  title: title,
+                  content: content,
+                  category: category,
+                }),
+              });
 
+              if (res.ok) {
+                // 성공적인 응답일 경우 리다이렉트
+                location.href = "/views/post"; // location.href는 함수가 아니므로 괄호를 사용하지 않습니다.
+              } else {
+                // 실패 시 알림
+                alert("글 잘못 전달 됐다 저장 잘해라");
+              }
+            } catch (error) {
+              console.error("Error occurred:", error);
+              alert("서버에 문제가 발생했습니다.");
+            }
           });
         });
 
@@ -164,7 +170,7 @@
             $(".categoryButton").removeClass("active");
             $(this).addClass("active");
 
-      
+            console.log("선택된 카테고리:", selectedCategory);
           });
         });
 

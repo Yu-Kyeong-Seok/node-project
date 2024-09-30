@@ -30,7 +30,6 @@ export const authCookieViewMiddleware = (authRedirect: boolean = true) => {
         userId: payload.userId,
         role: payload.role,
       };
-
       next();
     } catch (error: any) {
       // next(new HttpException(401, `인증 실패 ${error.message}`));

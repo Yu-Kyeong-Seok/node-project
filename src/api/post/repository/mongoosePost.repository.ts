@@ -48,6 +48,7 @@ export class MongoosePostRepository implements PostRepository {
   async save(post: Omit<IPost, "id">): Promise<IPost> {
     const newPost = new MongoosePost({
       ...post,
+      likeCount: 0,
     });
 
     await newPost.save();
@@ -90,4 +91,14 @@ export class MongoosePostRepository implements PostRepository {
 
     return;
   }
+  async likePost(postId: string): Promise<void> {
+    const post = await MongoosePost.findById(postId);
+
+    if (!post) {
+        throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+    }
+
+    post.likeCount = (post.likeCount || 0) + 1;
+    await post.save();
+}
 }

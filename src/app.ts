@@ -23,10 +23,12 @@ import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
+
 import profileViewRouter from "./api/profile/router/profile.view.router";
 import profileRouter from "./api/profile/router/profile.router";
 import adminUsersRouter from "./api/users/router/adminUsers.router";
 import uploadRouter from "./api/upload/router/upload.router";
+//import {commentViewRouter} from "@/api/comment/router/comment.view.router"
 
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
@@ -83,6 +85,9 @@ app.use(authViewRouter);
 
 app.use(commentRouter);
 app.use(postViewRouter);
+
+//app.use(commentViewRouter);
+
 app.use(postRouter);
 app.use(categoryViewRouter);
 app.use(categoryRouter);

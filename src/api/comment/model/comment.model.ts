@@ -9,9 +9,10 @@ export class Comment implements IComment{
     /** 댓글 이미지 */
     image? : string;
     /** 작성자 */
-    author: IUser
+    author: IUser;
      /** 게시글 작성날짜 */
     createdAt : Date;
+    _id: string;
 
     constructor(params:IComment){
         this.commentId=params.commentId;
@@ -19,6 +20,6 @@ export class Comment implements IComment{
         this.content=params.content;
         this.author=params.author;
         this.createdAt=params.createdAt;
-
+        this._id=params._id;
     }
 }

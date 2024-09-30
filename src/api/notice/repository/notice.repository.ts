@@ -1,3 +1,5 @@
+import { INotice } from "../@types/notice.type";
+
 export interface NoticeRepository {
   /** NOTICE 생성 */
   save(notice: Omit<INotice, "id">): Promise<INotice>;

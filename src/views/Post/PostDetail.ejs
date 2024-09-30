@@ -55,8 +55,8 @@ contents<!DOCTYPE html>
             </div>
           </div>
           <div class="tool">
-            <button class="tool-button">수정</button>
-            <button class="tool-button">삭제</button>
+            <button id="edit" class="tool-button">수정</button>
+            <button id="delete" class="tool-button">삭제</button>
           </div>
         </div>
 
@@ -117,6 +117,17 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
+        // console.log('<%= post.postId %>')
+       const del = document.querySelector('#delete')
+       del.addEventListener('click', function(){
+        fetch('/api/posts',{
+          method : "DELETE",
+
+        })
+       })
+
+
+
         $(document).ready(function () {
           const login = $(".comment-login");
           const logout = $(".comment-logOut");

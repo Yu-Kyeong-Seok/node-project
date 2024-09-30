@@ -19,7 +19,7 @@ const  POST_ROUTER = {
     CREATE_POST: `/api/post`,
 
     /**글 수정 */
-    UPDATE_POST: `/api/posts/:postId`,
+    UPDATE_POST: `/api/post/:postId`,
 
     /**글 삭제  */
     DELETE_POST: `/api/posts/:postId`,

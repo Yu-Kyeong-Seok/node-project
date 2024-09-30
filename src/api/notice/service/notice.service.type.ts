@@ -1,5 +1,6 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
 import { NoticesServiceImpl } from "./notice.service";
+import { INotice } from "../@types/notice.type";
 
 export interface NoticesService {
   /** NOTICE 생성 */

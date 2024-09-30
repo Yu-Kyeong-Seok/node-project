@@ -1,0 +1,148 @@
+#setting-wrap{
+    padding:0 20px;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     margin: 0 auto;
+     width: 100%; /* 부모 요소에 100% 설정 */
+    max-width: 1200px; /* 최대 너비 설정 */
+     
+}
+#setting-wrap #wrap-contents{
+        margin:120px auto;
+        height:auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:30px;
+        width: 100%; /* 부모 요소에 맞춰서 중앙 정렬 */
+    
+    
+}
+#setting-wrap .top{
+   outline:1px solid lightgray;
+    width:100%;
+    max-width:580px;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+#setting-wrap .email{
+
+    width:100%;
+    padding:30px;
+}
+#setting-wrap .tel{
+
+    width:100%;
+    padding:30px;
+    display: flex;align-items: center;
+    justify-content: space-between;
+
+}
+#setting-wrap .tel .left{
+  
+    height:100%;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px;
+}
+#setting-wrap .info{
+    padding:30px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom:1px solid lightgray;
+   
+}
+#setting-wrap .info .content1{
+    display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+
+/* position: relative; */
+}
+#setting-wrap .info .content1 .left{
+    display:flex;
+
+    flex-direction: column;
+   margin-top:20px;
+    gap:20px;
+    
+}
+#setting-wrap .info .content1 .right{
+    /* position: absolute;
+    bottom: 0;
+    right: 0; */
+    align-items: center;
+}
+
+#setting-wrap .change{
+    background-color: #2B3AA7;
+    color:white;
+    border-radius:5px;
+    border:none;
+    width:90px;
+    height:40px;
+}
+#setting-wrap .change a{
+    padding:10px 20px;
+}
+.setting-bottom{
+    width:100%;
+    max-width:580px;
+    gap:20px;
+    display:flex;
+    flex-direction: column;
+
+}
+.setting{
+    outline:1px solid lightgray;
+    align-items: center;
+    height:100%;
+    min-height: 90px; padding:30px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+.setting .cont{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.setting .out{
+    background-color:#D93046;
+    color:white;
+    border-radius:5px;
+    border:none;
+    width:90px;
+    height:40px;
+
+}
+#setting-wrap .title{
+    font-size:20px;
+}
+#setting-wrap .main-title{
+    font-size:30px;
+}
+#setting-wrap p{
+    font-size:13px;
+}
+
+/* @media screen and (max-width:378px) {
+    #setting-wrap .info .content1 {
+        flex-direction: column; 
+        align-items: flex-start; 
+    } 
+    #setting-wrap .info .content1 .right, 
+    #setting-wrap .tel .right {
+        margin-left: 0; 
+        margin-top: 10px; 
+        position: static; /* absolute 떼기*/
+ 

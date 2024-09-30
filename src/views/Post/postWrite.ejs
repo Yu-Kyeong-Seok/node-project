@@ -146,10 +146,10 @@
               });
 
               if (res.ok) {
-                // 성공적인 응답일 경우 리다이렉트
-                location.href = "/views/post"; // location.href는 함수가 아니므로 괄호를 사용하지 않습니다.
+              
+                location.href = "/views/post";
               } else {
-                // 실패 시 알림
+              
                 alert("글 잘못 전달 됐다 저장 잘해라");
               }
             } catch (error) {
@@ -163,10 +163,10 @@
           $(".categoryButton").click(function () {
             const selectedCategory = $(this).data("category");
 
-            // Hidden input에 선택된 카테고리 값을 설정
+   
             $("#categoryInput").val(selectedCategory);
 
-            // 버튼 색상 변경 (선택된 버튼 강조)
+           
             $(".categoryButton").removeClass("active");
             $(this).addClass("active");
 

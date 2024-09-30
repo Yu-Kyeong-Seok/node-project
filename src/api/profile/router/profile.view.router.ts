@@ -9,7 +9,7 @@ const profileViewRouter = express.Router();
 
 const PROFILE_VIEW_ROUTERS = {
     // 프로필
-    PROFILE: "/profile/:id",
+    PROFILE: "/profile",
     // 프로필 수정
     PROFILE_EDIT: "/profile/edit/:id",
     // 이메일 수정
@@ -19,7 +19,7 @@ const PROFILE_VIEW_ROUTERS = {
     // 패스워드 수정
     CHANGE_PASSWORD: "/profile/changePassword/:id",
     // 계정설정
-    SETTING: "/profile/setting/:id",
+    SETTING: "/profile/setting",
 } as const;
 
 const profileController = new ProfileViewController(

@@ -58,7 +58,9 @@ export class PostsServiceImpl implements PostService {
       limit,
       offset,
     });
-
+ 
+    const sortedPosts = posts.results.sort((a, b) => b.likeCount - a.likeCount);
+    console.log('sortedP',sortedPosts)
     return {
       totalCount: posts.totalCount,
       prev: posts.prev,
@@ -87,4 +89,26 @@ export class PostsServiceImpl implements PostService {
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
   }
+
+  async likePost(postId: string): Promise<number> {
+    try {
+      const post = await this._postRepository.findById(postId);
+
+      if (!post) {
+          throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+      }
+
+      if (typeof post.likeCount !== 'number') {
+          post.likeCount = 0;
+      }
+
+      post.likeCount += 1;
+      await this._postRepository.update(postId, { likeCount: post.likeCount });
+
+      return post.likeCount;
+  } catch (error) {
+      console.error("좋아요 처리 중 오류 발생:", error);
+      throw new HttpException(500, "좋아요 처리 중 오류가 발생했습니다."); // 적절한 오류 처리
+  }
+}
 }

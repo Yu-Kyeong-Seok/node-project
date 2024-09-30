@@ -25,7 +25,10 @@ const  POST_ROUTER = {
     DELETE_POST: `/api/posts/:postId`,
 
     /**글 좋아요 */
-    LIKE_POST: `/api/posts/:postId/like`
+    LIKE_POST: `/api/posts/:postId/like`,
+
+    /** 내 글 목록 조회 */
+    GET_MY_POSTS: '/api/post/my/:id',
   } as const;
 
   const postController = new PostController(
@@ -69,6 +72,12 @@ postRouter.get(
     (POST_ROUTER.LIKE_POST),
     authUserMiddleware,
     postController.likePost
-  )
+  );
+
+  postRouter.get(
+    POST_ROUTER.GET_MY_POSTS,
+    authUserMiddleware,
+    postController.getMyPost
+  );
 
 export default postRouter

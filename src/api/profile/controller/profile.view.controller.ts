@@ -2,11 +2,16 @@ import { NextFunction, Request, Response } from "express";
 import { ProfileService } from "@/api/profile/service/profile.service.type";
 // import { ProfileService } from "@/api/profile/service/profile.service.type";
 import { User } from "@/api/users/model/user.model";
+import { PostService } from "@/api/post/service/post.service.type";
 
 export default class ProfileViewController {
     private readonly _profileService: ProfileService;
-    constructor(profileService: ProfileService) {
+    private readonly _postService: PostService;
+
+    constructor(profileService: ProfileService , postService: PostService) {
         this._profileService = profileService;
+        this._postService = postService;
+
         this.profile = this.profile.bind(this);
         this.profileEdit = this.profileEdit.bind(this);
         this.profileChangeEmail = this.profileChangeEmail.bind(this);
@@ -20,7 +25,9 @@ export default class ProfileViewController {
 
         const user = await this._profileService.getUser(req.user.userId);
 
-        res.render("profile/profile", { user });
+        const post = await this._postService.getMyPost(req.user.userId);
+
+        res.render("profile/profile", { user, post });
     }
 
     /** 프로필 수정*/

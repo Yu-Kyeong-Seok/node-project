@@ -112,4 +112,10 @@ export class PostsServiceImpl implements PostService {
       throw new HttpException(500, "좋아요 처리 중 오류가 발생했습니다."); // 적절한 오류 처리
   }
 }
+  async getMyPost(id: string): Promise<IPost[]> {
+    const posts = await this._postRepository.findByAllAuthor(id);
+
+    return posts;
+  }
+
 }

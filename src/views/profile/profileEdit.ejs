@@ -92,7 +92,7 @@
                 });
 
                 const data = await uploadRes.json();
-
+                
                 const res = await fetch("/api/profile/<%= user.profile.id %>", {
                 method: "put",
                 headers: {

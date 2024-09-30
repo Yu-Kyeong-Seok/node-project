@@ -55,8 +55,8 @@ contents<!DOCTYPE html>
             </div>
           </div>
           <div class="tool">
-            <button class="tool-button">수정</button>
-            <button class="tool-button">삭제</button>
+            <button id="edit" class="tool-button">수정</button>
+            <button id="delete" class="tool-button">삭제</button>
           </div>
         </div>
 
@@ -163,6 +163,21 @@ contents<!DOCTYPE html>
 
       <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
+       const del = document.querySelector('#delete')
+       del.addEventListener('click', function(){
+        fetch('/api/posts',{
+          method : "DELETE",
+        })
+       })
+        $(document).ready(function () {
+          const login = $(".comment-login");
+          const logout = $(".comment-logOut");
+          const accessToken = document.cookie
+            .split("; ")
+            .find((index) => index.startsWith("accessToken="));
+          const isLoggedIn = !!accessToken;
+        
+
  $(document).ready(function () {
     // 햄버거 메뉴 관련
     $(".hamburger-bar").click(function () {
@@ -205,6 +220,7 @@ contents<!DOCTYPE html>
         $(".edit").hide();
         $(".remove").hide();
     }
+
 
     //좋아요 관련
     $(".fa-thumbs-up").click(async function(){

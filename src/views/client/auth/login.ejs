@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/common/header.css" />
+    <link rel="stylesheet" href="/static/styles/common/footer.css"/>
+    <link rel="stylesheet" href="/static/styles/common/reset.css"/>
+    <link rel="stylesheet" href="/static/styles/write/write.css" />
+    <link rel="stylesheet" href="/static/styles/auth/signup.css" />
+    <link rel="stylesheet" href="/static/styles/auth/login.css" />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+  <body>
+    <div class="page-container">
+        <%- include('../../_layouts/header') %>
+        <div class="content">
+    <div id="login-wrap">
+      <div id="wrap-contents">
+        <form id="form">
+          <h1 class="Title">
+           로그인</h1>
+            <label for="ID" class="TextInputSet">
+                <div class="TextInput">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="아이디"
+                  />
+                </div>
+              </label>
+              <label for="password" class="TextInputSet">
+                <div class="TextInput">
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="패스워드"
+                  />
+                </div>
+              </label>
+
+          <div class="btn">
+            <button type="submit" class="loginBtn">로그인</button>
+            <a href="/signup" class="signUpBtn">회원가입</a>
+          </div>
+        </form>
+      </div>
+    </div>
+   </div>
+    </div>
+    <footer>
+        <%- include('../../_layouts/footer') %>
+    </footer>
+    <script>
+      const $form = document.getElementById("form");
+
+      $form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = e.target.elements.email.value;
+        const password = e.target.elements.password.value;
+
+        console.log('id',email)
+        console.log('pwd',password)
+        try {
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          //           {
+          //     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmRmOTNhZjU0ODk3OGI4NTFkODBkMjgiLCJyb2xlIjoidXNlciIsImlhdCI6MTcyNTkzMTIyMiwiZXhwIjoxNzI2NTM2MDIyfQ.RYNQiVdoDuQH7sDsC8bcD-af_gkBUkDEYKx9FsekZbQ"
+          // }
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.details);
+          }
+
+          alert('로그인 성공했지롱!')
+          document.cookie = `accessToken=Bearer ${data.accessToken}; path=/`;
+          // console.log(window.location.search);
+          const searchParams = new URLSearchParams(window.location.search);
+          const redirect = searchParams.get("redirect");
+          location.href = redirect ? redirect : "/";
+        } catch (error) {
+          console.error(error);
+          alert("로그인에 실패했습니다.", error.message);
+        }
+      });
+    </script>
+  </body>
+</html>

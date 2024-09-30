@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles/common/header.css" />
+    <link rel="stylesheet" href="/static/styles/common/footer.css" />
+    <link rel="stylesheet" href="/static/styles/post/post.css" />
+    <link rel="stylesheet" href="/static/styles/common/reset.css" />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/5a10cda3a0.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <%- include('../_layouts/header.ejs') %>
+      <div class="content">
+        <div class="mobile-banner">
+          <p class="banner-text">
+            나만의 질문 모음집을 <br />
+            생성해보세요!
+          </p>
+          <a href="/signup" class="banner-sign-up mobile-sign-up">회원가입 → </a>
+        </div>
+        <div class="mobile-top3">
+          <div class="top3">
+            <h3>TOP 3</h3>
+            <ul>
+                <li>
+                    <a href="#" class="animal">동물</a>
+                </li>
+                <li>
+                    <a href="#" class="gran">육아</a>
+                </li>
+                <li>
+                    <a href="#" class="game">게임</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="gray-bg">
+          <h3>언제든지 질문해보세요!</h3>
+          <p>나의 지식을 나누고, 의미 있는 질의응답을 확인해보세요.</p>
+          <a href="/views/post/write">
+            <button class="question-button">질문하기</button>
+          </a>
+        </div>
+
+
+        <div class="question-bar">
+          <a href="#">인기</a>
+          <a href="#" class="who">답변</a>
+        </div>
+
+        <div class="post-container">
+          <div class="post-container-left">
+            <% for(i = 0; i < post.results.length ; i++) { %>
+            <div class="posts">
+              <div class="category-bar">
+                <div class="profile">
+                  <!-- 프로필 아이콘 -->
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="category">
+                  
+                  <%= post.results[i].category %>
+                </div>
+                <div class="user">
+                  <div class="nickName">
+                    <%= post.results[i].author.nickName %>
+                  </div>
+                  <div class="date">
+                    <% 
+                    const createdAt = post.results[i].createdAt;
+                    let formattedDate = "날짜 없음"; // 기본값
+                    if (createdAt) {
+                      const date = new Date(createdAt);
+                      if (!isNaN(date)) {
+                        formattedDate = date.toISOString().slice(0, 10);
+                      }
+                    }
+                  %>
+                  
+                  <p>작성일: <%= formattedDate %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="posts-contents">
+                <a href="/post/detail/<%= post.results[i].postId %>">
+                <div class="contents-title">
+                  <%= post.results[i].title %>
+                </div>
+              </a>
+              </div>
+              <div class="contents-bottom">
+                <div class="bottom-contents">
+                  <div class="icon">
+                    <!-- 말풍선 아이콘 -->
+                    <a href="#"><i class="fa-regular fa-comments"></i></a>
+                    <p class="beautiful">
+                      아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
+                    </p>
+                    <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                  </div>
+                  <button class="answer">나도 답변하기</button>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            
+
+          </div>
+
+          <div class="post-right">
+            <a href="/signup" class="banner">
+              <p class="banner-text">
+                나만의 <br />
+                질문 모음집을 <br />
+                생성해보세요!
+              </p>
+              <span class="banner-sign-up">
+                회원가입
+                <i class="fa-solid fa-arrow-right-long"></i>
+              </span>
+            </a>
+
+            <div class="top3">
+              <h3>TOP 3</h3>
+              <ul>
+                  <li>
+                      <a href="#" class="animal">동물</a>
+                  </li>
+                  <li>
+                      <a href="#" class="gran">육아</a>
+                  </li>
+                  <li>
+                      <a href="#" class="game">게임</a>
+                  </li>
+              </ul>
+          </div>
+
+
+          </div>
+      
+      </div>
+
+      <footer><%- include('../_layouts/footer.ejs') %></footer>
+      <script>
+        $(document).ready(function () {
+          const banner= $(".banner")
+          const mobanner=$(".mobile-banner")
+           const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
+          const isLoggedIn=!!accessToken;
+          
+
+          //로그인시 이렇게 됩니다
+          if (isLoggedIn) {
+            banner.css('visibility', 'hidden'); 
+            mobanner.css('display', 'none'); 
+            }
+          
+          $(".hamburger-bar").click(function () {
+            $("#menu, .page_cover").addClass("open");
+          });
+
+          $(".page_cover, .close").click(function () {
+            $("#menu, .page_cover").removeClass("open");
+          });
+
+          //게시물 정렬순(인기순=좋아요 많은 순)
+          
+
+        });
+      </script>
+    </div>
+  </body>
+</html>

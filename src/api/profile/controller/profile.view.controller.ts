@@ -17,9 +17,8 @@ export default class ProfileViewController {
 
     /** 프로필 */
     async profile(req: Request, res: Response, next: NextFunction) {
-        const { id } = req.params;
 
-        const user = await this._profileService.getUser(id);
+        const user = await this._profileService.getUser(req.user.userId);
 
         res.render("profile/profile", { user });
     }
@@ -60,12 +59,8 @@ export default class ProfileViewController {
     }
 
     async profileSetting(req: Request, res: Response, next: NextFunction) {
-        const { id } = req.params;
 
-        // 유저 정보 넘겨줄때 사용
-        console.log(req.user.userId);
-
-        const user = await this._profileService.getUser(id);
+        const user = await this._profileService.getUser(req.user.userId);
 
         res.render("profile/profileSetting", { user });
     }

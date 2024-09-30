@@ -41,6 +41,10 @@ viewRouter.get(`${BASE_PATH}/faq`, (req, res) => {
   res.render(`faq/faq`);
 });
 
+viewRouter.get(`${BASE_PATH}/search`, (req, res) => {
+  res.render(`postSearch/postSearch`);
+});
+
 viewRouter.get(`${BASE_PATH}/users`, (req, res) => {
   res.send("회원가입 완료");
 });

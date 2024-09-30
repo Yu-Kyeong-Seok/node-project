@@ -24,14 +24,13 @@ import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
 
+import postSearchRouter from "./api/postSearch/router/postSearch.router";
+import postSearchViewRouter from "./api/postSearch/router/postSearch.view.router";
+
 import profileViewRouter from "./api/profile/router/profile.view.router";
 import profileRouter from "./api/profile/router/profile.router";
 import adminUsersRouter from "./api/users/router/adminUsers.router";
 import uploadRouter from "./api/upload/router/upload.router";
-//import {commentViewRouter} from "@/api/comment/router/comment.view.router"
-
-// import { ROUTES_INDEX } from "./routers";
-// import authRouter from "./api/auth/router/auth.router";
 
 const app = express();
 
@@ -49,25 +48,14 @@ app.set("view engine", "ejs");
 
 // /admin-api
 
-// function sampleMiddleware(message: string) {
-//   return (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-//   ) => {
-//     console.log(message);
 
-//     next();
-//   };
-// }
-
-// app.use(sampleMiddleware("미들웨어 동작"));
+app.use(postSearchViewRouter);
+app.use(postSearchRouter);
 
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
 app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
-
 
 app.use(noticeViewRouter);
 app.use(faqViewRouter);
@@ -91,6 +79,7 @@ app.use(postViewRouter);
 app.use(postRouter);
 app.use(categoryViewRouter);
 app.use(categoryRouter);
+
 
 app.use(errorHandler);
 

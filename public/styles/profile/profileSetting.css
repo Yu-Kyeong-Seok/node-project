@@ -93,12 +93,13 @@ margin-top:24px;
 #setting-wrap .change{
     background-color: #2B3AA7;
     color:white;
-    border-radius:5px;
+    border-radius:8px;
     border:none;
     width:90px;
     height:40px;
 }
 #setting-wrap .change a{
+    font-size: 14px;
     padding:10px 20px;
 }
 .setting-bottom{

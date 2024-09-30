@@ -43,7 +43,7 @@
 .notice-label {
   background-color: #2B3AA7;
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: #ffffff;
   font-size: 12px;
 }
@@ -63,11 +63,11 @@
 .button-list {
   display: inline-block;
   margin-top: 40px;
-  padding: 10px 48px;
+  padding: 16px 64px;
   background-color: #2B3AA7;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
 }
 

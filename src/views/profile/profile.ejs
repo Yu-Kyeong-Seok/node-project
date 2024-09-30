@@ -22,10 +22,10 @@
         <div class="profile-container">
             <div class="profile-info">
                 <a href="#">
-                    <img src="<%= user.profile.thumbnail %>" alt="profile" class="profile-image">
+                  <img src="<%= user.profile.thumbnail %>" alt="profile" class="profile-image">
                 </a>
                 <div class="profile-button">
-                    <a><%= user.profile.nickName %></a>
+                    <a class="userNickName"><%= user.profile.nickName %></a>
                     <button><a href="/profile/Edit/<%= user.id %>">프로필 수정</a></button>
                 </div>
             </div>

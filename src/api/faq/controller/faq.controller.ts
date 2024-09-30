@@ -11,7 +11,7 @@ export default class FaqController {
   constructor(_faqsService: FaqsService) {
     this._faqsService = _faqsService;
     this.getFaqs = this.getFaqs.bind(this);
-    this.getFaqDetail = this.getFaqDetail.bind(this);
+    // this.getFaqDetail = this.getFaqDetail.bind(this);
   }
 
   async getFaqs(
@@ -28,18 +28,18 @@ export default class FaqController {
     }
   }
   
-  async getFaqDetail(
-    req: Request,
-    res: Response,
-    next: NextFunction 
-    ) {
-    const { faqId } = req.params;
-    try {
-      const faq = await this._faqsService.getFaqDetail(faqId);
+  // async getFaqDetail(
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction 
+  //   ) {
+  //   const { faqId } = req.params;
+  //   try {
+  //     const faq = await this._faqsService.getFaqDetail(faqId);
 
-      res.send(faq);
-    } catch (error){
-      next(error);
-    }
-  }
+  //     res.send(faq);
+  //   } catch (error){
+  //     next(error);
+  //   }
+  // }
 }

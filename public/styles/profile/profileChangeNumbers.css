@@ -68,6 +68,15 @@
   background-color: rgb(177, 163, 245);
 }
 
+#form .msg{
+  font-size:13px;
+  color:red;
+}
+
+.hide {
+  display: none;
+  }
+
 @media (max: 768px) {
   .button-bar {
     flex-direction: column;

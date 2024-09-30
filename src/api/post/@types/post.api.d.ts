@@ -35,6 +35,7 @@ declare type createPostRequestBody = {
   content: string;
   category:string;
   image?:string;
+  likeCount:number;
 };
 declare type createPostRequestParams = {};
 
@@ -56,7 +57,8 @@ declare type updatePostRequestBody = {
   title: string;
   content: string;
   category?: string; //카테고리 수정여부는 사용자 마음..
-  image?:string; 
+  image?:string;
+  likeCount:number;
 };
 declare type updatePostRequestParams = {};
 

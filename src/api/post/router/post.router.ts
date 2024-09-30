@@ -19,10 +19,13 @@ const  POST_ROUTER = {
     CREATE_POST: `/api/post`,
 
     /**글 수정 */
-    UPDATE_POST: `/api/posts/:postId`,
+    UPDATE_POST: `/api/post/:postId`,
 
     /**글 삭제  */
     DELETE_POST: `/api/posts/:postId`,
+
+    /**글 좋아요 */
+    LIKE_POST: `/api/posts/:postId/like`
   } as const;
 
   const postController = new PostController(
@@ -61,5 +64,11 @@ postRouter.get(
     authUserMiddleware,
     postController.deletePost
   );
+
+  postRouter.post(
+    (POST_ROUTER.LIKE_POST),
+    authUserMiddleware,
+    postController.likePost
+  )
 
 export default postRouter

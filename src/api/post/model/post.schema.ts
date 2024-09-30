@@ -20,10 +20,15 @@ const postSchema = new mongoose.Schema<IPost>(
         required: true,
         length: 50,
     },
+    likeCount: {
+        type: Number,
+        default: 0, // 기본값을 0으로 설정
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },},
+    
 
     {
         timestamps: {

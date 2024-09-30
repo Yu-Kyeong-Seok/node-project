@@ -1,6 +1,7 @@
 import { NoticeResponseDTO } from "../dto/noticeResponse.dto";
-import { NoticesService } from './notice.service.type';
+import { NoticesService } from "./notice.service.type";
 import { NoticeRepository } from "../repository/notice.repository";
+import { INotice } from "../@types/notice.type";
 import HttpException from "@/api/common/exceptions/http.exception";
 
 export class NoticesServiceImpl implements NoticesService {
@@ -12,37 +13,48 @@ export class NoticesServiceImpl implements NoticesService {
     this._noticeRepository = noticeRepository;
   }
 
+  async createNotice(notice: INotice): Promise<NoticeResponseDTO> {
+    const newNotice = await this._noticeRepository.save({
+      ...notice,
+    });
 
- async createNotice(notice: INotice): Promise<NoticeResponseDTO> {
-  const newNotice = await this._noticeRepository.save({
-    ...notice,
-  });
-
-  return new NoticeResponseDTO(newNotice);
- }
- async getNotices(): Promise<NoticeResponseDTO[]> {
-  const notices = await this._noticeRepository.findAll();
-
-  return await Promise.all(notices.map((notice) => new NoticeResponseDTO(notice)));
- }
- async getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO | null> {
-  const notice = await this._noticeRepository.findById(noticeId);
-
-  if (!notice) {
-    throw new HttpException(404, "FAQ를 찾을 수 없습니다.");
+    return new NoticeResponseDTO(newNotice);
   }
 
-  return new NoticeResponseDTO(notice);
-}
+  async getNotices(): Promise<NoticeResponseDTO[]> {
+    console.log("getNotices 호출됨");
+    const notices = await this._noticeRepository.findAll();
+    console.log("조회된 notices:", notices);
 
- async updateNotice(noticeId: string, params: Partial<INotice>): Promise<void> {
-  const findNotice = await this._noticeRepository.findById(noticeId);
-    
-  return; 
- }
- async deleteNotice(noticeId: string): Promise<void> {
-  const findNotice = await this._noticeRepository.findById(noticeId);
+    return await Promise.all(
+      notices.map((notice) => new NoticeResponseDTO(notice))
+    );
+  }
+  async getNoticeDetail(noticeId: string): Promise<NoticeResponseDTO | null> {
+    const notice = await this._noticeRepository.findById(noticeId);
 
-  return;
- }
+    if (!notice) {
+      throw new HttpException(404, "공지사항을 찾을 수 없습니다.");
+    }
+
+    return new NoticeResponseDTO(notice);
+  }
+
+  async updateNotice(
+    noticeId: string,
+    params: Partial<INotice>
+  ): Promise<void> {
+    const findNotice = await this._noticeRepository.findById(noticeId);
+    await this._noticeRepository.update(noticeId, {
+      ...params,
+    });
+    return;
+  }
+  async deleteNotice(noticeId: string): Promise<void> {
+    const findNotice = await this._noticeRepository.findById(noticeId);
+
+   await this._noticeRepository.delete(findNotice?._id.toString() ?? "");
+
+    return;
+  }
 }

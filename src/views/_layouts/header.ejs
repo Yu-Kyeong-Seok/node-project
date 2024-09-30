@@ -118,7 +118,7 @@
         const pageCover = document.querySelector('.page_cover');
         const logoutBtn=document.querySelector('.logout');
        // const userIcon = document.querySelector('.fa-user');
-        const userIcon = document.querySelector('.user-profile');
+        const userIcon = document.getElementById('userIcon');
         console.log(userIcon)
         const accessToken=document.cookie.split('; ').find(index=>index.startsWith('accessToken='))
         console.log('acc',accessToken)
@@ -166,13 +166,17 @@
         userIcon.addEventListener('click',function(){
             console.log('click')
             if(isLoggedIn){
-                location.href='/views/profile';
-
+                const $dropdown = $('.user-dropdown');
+                if ($dropdown.css('display') === 'none') {
+                    $dropdown.css('display', 'flex');
+                } else {
+                    $dropdown.css('display', 'none');
+                }
             }else{
                 location.href='/login'
             }
         });
-     
+
         //로그아웃 구현
         logoutBtn.addEventListener('click',async()=>{
             try{
@@ -193,16 +197,4 @@
         }
         });
     });
-
-    $(document).ready(function(){
-        $('#userIcon').on('click', function(){
-        const $dropdown = $('.user-dropdown');
-        
-        if ($dropdown.css('display') === 'none') {
-            $dropdown.css('display', 'flex');
-        } else {
-            $dropdown.css('display', 'none');
-        }
-    });
-    })
 </script>

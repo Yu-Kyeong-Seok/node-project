@@ -35,7 +35,7 @@
 .banner-sign-up{display:flex; justify-content: right; align-items: center; margin-top:50px; font-size:16px; font-weight: 600; color:#ffffff; opacity: .7;}
 .banner-sign-up i{margin-left:10px;}
 
-.category-aside-container{display:flex; flex-direction: column; gap:50px; position: sticky; top:100px; width:100%; max-width: 280px; max-height: 70vh;}
+.category-aside-container{display:flex; flex-direction: column; gap:50px; position: sticky; top:100px; width:100%; max-width: 280px; max-height: 70vh; overflow-y: auto;}
 .category-aside-container .aside-content .top3 h3{font-size:20px; font-weight: 800; display:flex; align-items: center; justify-content: center;}
 .category-aside-container .aside-content .top3 h3::before{content:''; width:20px; height: 20px; background: url('../../images/top3_icon.png') no-repeat center / 100% auto; margin-right:5px;}
 .category-aside-container .aside-content .top3 ul{margin-top:20px; border:1px solid #e3e3e3; border-radius: 20px; padding:30px; display:flex; flex-direction: column; gap: 20px; background-color:#fff;}

@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import { CategoriesService } from "../service/categoryService.type";
+import { CategoriesService } from "@/api/category/service/categoryService.type";
+import { PostService } from "@/api/post/service/post.service.type";
 
 export default class CategoryViewController {
     private readonly _categoryService: CategoriesService;
+    private readonly _postService: PostService;
 
-    constructor(_categoryService: CategoriesService) {
+    constructor(_categoryService: CategoriesService, _postService: PostService) {
         this._categoryService = _categoryService;
+        this._postService = _postService;
     }
 
     // 카테고리 목록을 EJS에 전달
@@ -48,17 +51,26 @@ export default class CategoryViewController {
         };
         try {
             const category = await this._categoryService.getCategoryDetail(req.params.categoryName);
-
             if (category) {
                 // 한글 이름으로 변환
                 const koreanName = categoryNameMapping[category.name] || category.name;
+
+                // 해당 카테고리의 게시글 가져오기
+                const postsData = await this._postService.getPosts({
+                    limit: 10, // 필요에 따라 limit, offset을 조정
+                    offset: 0
+                });
+
+                console.log("Category Detail:", category);
+                console.log("Posts for Category:", postsData);
 
                 // 카테고리 상세 정보를 EJS로 전달
                 res.render('category/categoryDetail', { 
                     category: {
                         ...category,
                         koreanName // 한글 이름 추가
-                    }
+                    },
+                    posts: postsData.results
                 });
             } else {
                 res.status(404).send("Category not found");

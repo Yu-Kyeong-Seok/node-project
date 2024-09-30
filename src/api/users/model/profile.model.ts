@@ -1,9 +1,8 @@
 export class Profile implements IProfile {
   id: string;
   birth?: string | undefined;
-
-  firstName: string;
   nickName: string;
+  firstName: string;
   thumbnail?: string | undefined;
   telNumber:string;
 
@@ -11,8 +10,9 @@ export class Profile implements IProfile {
   constructor(params: IProfile) {
     this.id = params.id;
     this.birth = params.birth;
+    this.nickName = params.nickName;
     this.firstName = params.firstName;
-    this.nickName=params.nickName;
-    this.telNumber=params.telNumber
+    this.thumbnail = params.thumbnail;
+    this.telNumber = params.telNumber;
   }
 }

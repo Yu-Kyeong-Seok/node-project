@@ -23,15 +23,30 @@ import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import {categoryRouter} from "@/api/category/router/category.router";
 import postRouter from "./api/post/router/post.router";
 import commentRouter from "./api/comment/router/comment.router";
-import profileRouter from "./api/profile/router/profile.view.router";
+
+import profileViewRouter from "./api/profile/router/profile.view.router";
+import profileRouter from "./api/profile/router/profile.router";
+import adminUsersRouter from "./api/users/router/adminUsers.router";
+import uploadRouter from "./api/upload/router/upload.router";
 //import {commentViewRouter} from "@/api/comment/router/comment.view.router"
+
 // import { ROUTES_INDEX } from "./routers";
 // import authRouter from "./api/auth/router/auth.router";
 
 const app = express();
 
+app.use(morgan("dev")); // 클로져
+app.use("/static", express.static(path.join(__dirname, "../public")));
+
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({extended:true})) 
+
+// view 파일들 모아놓는 위치 설정
+app.set("views", path.join(__dirname, "views"));
+// view engine 세팅
+app.set("view engine", "ejs");
+
 // /admin-api
 
 // function sampleMiddleware(message: string) {
@@ -47,57 +62,35 @@ app.use(cookieParser());
 // }
 
 // app.use(sampleMiddleware("미들웨어 동작"));
+
+app.use(ROUTES_INDEX.AUTH_API, authRouter);
+app.use(ROUTES_INDEX.USERS_API, userRouter);
+app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
+app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
+
+
 app.use(noticeViewRouter);
 app.use(faqViewRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
-app.use(express.json())
-app.use(express.urlencoded({extended:true})) 
 app.use(appRouter);
-//app.use(userRouter);
 app.use(viewRouter);
-app.use(categoryViewRouter);
+
+app.use(profileViewRouter);
+app.use(profileRouter);
+
 app.use(authViewRouter);
 
 app.use(commentRouter);
 app.use(postViewRouter);
+
 //app.use(commentViewRouter);
+
 app.use(postRouter);
+app.use(categoryViewRouter);
 app.use(categoryRouter);
-app.use(categoryRouter); 
-
-app.use(profileRouter);
-app.use(ROUTES_INDEX.USERS_API, userRouter);
-app.use(ROUTES_INDEX.AUTH_API, authRouter);
-
-
-// view 파일들 모아놓는 위치 설정
-app.set("views", path.join(__dirname, "views"));
-// view engine 세팅
-app.set("view engine", "ejs");
-
-app.use(morgan("dev")); // 클로져
-app.use("/static", express.static(path.join(__dirname, "../public")));
-
-
-
-app.get("/", function (req, res) {
-  res.render("index", { title: "홈페이지" });
-});
-
-app.get("/notice", (req, res) => {
-  res.render("notice/notice", { title: "공지사항" });
-});
-
-app.get("/notice/:id", (req, res) => {
-  res.render("notice/noticedetail", { title: "공지사항상세" });
-});
-
-app.get("/faq", (req, res) => {
-  res.render("faq/faq", { title: "FAQ" });
-});
 
 app.use(errorHandler);
 

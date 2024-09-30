@@ -1,4 +1,4 @@
-import { categoryResponseDTO } from "../dto/categoryResponse.dto"
+import { categoryResponseDTO } from "@/api/category/dto/categoryResponse.dto"
 
 export interface CategoriesService{
     /**카테고리 목록조회 */

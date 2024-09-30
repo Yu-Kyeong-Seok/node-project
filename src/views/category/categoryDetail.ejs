@@ -26,61 +26,58 @@
                     <input type="text" class="category-search" placeholder="원하는 단어를 검색해보세요!">
                 </article>
                 <article class="category-content">
-                    <div class="posts">
-                        <div class="category-bar">
-                          <div class="profile">
-                            <!-- 프로필 더미 아이콘 -->
-                            <i class="fa-solid fa-user"></i>
-                          </div>
-                          <div class="category">카테고리</div>
-                          <div class="user">
-                            <div class="nickName">닉네임</div>
-                            <div class="date">등록 날짜</div>
-                          </div>
-                        </div>
-                        <div class="posts-contents">
-                          <div class="contents-title">
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요? 아이언 맨은 다시 부활하나요?
-                            아이언 맨은 다시 부활하나요?
-                          </div>
-                        </div>
-                        <div class="contents-bottom">
-                          <div class="bottom-contents">
-                            <div class="icon">
-                              <!-- 말풍선 아이콘 -->
-                              <a href="#"><i class="fa-regular fa-comments"></i></a>
-                              <p class="beautiful">
-                                아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
-                              </p>
-                              <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                    <% for(i = 0; i < posts.length ; i++) { %>
+                        <div class="posts">
+                          <div class="category-bar">
+                            <div class="profile">
+                              <!-- 프로필 아이콘 -->
+                              <i class="fa-solid fa-user"></i>
                             </div>
-                            <button class="answer">나도 답변하기</button>
+                            <div class="category">
+                              <%= posts[i].category %>
+                            </div>
+                            <div class="user">
+                              <div class="nickName">
+                                닉네임
+                              </div>
+                              <div class="date">
+                                <% 
+                                const createdAt = posts[i].createdAt;
+                                let formattedDate = "날짜 없음"; // 기본값
+                                if (createdAt) {
+                                  const date = new Date(createdAt);
+                                  if (!isNaN(date)) {
+                                    formattedDate = date.toISOString().slice(0, 10);
+                                  }
+                                }
+                              %>
+                              
+                              <p>작성일: <%= formattedDate %></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="posts-contents">
+                            <a href="/views/post/detail/<%= posts[i].postId %>">
+                            <div class="contents-title">
+                              <%= posts[i].title %>
+                            </div>
+                          </a>
+                          </div>
+                          <div class="contents-bottom">
+                            <div class="bottom-contents">
+                              <div class="icon">
+                                <!-- 말풍선 아이콘 -->
+                                <a href="#"><i class="fa-regular fa-comments"></i></a>
+                                <p class="beautiful">
+                                  아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
+                                </p>
+                                <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                              </div>
+                              <button class="answer">나도 답변하기</button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                        <% } %>
                 </article>
             </section>
             <section class="category-aside-container">

@@ -51,7 +51,6 @@ adminUsersRouter.post(
 adminUsersRouter.put(
   extractPath(ADMIN_USER_ROUTES.UPDATE_USER, ROUTES_INDEX.ADMIN_USERS_API),
   validate(updateUserValidator),
-
   adminUserController.updateUser
 );
 adminUsersRouter.delete(

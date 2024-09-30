@@ -1,6 +1,6 @@
 //공통 응답 DTO 만들어둔 것
 export class FaqResponseDTO {
-  faqId!: string;
+  faqId: string;
   title: string;
   content: string;
 

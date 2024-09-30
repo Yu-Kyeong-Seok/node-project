@@ -1,0 +1,546 @@
+[33mcommit e97b58c45dce59012e87bdf5ace0f7296e73dc75[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32missue/#60[m[33m, [m[1;31morigin/issue/#60[m[33m, [m[1;31morigin/develop[m[33m)[m
+Merge: 7b9c5c8 37fdffc
+Author: Yu-Kyeong-Seok <99160642+Yu-Kyeong-Seok@users.noreply.github.com>
+Date:   Fri Sep 27 17:19:10 2024 +0900
+
+    Merge pull request #57 from ehddk/issue/#3
+    
+    [장유진] 공지사항 & FAQ API 유저 파트 완료
+
+[33mcommit 37fdffc09417049dee2216431dc5701956cae67b[m
+Merge: 9cf4fc4 7b9c5c8
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 17:11:51 2024 +0900
+
+    Merge branch 'develop' into issue/#3
+
+[33mcommit 9cf4fc47dba34d3ef3cc6af771a01b41d477c078[m
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 17:11:03 2024 +0900
+
+    공지사항 id 몽고DB id로 변경
+
+[33mcommit 8f00940afe32123321a5b8da13bab8a97efaa0cd[m
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 15:04:38 2024 +0900
+
+    [장유진] 뷰에 데이터 출력 부분 완료
+
+[33mcommit 7b9c5c806b0e16a683c6a7068ee5c098919c641b[m
+Merge: 32b23ad 631f98d
+Author: 허태영 <her020212@naver.com>
+Date:   Fri Sep 27 11:30:47 2024 +0900
+
+    Merge pull request #56 from ehddk/issue/#8
+    
+    [허태영] write 부분
+
+[33mcommit 631f98d6f9b924788e76fc6170aaa725dcd4f50d[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Fri Sep 27 11:29:42 2024 +0900
+
+    제목너무길어요
+
+[33mcommit e5c9f7502156033e63e0d1a848b9a628de64a393[m
+Merge: b464b86 32b23ad
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 11:24:27 2024 +0900
+
+    app.ts 머지 충돌 해결
+
+[33mcommit b464b861ba84e3bcd204791d9fade994ec12fbf5[m
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 11:13:32 2024 +0900
+
+    데이터 뿌리는 거 수정 중. FAQ ejs수정 전
+
+[33mcommit 6513abc39e595ca9faf76e90c14e212b2ffa4350[m
+Merge: f9077f9 32b23ad
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Fri Sep 27 09:58:00 2024 +0900
+
+    Merge branch 'develop' into issue/#8
+
+[33mcommit f9077f9f8e5e6d6fa8bea90ca2faec45bdbe3b1d[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Fri Sep 27 09:56:10 2024 +0900
+
+    작성부분 넌 왜 안되는거니이이이
+
+[33mcommit 32b23ad92b1c8767380c632ae96c7ce2eed35c3a[m[33m ([m[1;32mdevelop[m[33m)[m
+Merge: c63e803 521fce3
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Fri Sep 27 09:54:38 2024 +0900
+
+    Merge pull request #55 from ehddk/issue/#1
+    
+    [김동아]댓글 생성,목록 api 완료
+
+[33mcommit 521fce3f73a4f09a4cc5f07f2829a13c3e4c5186[m
+Merge: 6b972ec c63e803
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Fri Sep 27 09:54:30 2024 +0900
+
+    Merge branch 'develop' into issue/#1
+
+[33mcommit c63e8031ad2d69b4b30445da75a0213e8ac1ac2b[m
+Merge: 5b3e3bc 8d44cb7
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Fri Sep 27 09:53:52 2024 +0900
+
+    Merge pull request #54 from ehddk/issue/#8
+    
+    [허태영] ejs 기능 list detail
+
+[33mcommit 5b3e3bc265c92a11d965676de91a20854f3efee6[m
+Merge: 7173b6e f38fda8
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Fri Sep 27 09:53:38 2024 +0900
+
+    Merge pull request #53 from ehddk/issue/#4
+    
+    공통 프론트영역 수정(헤더 프로필 드롭다운, pretendard 폰트 추가, faq 페이지)
+
+[33mcommit 62fe9f2a6443cc8d50875462450f4c79ab735102[m
+Author: ella227 <ella227@gmail.com>
+Date:   Fri Sep 27 00:41:46 2024 +0900
+
+    수정중
+
+[33mcommit 0e608b4327a69efcfcd613590ccb6c86466e329c[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 19:44:44 2024 +0900
+
+    공지사항 라우터 수정
+
+[33mcommit 6b972ecfeabb212a51bcc4163c78b0b3d7f78221[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 19:33:19 2024 +0900
+
+    categoryName으로 변경
+
+[33mcommit f323d99608cd670ee23ad3a3374eb391900c7231[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 19:28:18 2024 +0900
+
+    comment관련 _id 속성 추가
+
+[33mcommit b327caf6b0a1f130bb804e6b0eb13be3dc964c78[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 18:22:09 2024 +0900
+
+    라우터 코드 순서 수정
+
+[33mcommit c75fcf100a34ecef5b6a32bffb93e5f9c6b2558e[m
+Merge: 8a91394 7173b6e
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 18:05:44 2024 +0900
+
+    디벨롭 충돌 해결
+
+[33mcommit 8d44cb75622f2f6d8a986e6781bf4a55d4a69892[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Thu Sep 26 17:58:49 2024 +0900
+
+    ejs 기능
+
+[33mcommit 26ab25e95839aff6f5722db52f51ca6c100c487a[m
+Merge: 2ceb169 3388c4f
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Thu Sep 26 17:53:51 2024 +0900
+
+    Merge branch 'issue/#8' of https://github.com/ehddk/genesis into issue/#8
+
+[33mcommit 2ceb169b13de288c42fb138929651ef934bd9de0[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Thu Sep 26 17:45:20 2024 +0900
+
+    list, deatil 기능 추가
+
+[33mcommit f38fda8ede76f66af2a90a1b31f5aedb747cf5a8[m[33m ([m[1;31morigin/issue/#4[m[33m)[m
+Author: Yu-Kyeong-Seok <iq4578@naver.com>
+Date:   Thu Sep 26 17:41:28 2024 +0900
+
+    공통단 프론트영역 수정
+
+[33mcommit 5a0ffa009034716b516edd8a54528bd29eb7ab52[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 17:30:07 2024 +0900
+
+    댓글 생성 완성
+
+[33mcommit 4b50d4c43168d029def10453271556870805805a[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 16:36:50 2024 +0900
+
+    comment 개발 중
+
+[33mcommit cf271a5bbd6699c8c1be47f0bbf9cf117c9b6df9[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 15:38:05 2024 +0900
+
+    comment 개발 테스트중
+
+[33mcommit 8a91394ed208bae46eea2892e1b9187286021583[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 15:17:00 2024 +0900
+
+    공지사항 FAQ 수정&삭제 id 값 통일
+
+[33mcommit f9a8447e4a2489a632e2fa2a743aa934e458a035[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 14:12:26 2024 +0900
+
+    FAQ 포스트맨 오류 해결
+
+[33mcommit 988567ea489ae3b3cd49040f2b5e23f606c548a4[m
+Author: sangheon-kim <ksj83671@gmail.com>
+Date:   Thu Sep 26 12:42:18 2024 +0900
+
+    [김상헌] 공지사항 에러 해결
+
+[33mcommit 02f5e16f418b88dca2cc0af24b0adcf57742d1a4[m
+Author: sangheon-kim <ksj83671@gmail.com>
+Date:   Thu Sep 26 12:40:14 2024 +0900
+
+    [김상헌] 공지사항
+
+[33mcommit 23936ea35e12847c7039d4e3df86cf02b3a9495e[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 12:33:15 2024 +0900
+
+    오류확인중
+
+[33mcommit a32ea23081de20c139a3e8583c04f7bb8ee67196[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 12:29:11 2024 +0900
+
+    app.ts에 댓글라우터 추가
+
+[33mcommit ea8e492e407d18f48c0579a5a0750b6e2168cff0[m
+Author: ehddk <bj9147@naver.com>
+Date:   Thu Sep 26 12:28:12 2024 +0900
+
+    댓글 api 구현 중
+
+[33mcommit 7173b6e66d84ffb205cdb87791555cf05d181fbc[m
+Merge: 92ed346 a8d2516
+Author: Yu-Kyeong-Seok <99160642+Yu-Kyeong-Seok@users.noreply.github.com>
+Date:   Thu Sep 26 12:06:15 2024 +0900
+
+    Merge pull request #52 from ehddk/issue/#4
+    
+    카테고리 사이드 배너 css, 헤더 ejs, post css 수정
+
+[33mcommit a8d2516a0288ff5791d695565e7b36dd40315898[m
+Author: Yu-Kyeong-Seok <iq4578@naver.com>
+Date:   Thu Sep 26 11:06:37 2024 +0900
+
+    카테고리 사이드 배너 css, 헤더 ejs, post css 수정
+
+[33mcommit f1dc763a5000af1e3f0d7f6c4e4b3d81c56f6677[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 10:10:19 2024 +0900
+
+    공지사항 postman 오류 수정
+
+[33mcommit f83762a1c38e99d125a0d7f33426a1261835b172[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 08:56:33 2024 +0900
+
+    파일 정리중
+
+[33mcommit 76eccadd637e24a5f6ea032df07497a510923afb[m
+Author: ella227 <ella227@gmail.com>
+Date:   Thu Sep 26 00:00:40 2024 +0900
+
+    faq 스키마 수정
+
+[33mcommit 6b87651ec2e510e4a0aa319402b961a624a38154[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 23:36:36 2024 +0900
+
+    [장유진] 뷰 라우터 컨트롤러 코드 통일
+
+[33mcommit b16abbe5930259be4d6b5fb0f222a4d31c75980e[m
+Merge: 2f3e516 92ed346
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Wed Sep 25 22:41:26 2024 +0900
+
+    Merge branch 'develop' into issue/#8
+
+[33mcommit 2f3e5169bce39d25a13c189290b4d07502fe9159[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Wed Sep 25 22:04:47 2024 +0900
+
+    edit css 작업해보기
+
+[33mcommit 3388c4f0f51d9a6de813e98571d30e5fbc856cd9[m
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 21:56:29 2024 +0900
+
+    [전경호] post detail 오류 수정
+
+[33mcommit c15d9823a494af5b71db004332f052ac9b818088[m
+Merge: 92ed346 92d24f5
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 17:36:54 2024 +0900
+
+    Merge branch 'issue/#8' of https://github.com/ehddk/genesis into issue/#8
+
+[33mcommit 92d24f5a4cbdd4faef091a4ba04424065dd07c37[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Wed Sep 25 17:28:15 2024 +0900
+
+    post ejs 나오게하게
+
+[33mcommit c653b7b6630e0487ba35c5587fd878cd473bd130[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 16:52:40 2024 +0900
+
+    [장유진] app.ts에 뷰라우터 적용
+
+[33mcommit b9f201e4d7e9034f99693a417b3bfc69608896ab[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 15:10:37 2024 +0900
+
+    postman 확인중
+
+[33mcommit 5a1250483aeb38517df35554d69034fca2e3bd61[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Wed Sep 25 15:07:43 2024 +0900
+
+    ejs 동적 파일 작업 예정
+
+[33mcommit 92ed34697e7646919e71b0be63c4acdceb78eaee[m
+Merge: fbeaab1 a493fb0
+Author: Yu-Kyeong-Seok <99160642+Yu-Kyeong-Seok@users.noreply.github.com>
+Date:   Wed Sep 25 15:03:30 2024 +0900
+
+    Merge pull request #51 from ehddk/issue/#33
+    
+    [전경호] 프로필 뷰 연동 작업
+
+[33mcommit a493fb0511ac28d55f212f360c1fcd0a2783052f[m
+Merge: b529557 fbeaab1
+Author: Yu-Kyeong-Seok <99160642+Yu-Kyeong-Seok@users.noreply.github.com>
+Date:   Wed Sep 25 15:03:19 2024 +0900
+
+    Merge branch 'develop' into issue/#33
+
+[33mcommit b5295574fb369a8984fd634c983562b754db78c6[m
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 14:57:57 2024 +0900
+
+    [전경호] profile 뷰 연동
+
+[33mcommit e5c69330fed7bd894021f9450111afcb13d31eef[m
+Merge: 4eb7335 fbeaab1
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 14:25:53 2024 +0900
+
+    Merge branch 'develop' into issue/#3
+
+[33mcommit 4eb733514828b579b8515e8e87d3f8df42c1b818[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 14:25:20 2024 +0900
+
+    app.ts에 뷰라우터 적용
+
+[33mcommit fbeaab1c1484496791cb80186fa4210e74d7ec52[m
+Merge: 0790194 f2a3d5c
+Author: Yu-Kyeong-Seok <99160642+Yu-Kyeong-Seok@users.noreply.github.com>
+Date:   Wed Sep 25 14:24:09 2024 +0900
+
+    Merge pull request #50 from ehddk/issue/#4
+    
+    [유경석] 카테고리 상세 페이지까지 연결 완료
+
+[33mcommit f2a3d5c6d39601f66523672e3e88ea0c6621c819[m
+Author: Yu-Kyeong-Seok <iq4578@naver.com>
+Date:   Wed Sep 25 14:23:19 2024 +0900
+
+    카테고리 상세 페이지까지 연결 완료
+
+[33mcommit d6f43968e27f3684c5e49ba20c3500ab71f69bd5[m
+Merge: 177b7da 0790194
+Author: Yu-Kyeong-Seok <iq4578@naver.com>
+Date:   Wed Sep 25 11:24:44 2024 +0900
+
+    Merge branch 'develop' into issue/#4
+
+[33mcommit 177b7da20873075bf9e80e0359a623e7c37fb784[m
+Author: Yu-Kyeong-Seok <iq4578@naver.com>
+Date:   Wed Sep 25 11:24:10 2024 +0900
+
+    중간 저장
+
+[33mcommit 52a449b501081144dd1e07e89dd04f549bcbd89b[m
+Merge: a787be0 0790194
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 10:56:29 2024 +0900
+
+    Merge branch 'develop' into issue/#33
+
+[33mcommit a787be0922456148b35374e89264f93d502ac66e[m
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 10:55:00 2024 +0900
+
+    [전경호] .
+
+[33mcommit 09aa35aaa329011a4be91afce51bed410d3f4bf1[m
+Merge: 47e55b6 0790194
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 10:26:22 2024 +0900
+
+    Merge branch 'develop' into issue/#3
+
+[33mcommit 47e55b6e12250adb26e819ffb1c07b272dc69a00[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 10:18:00 2024 +0900
+
+    뷰 개발 부분 작성 중
+
+[33mcommit 0790194fcd668f4e18a1f247c8fc548265ccf078[m
+Merge: 782195f f897447
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 10:16:47 2024 +0900
+
+    Merge pull request #49 from ehddk/issue/#1
+    
+    [김동아] post 부분 수정
+
+[33mcommit f897447292f9ec6ba4ed2ada44fb177282f1feb5[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:15:36 2024 +0900
+
+    postRouter 추가
+
+[33mcommit 33bd3e609e0efe7dcd788e5d967cd3bcc8724a86[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:15:15 2024 +0900
+
+    post 컨트롤러 수정
+
+[33mcommit f2cf5a4a699ec1f7d3a0a2e15b66ee6571922fe6[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:15:02 2024 +0900
+
+    post router에 인증미들웨어 추가
+
+[33mcommit 8843d4e17619b60503aacf7db20499ddd86324c0[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:14:48 2024 +0900
+
+    post 스키마 author 부분 수정
+
+[33mcommit ae9c35a81c4d191519addd29d1e7632d1176c5e2[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:14:33 2024 +0900
+
+    post 옵셔널 추가
+
+[33mcommit 1cab5675299b1563302cca494ecaf63be1a5515b[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:14:25 2024 +0900
+
+    post 옵셔널 추가
+
+[33mcommit fa21105cdea82775c019cd151444f04c970592ec[m
+Author: ehddk <bj9147@naver.com>
+Date:   Wed Sep 25 10:13:46 2024 +0900
+
+    post 부분 옵셔널 추가
+
+[33mcommit b3d973387d281e71b90cf86844a24dc5e0650cc6[m
+Merge: d417e91 782195f
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 09:44:21 2024 +0900
+
+    Merge branch 'develop' into issue/#33
+
+[33mcommit d417e91a4cd8bf1695a6cb6812e01ad76bffb8e4[m
+Author: GyeonghoJeon <wjstkwal7@gmail.com>
+Date:   Wed Sep 25 09:40:10 2024 +0900
+
+    [전경호] 라우터 작업
+
+[33mcommit 782195f5efb79d91f68ada4b2fb7d42e39fc549e[m
+Merge: 9a77e00 751041a
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:20:40 2024 +0900
+
+    Merge pull request #48 from ehddk/issue/#8
+    
+    [허태영] 테스중 입니다. 오류 해결 필요
+
+[33mcommit 751041a2fd4aff242cb33ca858a20aad72605715[m
+Merge: 19d41ea 9a77e00
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:20:31 2024 +0900
+
+    Merge branch 'develop' into issue/#8
+
+[33mcommit 19d41ead00d3ca0770ab768a83c64a088dfef325[m
+Author: taeyoung0001 <her020212@naver.com>
+Date:   Wed Sep 25 09:17:07 2024 +0900
+
+    오류 해결 필요
+
+[33mcommit 9a77e00baae277816f580d3c964a5b77a0bb871d[m
+Merge: c2bbba1 85eac91
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:06:15 2024 +0900
+
+    Merge pull request #46 from ehddk/issue/#1
+    
+    [김동아]불필요한 부분 삭제 및 로그인상태에 따른 화면 작업.
+
+[33mcommit c2bbba1971045e6a4c43e6150c21ca9607886125[m
+Merge: e9be343 53a402d
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:06:03 2024 +0900
+
+    Merge pull request #43 from ehddk/issue/#4
+    
+    [유경석] 카테고리 화면 구현 중 500번 에러 수정완료 및 카테고리 리스트 한글로 변환후 출력 완
+
+[33mcommit 53a402d053fce0398520bc908558588d0042e60c[m
+Merge: 935522c e9be343
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:05:42 2024 +0900
+
+    Merge branch 'develop' into issue/#4
+
+[33mcommit e9be3433f83b4528f2cec5b919fc4286a46f69f4[m
+Merge: 04f0c0b 6bb572c
+Author: ehddk <86900169+ehddk@users.noreply.github.com>
+Date:   Wed Sep 25 09:03:55 2024 +0900
+
+    Merge pull request #47 from ehddk/issue/#3
+    
+    [장유진] 공지사항 & FAQ 공통응답 DTO 만들기 완료
+
+[33mcommit 6bb572c2e02e46901cbcf30a6ea0fc22a991246f[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 08:51:15 2024 +0900
+
+    공지사항 작성날짜 추가
+
+[33mcommit b931a39f8108c8dbbaab57e377a558686c242da3[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 08:00:05 2024 +0900
+
+    schema & mongoose 파일 추가
+
+[33mcommit f0bae8a101fec71f546d4e44d10f6b9e9db9d435[m
+Author: ella227 <ella227@gmail.com>
+Date:   Wed Sep 25 07:31:22 2024 +0900
+
+    [장유진] 공지사항 FAQ 응답 DTO 만들기
+
+[33mcommit 85eac91f926b490761e64f071d4bd0ce8f896a41[m
+Author: ehddk <bj9147@naver.com>
+Date:   Tue Sep 24 22:38:41 2024 +0900
+
+    페이지 이동 경로 수정 및 로그인 시 배너 숨김.

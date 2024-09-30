@@ -6,10 +6,10 @@ export class GetUserResponseDTO {
   profile: {
     id: string;
     birth?: string;
+    nickName:string;
     firstName: string;
     thumbnail?: string;
     telNumber:string;
-    nickName:string;
   };
  // posts?: PostResponseDTO[];
 
@@ -20,10 +20,10 @@ export class GetUserResponseDTO {
     this.profile = {
       id: user.profile.id,
       birth: user.profile.birth,
+      nickName:user.profile.nickName,
       firstName: user.profile.firstName,
       thumbnail: user.profile.thumbnail,
       telNumber:user.profile.telNumber,
-      nickName:user.profile.nickName
     };
   }
 }

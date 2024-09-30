@@ -4,8 +4,14 @@ const faqSchema = new mongoose.Schema<IFaq>({
   id:{
     type:String,
     required:true,
+    unique: true,
   },
   title:{
+    type:String,
+    required:true,
+    
+  },
+  content:{
     type:String,
     required:true,
     

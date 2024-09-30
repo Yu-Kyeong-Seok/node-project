@@ -20,7 +20,7 @@ export default class UsersController {
       const { password } = req.body;
       console.log('pssw',password)
       const { hashedPassword, salt } = CryptoService.encryptPassword(password);
-
+      
       const user = await this._userService.createUser({
         email: req.body.email,
         password: hashedPassword,

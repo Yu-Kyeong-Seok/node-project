@@ -59,7 +59,8 @@ declare type createCommentRequestPath = {
 
 declare type createCommentRequestBody = {
     content: string; // 댓글 내용
-    image?: string; // 댓글 이미지 (선택 사항)
+    image?: string; // 댓글 이미지 (선택 사항),
+    
 };
 
 declare type createCommentRequestParams = {}; // 필요에 따라 수정 가능

@@ -31,10 +31,7 @@ export default class PostViewController {
     const { id } = req.params;
     const post = await this._postService.getPostDetail(id);
     const comments=await this._commentService.getComments(id)
-    //console.log(id)
-
-    const authorId = post?.author.id;
-    //console.log(authorId)
+   
     res.render("post/postDetail", { post ,comments});
   }
 

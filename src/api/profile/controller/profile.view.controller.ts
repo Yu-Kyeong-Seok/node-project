@@ -57,7 +57,7 @@ export default class ProfileViewController {
 
         res.render("profile/profileChangePassword", { user });
     }
-
+    /** 계정 설정 */
     async profileSetting(req: Request, res: Response, next: NextFunction) {
 
         const user = await this._profileService.getUser(req.user.userId);

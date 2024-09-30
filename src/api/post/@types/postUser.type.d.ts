@@ -5,13 +5,16 @@ interface IProfile {
   id: string;
   /** 생년월일 */
   birth?: string;
-  nickName:string;
+  /** 닉네임 */
+  nickName: string;
   /** 이름 */
   firstName: string;
   /** 프로필 이미지 */
   thumbnail?: string;
-  /*전화번호 */
-  telNumber:string;
+  /** 전화번호 */
+  telNumber: string;
+  /** 인사말*/
+  greeting?: string;
 }
 
 interface IUser {

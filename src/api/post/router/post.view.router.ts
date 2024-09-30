@@ -28,7 +28,7 @@ const POST_VIEW_ROUTER = {
   POST_WRITE: `/post/wirte`,
 
   /**글 수정 */
-  POST_EDIT: `/posts/:postId`,
+  POST_EDIT: `/post/edit/:postId`,
 } as const;
 
 const postViewController = new PostViewController(

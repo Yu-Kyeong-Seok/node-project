@@ -31,6 +31,7 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
+          
           <h2 class="category-title"><%= post.category %></h2>
           <div class="profile-bar">
             <div class="detail-profile">
@@ -147,8 +148,7 @@ contents<!DOCTYPE html>
                       <p><%=comments[i].content %></p>
                     </div>
                     </div>
-                    <div class="comment-button">
-                    
+                    <div class="comment-button">                 
                         <button type="button" class="edit">수정</button>
                         <button type="button" class="remove">삭제</button>
                   </div>
@@ -157,25 +157,58 @@ contents<!DOCTYPE html>
               <% } else { %>
                 <p>댓글이 없습니다.</p>
               <% } %>
-            </div>
-        </div>
+            </div>       
+            </div>          
       </div>
 
       <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
-       const del = document.querySelector('#delete')
-       del.addEventListener('click', function(){
-        fetch('/api/posts',{
-          method : "DELETE",
-        })
-       })
+        const del = document.querySelector('#delete');
+
+del.addEventListener('click', async function(e) {
+    e.preventDefault();
+
+    // Retrieve the access token from cookies
+    const accessToken = document.cookie
+        .split("; ")
+        .find((index) => index.startsWith("accessToken="))
+        ?.split("=")[1];
+
+    if (!accessToken) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+    try {
+        const postId = '<%= post.postId %>'; // Ensure this contains the correct post ID
+        const res = await fetch(`/api/posts/${postId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": accessToken, // Ensure the token is sent here
+            },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+         
+        }
+    } catch (e) {
+        alert("삭제요");
+          location.href = "/views/post"
+    }
+});
+
+
+
         $(document).ready(function () {
           const login = $(".comment-login");
           const logout = $(".comment-logOut");
           const accessToken = document.cookie
             .split("; ")
             .find((index) => index.startsWith("accessToken="));
-          const isLoggedIn = !!accessToken;
+          const isLoggedIn = !!accessToken; });
         
 
  $(document).ready(function () {

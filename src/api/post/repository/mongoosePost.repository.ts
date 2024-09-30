@@ -88,7 +88,6 @@ export class MongoosePostRepository implements PostRepository {
   }
   async delete(postId: string): Promise<void> {
     await MongoosePost.deleteOne({ _id: postId });
-
     return;
   }
   async likePost(postId: string): Promise<void> {

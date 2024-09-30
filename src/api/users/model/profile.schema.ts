@@ -5,7 +5,6 @@ const profileSchema = new mongoose.Schema<IProfile>({
     type: String,
     length: 10,
   },
- 
   firstName: {
     type: String,
     required: true,
@@ -19,6 +18,8 @@ const profileSchema = new mongoose.Schema<IProfile>({
   },
   thumbnail: {
     type: String,
+    // data:Buffer,
+    // contentType:String,
   },
   telNumber:{
     type:String,

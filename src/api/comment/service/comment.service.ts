@@ -4,11 +4,13 @@ import { CommentService } from "./comment.service.type";
 import { CommentRepository } from "../repository/comment.respository";
 import { UserRepository } from "@/api/users/repository/user/user.repository";
 import { PostRepository } from "@/api/post/repository/post.repository";
+import { MongooseComment } from "../model/comment.schema";
 
 export class CommentsServiceImpl implements CommentService{
     private readonly _commentRepository:CommentRepository;
-    private readonly _userRepository:UserRepository;
     private readonly _postRepository:PostRepository;
+    private readonly _userRepository:UserRepository;
+  
 
     constructor(commentRepository:CommentRepository,userRepository:UserRepository,postRepository:PostRepository){
         this._commentRepository=commentRepository;
@@ -22,6 +24,7 @@ export class CommentsServiceImpl implements CommentService{
         if (!comments) {
             return []; // comments가 null일 경우 빈 배열 반환
         }
+       // console.log('9/25commentssss',comments)
         return comments.map(comment => ({
             _id: comment._id,
             content: comment.content,
@@ -29,13 +32,8 @@ export class CommentsServiceImpl implements CommentService{
             author:comment.postId.author._id,
             createdAt: comment.createdAt,
             postId: comment.postId._id, // postId의 _id만 포함
+         
         }));
-
-       //console.log('comments service',comments)
-        // return comments;
-      
-     
-  
     }
     async createComment(userId:string,params:Omit<IComment,"_id" |"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
          // 1. 작성자 찾기
@@ -76,13 +74,14 @@ export class CommentsServiceImpl implements CommentService{
         return comment;
        
     }
-    async editComment(commentId: string,
-        updatedComment: Omit<IComment, "id" | "postId" | "author" | "createdAt">): Promise<commentResponseDTO | null> {
-        const comment=await this._commentRepository.findById(commentId);
-        if(!comment){
-            throw new HttpException(401,'댓글 없음.')
+    async editComment(commentId: string, updatedComment: Partial<IComment>): Promise<IComment> {
+        const updatedResult = await this._commentRepository.update(commentId, updatedComment);
+    
+        if (!updatedResult) {
+            throw new Error("댓글 수정에 실패했습니다.");
         }
-        const updated=await this._commentRepository.update(commentId, updatedComment);
-        return updated;
+
+        return updatedResult; // 수정된 댓글을 반환
     }
+    
 }

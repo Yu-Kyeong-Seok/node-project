@@ -35,7 +35,12 @@
                           <span class="notice-label">공지</span>
                           <span class="notice-title"><%= notice.title %></span>
                         </div>
-                        <span class="notice-date"><%= new Date(notice.createdAt).toLocaleDateString() %></span>
+                        <span class="notice-date"> <%= new Date(notice.createdAt)
+                          .toLocaleDateString('ko-KR')
+                          .replace(/\./g, '.')   // 모든 '.'을 '.'으로 바꿈 (기본 형식 유지)
+                          .replace(/\s/g, '')    // 모든 공백을 제거
+                          .replace(/[./]+$/, '') //마지막 . 제거
+                          %></span>
                       </a>
                     </li>
                   <% }) %>

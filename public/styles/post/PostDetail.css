@@ -25,15 +25,39 @@
 .content-line { margin: 0 auto; max-width: 1280px; width: 85%; border-bottom: 1px solid rgb(224, 224, 224); } 
 /* 끝선맞추기 물어볼거 */
 .comment-logOut { border: 1px solid rgb(240, 240, 240); width: 96%; height: 80px; margin: 10px auto 0 auto; border-radius: 10px; display: flex; justify-content: start; align-items: start; } 
-.comment-profile { border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; background-color: rgba(214, 214, 214, 0.5); margin: 10px 15px 0px 10px; } 
-
+.comment-profile { border-radius: 50%; ; height: 30px; display: flex;  align-items: center; margin: 10px 15px 0px 10px; } 
+.comment-userIcon{border-radius: 50%; width:30px;background-color: rgba(214, 214, 214, 0.5);}
+.comment_profile{ gap:12px; display: flex; align-items: center; margin: 10px 15px 0px 10px;}
+.comment_profile > p{
+    font-size:12px;
+}
 .comment-contants { margin-top: 15px; font-size: 14px; color: rgb(195, 195, 195); } 
 .comment-contants p { padding-left: 17px;} 
 
 .need-login { color: rgb(41, 131, 213); } 
 .comment-login { border: 1px solid rgb(240, 240, 240); width: 96%; height: 80px; margin: 10px auto 0 auto; border-radius: 10px; display: none;} 
 .commet-login-up { display: flex; justify-content: start; align-items: start; } 
-.comment-login-down { display: flex; justify-content: end; align-items: end; } 
+.comment-login-down,.comment-button { display: flex; justify-content: end; align-items: end; } 
 .login-comment-contants { width: 70%; height: 80px; } 
 #comment-textarea { padding: 10px 20px; width: 100%; height: 80%; border: none; } 
 .registration { margin-top: 5px; border: none; outline: none; padding: 5px 15px; font-size: 12px; background-color: rgba(161, 109, 246, 0.5); color: rgb(239, 239, 239); cursor: pointer; } 
+
+.commentss{ border: 1px solid rgb(240, 240, 240); width: 96%; height: 93px; margin: 10px auto 0 auto; border-radius: 10px;} 
+.fa-user{
+    padding: 7px;
+}
+
+.comment-text{
+    margin-left:50px;
+}
+.comment-button{
+    gap:10px;
+}
+.comment-button > button{
+   background-color: #fff;
+    border:none;
+    padding:3px;
+}
+
+.edit-textarea {
+    margin:0 0 0 50px;}

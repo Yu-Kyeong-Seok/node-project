@@ -11,6 +11,7 @@ export default class PostController {
       this.createPost = this.createPost.bind(this);
       this.updatePost = this.updatePost.bind(this);
       this.deletePost = this.deletePost.bind(this);
+      this.likePost=this.likePost.bind(this);
     }
 
     /** 게시글 목록 조회 */
@@ -31,7 +32,7 @@ export default class PostController {
         limit,
         offset,
       });
-
+      
       res.send(posts);
     } catch (error) {
       next(error);
@@ -70,13 +71,14 @@ export default class PostController {
     res: Response,
     next: NextFunction
   ) {
-    const { title, content,category,image } = req.body;
+    const { title, content,category,image ,likeCount} = req.body;
     try {
       const post = await this._postService.createPost(req.user.userId, {
         title,
         content,
         category,
         image,
+        likeCount
       });
       res.send(post);
 
@@ -86,6 +88,20 @@ export default class PostController {
     }
   }
 
+  /**좋아요 */
+  async likePost(req:Request,res:Response,next:NextFunction){
+    const {postId}=req.params;
+    try{
+      const updatedPost=await this._postService.likePost(postId);
+      
+      console.log('updatePost',updatedPost)
+      res.status(200).send({message:"게시글에 좋아요를 눌렀습니다.",
+      likeCount:updatedPost
+    })
+    }catch(error){
+      next(error);
+    }
+  }
   /** 게시글 수정 */
   async updatePost(
     req: Request<
@@ -98,13 +114,14 @@ export default class PostController {
     next: NextFunction
   ) {
     const { postId } = req.params;
-    const { title, content,category,image } = req.body;
+    const { title, content,category,image,likeCount } = req.body;
     try {
       const post = await this._postService.updatePost(postId, {
         title,
         content,
         category,
-        image
+        image,
+        likeCount
       });
 
       res.send(post);

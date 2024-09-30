@@ -28,4 +28,7 @@ export interface PostService {
 
   /** 게시글 삭제 */
   deletePost(postId: string): Promise<void>;
+
+  /**좋아요 */
+  likePost(postId:string):Promise<number>;
 }

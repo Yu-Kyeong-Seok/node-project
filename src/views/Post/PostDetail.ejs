@@ -71,6 +71,7 @@ contents<!DOCTYPE html>
             <button class="thumbs-up hello">
               <!-- 색 있는거 -->
               <i class="fa-solid fa-thumbs-up fa-2x"></i>
+              <span id="like-count"><%= post.likeCount %></span> 
               <!-- 색 없는거  내일 물어봐야 함-->
               <!-- <i class="fa-regular fa-thumbs-up"></i> -->
             </button>
@@ -86,14 +87,17 @@ contents<!DOCTYPE html>
         <div class="comment-container">
           <div class="comment-logOut">
             <div class="comment-profile">
+              <div class="comment-userIcon">
               <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="comment-contants">
+                <p>
+                  댓글을 등록하려면
+                  <a href="/login" class="need-login">로그인</a>이 필요합니다.
+                </p>
+              </div>
             </div>
-            <div class="comment-contants">
-              <p>
-                댓글을 등록하려면
-                <a href="/login" class="need-login">로그인</a>이 필요합니다.
-              </p>
-            </div>
+           
           </div>
           <div class="comment-login">
             <div class="commet-login-up">
@@ -112,22 +116,59 @@ contents<!DOCTYPE html>
               <button type="submit" class="registration">등 록</button>
             </div>
           </div>
+            <div class="commentList" style="display: block;  margin-top: 33px;">
+              <% if (comments && comments.length > 0) { %>
+                <% for(i=0; i<comments.length; i++){ %>
+                  <div class="commentss" data-comment-id="<%= comments[i]._id %>">
+                    <div class="comment-login-up">
+                      <div style="width:100%">
+                        <div class="comment_profile">
+                          <div class="comment-userIcon">
+                            <i class="fa-solid fa-user"></i>
+                          </div>
+                       
+                          <p><%= comments[i].author %></p>
+                          <% 
+                          const createdAt = comments[i].createdAt;
+                          let formattedDate = "날짜 없음"; // 기본값
+                          if (createdAt) {
+                            const date = new Date(createdAt);
+                            if (!isNaN(date)) {
+                              formattedDate = date.toISOString().slice(0, 10);
+                            }
+                          }
+                        %>
+                          <p><%= formattedDate %></p>
+                          
+                        </div>
+                      </div>
+                 
+                    <div class="comment-text">
+                      <p><%=comments[i].content %></p>
+                    </div>
+                    </div>
+                    <div class="comment-button">
+                    
+                        <button type="button" class="edit">수정</button>
+                        <button type="button" class="remove">삭제</button>
+                  </div>
+                  </div>
+                <% } %>
+              <% } else { %>
+                <p>댓글이 없습니다.</p>
+              <% } %>
+            </div>
         </div>
       </div>
 
-      <footer><%- include('../_layouts/footer') %></footer>
+      <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
-        // console.log('<%= post.postId %>')
        const del = document.querySelector('#delete')
        del.addEventListener('click', function(){
         fetch('/api/posts',{
           method : "DELETE",
-
         })
        })
-
-
-
         $(document).ready(function () {
           const login = $(".comment-login");
           const logout = $(".comment-logOut");
@@ -137,31 +178,205 @@ contents<!DOCTYPE html>
           const isLoggedIn = !!accessToken;
         
 
-          //로그인시 이렇게 됩니다
-          if (isLoggedIn) {
-            login.css("display", "block");
-            logout.css("display", "none");
-          }
+ $(document).ready(function () {
+    // 햄버거 메뉴 관련
+    $(".hamburger-bar").click(function () {
+        $("#menu, .page_cover").addClass("open");
+    });
+
+    $(".page_cover, .close").click(function () {
+        $("#menu, .page_cover").removeClass("open");
+    });
+
+    $("#like-count").show();
+
+    // 현재 포스트 ID 가져오기
+    const url = window.location.pathname;
+    const postId = url.split("/").pop();
+
+   
+    // 로그인 관련
+    const login = $(".comment-login");
+    const logout = $(".comment-logOut");
+    const commentList = $(".commentList");
+    const accessToken = document.cookie
+        .split("; ")
+        .find((index) => index.startsWith("accessToken="));
+    const isLoggedIn = !!accessToken;
+
+    // 로그인 상태에 따라 표시 제어
+    if (isLoggedIn) {
+        login.css("display", "block"); // 댓글 등록하라는 div
+        logout.css("display", "none"); // 로그인 하라는 div 
+
+        // 모든 댓글의 수정 버튼 보이기
+        $(".edit").show();
+
+    } else {
+        login.css("display", "none");
+        logout.css("display", "block");
+
+        // 모든 댓글의 수정 버튼 숨기기
+        $(".edit").hide();
+        $(".remove").hide();
+    }
+
+
+    //좋아요 관련
+    $(".fa-thumbs-up").click(async function(){
+      try{
+        const res=await fetch(`/api/posts/${postId}/like `,{
+          method:"POST",
+          headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `${accessToken}`,
+                },
+                
         });
+        const data = await res.json();
+        
+            if (!res.ok) {
+                throw new Error(data.details);
+            }
+            alert("좋아요가 성공적으로 등록되었습니다.");
+            console.log('dataaa',data)
+            $(this).addClass("liked");
+            $("#like-count").text(data.likeCount);
+    //         const currentCount = parseInt($("#like-count").text())  || 0; 
+    // $("#like-count").text(currentCount + 1); // 좋아요 개수 증가
+   
 
-        const [cookies] = useCookies(["accessToken"]);
+      }catch(error){
+        alert("좋아요 실패.")
+      }
+    })
+    // 댓글 등록 버튼 이벤트 리스너
+    $(".registration").click(async function (event) {
+      
+        event.preventDefault(); // 기본 동작 막기
 
-        const handleComment = () => {
-          if (!cookies.accessToken) {
-            alert("로그인필요");
+        // 로그인 체크
+        if (!isLoggedIn) {
+            alert("로그인이 필요합니다.");
             return;
-          }
-        };
+        }
 
-        $(document).ready(function () {
-          $(".hamburger-bar").click(function () {
-            $("#menu, .page_cover").addClass("open");
-          });
+        // 댓글 내용 가져오기
+        const commentContent = $("#comment-textarea").val();
+        try {
+            const res = await fetch(`/api/posts/${postId}/comments`, {
+                method: "POST",
+                body: JSON.stringify({
+                    content: commentContent,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `${accessToken}`,
+                },
+            });
 
-          $(".page_cover, .close").click(function () {
-            $("#menu, .page_cover").removeClass("open");
-          });
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.details);
+            }
+            alert("댓글이 성공적으로 등록되었습니다.");
+            // 성공 후 입력창 초기화
+            $("#comment-textarea").val("");
+            window.location.href=`/views/post/detail/${postId}`;
+        } catch (error) {
+            alert("댓글 등록에 실패하였습니다: " + error.message);
+        }
+    });
+
+    // 댓글 수정 관련
+    $(".edit").click(function () {
+       //댓글 관련 요소
+    const commentEle = $(this).closest(".commentss");
+    const commentContent = commentEle.find(".comment-text p").text();
+    const commentId = commentEle.data("comment-id");
+        commentEle.find(".edit").hide();
+        const editText = `
+        <div class="edit-container">
+            <textarea class="edit-textarea">${commentContent}</textarea>
+            <button class="save-edit">저장</button>
+            <button class="cancel-edit">취소</button>
+        </div>
+        `;
+        commentEle.find(".comment-text").hide();
+        commentEle.find(".comment-login-down").hide();
+        commentEle.find(".remove").hide();
+        
+        commentEle.append(editText);
+
+        commentEle.find(".save-edit").click(async () => {
+            const updatedComment = commentEle.find(".edit-textarea").val();
+            const commentId = commentEle.data("comment-id");
+            commentEle.find(".edit").show();
+            commentEle.find(".remove").show();
+
+            try {
+                const res = await fetch(`/api/${postId}/comments/${commentId}`, {
+                    method: "PUT",
+                    body: JSON.stringify({ content: updatedComment }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `${accessToken}`,
+                    }
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.details);
+                }
+
+                commentEle.find(".comment-text p").text(updatedComment);
+                commentEle.find(".edit-container").remove();
+                commentEle.find(".comment-text").show(); // 기존 댓글 다시 표시
+                commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
+                alert("댓글이 성공적으로 수정되었습니다.");
+            } catch (error) {
+                alert("댓글 수정에 실패하였습니다: " + error.message);
+            }
         });
+
+        // 수정 취소 버튼 클릭 이벤트
+        commentEle.find(".cancel-edit").click(function () {
+          commentEle.find(".edit").show();
+          commentEle.find(".remove").show();
+            commentEle.find(".edit-container").remove(); // 수정 영역 제거
+            commentEle.find(".comment-text").show(); // 기존 댓글 다시 표시
+            commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
+        });
+      
+      });
+      
+      //댓글 삭제 관련
+      $(".remove").click(async function(){
+         //댓글 관련 요소
+      const commentEle = $(this).closest(".commentss");
+      const commentContent = commentEle.find(".comment-text p").text();
+      const commentId = commentEle.data("comment-id");
+      console.log('comeremove',commentId);
+     
+        try{
+          const res=await fetch(`/api/${postId}/comments/${commentId}`, {
+              method:"DELETE",
+
+              headers:{
+                "Content-Type": "application/json",
+                "Authorization": `${accessToken}`,
+              }
+          })
+          alert("댓글이 삭제되었습니다.");
+          window.location.href=`/views/post/detail/${postId}`;
+        }
+        catch(error){
+          alert("댓글 삭제에 실패하였습니다: " + error.message);
+        }
+      })
+
+  
+});
+
       </script>
     </div>
   </body>

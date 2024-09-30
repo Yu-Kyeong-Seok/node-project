@@ -32,20 +32,22 @@
               <h1 class="Title">회원가입</h1>
 
               <!-- 아이디 입력 -->
-              <label for="ID" class="TextInputSet">
-                <span class="InputLabel">아이디</span>
+              <label for="email" class="TextInputSet">
+                <span class="InputLabel">본인 확인 이메일</span>
                 <div class="TextInput">
-                  <input type="text" name="ID" id="ID" placeholder="ID" />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="E-mail"
+                  />
                 </div>
               </label>
               <div class="success-message msg hide">
-                사용할 수 있는 아이디입니다.
+                사용할 수 있는 이메일입니다.
               </div>
               <div class="failure-message msg hide">
-                아이디는 최소 5글자 이상이어야 합니다.
-              </div>
-              <div class="failure-message2 msg hide">
-                영문, 숫자만 가능합니다.
+                이메일은 @가 반드시 포함되어야 합니다.
               </div>
 
               <!-- 패스워드 입력 -->
@@ -113,17 +115,7 @@
                   />
                 </div>
               </label>
-              <label for="email" class="TextInputSet">
-                <span class="InputLabel">본인 확인 이메일</span>
-                <div class="TextInput">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="E-mail"
-                  />
-                </div>
-              </label>
+             
               <label for="tel" class="TextInputSet">
                 <span class="InputLabel">휴대전화</span>
                 <div class="TextInput">
@@ -154,7 +146,7 @@
         const idForm = form.querySelector("#ID");
         const pwForm = form.querySelector("#password");
         const confirm = form.querySelector("#confirmPwd");
-        const email = form.querySelector("#email");
+        const emailForm = form.querySelector("#email");
         const name = form.querySelector("#firstName");
         const telNumber = form.querySelector("#tel");
 
@@ -179,7 +171,6 @@
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                id: idForm.value,
                 password: pwForm.value,
                 email: email.value,
                 profile: {
@@ -209,12 +200,12 @@
 
         //조건 미충족시 버튼 비활성화
         function handleInput() {
-          const idValue = idForm.value.trim(); // 공백을 제거한 값으로 확인
-
+         // const idValue = idForm.value.trim(); // 공백을 제거한 값으로 확인
+          const emailValue=emailForm.value.trim();
           const pwValue = pwForm.value.trim();
           const confirmValue = confirm.value.trim();
 
-          if (idValue.length > 0 && pwValue.length > 0) {
+          if (emailValue.length > 0 && pwValue.length > 0) {
             submitBtn.disabled = false;
             submitBtn.style.backgroundColor = "#7E0DBD";
             submitBtn.style.cursor = "pointer";
@@ -224,16 +215,16 @@
             submitBtn.style.cursor = "not-allowed";
           }
         }
-        idForm.addEventListener("input", handleInput);
+        emailForm.addEventListener("input", handleInput);
         pwForm.addEventListener("input", handleInput);
-        // ID 유효성 검사
-        idForm.onkeyup = () => {
-          if (idForm.value.length !== 0) {
-            if (!onlyNumberAndEnglish(idForm.value)) {
+        // email 유효성 검사
+        emailForm.onkeyup = () => {
+          if (emailForm.value.length !== 0) {
+            if (!validateEmail(emailForm.value)) {
               successMsg.classList.add("hide");
               failureMsg.classList.add("hide");
               failureMsg2.classList.remove("hide");
-            } else if (!idLength(idForm.value)) {
+            } else if (!emailValidChk(emailForm.value)) {
               successMsg.classList.add("hide");
               failureMsg.classList.remove("hide");
               failureMsg2.classList.add("hide");
@@ -280,13 +271,13 @@
         // 폼 유효성 검사 및 제출 방지
         submitBtn.addEventListener("click", (e) => {
           //처음에 값을 입력했다가 지웠을 경우에 버튼을 누르니까 alert창이 제대로 안뜸...
-          const idValue = idForm.value.trim(); // 공백을 제거한 값으로 확인
+          const emailValue = emailForm.value.trim(); // 공백을 제거한 값으로 확인
           const pwValue = pwForm.value.trim();
           const confirmValue = confirm.value.trim();
 
-          if (idValue === "") {
+          if (emailValue === "") {
             e.preventDefault(); // 폼 전송 중지
-            alert("아이디를 입력해주세요.");
+            alert("이메일을 입력해주세요.");
             return;
           }
           if (pwValue === "" || confirmValue === "") {
@@ -298,10 +289,16 @@
       });
 
       // 유틸리티 함수
-      function idLength(value) {
-        return value.length >= 5 && value.length <= 12;
+      const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+
+      function emailValidChk(str) {
+          if(pattern.test(str) === false) { return false; }
+          else { return true; }
       }
 
+      function validateEmail(value) {
+        return value.includes('@');
+      }
       function onlyNumberAndEnglish(str) {
         return /^[A-Za-z0-9]*$/.test(str);
       }

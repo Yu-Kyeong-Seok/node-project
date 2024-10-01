@@ -220,10 +220,47 @@ export class PostsServiceImpl implements PostService {
   }
 
 }
-  async getMyPost(id: string): Promise<IPost[]> {
+  async getMyPost(id: string): Promise<PostResponseDTO[]> {
     const posts = await this._postRepository.findByAllAuthor(id);
 
-    return posts;
-  }
+    //댓글 수 가져오는 배열
+    const commentCounts = await Promise.all(posts.map(post => this._commentRepository.countByPostId(post.id)));
+    
+    // console.log(commentCounts);
 
+    //각 post에 댓글 수 추가
+    const resultsCommentCount = posts.map((post,index) => new PostResponseDTO(post, commentCounts[index])
+    );
+
+    const comments = await this._commentRepository.findByAllAuthor(id);
+
+    const posts2 = await Promise.all(comments.map(comment => this._postRepository.findById(comment.postId)));
+
+    return resultsCommentCount;
+  }
+  async getMyPostComment(id: string): Promise<PostResponseDTO[]> {
+
+      const comments = await this._commentRepository.findByAllAuthor(id);
+      
+      console.log('comments',comments);
+
+      const posts = await Promise.all(comments.map(comment => this._postRepository.findById(comment.postId)));
+      
+      const uniquePostsMap = new Map(posts.map(post => [post?.id, post])).values();
+      const uniquePosts = Array.from(uniquePostsMap);
+
+
+      const validPosts = uniquePosts.filter(post => post !== null);
+
+      console.log('validPosts',validPosts);
+
+      //댓글 수 가져오는 배열
+      const commentCounts = await Promise.all(validPosts.map(post => this._commentRepository.countByPostId(post.id)));
+      
+      //각 post에 댓글 수 추가
+      const resultsCommentCount = validPosts.map((post,index) => new PostResponseDTO(post, commentCounts[index])
+    );
+    
+    return resultsCommentCount;
+  }
 }

@@ -30,13 +30,16 @@ export class CommentsServiceImpl implements CommentService{
             _id: comment._id,
             content: comment.content,
             image: comment.image,
-            author:comment.postId.author._id,
+            author: {
+                id: comment.author.id, // 댓글 작성자의 id
+                nickName: comment.author.userName, // 댓글 작성자의 userName
+            },
             createdAt: comment.createdAt,
             postId: comment.postId._id, // postId의 _id만 포함
          
         }));
     }
-    async createComment(userId:string,params:Omit<IComment,"_id" |"commentId" |"author"| "createdAt">):Promise<commentResponseDTO | null>{
+    async createComment(userId:string,params:Omit<IComment,"_id" |"commentId" | "createdAt">):Promise<commentResponseDTO | null>{
          // 1. 작성자 찾기
     const author = await this._userRepository.findById(userId);
     
@@ -54,13 +57,14 @@ export class CommentsServiceImpl implements CommentService{
     // 3. 새로운 댓글 생성
     const newComment = await this._commentRepository.save({
         ...params,
-        author,
-            // id: author.id,
-            // userName: author.userName,
-        
+        author: {
+            id: author.profile.id,        // 프로필의 ID
+            userName: author.profile.nickName,
+          },
         createdAt: new Date(), // 생성 시간 추가
     });
  
+    console.log('newCOmm',newComment)
     // 4. 저장
     const savedComment = await this._commentRepository.save(newComment);
     return new commentResponseDTO(savedComment); 

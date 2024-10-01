@@ -14,7 +14,7 @@ interface IProfile {
   /** 전화번호 */
   telNumber: string;
   /** 인사말*/
-  greeting: string;
+  greeting?: string;
 }
 
 interface IUser {

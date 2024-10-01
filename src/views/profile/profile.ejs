@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="/static/styles/profile/profile.css"/>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
-    
     <title>Document</title>
 </head>
 <body>
@@ -22,7 +20,7 @@
         <div class="profile-container">
             <div class="profile-info">
                 <a href="#">
-                  <img src="<%= user.profile.thumbnail %>" alt="profile" class="profile-image">
+                    <img src="<%= user.profile.thumbnail %>" alt="profile" class="profile-image">
                 </a>
                 <div class="profile-button">
                     <a class="userNickName"><%= user.profile.nickName %></a>
@@ -36,33 +34,134 @@
             <br>
             <!-- 탭 내 질문 활성 -->
             <div id="myQuestionContent">
-                <% for(i = 0; i < post.length; i++) { %>
-                <div class="boxQuestion">
-                    <div class="contentQuestion">
-                        <span class="titleQuestion"><%= post[i].title %></span>
-                        <span class="bodyQuestion"><%= post[i].content %>
-                        </span>
+                <div class="post-container">
+                    <div class="post-container-left">
+                    <% for(i = 0; i < post.length ; i++) { %>
+                        <div class="posts">
+                            <div class="category-bar">
+                                <div class="profile">
+                                <!-- 프로필 아이콘 -->
+                                <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div class="category">
+                                    <%= post[i].category %>
+                                </div>
+
+                                <div class="user">
+                                    <div class="nickName">
+                                        <!-- <%= post[i].author.nickName %> -->
+                                        <%= user.profile.nickName %>
+                                    </div>
+                                <div class="date">
+                                    <% 
+                                    const createdAt = post[i].createdAt;
+                                    let formattedDate = "날짜 없음"; // 기본값
+                                    if (createdAt) {
+                                    const date = new Date(createdAt);
+                                    if (!isNaN(date)) {
+                                        formattedDate = date.toISOString().slice(0, 10);
+                                        }
+                                    }
+                                    %>
+                                <p>작성일: <%= formattedDate %></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="posts-contents">
+                            <a href="/post/detail/<%= post[i].postId %>">
+                            <div class="contents-title">
+                                <%= post[i].title %>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="contents-bottom">
+                            <div class="bottom-contents">
+                                <div class="icon">
+                                    <!-- 말풍선 아이콘 -->
+                                    <a href="#"><i class="fa-regular fa-comments"></i></a>
+                                    <p class="beautiful">
+                                    <!-- 아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요! -->
+                                    <%= post[i].commentCount%>개
+                                    </p>
+                                    <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                                </div>
+                            <!-- <a href="/post/detail/<%= post[i].postId %>" class="answer">나도 답변하기</a> -->
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <% } %>
+                
+                    <% } %>
+                    </div>
                 <!-- <img src="/static/images/no-questions.png" alt="noquestions">
                 <span>아직 질문이 없어요.</span> -->
+                </div>
             </div>
             <!-- 탭 내 답변 활성 -->
             <div id="myAnswerContent">
-                <% for(i = 0; i < comment.length; i++) { %>
-                    <div class="boxQuestion">
-                        <div class="contentQuestion">
-                            <span class="titleQuestion"><%= comment[i].content %></span>
-                            <!-- <span class="bodyQuestion"><%= comment[i].content %> -->
-                            </span>
+                <div class="post-container"></div>
+                    <div class="post-container-left">
+                    <% for(i = 0; i < comment.length ; i++) { %>
+                        <div class="posts">
+                            <div class="category-bar">
+                                <div class="profile">
+                                <!-- 프로필 아이콘 -->
+                                <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div class="category">
+                                    <%= comment[i].category %>
+                                </div>
+
+                                <div class="user">
+                                    <div class="nickName">
+                                        <!-- <%= comment[i].author.nickName %> -->
+                                        <%= user.profile.nickName %>
+                                    </div>
+                                <div class="date">
+                                    <% 
+                                    const createdAt = comment[i].createdAt;
+                                    let formattedDate = "날짜 없음"; // 기본값
+                                    if (createdAt) {
+                                    const date = new Date(createdAt);
+                                    if (!isNaN(date)) {
+                                        formattedDate = date.toISOString().slice(0, 10);
+                                        }
+                                    }
+                                    %>
+                                <p>작성일: <%= formattedDate %></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="posts-contents">
+                            <a href="/post/detail/<%= comment[i].postId %>">
+                            <div class="contents-title">
+                                <%= comment[i].title %>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="contents-bottom">
+                            <div class="bottom-contents">
+                                <div class="icon">
+                                    <!-- 말풍선 아이콘 -->
+                                    <a href="#"><i class="fa-regular fa-comments"></i></a>
+                                    <p class="beautiful">
+                                    <!-- 아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요! -->
+                                    <%= comment[i].commentCount%>개
+                                    </p>
+                                    <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                                </div>
+                            <!-- <a href="/post/detail/<%= comment[i].postId %>" class="answer">나도 답변하기</a> -->
+                            </div>
                         </div>
                     </div>
                     <% } %>
+                    </div>
             </div>
         </div>
-    </div>
-    <%- include('../_layouts/footer') %>
+        <%- include('../_layouts/footer') %>
         <script>
 
         const $myQuestion = document.getElementById("myQuestion");
@@ -76,8 +175,6 @@
 
             $myQuestionContent.style.display = 'flex';
             $myAnswerContent.style.display = 'none';
-            // $myQuestionContent.classList.add('active'); 
-            // $myAnswerContent.classList.remove('active'); 
         });
 
         $myAnswer.addEventListener("click", () => {
@@ -86,8 +183,6 @@
             
             $myQuestionContent.style.display = 'none';
             $myAnswerContent.style.display = 'flex';
-            // $myAnswerContent.classList.add('active'); 
-            // $myQuestionContent.classList.remove('active'); 
         });
 
         $(document).ready(function() {

@@ -3,9 +3,10 @@
     max-width: 1200px;
     padding:0 20px;
     margin: 0 auto;
-    height: 800px;
+    /* height: 800px; */
     /* background-color: orange; */
     /* top: 70px; */
+    padding-bottom: 100px;
     transform: translateY(80px);
 }
 
@@ -120,7 +121,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 16px;
+    /* gap: 16px; */
 
     display: none;
 }
@@ -167,6 +168,38 @@
     word-break: break-word;
     white-space: pre-wrap;
 }
+
+/* Post Css */
+.post-container { width: 100%; max-width: 1280px; display: flex; justify-content: space-between; gap: 40px; } 
+.post-container-left { flex: 3; } 
+.posts { margin-top: 20px; padding: 15px; border-radius: 10px; box-shadow: 2px 2px 5px rgba(229, 229, 229, 0.5); border: 1px solid #e7e7e7; } 
+
+.profile { width: 30px; height: 30px; border: 1px black solid; border-radius: 50%; display: flex; justify-content: center; align-items: center; float: left; } 
+.category-bar { padding-left: 10px; font-size: 12px; } 
+.category-bar .category { margin-left: 40px; display: block; } 
+
+.user { margin-top: 10px; margin-left: 40px; display: flex; gap: 30px; } 
+
+.posts-contents { width: 100%; max-width: 300px; overflow: hidden; } 
+.contents-title { width: 100%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; display: -moz-box; white-space: normal; word-wrap: break-word; padding: 15px 0px 0px 20px; } 
+.contents-bottom { margin-top: 10px; } 
+
+.bottom-contents { display: flex; justify-content: space-between; align-items: center; padding: 0px 10px; } 
+.icon { display: flex; gap: 10px; justify-content: space-between; align-items: center; } 
+.bottom-contents i { width: 100%; height: 100%; } 
+
+.beautiful { color: grey; } 
+.answer {border-radius: 5px; background-color: rgba(74, 71, 255, 1); color: #fff; padding: 8px; cursor: pointer; border:0;} 
+.answer:hover { background-color: rgba(25, 22, 187, 1); } 
+.post-right { flex: 1; display:flex; flex-direction: column; gap:40px; position: relative; } 
+
+.banner-text { font-size: 22px; font-weight: 700; line-height: 1.5; } 
+.banner-sign-up { margin-top: 50px; display: flex; justify-content: end; font-size: 600; align-items: center; color: rgba(255, 255, 255, 0.7); } 
+.banner-sign-up i { margin-left: 10px; } 
+
+.beautiful-mobile { display: none; } 
+.beautiful-min-mobile { display: none; white-space: pre-line; } 
+
 
 @media screen and (max-width:373px) {
     .profile-image {

@@ -11,6 +11,8 @@ import { date } from "yup";
 import CommentViewController from "@/api/comment/controller/comment.view.controller";
 import { CommentsServiceImpl } from "@/api/comment/service/comment.service";
 import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import { extractPath } from "@/utils/path.util";
+import { ROUTES_INDEX } from "@/routers";
 const { ObjectId } = require("mongodb");
 const { MongoClient } = require("mongodb");
 
@@ -18,11 +20,13 @@ const postViewRouter = express.Router();
 const BASE_PATH = "/views";
 
 const POST_VIEW_ROUTER = {
-  /**글 목록 조회 */
-  POST_LIST: `/post`,
+   /**글 상세 조회  */
+   POST_DETAIL: `/posts/:postId`,
 
-  /**글 상세 조회  */
-  POST_DETAIL: `/posts/:postId`,
+  /**글 목록 조회 */
+  POST_LIST: `/posts`,
+
+ 
 
   /**글 작성  */
   POST_WRITE: `/post/wirte`,
@@ -34,7 +38,8 @@ const POST_VIEW_ROUTER = {
 const postViewController = new PostViewController(
   new PostsServiceImpl(
   new MongoosePostRepository(),
-  new MongooseUserRepository()
+  new MongooseUserRepository(),
+  new MongooseCommentRepository
   ),
 
 
@@ -53,12 +58,23 @@ const commentViewController=new CommentViewController(
   )
 )
 
-/**목록조회 */
-postViewRouter.get(`${BASE_PATH}/post`, (req, res, next) => {
-  postViewController.postListPage(req, res, next);
-});
 /**상세조회 */
-postViewRouter.get(`${BASE_PATH}/post/detail/:id`,  (req, res, next) => {
+// postViewRouter.get(
+//   extractPath(POST_VIEW_ROUTER.POST_DETAIL,ROUTES_INDEX.POST_VIEW),
+//   (req,res,next)=>{
+//     postViewController.postDetailPage(req,res,next);
+//   }
+// )
+/**목록조회 */
+postViewRouter.get(
+
+  extractPath(POST_VIEW_ROUTER.POST_LIST,ROUTES_INDEX.POST_VIEW),
+  (req, res, next) => {
+    postViewController.postListPage(req, res, next);
+  })
+
+
+postViewRouter.get(`/post/detail/:id`,  (req, res, next) => {
   postViewController.postDetailPage(req, res, next);
 });
 
@@ -73,7 +89,8 @@ postViewRouter.get(`${BASE_PATH}/post/edit/:postId`, (req, res, next) => {
 });
 
 
-const COMMENT_VIEW_ROUTER={
+
+ const COMMENT_VIEW_ROUTER={
   /**댓긂 목록 조회 */
   COMMENT_LIST:`${BASE_PATH}/post/detail/:postId`
  

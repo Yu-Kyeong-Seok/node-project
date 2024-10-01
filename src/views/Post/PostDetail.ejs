@@ -40,6 +40,7 @@ contents<!DOCTYPE html>
               <i class="fa-solid fa-user fa-2x"></i>
             </div>
             <div class="detail-user">
+
               <div class="detail-nickName">   <%= post.author.nickName %></div>
               <div class="detail-date">
                 <% 
@@ -53,6 +54,7 @@ contents<!DOCTYPE html>
                   }
                 %>
                 <p>작성일: <%= formattedDate %></p>
+                <p>댓글수: <%= post.commentCount %></p>
               </div>
             </div>
           </div>
@@ -74,19 +76,14 @@ contents<!DOCTYPE html>
             <p><%= post.content %></p>
           </div>
           <div class="contents-bottom">
-            <button class="thumbs-up hello">
+            <button class="thumbs-up">
               <!-- 색 있는거 -->
               <i class="fa-solid fa-thumbs-up fa-2x"></i>
               <span id="like-count"><%= post.likeCount %></span> 
               <!-- 색 없는거  내일 물어봐야 함-->
               <!-- <i class="fa-regular fa-thumbs-up"></i> -->
             </button>
-            <button class="thumbs-down hello">
-              <!-- 색 있는거 -->
-              <i class="fa-solid fa-thumbs-down fa-2x"></i>
-              <!-- 색 없는거  내일 물어봐야 함-->
-              <!-- <i class="fa-regular fa-thumbs-down"></i> -->
-            </button>
+            
           </div>
         </div>
 
@@ -160,7 +157,7 @@ contents<!DOCTYPE html>
                   </div>
                 <% } %>
               <% } else { %>
-                <p>댓글이 없습니다.</p>
+                <p style="margin-left:40px;">댓글이 없습니다.</p>
               <% } %>
             </div>       
             </div>          
@@ -170,29 +167,29 @@ contents<!DOCTYPE html>
       <script>
         const del = document.querySelector('#delete');
 
-del.addEventListener('click', async function(e) {
-    e.preventDefault();
+        del.addEventListener('click', async function(e) {
+            e.preventDefault();
 
-    // Retrieve the access token from cookies
-    const accessToken = document.cookie
-        .split("; ")
-        .find((index) => index.startsWith("accessToken="))
-        ?.split("=")[1];
+          // Retrieve the access token from cookies
+          const accessToken = document.cookie
+              .split("; ")
+              .find((index) => index.startsWith("accessToken="))
+              ?.split("=")[1];
 
-    if (!accessToken) {
-        alert("로그인이 필요합니다.");
-        return;
-    }
+          if (!accessToken) {
+              alert("로그인이 필요합니다.");
+              return;
+          }
 
-    try {
-        const postId = '<%= post.postId %>'; 
-        const res = await fetch(`/api/posts/${postId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": accessToken, 
-            },
-        });
+        try {
+            const postId = '<%= post.postId %>'; 
+            const res = await fetch(`/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": accessToken, 
+                },
+            });
 
         const data = await res.json();
 
@@ -207,11 +204,11 @@ del.addEventListener('click', async function(e) {
 
 
 
-        $(document).ready(function () {
-          const login = $(".comment-login");
-          const logout = $(".comment-logOut");
-          const accessToken = document.cookie
-            .split("; ")
+    $(document).ready(function () {
+        const login = $(".comment-login");
+        const logout = $(".comment-logOut");
+        const accessToken = document.cookie
+         .split("; ")
             .find((index) => index.startsWith("accessToken="));
           const isLoggedIn = !!accessToken; });
         
@@ -227,7 +224,7 @@ del.addEventListener('click', async function(e) {
     });
 
     $("#like-count").show();
-
+  
     // 현재 포스트 ID 가져오기
     const url = window.location.pathname;
     const postId = url.split("/").pop();
@@ -280,13 +277,10 @@ del.addEventListener('click', async function(e) {
             console.log('dataaa',data)
             $(this).addClass("liked");
             $("#like-count").text(data.likeCount);
-    //         const currentCount = parseInt($("#like-count").text())  || 0; 
-    // $("#like-count").text(currentCount + 1); // 좋아요 개수 증가
-   
-
-      }catch(error){
-        alert("좋아요 실패.")
-      }
+  
+          }catch(error){
+            alert("좋아요 실패.")
+          }
     })
     // 댓글 등록 버튼 이벤트 리스너
     $(".registration").click(async function (event) {
@@ -320,7 +314,7 @@ del.addEventListener('click', async function(e) {
             alert("댓글이 성공적으로 등록되었습니다.");
             // 성공 후 입력창 초기화
             $("#comment-textarea").val("");
-            window.location.href=`/views/post/detail/${postId}`;
+            window.location.href=`/post/detail/${postId}`;
         } catch (error) {
             alert("댓글 등록에 실패하였습니다: " + error.message);
         }
@@ -349,8 +343,8 @@ del.addEventListener('click', async function(e) {
         commentEle.find(".save-edit").click(async () => {
             const updatedComment = commentEle.find(".edit-textarea").val();
             const commentId = commentEle.data("comment-id");
-            commentEle.find(".edit").show();
-            commentEle.find(".remove").show();
+            commentEle.find(".edit").hide();
+            commentEle.find(".remove").hide();
 
             try {
                 const res = await fetch(`/api/${postId}/comments/${commentId}`, {
@@ -371,6 +365,8 @@ del.addEventListener('click', async function(e) {
                 commentEle.find(".comment-text").show(); // 기존 댓글 다시 표시
                 commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
                 alert("댓글이 성공적으로 수정되었습니다.");
+                commentEle.find(".edit").show();
+            commentEle.find(".remove").show();
             } catch (error) {
                 alert("댓글 수정에 실패하였습니다: " + error.message);
             }
@@ -405,14 +401,12 @@ del.addEventListener('click', async function(e) {
               }
           })
           alert("댓글이 삭제되었습니다.");
-          window.location.href=`/views/post/detail/${postId}`;
+          window.location.href=`/post/detail/${postId}`;
         }
         catch(error){
           alert("댓글 삭제에 실패하였습니다: " + error.message);
         }
       })
-
-  
 });
 
       </script>

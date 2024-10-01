@@ -56,7 +56,15 @@ export interface PostService {
 }> 
 
   getMyPost(id:string): Promise<PostResponseDTO[]>;
-
+  /** 내 댓글의 게시글 조회 */
   getMyPostComment(id: string): Promise<PostResponseDTO[]>;
+
+  /** 좋아요 TOP 3 가져오기 */
+  getTopLikesByCategory(): 
+  Promise<{
+  category: string;
+  totalCount: number;
+  cssClass: string;
+  }[]>;
 
 }

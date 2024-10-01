@@ -2,6 +2,7 @@ import { MongooseCategory } from "@/api/category/model/category.schema";
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongoosePost } from "@/api/post/model/post.schema";
 import { PostRepository } from "@/api/post/repository/post.repository";
+import { promises } from "node:dns";
 
 export class MongoosePostRepository implements PostRepository {
   async findAllWithPagination({
@@ -144,4 +145,28 @@ export class MongoosePostRepository implements PostRepository {
 
     return posts;
   }
+  async getTopLikesByCategory(): 
+    Promise<{
+    category: string;
+    totalCount: number;
+    cssClass: string;
+    }[]>{
+    const result = await MongoosePost.aggregate([
+      {
+          $group: {
+              _id: "$category", // 카테고리별로 그룹화
+              totalCount: { $sum: "$likeCount" } // 각 카테고리의 문서 수 합산
+          }
+      }
+    ]);
+  
+    const sortedResult = result.sort((a,b) => b.totalCount - a.totalCount);
+
+    return sortedResult.slice(0, 3).map(item => ({
+      category: item._id as string,
+      totalCount: item.totalCount as number,
+      cssClass: "" as string,
+    }));
+  }
+
 }

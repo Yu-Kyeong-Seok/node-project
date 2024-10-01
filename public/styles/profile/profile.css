@@ -15,10 +15,11 @@
     /* background-color: gold; */
 }
 
+.profile-info > a{width: 160px;
+    height: 160px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;}
+
 .profile-image {
-    margin: 10px;
-    width: 160px;
-    height: 160px;
+    max-width: 100%;
 }
 
 .profile-button {

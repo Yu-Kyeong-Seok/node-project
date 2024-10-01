@@ -16,14 +16,13 @@
 
 .contents p { padding-top: 80px; padding-left: 15px; color:#4E5968;} 
 
-.contents-bottom { display: flex; justify-content: end; align-items: center; gap: 20px; margin: 0 auto; padding-bottom: 15px; } 
+.contents-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin: 0 auto;} 
 .thumbs-up{background-color: white;border:none}
 .fa-thumbs-up
  { border: none; outline: none; background-color: white; cursor: pointer; } 
 .fa-thumbs-up:hover { scale: 1.1; transition:0.5s; color: rgb(4, 0, 231); } 
 .fa-thumbs-up:focus { scale: 1.1; color: rgb(0, 0, 203); } 
 .fa-thumbs-up:active { scale: 1.1; color: rgb(0, 0, 197); } 
-.comment-container { max-width: 1280px; width: 98%; margin: 0 auto; } 
 .content-line { margin: 0 auto; max-width: 1280px; width: 85%; border-bottom: 1px solid rgb(224, 224, 224); } 
 /* 끝선맞추기 물어볼거 */
 .comment-logOut { border: 1px solid rgb(240, 240, 240); height: 80px; border-radius: 10px; display: flex; justify-content: start; align-items: start; margin-top:20px;} 

@@ -75,12 +75,13 @@
     width:82px;
     height:30px;
     border-radius: 8px;
-
+    cursor: pointer;
 }
 .categoryBtn button a{
 text-decoration: none;
 color:black;
 }
+.categoryButton.active{background-color: blue; color:#fff;}
 
 /* #questionForm .completeBtn{
     width:400px;

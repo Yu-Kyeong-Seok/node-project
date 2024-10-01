@@ -74,7 +74,7 @@
     padding: 0px 12px;
 }
 
-.active::after {
+.actived::after {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -84,32 +84,38 @@
     background-color: rgb(25, 31, 40);
 }
 
-.myQuestion {
+#myQuestion, #myAnswer {
+    cursor: pointer;
+}
+
+#myQuestionContent {
     width: 100%;
-    height: 500px;
+    /* height: 500px;
     max-width: 1200px;
     padding:0 20px;
-    margin: 0 auto;
+    margin: 0 auto; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     gap: 20px;
 
     /* 버튼 이벤트 보완 예정 */
-    display: none;
+    /* display: none; */
 }
 
-.myQuestion img {
+#myQuestionContent img, #myAnswerContent img {
     width: 100px;
     height: 100px;
 }
 
-.myAnswer {
+#myAnswerContent {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 16px;
+
+    display: none;
 }
 .boxQuestion {
     display: flex;

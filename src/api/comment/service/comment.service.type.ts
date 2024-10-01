@@ -11,4 +11,6 @@ export interface CommentService{
         commentId:string,
         updatedComment:Partial<IComment>
         ):Promise<IComment>
+    /** 내 댓글 조회 */
+    getMyComments(id:string): Promise<IComment[]>
 }

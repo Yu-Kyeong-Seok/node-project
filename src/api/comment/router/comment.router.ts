@@ -25,6 +25,8 @@ const COMMENT_ROUTES = {
     CREATE_COMMENT: `/api/posts/:postId/comments`,
     /** 댓글 삭제 */
     DELETE_COMMENT: `/api/:postId/comments/:commentId`,
+    /** 내 댓글 조회 */
+    GET_MY_POSTS: '/api/comments/my/:id',
 } as const;
 
 
@@ -34,6 +36,6 @@ commentRouter.put(COMMENT_ROUTES.EDIT_COMMENT, authUserMiddleware,commentControl
 // commentRouter.post(COMMENT_ROUTES.CREATE_COMMENT),authUserMiddleware,commentController.createComment.bind(commentController);
 
 commentRouter.delete(COMMENT_ROUTES.DELETE_COMMENT,authUserMiddleware, commentController.deleteComment.bind(commentController)as any);
-
+commentRouter.get(COMMENT_ROUTES.GET_MY_POSTS, authUserMiddleware,commentController.getMyComments)
 
 export default commentRouter;

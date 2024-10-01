@@ -127,4 +127,10 @@ export class PostsServiceImpl implements PostService {
   }
 
 }
+  async getMyPost(id: string): Promise<IPost[]> {
+    const posts = await this._postRepository.findByAllAuthor(id);
+
+    return posts;
+  }
+
 }

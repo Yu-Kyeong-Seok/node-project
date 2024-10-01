@@ -49,7 +49,7 @@
             cancleBtn.addEventListener("click", (e) => {
                 e.preventDefault();
 
-                location.href = "/profile/setting/<%= user.id %>";
+                location.href = "/profile";
                 });
 
             completeBtn.addEventListener("click", async (e) => {
@@ -71,7 +71,7 @@
                     console.error("Response body:", errorText);
                     }
 
-                    location.href = "/profile/setting/<%= user.id %>";
+                    location.href = "/profile/setting";
                 } catch (error) {
                     console.error(error.message);
                 }

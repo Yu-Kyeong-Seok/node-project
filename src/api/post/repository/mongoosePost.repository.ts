@@ -100,5 +100,10 @@ export class MongoosePostRepository implements PostRepository {
 
     post.likeCount = (post.likeCount || 0) + 1;
     await post.save();
-}
+  }
+  async findByAllAuthor(id: string): Promise<IPost[]> {
+    const posts = await MongoosePost.find({ author: id })
+
+    return posts;
+  }
 }

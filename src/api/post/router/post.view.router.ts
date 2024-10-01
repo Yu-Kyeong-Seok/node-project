@@ -38,7 +38,8 @@ const POST_VIEW_ROUTER = {
 const postViewController = new PostViewController(
   new PostsServiceImpl(
   new MongoosePostRepository(),
-  new MongooseUserRepository()
+  new MongooseUserRepository(),
+  new MongooseCommentRepository
   ),
 
 

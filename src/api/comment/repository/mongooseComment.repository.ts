@@ -111,4 +111,8 @@ export class MongooseCommentRepository implements CommentRepository{
           return;
       }
 
+      async countByPostId(postId: string): Promise<number> {
+          return MongooseComment.countDocuments({postId})
+      }
+
 }

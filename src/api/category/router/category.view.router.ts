@@ -5,10 +5,11 @@ import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCa
 import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repository";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { PostsServiceImpl } from "@/api/post/service/post.service";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const categoryViewRouter = express.Router();
 
-const categoryViewController = new CategoryViewController(new CategoriesServiceImpl(new MongooseCategoryRepository(), new MongoosePostRepository()), new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository()));
+const categoryViewController = new CategoryViewController(new CategoriesServiceImpl(new MongooseCategoryRepository(), new MongoosePostRepository()), new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(),new MongooseCommentRepository));
 
 // const BASE_PATH = "/views";
 const CATEGORY_VIEW_ROUTES={

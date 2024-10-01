@@ -59,6 +59,7 @@ export default class PostController {
       next(error);
     }
   }
+  
   /** 게시글 수정 */
   async updatePost(
     req: Request<
@@ -70,20 +71,20 @@ export default class PostController {
     res: Response,
     next: NextFunction
   ) {
-    const { postId } = req.params;
+    const { postId } = req.params; // URL에서 postId 가져오기
     const { title, content, category, image, likeCount } = req.body;
+  
     try {
-      const post = await this._postService.updatePost(req.user.userId,{
+      const updatedPost = await this._postService.updatePost(postId, {
         title,
         content,
         category,
         image,
         likeCount,
       });
-      
-      res.send(post);
+      res.send(updatedPost); // 수정된 게시글 반환
     } catch (error) {
-      next(error);
+      next(error); // 오류 처리
     }
   }
 

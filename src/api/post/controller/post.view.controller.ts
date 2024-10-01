@@ -3,13 +3,12 @@ import { PostService } from "@/api/post/service/post.service.type";
 import { db } from "@/db/mongoose";
 import { CommentService } from "@/api/comment/service/comment.service.type";
 
-
 export default class PostViewController {
   private readonly _postService: PostService;
   private readonly _commentService: CommentService;
-  constructor(_postService: PostService,_commentService:CommentService) {
+  constructor(_postService: PostService, _commentService: CommentService) {
     this._postService = _postService;
-    this._commentService=_commentService;
+    this._commentService = _commentService;
 
     this.postListPage = this.postListPage.bind(this);
     this.postDetailPage = this.postDetailPage.bind(this);
@@ -34,15 +33,16 @@ export default class PostViewController {
     const post = await this._postService.getPostDetail(id);
 
     console.log(id);
-    const comments=await this._commentService.getComments(id)
+    const comments = await this._commentService.getComments(id);
     const authorId = post?.author.id;
-    res.render("post/postDetail", { post ,comments});
-
+    res.render("post/postDetail", { post, comments });
   }
 
   /** 게시글 수정 페이지 */
   async postEditPage(req: Request, res: Response, next: NextFunction) {
-    res.render("post/postEdit");
+    const { postId } = req.params;
+    const post = await this._postService.getPostDetail(postId); 
+   res.render("post/postEdit", {post})
   }
 
   /** 게시글 작성 페이지 */

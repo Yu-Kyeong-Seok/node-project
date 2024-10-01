@@ -30,34 +30,38 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
-          <h2 class="category-title">카테고리</h2>
+          <h2 class="category-title">
+        카테고리
+          </h2>
           <div class="profile-bar">
             <div class="detail-profile">
               <!-- 프로필 더미 2배 키움 -->
               <i class="fa-solid fa-user fa-2x"></i>
             </div>
             <div class="detail-user">
-              <div class="detail-nickName">닉네임</div>
-              <div class="detail-date">등록날짜</div>
+              <div class="detail-nickName"><%= post.author.nickName %></div>
+              <div class="detail-date">
+                등록날짜
+              </div>
             </div>
           </div>
           <div class="tool"></div>
         </div>
 
-        <form class="contents-container" action="api/posts/<%= post.postId %>">
+        <form
+          id="edit-form"
+          action="/api/posts/<%= post.postId%>"
+          method="post"
+        >
           <div class="contents-title">
-            <input
-              class="title-input"
-              type="text"
-              value="전에 쓴거 전에 쓴거 id 가져와서 제목 불러오기"
-            />
+            <input class="title-input" type="text" value="<%= post.title %>" />
           </div>
 
           <div class="contents">
             <input
               class="contents-input"
               type="text"
-              value="전에 쓴거 id 가져와서 내용 불러오기"
+              value="<%= post.content %>"
             />
 
             <div class="save-bar">
@@ -69,25 +73,38 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
-        /** 글을 생성해온다 */
-        const url = window.location.pathname;
-        const postId = url.split("/").pop();
+        document
+          .getElementById("edit-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const title = document.querySelector(".title-input").value;
+            const content = document.querySelector(".contents-input").value;
+            const accessToken = document.cookie
+              .split("; ")
+              .find((index) => index.startsWith("accessToken="))
+              ?.split("=")[1];
 
-        const savePost = async () => {
-          const title = $(".title-input").val();
-          const content = $(".contents-input").val();
-
-          const res = await fetch(`api/posts/${postId}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, content }),
+            try {
+          const res = await fetch(`/api/post/<%= post.postId %>`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: accessToken,
+            },
+            body: JSON.stringify({ title : title, content : content }),
           });
-        };
-        const data = await res.json()
-        
 
+          if (!res.ok) {
+            throw new Error('게시글 수정에 실패했습니다.');
+          }
 
-
+          // 수정 완료 후 페이지 리다이렉트
+          location.href = `/views/post`;
+        } catch (error) {
+          console.error(error);
+          alert(error.message);
+        }
+          });
 
         const [cookies] = useCookies(["accessToken"]);
 

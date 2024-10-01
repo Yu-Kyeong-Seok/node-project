@@ -32,12 +32,11 @@ export class MongooseCommentRepository implements CommentRepository{
               path: "postId",  // 댓글 작성자 정보
               populate: {
                 path: "author",  // 프로필 정보 불러오기
-                
-              },
-           
-            })
-        
-            
+                select: "profile.userName profile.id",  // 필요한 프로필 정보만 선택
+            }});
+          
+    
+            console.log('commentdMongoose,sdsd',comments)
         return comments; 
         
     }catch(error:any){
@@ -76,6 +75,10 @@ export class MongooseCommentRepository implements CommentRepository{
     async update(commentId: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
         console.log("Updating comment with ID:", commentId); 
         const objectId = new mongoose.Types.ObjectId(commentId); // ID 변환
+
+        // if (comment.author.toString() !== userId) {
+        //     throw new HttpException(403, "수정 권한이 없습니다.");
+        //   }
 
         const updatedComment = await MongooseComment.findByIdAndUpdate(objectId, updateCommentInfo, { new: true });
         console.log('updateMOngekse',updatedComment)

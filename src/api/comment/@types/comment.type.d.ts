@@ -10,7 +10,9 @@ interface IComment {
     /** 댓글 이미지 */
     image? : string;
     /** 작성자 */
-    author: IUser
+    author:{id: string;         // 프로필의 ID
+    userName: string;  
+}
      /** 게시글 작성날짜 */
     createdAt : Date;
 }

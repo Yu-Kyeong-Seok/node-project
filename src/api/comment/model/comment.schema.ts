@@ -16,8 +16,8 @@ const commentSchema=new mongoose.Schema<IComment>({
         length:200
     },
     author:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        id: { type: String, required: true },
+  userName: { type: String, required: true },
     },
     image:{
         type:String

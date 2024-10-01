@@ -50,31 +50,36 @@ export default class CategoryViewController {
             // Add more mappings as needed
         };
         try {
+            const categoryName = req.params.categoryName;
+            
             const category = await this._categoryService.getCategoryDetail(req.params.categoryName);
+            console.log('categroy',category)
             if (category) {
                 // 한글 이름으로 변환
                 const koreanName = categoryNameMapping[category.name] || category.name;
 
-                // 해당 카테고리의 게시글 가져오기
-                const postsData = await this._postService.getPosts({
-                    limit: 10, // 필요에 따라 limit, offset을 조정
+                const postsData = await this._postService.getPostsByCategory({
+                    category: koreanName, // 카테고리 이름을 전달
+                    limit: 10,
                     offset: 0
                 });
+            
+                console.log("Korean Name for Category:", koreanName);
 
-                console.log("Category Detail:", category);
-                console.log("Posts for Category:", postsData);
+        // console.log("Category Detail:", category);
+         console.log("Posts for Category:", postsData);
 
-                // 카테고리 상세 정보를 EJS로 전달
-                res.render('category/categoryDetail', { 
-                    category: {
-                        ...category,
-                        koreanName // 한글 이름 추가
-                    },
-                    posts: postsData.results
-                });
-            } else {
-                res.status(404).send("Category not found");
-            }
+        // 카테고리 상세 정보 및 게시글 목록 EJS로 전달
+        res.render('category/categoryDetail', {
+            category: {
+                ...category,
+                koreanName: koreanName
+            },
+            posts: postsData.results
+        });
+    }else{
+            res.status(404).send("Category not found");
+        }
         } catch (error) {
             console.error(error);
             next(error);

@@ -5,7 +5,7 @@ export class commentResponseDTO{
 //    author:IUser;
     author:{
         id: string;
-        userName: string;
+       // userName: string;
         nickName : string;
       };
     content:string;
@@ -20,8 +20,8 @@ export class commentResponseDTO{
         // this.author=params.author;
         this.author={
             id:params.author?.id,
-            userName:params.author?.profile?.firstName,
-            nickName:params.author?.profile?.nickName
+         //   userName:params.author?.profile?.firstName,
+            nickName:params.author?.userName
         }
         this.content=params.content,
         this.createdAt=params.createdAt,

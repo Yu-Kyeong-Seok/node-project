@@ -36,7 +36,15 @@ export default class PostViewController {
 
     // console.log(category);
     res.render(`post/index`, { post, category });
+
+    const popularPost=await this._postService.getPopularPosts({
+      offset,
+      limit,
+    })
+    res.render(`post/index`, { post ,popularPost});
+
   }
+  
 
   /**게시글 상세 페이지 부분 */
   async postDetailPage(req: Request, res: Response, next: NextFunction) {

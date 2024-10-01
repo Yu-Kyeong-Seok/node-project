@@ -14,5 +14,6 @@ export interface CommentRepository{
     delete(commentId:string): Promise<void>;
     /** 내 댓글 조회 */
     findByAllAuthor(id:string): Promise<IComment[]>;
- 
+    /**댓글 수 */
+    countByPostId(postId:string):Promise<number>;
 }

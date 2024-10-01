@@ -78,7 +78,7 @@ export default class PostController {
         content,
         category,
         image,
-        likeCount
+        likeCount,
       });
       res.send(post);
 

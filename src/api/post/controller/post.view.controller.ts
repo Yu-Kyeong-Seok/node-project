@@ -35,13 +35,13 @@ export default class PostViewController {
     };
 
     // console.log(category);
-    res.render(`post/index`, { post, category });
+    // res.render(`post/index`, { post, category });
 
     const popularPost=await this._postService.getPopularPosts({
       offset,
       limit,
     })
-    res.render(`post/index`, { post ,popularPost});
+    res.render(`post/index`, { post ,popularPost, category});
 
   }
   

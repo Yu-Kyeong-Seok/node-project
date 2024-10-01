@@ -69,6 +69,13 @@ contents<!DOCTYPE html>
             <div class="contents-bottom">
               <div class="tool">
                 <a href="/" class="tool-button">목록</a>
+                <button class="thumbs-up">
+                  <!-- 색 있는거 -->
+                  <i class="fa-solid fa-thumbs-up fa-2x"></i>
+                  <span id="like-count"><%= post.likeCount %></span> 
+                  <!-- 색 없는거  내일 물어봐야 함-->
+                  <!-- <i class="fa-regular fa-thumbs-up"></i> -->
+                </button>
                 <!-- 수정, 삭제는 로그인 했을 때만 보임 -->
                 <a href="/post/edit/<%= post.postId %>">
                     <button id="edit" class="tool-button user">수정</button>
@@ -128,7 +135,7 @@ contents<!DOCTYPE html>
                             <i class="fa-solid fa-user"></i>
                           </div>
                        
-                          <p><%= post.author.nickName %></p>
+                          <p><%= comments[i].author.nickName%></p>
                           <% 
                           const createdAt = comments[i].createdAt;
                           let formattedDate = "날짜 없음"; // 기본값

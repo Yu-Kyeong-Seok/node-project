@@ -29,9 +29,10 @@ const profileSchema = new mongoose.Schema<IProfile>({
   },
   greeting:{
     type:String,
-    required:true,
+    required:false,
     length:20,
     unique:true,
+    default:'Hello'
   },
 });
 

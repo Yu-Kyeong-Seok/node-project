@@ -18,7 +18,7 @@ interface IPost {
 
         /** 게시글 작성날짜 */
     createdAt : Date;
-
+    /**좋아요 수 */
     likeCount: number;
 }
 
@@ -40,4 +40,5 @@ interface IPostResponseDTO{
       id: string;
       userName: string;
     };
+   // commentCount:number;
 }

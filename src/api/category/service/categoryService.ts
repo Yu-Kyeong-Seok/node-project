@@ -24,11 +24,12 @@ export class CategoriesServiceImpl implements CategoriesService{
     }
     async getCategoryDetail(categoryName:string):Promise<categoryResponseDTO | null>{
         const category=await this._categoryRepository.findByName(categoryName);
-
+      //  console.log('categoryService',category)
         if(!category) 
             throw new HttpException(404,'해당 카테고리 없음.');
 
         const dtoCategory= await new categoryResponseDTO(category);
+        console.log('categoryService',dtoCategory)
         return dtoCategory;
     }   
 

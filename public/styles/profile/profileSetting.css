@@ -1,3 +1,9 @@
+.content {
+  margin-top: 120px;
+  margin-bottom: 80px;
+}
+
+
 #setting-wrap{
     padding:0 20px;
     display: flex;
@@ -10,7 +16,7 @@
      
 }
 #setting-wrap #wrap-contents{
-        margin:120px auto;
+        margin: 0 auto;
         height:auto;
         display: flex;
         flex-direction: column;
@@ -46,11 +52,11 @@
 #setting-wrap .tel .left{
   
     height:100%;
-    min-height: 90px;
+    /* min-height: 90px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap:20px;
+    gap:12px;
 }
 #setting-wrap .info{
     padding:30px;
@@ -65,6 +71,7 @@
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
+margin-top:24px;
 
 /* position: relative; */
 }
@@ -72,8 +79,8 @@ align-items: center;
     display:flex;
 
     flex-direction: column;
-   margin-top:20px;
-    gap:20px;
+
+    gap:8px;
     
 }
 #setting-wrap .info .content1 .right{
@@ -86,18 +93,19 @@ align-items: center;
 #setting-wrap .change{
     background-color: #2B3AA7;
     color:white;
-    border-radius:5px;
+    border-radius:8px;
     border:none;
     width:90px;
     height:40px;
 }
 #setting-wrap .change a{
+    font-size: 14px;
     padding:10px 20px;
 }
 .setting-bottom{
     width:100%;
     max-width:580px;
-    gap:20px;
+    gap:30px;
     display:flex;
     flex-direction: column;
 
@@ -111,6 +119,17 @@ align-items: center;
     justify-content: space-between;
     border-radius: 5px;
 }
+.passwordInfo{
+    outline:1px solid lightgray;
+    /* align-items: center; */
+    height:100%;
+    min-height: 90px; padding:30px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
 .setting .cont{
     display: flex;
     flex-direction: column;
@@ -132,8 +151,33 @@ align-items: center;
     font-size:30px;
 }
 #setting-wrap p{
-    font-size:13px;
+    font-size:16px;
 }
+
+ 
+
+#setting-wrap .passwordInfo .content2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top:24px;
+  }
+
+.user-email {
+  color: #848484;
+}
+
+.user-telNumber {
+  color: #848484;
+}
+
+h4 {
+  /* font-weight: bold; */
+  margin: 0;
+}
+
+
 
 /* @media screen and (max-width:378px) {
     #setting-wrap .info .content1 {

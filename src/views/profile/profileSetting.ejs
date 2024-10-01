@@ -25,9 +25,9 @@
                             <h3 class="title">기본정보</h3>
                                 <div class="content1">
                                     <div class="left">
-                                        <p>이메일</p>
+                                        <h4>이메일</h4>
                                         <!-- <p>bj999@nananan.com</p> -->
-                                        <p><%= user.email %></p>
+                                        <p class="user-email"><%= user.email %></p>
                                     </div>
                                     <div class="right">
                                         <button class="change">
@@ -38,8 +38,8 @@
                         </div>
                         <div class="tel">
                             <div class="left">
-                                <p>휴대폰 번호</p>
-                                <p><%= user.profile.telNumber %></p>
+                                <h4>휴대폰 번호</h4>
+                                <p class="user-telNumber"><%= user.profile.telNumber %></p>
                             </div>
                             <div class="right">
                                 <button class="change">
@@ -50,19 +50,21 @@
                         
                     </section>
                     <section class="setting-bottom">
-                        <div class="setting">
-                            <div class="cont">
-                                <h3 class="title">보안설정</h3>
-                                <p>비밀번호</p>
+                        <div class="passwordInfo">
+                          <h3 class="title">보안설정</h3>
+                          <div class="content2">
+                            <div class="left">
+                                <h4>비밀번호</h4>
                             </div>
-                            <div>
+                            <div class="right">
                                 <button class="change">
                                     <a href="/profile/changePassword/<%= user.id %>">변경</a>
                                 </button>
                             </div>
+                          </div>
                         </div>
                         <div class="setting">
-                            <p>탈퇴</p>
+                            <h4>탈퇴</h4>
                             <div>
                                 <button class="out">회원탈퇴</button>
                             </div>

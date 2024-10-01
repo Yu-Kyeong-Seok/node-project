@@ -40,7 +40,7 @@ contents<!DOCTYPE html>
               <i class="fa-solid fa-user fa-2x"></i>
             </div>
             <div class="detail-user">
-              <div class="detail-nickName">   <%= post.postId %></div>
+              <div class="detail-nickName">   <%= post.author.nickName %></div>
               <div class="detail-date">
                 <% 
                   const createdAt = post.createdAt;
@@ -133,7 +133,7 @@ contents<!DOCTYPE html>
                             <i class="fa-solid fa-user"></i>
                           </div>
                        
-                          <p><%= comments[i].author %></p>
+                          <p><%= post.author.nickName %></p>
                           <% 
                           const createdAt = comments[i].createdAt;
                           let formattedDate = "날짜 없음"; // 기본값

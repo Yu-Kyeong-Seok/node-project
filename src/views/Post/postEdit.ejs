@@ -30,9 +30,7 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
-          <h2 class="category-title">
-        카테고리
-          </h2>
+          <h2 class="category-title">카테고리</h2>
           <div class="profile-bar">
             <div class="detail-profile">
               <!-- 프로필 더미 2배 키움 -->
@@ -41,7 +39,9 @@ contents<!DOCTYPE html>
             <div class="detail-user">
               <div class="detail-nickName"><%= post.author.nickName %></div>
               <div class="detail-date">
-                등록날짜
+                <% const options = { year: 'numeric', month: 'long', day:
+                'numeric' }; %> <%= new
+                Date(post.createdAt).toLocaleDateString('ko-KR', options) %>
               </div>
             </div>
           </div>
@@ -73,6 +73,29 @@ contents<!DOCTYPE html>
 
       <footer><%- include('../_layouts/footer') %></footer>
       <script>
+        /**여기 고쳐야해*/
+        document
+          .getElementById("edit-form")
+          .addEventListener("submit", function (e) {
+            const titleInput = document.querySelector(".title-input");
+
+            if (titleInput.value.length > 20) {
+              alert("제목은 20글자 이하로 입력해주세요.");
+              e.preventDefault();
+            }
+          });
+
+        document
+          .getElementById("edit-form")
+          .addEventListener("submit", function (e) {
+            const contentsInput = document.querySelector(".contents-input");
+
+            if (contentsInput.value.length < 51) {
+              alert("내용은 50글자 이상으로 입력해주세요.");
+              e.preventDefault();
+            }
+          });
+
         document
           .getElementById("edit-form")
           .addEventListener("submit", async (e) => {
@@ -85,25 +108,25 @@ contents<!DOCTYPE html>
               ?.split("=")[1];
 
             try {
-          const res = await fetch(`/api/post/<%= post.postId %>`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: accessToken,
-            },
-            body: JSON.stringify({ title : title, content : content }),
-          });
+              const res = await fetch(`/api/post/<%= post.postId %>`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: accessToken,
+                },
+                body: JSON.stringify({ title: title, content: content }),
+              });
 
-          if (!res.ok) {
-            throw new Error('게시글 수정에 실패했습니다.');
-          }
+              if (!res.ok) {
+                throw new Error("게시글 수정에 실패했습니다.");
+              }
 
-          // 수정 완료 후 페이지 리다이렉트
-          location.href = `/views/post`;
-        } catch (error) {
-          console.error(error);
-          alert(error.message);
-        }
+              // 수정 완료 후 페이지 리다이렉트
+              location.href = `/views/post`;
+            } catch (error) {
+              console.error(error);
+              alert(error.message);
+            }
           });
 
         const [cookies] = useCookies(["accessToken"]);
@@ -114,6 +137,7 @@ contents<!DOCTYPE html>
             return;
           }
         };
+
         $(document).ready(function () {
           $(".hamburger-bar").click(function () {
             $("#menu, .page_cover").addClass("open");

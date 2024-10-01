@@ -32,7 +32,7 @@ const POST_VIEW_ROUTER = {
   POST_WRITE: `/post/wirte`,
 
   /**글 수정 */
-  POST_EDIT: `/posts/:postId`,
+  POST_EDIT: `/post/edit/:postId`,
 } as const;
 
 const postViewController = new PostViewController(
@@ -80,13 +80,14 @@ postViewRouter.get(`/post/detail/:id`,  (req, res, next) => {
 
 /**작성 */
 postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
-  postViewController.postWritePage(req, res, next);
- });
- 
- /**수정 */
- postViewRouter.get(`${BASE_PATH}/post/edit`, (req, res, next) => {
-   postViewController.postEditPage(req, res, next);
- });
+ postViewController.postWritePage(req, res, next);
+});
+
+/**수정 */
+postViewRouter.get(`${BASE_PATH}/post/edit/:postId`, (req, res, next) => {
+  postViewController.postEditPage(req, res, next);
+});
+
 
 
  const COMMENT_VIEW_ROUTER={

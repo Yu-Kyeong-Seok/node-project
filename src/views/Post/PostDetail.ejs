@@ -31,14 +31,17 @@ contents<!DOCTYPE html>
 
       <div class="content">
         <div class="detail-category">
-          <h2 class="category-title"><%= post.category %></h2>
+          
+          <h2 class="category-title"></h2>
+       
           <div class="profile-bar">
             <div class="detail-profile">
               <!-- 프로필 더미 2배 키움 -->
               <i class="fa-solid fa-user fa-2x"></i>
             </div>
             <div class="detail-user">
-              <div class="detail-nickName"><%= post.author.nickName %></div>
+
+              <div class="detail-nickName">   <%= post.author.nickName %></div>
               <div class="detail-date">
                 <% 
                   const createdAt = post.createdAt;
@@ -56,7 +59,11 @@ contents<!DOCTYPE html>
             </div>
           </div>
           <div class="tool">
+            
+            <a href="/views/post/edit/<%= post.postId %>">
             <button id="edit" class="tool-button">수정</button>
+          </a>
+      
             <button id="delete" class="tool-button">삭제</button>
           </div>
         </div>
@@ -123,7 +130,7 @@ contents<!DOCTYPE html>
                             <i class="fa-solid fa-user"></i>
                           </div>
                        
-                          <p><%= comments[i].author %></p>
+                          <p><%= post.author.nickName %></p>
                           <% 
                           const createdAt = comments[i].createdAt;
                           let formattedDate = "날짜 없음"; // 기본값
@@ -143,8 +150,7 @@ contents<!DOCTYPE html>
                       <p><%=comments[i].content %></p>
                     </div>
                     </div>
-                    <div class="comment-button">
-                    
+                    <div class="comment-button">                 
                         <button type="button" class="edit">수정</button>
                         <button type="button" class="remove">삭제</button>
                   </div>
@@ -153,19 +159,59 @@ contents<!DOCTYPE html>
               <% } else { %>
                 <p style="margin-left:40px;">댓글이 없습니다.</p>
               <% } %>
-            </div>
-        </div>
+            </div>       
+            </div>          
       </div>
 
       <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
-       const del = document.querySelector('#delete')
-       del.addEventListener('click', function(){
-        fetch('/api/posts',{
-          method : "DELETE",
-        })
-       })
+        const del = document.querySelector('#delete');
+
+        del.addEventListener('click', async function(e) {
+            e.preventDefault();
+
+          // Retrieve the access token from cookies
+          const accessToken = document.cookie
+              .split("; ")
+              .find((index) => index.startsWith("accessToken="))
+              ?.split("=")[1];
+
+          if (!accessToken) {
+              alert("로그인이 필요합니다.");
+              return;
+          }
+
+        try {
+            const postId = '<%= post.postId %>'; 
+            const res = await fetch(`/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": accessToken, 
+                },
+            });
+
+        const data = await res.json();
+
+        if (!res.ok) {
          
+        }
+    } catch (e) {
+        alert("삭제요");
+          location.href = "/views/post"
+    }
+});
+
+
+
+    $(document).ready(function () {
+        const login = $(".comment-login");
+        const logout = $(".comment-logOut");
+        const accessToken = document.cookie
+         .split("; ")
+            .find((index) => index.startsWith("accessToken="));
+          const isLoggedIn = !!accessToken; });
+        
 
  $(document).ready(function () {
     // 햄버거 메뉴 관련

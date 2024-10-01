@@ -101,8 +101,10 @@ export class PostsServiceImpl implements PostService {
 
     return;
   }
+
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
+    console.log(postId)
   }
 
   async likePost(postId: string): Promise<number> {

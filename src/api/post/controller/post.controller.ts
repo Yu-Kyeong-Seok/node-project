@@ -2,20 +2,20 @@ import { NextFunction, Request, Response } from "express";
 import { PostService } from "@/api/post/service/post.service.type";
 
 export default class PostController {
-    private readonly _postService: PostService;
-    constructor(_postService: PostService) {
-      this._postService = _postService;
-  
-      this.getPost = this.getPost.bind(this);
-      this.getPostDetail = this.getPostDetail.bind(this);
-      this.createPost = this.createPost.bind(this);
-      this.updatePost = this.updatePost.bind(this);
-      this.deletePost = this.deletePost.bind(this);
-      this.likePost=this.likePost.bind(this);
-      this.getMyPost = this.getMyPost.bind(this);
-    }
+  private readonly _postService: PostService;
+  constructor(_postService: PostService) {
+    this._postService = _postService;
 
-    /** 게시글 목록 조회 */
+    this.getPost = this.getPost.bind(this);
+    this.getPostDetail = this.getPostDetail.bind(this);
+    this.createPost = this.createPost.bind(this);
+    this.updatePost = this.updatePost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
+    this.likePost = this.likePost.bind(this);
+    this.getMyPost = this.getMyPost.bind(this);
+  }
+
+  /** 게시글 목록 조회 */
   async getPost(
     req: Request<
       getPostsRequest["path"],
@@ -33,7 +33,7 @@ export default class PostController {
         limit,
         offset,
       });
-      
+
       res.send(posts);
     } catch (error) {
       next(error);
@@ -52,14 +52,43 @@ export default class PostController {
     next: NextFunction
   ) {
     const { postId } = req.params;
-   
+
     try {
       const post = await this._postService.getPostDetail(postId);
-      res.send(post);  
+      res.send(post);
     } catch (error) {
       next(error);
     }
   }
+  
+  /** 게시글 수정 */
+  async updatePost(
+    req: Request<
+      updatePostRequest["path"],
+      updatePostResponse,
+      updatePostRequest["body"],
+      updatePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params; // URL에서 postId 가져오기
+    const { title, content, category, image, likeCount } = req.body;
+  
+    try {
+      const updatedPost = await this._postService.updatePost(postId, {
+        title,
+        content,
+        category,
+        image,
+        likeCount,
+      });
+      res.send(updatedPost); // 수정된 게시글 반환
+    } catch (error) {
+      next(error); // 오류 처리
+    }
+  }
+
 
   /** 게시글 작성 */
   async createPost(
@@ -72,17 +101,16 @@ export default class PostController {
     res: Response,
     next: NextFunction
   ) {
-    const { title, content,category,image ,likeCount} = req.body;
+    const { title, content, category, image, likeCount } = req.body;
     try {
       const post = await this._postService.createPost(req.user.userId, {
         title,
         content,
         category,
         image,
-        likeCount
+        likeCount,
       });
       res.send(post);
-
     } catch (error) {
       console.error(error);
       next(error);
@@ -90,47 +118,23 @@ export default class PostController {
   }
 
   /**좋아요 */
-  async likePost(req:Request,res:Response,next:NextFunction){
-    const {postId}=req.params;
-    try{
-      const updatedPost=await this._postService.likePost(postId);
-      
-      console.log('updatePost',updatedPost)
-      res.status(200).send({message:"게시글에 좋아요를 눌렀습니다.",
-      likeCount:updatedPost
-    })
-    }catch(error){
-      next(error);
-    }
-  }
-  /** 게시글 수정 */
-  async updatePost(
-    req: Request<
-      updatePostRequest["path"],
-      updatePostResponse,
-      updatePostRequest["body"],
-      updatePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async likePost(req: Request, res: Response, next: NextFunction) {
     const { postId } = req.params;
-    const { title, content,category,image,likeCount } = req.body;
     try {
-      const post = await this._postService.updatePost(postId, {
-        title,
-        content,
-        category,
-        image,
-        likeCount
-      });
+      const updatedPost = await this._postService.likePost(postId);
 
-      res.send(post);
+      console.log("updatePost", updatedPost);
+      res
+        .status(200)
+        .send({
+          message: "게시글에 좋아요를 눌렀습니다.",
+          likeCount: updatedPost,
+        });
     } catch (error) {
       next(error);
     }
   }
-
+  
   /** 게시글 삭제 */
   async deletePost(
     req: Request<
@@ -142,8 +146,9 @@ export default class PostController {
     res: Response,
     next: NextFunction
   ) {
+  
     const { postId } = req.params;
-
+    console.log(postId)
     try {
       await this._postService.deletePost(postId);
 

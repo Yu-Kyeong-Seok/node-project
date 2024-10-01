@@ -33,7 +33,8 @@ const profileController = new ProfileViewController(
     ),
     new PostsServiceImpl(
         new MongoosePostRepository(),
-        new MongooseUserRepository()
+        new MongooseUserRepository(),
+        new MongooseCommentRepository()
     ),
     new CommentsServiceImpl(
         new MongooseCommentRepository(), // CommentRepository

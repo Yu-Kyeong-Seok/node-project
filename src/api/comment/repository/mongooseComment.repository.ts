@@ -113,11 +113,13 @@ export class MongooseCommentRepository implements CommentRepository{
           }
           return;
       }
+
       async findByAllAuthor(id: string): Promise<IComment[]> {
-        const comments = await MongooseComment.find({ author: id })
-    
+        
+        const comments = await MongooseComment.find({ "author.id": id }).exec();
+
         return comments;
-      }
+        }
 
 
       async countByPostId(postId: string): Promise<number> {

@@ -29,7 +29,7 @@ export default class ProfileViewController {
 
         const post = await this._postService.getMyPost(req.user.userId);
 
-        const comment = await this._postService.getMyPostComment(req.user.userId);
+        const comment = user ? await this._postService.getMyPostComment(user.profile.id) : null;
         
         res.render("profile/profile", { user, post, comment });
     }

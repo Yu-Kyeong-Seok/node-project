@@ -58,7 +58,7 @@
         <div class="gray-bg">
           <h3>언제든지 질문해보세요!</h3>
           <p>나의 지식을 나누고, 의미 있는 질의응답을 확인해보세요.</p>
-          <a href="/views/post/write">
+          <a href="/post/write">
             <button class="question-button">질문하기</button>
           </a>
         </div>
@@ -198,7 +198,12 @@
             <div class="top3">
               <h3>TOP 3</h3>
               <ul>
-                  <li>
+                  <% for(i = 0; i < category.length; i++) { %> 
+                    <li>
+                      <a href="#" class=<%= category[i].cssClass %>><%= category[i].category %></a>
+                    </li>
+                  <% } %>
+                  <!-- <li>
                       <a href="#" class="animal">동물</a>
                   </li>
                   <li>
@@ -206,7 +211,7 @@
                   </li>
                   <li>
                       <a href="#" class="game">게임</a>
-                  </li>
+                  </li> -->
               </ul>
             </div>
           </div>

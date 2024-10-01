@@ -19,7 +19,7 @@ export default class UsersController {
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
       const { password } = req.body;
-      console.log('pssw',password)
+      // console.log('pssw',password)
       const { hashedPassword, salt } = CryptoService.encryptPassword(password);
       
       const user = await this._userService.createUser({

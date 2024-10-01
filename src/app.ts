@@ -64,8 +64,6 @@ app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
-// app.use(appRouter);
-// app.use(viewRouter);
 
 /**----- 마이프로필 --------*/
 app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);

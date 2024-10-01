@@ -24,11 +24,25 @@ export default class PostViewController {
       offset,
       limit,
     });
+
+    const category = await this._postService.getTopLikesByCategory();
+
+    const cssClass = ['animal','gran','game'];
+
+    for (let i = 0; i < category.length; i++) {
+      // const randomIndex = Math.floor(Math.random() * cssClass.length);
+      category[i].cssClass = cssClass[i];
+    };
+
+    // console.log(category);
+    res.render(`post/index`, { post, category });
+
     const popularPost=await this._postService.getPopularPosts({
       offset,
       limit,
     })
     res.render(`post/index`, { post ,popularPost});
+
   }
   
 

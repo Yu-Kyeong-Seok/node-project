@@ -40,5 +40,4 @@ interface IPostResponseDTO{
       id: string;
       userName: string;
     };
-   // commentCount:number;
 }

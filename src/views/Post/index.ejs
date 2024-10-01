@@ -65,11 +65,67 @@
 
         <div class="question-bar">
           <a href="#" class="popular">인기</a>
-          <a href="#" class="myAnswer">답변</a>
+          <a href="#" class="myAnswer">최신</a>
         </div>
 
         <div class="post-container">
-          <div class="post-container-left">
+          <div class="post-container-left popularList actived">
+            <% for(i = 0; i < popularPost.results.length ; i++) { %>
+            <div class="posts">
+              <div class="category-bar">
+                <div class="profile">
+                  <!-- 프로필 아이콘 -->
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="category">
+                  
+                  <%= popularPost.results[i].category %>
+                </div>
+                <div class="user">
+                  <div class="nickName">
+                    <%= popularPost.results[i].author.nickName %>
+                  </div>
+                  <div class="date">
+                    <% 
+                    const createdAt = popularPost.results[i].createdAt;
+                    let formattedDate = "날짜 없음"; // 기본값
+                    if (createdAt) {
+                      const date = new Date(createdAt);
+                      if (!isNaN(date)) {
+                        formattedDate = date.toISOString().slice(0, 10);
+                      }
+                    }
+                  %>
+                  
+                  <p>작성일: <%= formattedDate %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="posts-contents">
+                <a href="/post/detail/<%= popularPost.results[i].postId %>">
+                <div class="contents-title">
+                  <%= popularPost.results[i].title %>
+                </div>
+              </a>
+              </div>
+              <div class="contents-bottom">
+                <div class="bottom-contents">
+                  <div class="icon">
+                    <!-- 말풍선 아이콘 -->
+                    <a href="#"><i class="fa-regular fa-comments"></i></a>
+                    <p class="beautiful">
+                      <!-- 아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요! -->
+                      <%= popularPost.results[i].commentCount%>개
+                    </p>
+                    <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                  </div>
+                  <a href="/post/detail/<%= popularPost.results[i].postId %>" class="answer">나도 답변하기</a>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+          <div class="post-container-left recentList">
             <% for(i = 0; i < post.results.length ; i++) { %>
             <div class="posts">
               <div class="category-bar">
@@ -174,6 +230,22 @@
             banner.css('display', 'block'); 
           }
       });
+
+      $(".myAnswer").on("click",()=>{
+      $(".popular").removeClass('actived');
+      $(".myAnswer").addClass('actived');
+
+      $(".popularList").css("display", "none");
+      $(".recentList").css("display", "block");
+
+      })
+      $(".popular").on("click",()=>{
+        $(".myAnswer").removeClass('actived');
+        $(".popular").addClass('actived');
+
+        $(".popularList").css("display", "block");
+      $(".recentList").css("display", "none");
+      })
     </script>
   </body>
 </html>

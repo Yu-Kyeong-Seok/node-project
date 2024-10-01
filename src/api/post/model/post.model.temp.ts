@@ -7,6 +7,7 @@ image?: string;
 createdAt: Date;
 author: IUser;
 likeCount: number;
+//commentCount:number;
 
 constructor(params: IPost) {
     this.id = params.id;
@@ -16,6 +17,7 @@ constructor(params: IPost) {
     this.image = params.image;
     this.createdAt = params.createdAt
     this.author = params.author;
-    this.likeCount=params.likeCount
+    this.likeCount=params.likeCount;
+  //  this.commentCount=params.commentCount;
   }
 }

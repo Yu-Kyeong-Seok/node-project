@@ -17,6 +17,7 @@ export class CommentsServiceImpl implements CommentService{
         this._postRepository=postRepository;
         this._userRepository=userRepository;
     }
+
     
     
      async getComments(postId:string): Promise<commentResponseDTO[]> {
@@ -65,15 +66,23 @@ export class CommentsServiceImpl implements CommentService{
     return new commentResponseDTO(savedComment); 
     
     }
-    async  deleteComment(commentId: string): Promise<commentResponseDTO | null> {
-        const comment=await this._commentRepository.findById(commentId);
-        if(!comment){
-            throw new HttpException(401,'댓글 없음.')
-        }
+   
+    // async  deleteComment(commentId: string): Promise<commentResponseDTO | null> {
+    //     const comment=await this._commentRepository.findById(commentId);
+    //     if(!comment){
+    //         throw new HttpException(401,'댓글 없음.')
+    //     }
+    //     await this._commentRepository.delete(commentId);
+    //     return comment;
+       
+    // }
+    async  deleteComment(commentId: string): Promise<void> {
+      
         await this._commentRepository.delete(commentId);
-        return comment;
+  
        
     }
+
     async editComment(commentId: string, updatedComment: Partial<IComment>): Promise<IComment> {
         const updatedResult = await this._commentRepository.update(commentId, updatedComment);
     
@@ -83,5 +92,11 @@ export class CommentsServiceImpl implements CommentService{
 
         return updatedResult; // 수정된 댓글을 반환
     }
-    
+
+    async getMyComments(id: string): Promise<IComment[]> {
+        const comments = await this._commentRepository.findByAllAuthor(id);
+
+        return comments;
+        
+    }
 }

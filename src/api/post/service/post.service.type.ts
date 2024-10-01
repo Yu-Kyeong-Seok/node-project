@@ -31,4 +31,7 @@ export interface PostService {
 
   /**좋아요 */
   likePost(postId:string):Promise<number>;
+
+  /** 내 게시글 조회 */
+  getMyPost(id:string): Promise<IPost[]>;
 }

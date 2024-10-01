@@ -26,7 +26,13 @@ const profileSchema = new mongoose.Schema<IProfile>({
     require:true,
     length:11,
     unique:true,
-  }
+  },
+  greeting:{
+    type:String,
+    required:true,
+    length:20,
+    unique:true,
+  },
 });
 
 export const MongooseProfile = mongoose.model<IProfile>(

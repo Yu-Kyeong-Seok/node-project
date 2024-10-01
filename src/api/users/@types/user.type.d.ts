@@ -11,8 +11,10 @@ interface IProfile {
   firstName: string;
   /** 프로필 이미지 */
   thumbnail?: string;
-  /*전화번호 */
+  /** 전화번호 */
   telNumber: string;
+  /** 인사말*/
+  greeting: string;
 }
 
 interface IUser {

@@ -72,6 +72,7 @@ const NOTICE_ROUTES = {
 
 
 
+
 export const ROUTES_INDEX = {
   ...POST_ROUTES,
   ...AUTH_ROUTES,

@@ -44,35 +44,43 @@ app.set("views", path.join(__dirname, "views"));
 // view engine 세팅
 app.set("view engine", "ejs");
 
-// /admin-api
 
 
+
+/*----- post 검색---------*/
 app.use(postSearchViewRouter);
 app.use(postSearchRouter);
 
+/*----- 인증 ,유저 ---------*/
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 app.use(ROUTES_INDEX.USERS_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USERS_API, adminUsersRouter);
-app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
+app.use(authViewRouter);
 
+/**---- 공지사항,faq--------*/
 app.use(noticeViewRouter);
 app.use(faqViewRouter);
 app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
+app.use(appRouter);
+app.use(viewRouter);
 
+/**----- 마이프로필 --------*/
+app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
 app.use(profileViewRouter);
 app.use(profileRouter);
 
-app.use(authViewRouter);
-
+/**----- 댓글 ------------ */
 app.use(commentRouter);
+
+
+/**---게시글(post)--------- */
 app.use(postViewRouter);
-
-//app.use(commentViewRouter);
-
 app.use(postRouter);
+
+/**-----카테고리----------- */
 app.use(categoryViewRouter);
 app.use(categoryRouter);
 

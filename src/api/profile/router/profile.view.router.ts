@@ -4,6 +4,10 @@ import ProfileViewController from "../controller/profile.view.controller";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/users/repository/profile/mongooseProfile.repository";
 import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
+import { PostsServiceImpl } from "@/api/post/service/post.service";
+import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repository";
+import { CommentsServiceImpl } from "@/api/comment/service/comment.service";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const profileViewRouter = express.Router();
 
@@ -26,6 +30,15 @@ const profileController = new ProfileViewController(
     new ProfileServiceImpl(
         new MongooseUserRepository(),
         new MongooseProfileRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository()
+    ),
+    new CommentsServiceImpl(
+        new MongooseCommentRepository(), // CommentRepository
+        new MongooseUserRepository(),
+        new MongoosePostRepository()    // PostRepository
     )
 );
 

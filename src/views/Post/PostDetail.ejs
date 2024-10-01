@@ -39,7 +39,7 @@ contents<!DOCTYPE html>
                 <i class="fa-solid fa-user fa-2x"></i>
               </div>
               <div class="detail-user">
-                <div class="detail-nickName">닉네임</div>
+                <div class="detail-nickName"><%= post.author.nickName %></div>
                 <div class="detail-date">
                   <% 
                     const createdAt = post.createdAt;
@@ -52,6 +52,7 @@ contents<!DOCTYPE html>
                     }
                   %>
                   <p>작성일: <%= formattedDate %></p>
+                  <p>댓글수: <%= post.commentCount %></p>
                 </div>
               </div>
             </div>
@@ -69,8 +70,37 @@ contents<!DOCTYPE html>
               <div class="tool">
                 <a href="/" class="tool-button">목록</a>
                 <!-- 수정, 삭제는 로그인 했을 때만 보임 -->
-                <button id="edit" class="tool-button user">수정</button>
+                <a href="/post/edit/<%= post.postId %>">
+                    <button id="edit" class="tool-button user">수정</button>
+                </a>
                 <button id="delete" class="tool-button user">삭제</button>
+               </div>
+            </div>
+
+        <div class="contents-container">
+          <div class="contents-title">
+            <h3><%= post.title %></h3>
+          </div>
+          <div class="contents">
+            <p><%= post.content %></p>
+          </div>
+          <div class="contents-bottom">
+            <button class="thumbs-up">
+              <!-- 색 있는거 -->
+              <i class="fa-solid fa-thumbs-up fa-2x"></i>
+              <span id="like-count"><%= post.likeCount %></span> 
+              <!-- 색 없는거  내일 물어봐야 함-->
+              <!-- <i class="fa-regular fa-thumbs-up"></i> -->
+            </button>
+            
+          </div>
+        </div>
+
+        <div class="comment-container">
+          <div class="comment-logOut">
+            <div class="comment-profile">
+              <div class="comment-userIcon">
+              <i class="fa-solid fa-user"></i>
               </div>
               <div class="thumbs-box">
                 <button class="thumbs-up hello">
@@ -133,7 +163,7 @@ contents<!DOCTYPE html>
                             <i class="fa-solid fa-user"></i>
                           </div>
                        
-                          <p><%= comments[i].author %></p>
+                          <p><%= post.author.nickName %></p>
                           <% 
                           const createdAt = comments[i].createdAt;
                           let formattedDate = "날짜 없음"; // 기본값
@@ -153,34 +183,66 @@ contents<!DOCTYPE html>
                       <p><%=comments[i].content %></p>
                     </div>
                     </div>
-                    <div class="comment-button">
-                    
+                    <div class="comment-button">                 
                         <button type="button" class="edit">수정</button>
                         <button type="button" class="remove">삭제</button>
                   </div>
                   </div>
                 <% } %>
               <% } else { %>
-                <p>댓글이 없습니다.</p>
+                <p style="margin-left:40px;">댓글이 없습니다.</p>
               <% } %>
-            </div>
-        </div>
+            </div>       
+            </div>          
       </div>
       </div>
 
       <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
-       const del = document.querySelector('#delete')
-       del.addEventListener('click', function(){
-        fetch('/api/posts',{
-          method : "DELETE",
-        })
-       })
-        $(document).ready(function () {
-          const login = $(".comment-login");
-          const logout = $(".comment-logOut");
+        const del = document.querySelector('#delete');
+
+        del.addEventListener('click', async function(e) {
+            e.preventDefault();
+
+          // Retrieve the access token from cookies
           const accessToken = document.cookie
-            .split("; ")
+              .split("; ")
+              .find((index) => index.startsWith("accessToken="))
+              ?.split("=")[1];
+
+          if (!accessToken) {
+              alert("로그인이 필요합니다.");
+              return;
+          }
+
+        try {
+            const postId = '<%= post.postId %>'; 
+            const res = await fetch(`/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": accessToken, 
+                },
+            });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+         
+        }
+    } catch (e) {
+        alert("삭제요");
+          location.href = "/views/post"
+    }
+});
+
+
+
+    $(document).ready(function () {
+        const login = $(".comment-login");
+        const logout = $(".comment-logOut");
+        const accessToken = document.cookie
+         .split("; ")
             .find((index) => index.startsWith("accessToken="));
           const isLoggedIn = !!accessToken;
         });
@@ -196,7 +258,7 @@ contents<!DOCTYPE html>
     });
 
     $("#like-count").show();
-
+  
     // 현재 포스트 ID 가져오기
     const url = window.location.pathname;
     const postId = url.split("/").pop();
@@ -250,13 +312,10 @@ contents<!DOCTYPE html>
             console.log('dataaa',data)
             $(this).addClass("liked");
             $("#like-count").text(data.likeCount);
-    //         const currentCount = parseInt($("#like-count").text())  || 0; 
-    // $("#like-count").text(currentCount + 1); // 좋아요 개수 증가
-   
-
-      }catch(error){
-        alert("좋아요 실패.")
-      }
+  
+          }catch(error){
+            alert("좋아요 실패.")
+          }
     })
     // 댓글 등록 버튼 이벤트 리스너
     $(".registration").click(async function (event) {
@@ -319,8 +378,8 @@ contents<!DOCTYPE html>
         commentEle.find(".save-edit").click(async () => {
             const updatedComment = commentEle.find(".edit-textarea").val();
             const commentId = commentEle.data("comment-id");
-            commentEle.find(".edit").show();
-            commentEle.find(".remove").show();
+            commentEle.find(".edit").hide();
+            commentEle.find(".remove").hide();
 
             try {
                 const res = await fetch(`/api/${postId}/comments/${commentId}`, {
@@ -341,6 +400,8 @@ contents<!DOCTYPE html>
                 commentEle.find(".comment-text").show(); // 기존 댓글 다시 표시
                 commentEle.find(".comment-login-down").show(); // 수정, 삭제 버튼 다시 표시
                 alert("댓글이 성공적으로 수정되었습니다.");
+                commentEle.find(".edit").show();
+            commentEle.find(".remove").show();
             } catch (error) {
                 alert("댓글 수정에 실패하였습니다: " + error.message);
             }
@@ -381,8 +442,6 @@ contents<!DOCTYPE html>
           alert("댓글 삭제에 실패하였습니다: " + error.message);
         }
       })
-
-  
 });
 
       </script>

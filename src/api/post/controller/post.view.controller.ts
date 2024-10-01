@@ -24,7 +24,18 @@ export default class PostViewController {
       offset,
       limit,
     });
-    res.render(`post/index`, { post });
+
+    const category = await this._postService.getTopLikesByCategory();
+
+    const cssClass = ['animal','gran','game'];
+
+    for (let i = 0; i < category.length; i++) {
+      // const randomIndex = Math.floor(Math.random() * cssClass.length);
+      category[i].cssClass = cssClass[i];
+    };
+
+    // console.log(category);
+    res.render(`post/index`, { post, category });
   }
 
   /**게시글 상세 페이지 부분 */

@@ -151,17 +151,13 @@ export class PostsServiceImpl implements PostService {
 
       const comments = await this._commentRepository.findByAllAuthor(id);
       
-      console.log('comments',comments);
-
       const posts = await Promise.all(comments.map(comment => this._postRepository.findById(comment.postId)));
       
+      //게시글 중복 제거
       const uniquePostsMap = new Map(posts.map(post => [post?.id, post])).values();
       const uniquePosts = Array.from(uniquePostsMap);
-
-
+      //null 체크
       const validPosts = uniquePosts.filter(post => post !== null);
-
-      console.log('validPosts',validPosts);
 
       //댓글 수 가져오는 배열
       const commentCounts = await Promise.all(validPosts.map(post => this._commentRepository.countByPostId(post.id)));
@@ -169,7 +165,14 @@ export class PostsServiceImpl implements PostService {
       //각 post에 댓글 수 추가
       const resultsCommentCount = validPosts.map((post,index) => new PostResponseDTO(post, commentCounts[index])
     );
-    
+
     return resultsCommentCount;
   }
+
+  async getTopLikesByCategory(): Promise<{ category: string; totalCount: number; cssClass: string;}[]> {
+    const result = await this._postRepository.getTopLikesByCategory();
+
+    return result;
+  }
+
 }

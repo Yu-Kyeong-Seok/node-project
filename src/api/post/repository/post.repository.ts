@@ -24,5 +24,12 @@ export interface PostRepository {
     delete(postId: string): Promise<void>;
     /** 내 게시글 조회 */
     findByAllAuthor(id:string): Promise<IPost[]>;
+    /** 좋아요 TOP 3 가져오기 */
+    getTopLikesByCategory(): 
+    Promise<{
+    category: string;
+    totalCount: number;
+    cssClass: string;
+    }[]>;
   }
   

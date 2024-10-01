@@ -12,5 +12,6 @@ export interface CommentRepository{
     update(commentId:string,updateCommentInfo:Partial<IComment>):Promise<IComment>;
     /*댓글 삭제*/
     delete(commentId:string): Promise<void>;
- 
+    /**댓글 수 */
+    countByPostId(postId:string):Promise<number>;
 }

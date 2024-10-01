@@ -3,13 +3,18 @@ import { PostResponseDTO } from "@/api/post/dto/postResponse.dto";
 import { PostRepository } from "@/api/post/repository/post.repository";
 import { PostService } from "@/api/post/service/post.service.type";
 import HttpException from "@/api/common/exceptions/http.exception";
+import { CommentRepository } from "@/api/comment/repository/comment.respository";
 
 export class PostsServiceImpl implements PostService {
   private readonly _postRepository: PostRepository;
   private readonly _userRepository: UserRepository;
-  constructor(postRepository: PostRepository, userRepository: UserRepository) {
+  private readonly _commentRepository: CommentRepository;
+ 
+  constructor(postRepository: PostRepository, userRepository: UserRepository,commentRepository:CommentRepository) {
     this._postRepository = postRepository;
     this._userRepository = userRepository;
+    this._commentRepository= commentRepository;
+
   }
 
   async createPost(
@@ -40,7 +45,7 @@ export class PostsServiceImpl implements PostService {
       posts: newPosts,
     });
 
-    return new PostResponseDTO(newPost);
+    return new PostResponseDTO(newPost,0);
   }
   
   async getPosts({
@@ -59,13 +64,22 @@ export class PostsServiceImpl implements PostService {
       limit,
       offset,
     });
- 
     const sortedPosts = posts.results.sort((a, b) => b.likeCount - a.likeCount);
     console.log('sortedP',sortedPosts)
+
+    //댓글 수 가져오는 배열
+    const commentCounts=await Promise.all(posts.results.map(post=>this._commentRepository.countByPostId(post.id)))
+    
+    //각 post에 댓글 수 추가
+    const resultsCommentCount=posts.results.map((post,index)=>
+      new PostResponseDTO(post,commentCounts[index])
+    )
+    
     return {
       totalCount: posts.totalCount,
       prev: posts.prev,
-      results: posts.results.map((post) => new PostResponseDTO(post)),
+     // results: posts.results.map((post) => new PostResponseDTO(post)),
+     results:resultsCommentCount,
       next: posts.next,
     };
   }
@@ -76,8 +90,8 @@ export class PostsServiceImpl implements PostService {
     if (!post) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");
     }
-
-    return new PostResponseDTO(post);
+    const commentCount = await this._commentRepository.countByPostId(postId);
+    return new PostResponseDTO(post,commentCount);
   }
   async updatePost(
     postId: string,
@@ -111,5 +125,6 @@ export class PostsServiceImpl implements PostService {
       console.error("좋아요 처리 중 오류 발생:", error);
       throw new HttpException(500, "좋아요 처리 중 오류가 발생했습니다."); // 적절한 오류 처리
   }
+
 }
 }

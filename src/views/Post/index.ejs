@@ -102,7 +102,7 @@
                 </div>
               </div>
               <div class="posts-contents">
-                <a href="/views/post/detail/<%= post.results[i].postId %>">
+                <a href="/post/detail/<%= post.results[i].postId %>">
                 <div class="contents-title">
                   <%= post.results[i].title %>
                 </div>
@@ -114,11 +114,12 @@
                     <!-- 말풍선 아이콘 -->
                     <a href="#"><i class="fa-regular fa-comments"></i></a>
                     <p class="beautiful">
-                      아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요!
+                      <!-- 아직 답변이 달리지 않았어요. 당신의 지식을 공유해주세요! -->
+                      <%= post.results[i].commentCount%>개
                     </p>
                     <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
                   </div>
-                  <button class="answer">나도 답변하기</button>
+                  <button class="answer"> <a href="/post/detail/<%= post.results[i].postId %>">나도 답변하기</a></button>
                 </div>
               </div>
             </div>
@@ -183,6 +184,8 @@
             $("#menu, .page_cover").removeClass("open");
           });
 
+          //게시물 정렬순(인기순=좋아요 많은 순)
+          
 
         });
       </script>

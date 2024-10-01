@@ -11,10 +11,8 @@ export default class CommentViewController {
   
     async commentListPage(req: Request, res: Response, next: NextFunction) {
       const { postId } = req.params;
-  
       try {
-        const comments = await this._commentService.getComments(postId) || { results: [] };
-        
+        const comments = await this._commentService.getComments(postId) || { results: [] }; 
         // comments 변수를 템플릿에 전달
         res.render('post/postDetail', { comments }); // 'comment' -> 'comments'로 수정
       } catch (error) {

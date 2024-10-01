@@ -11,8 +11,10 @@ export class PostResponseDTO {
     createdAt: Date;
     image ?: string;
     likeCount:number;
+    commentCount: number;  // 댓글 수 필드 추가
+
     
-    constructor(params: IPost) {
+    constructor(params: IPost, commentCount: number) {
       this.postId = params.id;
       this.category= params.category;
       this.title = params.title;
@@ -25,6 +27,7 @@ export class PostResponseDTO {
       };
       this.createdAt = params.createdAt;
       this.likeCount=params.likeCount
+      this.commentCount = commentCount;  
     }
   }
   

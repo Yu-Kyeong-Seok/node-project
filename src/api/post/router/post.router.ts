@@ -4,6 +4,7 @@ import { PostsServiceImpl } from "@/api/post/service/post.service";
 import { MongoosePostRepository } from "@/api/post/repository/mongoosePost.repository";
 import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 
 const postRouter = express.Router();
@@ -31,7 +32,8 @@ const  POST_ROUTER = {
   const postController = new PostController(
     new PostsServiceImpl(
       new MongoosePostRepository(),
-      new MongooseUserRepository()
+      new MongooseUserRepository(),
+      new MongooseCommentRepository()
     )
   );
 

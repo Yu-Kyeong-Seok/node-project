@@ -30,36 +30,52 @@ contents<!DOCTYPE html>
       <%- include('../_layouts/header') %>
 
       <div class="content">
-        <div class="detail-category">
-          <h2 class="category-title"><%= post.category %></h2>
-          <div class="profile-bar">
-            <div class="detail-profile">
-              <!-- 프로필 더미 2배 키움 -->
-              <i class="fa-solid fa-user fa-2x"></i>
-            </div>
-            <div class="detail-user">
-              <div class="detail-nickName"><%= post.author.nickName %></div>
-              <div class="detail-date">
-                <% 
-                  const createdAt = post.createdAt;
-                  let formattedDate = "날짜 없음"; // 기본값 설정
-                  if (createdAt) {
-                    const date = new Date(createdAt);
-                    if (!isNaN(date)) {
-                      formattedDate = date.toISOString().slice(0, 10);
+        <div class="postDetail-wrap">
+          <div class="detail-category">
+            <h2 class="category-title"><%= post.category %></h2>
+            <div class="profile-bar">
+              <div class="detail-profile">
+                <!-- 프로필 더미 2배 키움 -->
+                <i class="fa-solid fa-user fa-2x"></i>
+              </div>
+              <div class="detail-user">
+                <div class="detail-nickName"><%= post.author.nickName %></div>
+                <div class="detail-date">
+                  <% 
+                    const createdAt = post.createdAt;
+                    let formattedDate = "날짜 없음"; // 기본값 설정
+                    if (createdAt) {
+                      const date = new Date(createdAt);
+                      if (!isNaN(date)) {
+                        formattedDate = date.toISOString().slice(0, 10);
+                      }
                     }
-                  }
-                %>
-                <p>작성일: <%= formattedDate %></p>
-                <p>댓글수: <%= post.commentCount %></p>
+                  %>
+                  <p>작성일: <%= formattedDate %></p>
+                  <p>댓글수: <%= post.commentCount %></p>
+                </div>
               </div>
             </div>
+            
           </div>
-          <div class="tool">
-            <button id="edit" class="tool-button">수정</button>
-            <button id="delete" class="tool-button">삭제</button>
-          </div>
-        </div>
+
+          <div class="contents-container">
+            <div class="contents-title">
+              <h3><%= post.title %></h3>
+            </div>
+            <div class="contents">
+              <p><%= post.content %></p>
+            </div>
+            <div class="contents-bottom">
+              <div class="tool">
+                <a href="/" class="tool-button">목록</a>
+                <!-- 수정, 삭제는 로그인 했을 때만 보임 -->
+                <a href="/post/edit/<%= post.postId %>">
+                    <button id="edit" class="tool-button user">수정</button>
+                </a>
+                <button id="delete" class="tool-button user">삭제</button>
+               </div>
+            </div>
 
         <div class="contents-container">
           <div class="contents-title">
@@ -86,33 +102,57 @@ contents<!DOCTYPE html>
               <div class="comment-userIcon">
               <i class="fa-solid fa-user"></i>
               </div>
-              <div class="comment-contants">
-                <p>
-                  댓글을 등록하려면
-                  <a href="/login" class="need-login">로그인</a>이 필요합니다.
-                </p>
+              <div class="thumbs-box">
+                <button class="thumbs-up hello">
+                  <!-- 색 있는거 -->
+                  <i class="fa-solid fa-thumbs-up fa-2x"></i>
+                  <span id="like-count"><%= post.likeCount %></span> 
+                  <!-- 색 없는거  내일 물어봐야 함-->
+                  <!-- <i class="fa-regular fa-thumbs-up"></i> -->
+                </button>
+                <button class="thumbs-down hello">
+                  <!-- 색 있는거 -->
+                  <i class="fa-solid fa-thumbs-down fa-2x"></i>
+                  <!-- 색 없는거  내일 물어봐야 함-->
+                  <!-- <i class="fa-regular fa-thumbs-down"></i> -->
+                </button>
               </div>
             </div>
-           
           </div>
-          <div class="comment-login">
-            <div class="commet-login-up">
+
+          <div class="comment-container">
+            <div class="comment-logOut">
               <div class="comment-profile">
-                <i class="fa-solid fa-user"></i>
+                <div class="comment-userIcon">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="comment-contants">
+                  <p>
+                    댓글을 등록하려면
+                    <a href="/login" class="need-login">로그인</a>이 필요합니다.
+                  </p>
+                </div>
               </div>
-              <div class="login-comment-contants">
-                <textarea
-                  name=""
-                  id="comment-textarea"
-                  placeholder="당신의 의견을 들려주세요"
-                ></textarea>
+            
+            </div>
+            <div class="comment-login">
+              <div class="commet-login-up">
+                <div class="comment-profile">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="login-comment-contants">
+                  <textarea
+                    name=""
+                    id="comment-textarea"
+                    placeholder="당신의 의견을 들려주세요"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="comment-login-down">
+                <button type="submit" class="registration">등 록</button>
               </div>
             </div>
-            <div class="comment-login-down">
-              <button type="submit" class="registration">등 록</button>
-            </div>
-          </div>
-            <div class="commentList" style="display: block;  margin-top: 33px;">
+            <div class="commentList">
               <% if (comments && comments.length > 0) { %>
                 <% for(i=0; i<comments.length; i++){ %>
                   <div class="commentss" data-comment-id="<%= comments[i]._id %>">
@@ -123,7 +163,7 @@ contents<!DOCTYPE html>
                             <i class="fa-solid fa-user"></i>
                           </div>
                        
-                          <p><%= comments[i].author %></p>
+                          <p><%= post.author.nickName %></p>
                           <% 
                           const createdAt = comments[i].createdAt;
                           let formattedDate = "날짜 없음"; // 기본값
@@ -143,8 +183,7 @@ contents<!DOCTYPE html>
                       <p><%=comments[i].content %></p>
                     </div>
                     </div>
-                    <div class="comment-button">
-                    
+                    <div class="comment-button">                 
                         <button type="button" class="edit">수정</button>
                         <button type="button" class="remove">삭제</button>
                   </div>
@@ -153,19 +192,60 @@ contents<!DOCTYPE html>
               <% } else { %>
                 <p style="margin-left:40px;">댓글이 없습니다.</p>
               <% } %>
-            </div>
-        </div>
+            </div>       
+            </div>          
+      </div>
       </div>
 
       <!-- <footer><%- include('../_layouts/footer') %></footer> -->
       <script>
-       const del = document.querySelector('#delete')
-       del.addEventListener('click', function(){
-        fetch('/api/posts',{
-          method : "DELETE",
-        })
-       })
+        const del = document.querySelector('#delete');
+
+        del.addEventListener('click', async function(e) {
+            e.preventDefault();
+
+          // Retrieve the access token from cookies
+          const accessToken = document.cookie
+              .split("; ")
+              .find((index) => index.startsWith("accessToken="))
+              ?.split("=")[1];
+
+          if (!accessToken) {
+              alert("로그인이 필요합니다.");
+              return;
+          }
+
+        try {
+            const postId = '<%= post.postId %>'; 
+            const res = await fetch(`/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": accessToken, 
+                },
+            });
+
+        const data = await res.json();
+
+        if (!res.ok) {
          
+        }
+    } catch (e) {
+        alert("삭제요");
+          location.href = "/views/post"
+    }
+});
+
+
+
+    $(document).ready(function () {
+        const login = $(".comment-login");
+        const logout = $(".comment-logOut");
+        const accessToken = document.cookie
+         .split("; ")
+            .find((index) => index.startsWith("accessToken="));
+          const isLoggedIn = !!accessToken;
+        });
 
  $(document).ready(function () {
     // 햄버거 메뉴 관련
@@ -187,6 +267,7 @@ contents<!DOCTYPE html>
     // 로그인 관련
     const login = $(".comment-login");
     const logout = $(".comment-logOut");
+    const postUserButton = $(".tool-button.user")
     const commentList = $(".commentList");
     const accessToken = document.cookie
         .split("; ")
@@ -197,14 +278,14 @@ contents<!DOCTYPE html>
     if (isLoggedIn) {
         login.css("display", "block"); // 댓글 등록하라는 div
         logout.css("display", "none"); // 로그인 하라는 div 
-
+        postUserButton.css("display","block")
         // 모든 댓글의 수정 버튼 보이기
         $(".edit").show();
 
     } else {
         login.css("display", "none");
         logout.css("display", "block");
-
+        postUserButton.css("display","none")
         // 모든 댓글의 수정 버튼 숨기기
         $(".edit").hide();
         $(".remove").hide();

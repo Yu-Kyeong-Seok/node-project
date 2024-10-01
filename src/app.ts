@@ -1,11 +1,9 @@
 import express from "express";
 import path from "node:path";
 import morgan from "morgan";
-import appRouter from "./routers/app.router";
 import userRouter from "@/api/users/router/users.router";
 
 import postViewRouter from "../src/api/post/router/post.view.router";
-import viewRouter from "./routers/views/view.router";
 import authViewRouter from "@/api/auth/router/auth.view.router";
 import categoryViewRouter from "@/api/category/router/category.view.router";
 import adminFaqViewRouter from "./api/faq/router/adminFaq.view.router";
@@ -66,7 +64,6 @@ app.use(adminFaqRouter);
 app.use(faqRouter);
 app.use(adminNoticeRouter);
 app.use(noticeRouter);
-
 app.use(appRouter);
 app.use(viewRouter);
 

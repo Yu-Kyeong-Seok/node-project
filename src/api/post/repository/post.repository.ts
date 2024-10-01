@@ -22,5 +22,7 @@ export interface PostRepository {
     update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost>;
     /** 게시글 삭제 */
     delete(postId: string): Promise<void>;
+    /** 내 게시글 조회 */
+    findByAllAuthor(id:string): Promise<IPost[]>;
   }
   

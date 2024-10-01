@@ -5,6 +5,7 @@ export class Profile implements IProfile {
   firstName: string;
   thumbnail?: string | undefined;
   telNumber:string;
+  greeting?: string | undefined;
 
 
   constructor(params: IProfile) {
@@ -14,5 +15,6 @@ export class Profile implements IProfile {
     this.firstName = params.firstName;
     this.thumbnail = params.thumbnail;
     this.telNumber = params.telNumber;
+    this.greeting = params.greeting;
   }
 }

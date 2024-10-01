@@ -88,7 +88,6 @@ export class MongoosePostRepository implements PostRepository {
   }
   async delete(postId: string): Promise<void> {
     await MongoosePost.deleteOne({ _id: postId });
-
     return;
   }
   async likePost(postId: string): Promise<void> {
@@ -100,5 +99,10 @@ export class MongoosePostRepository implements PostRepository {
 
     post.likeCount = (post.likeCount || 0) + 1;
     await post.save();
-}
+  }
+  async findByAllAuthor(id: string): Promise<IPost[]> {
+    const posts = await MongoosePost.find({ author: id })
+
+    return posts;
+  }
 }

@@ -10,7 +10,7 @@ export interface PostService {
   ): Promise<PostResponseDTO>;
 
   /** 게시글 목록 조회 */
-  getPosts({ limit, offset }: { limit?: number; offset?: number }): Promise<{
+  getPosts({ limit, offset,category }: { limit?: number; offset?: number,category?:string }): Promise<{
     totalCount: number;
     prev: string | null;
     results: PostResponseDTO[];
@@ -23,7 +23,7 @@ export interface PostService {
     results: PostResponseDTO[];
     next: string | null;
   }>;
-  
+
   /** 게시글 조회 */
   getPostDetail(id: string): Promise<PostResponseDTO | null>;
 
@@ -41,4 +41,17 @@ export interface PostService {
 
   /** 내 게시글 조회 */
   getMyPost(id:string): Promise<IPost[]>;
+
+  getPostsByCategory({
+    category,
+    limit,
+    offset,
+}: {
+    category: string; // 필수 카테고리
+    limit?: number; 
+    offset?: number; 
+}): Promise<{
+    totalCount: number; 
+    results: PostResponseDTO[]; 
+}> 
 }

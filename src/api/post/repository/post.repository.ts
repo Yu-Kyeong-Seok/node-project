@@ -3,9 +3,11 @@ export interface PostRepository {
     save(post: Omit<IPost, "id">): Promise<IPost>;
     /** 페이지네이션 목록 조회 */
     findAllWithPagination({
+      category,
       limit,
       offset,
     }: {
+      category?:string,
       offset?: number;
       limit?: number;
     }): Promise<{
@@ -14,6 +16,21 @@ export interface PostRepository {
       results: IPost[];
       next: string | null;
     }>;
+    findByCategoryWithPagination({
+      category,
+      limit,
+      offset,
+    }: {
+      category:string,
+      offset?: number;
+      limit?: number;
+    }): Promise<{
+      totalCount: number;
+      prev: string | null;
+      results: IPost[];
+      next: string | null;
+    }>;
+
     /** 게시글 목록 조회 */
     findAll(): Promise<IPost[]>;
     /** ID로 게시글 조회 */

@@ -80,6 +80,41 @@ export class PostsServiceImpl implements PostService {
       next: posts.next,
     };
   }
+
+  //카테고리별 페이지 불러오기
+  async getPostsByCategory({
+    category,
+    limit,
+    offset,
+}: {
+    category: string; // 필수 카테고리
+    limit?: number; 
+    offset?: number; 
+}): Promise<{
+    totalCount: number; 
+    results: PostResponseDTO[]; 
+}> {
+    // 카테고리 필터링을 포함한 게시글 쿼리
+    const posts = await this._postRepository.findByCategoryWithPagination({
+        category, // 카테고리로 필터링
+        limit,
+        offset,
+    });
+  console.log('postsService?',posts)
+    // 댓글 수 가져오기
+    const commentCounts = await Promise.all(posts.results.map(post => this._commentRepository.countByPostId(post.id)));
+    
+    // 각 게시글에 댓글 수 추가
+    const resultsCommentCount = posts.results.map((post, index) =>
+        new PostResponseDTO(post, commentCounts[index])
+    );
+    
+    return {
+        totalCount: posts.totalCount,
+        results: resultsCommentCount,
+    };
+}
+
   
   async getPopularPosts({
     limit,
@@ -116,7 +151,30 @@ export class PostsServiceImpl implements PostService {
       next: posts.next,
     };
   }
-  async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
+
+//   async getPostsByCategory(categoryId:string, {limit, offset }: { limit?: number; offset?: number; }): Promise<{
+//     totalCount: number;
+//     prev: string | null;
+//     results: PostResponseDTO[];
+//     next: string | null;
+//   }> {
+//     const categoryPosts = await this._postRepository.findByCategoryWithPagination(categoryId, { limit, offset });
+//   // 댓글 수 가져오는 배열
+//   const commentCounts = await Promise.all(categoryPosts.results.map(post => this._commentRepository.countByPostId(post.id)));
+  
+//   // 각 post에 댓글 수 추가
+//   const resultsCommentCount = categoryPosts.results.map((post, index) => new PostResponseDTO(post, commentCounts[index]));
+  
+//   return {
+//     totalCount: posts.totalCount,
+//     prev: posts.prev,
+//     results: resultsCommentCount,
+//     next: posts.next,
+//   };
+// }
+  
+  
+    async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
     
     const post = await this._postRepository.findById(postId);
 

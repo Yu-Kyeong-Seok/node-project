@@ -1,3 +1,4 @@
+import { MongooseCategory } from "@/api/category/model/category.schema";
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongoosePost } from "@/api/post/model/post.schema";
 import { PostRepository } from "@/api/post/repository/post.repository";
@@ -45,6 +46,44 @@ export class MongoosePostRepository implements PostRepository {
     };
   }
 
+  async findByCategoryWithPagination({
+    category,
+    limit = 10, // 기본값 설정
+    offset = 0,  // 기본값 설정
+}: {
+    category?: string; // 카테고리 필터링을 위한 매개변수
+    limit?: number;
+    offset?: number;
+}): Promise<{
+    totalCount: number;
+    prev: string | null;
+    results: IPost[];
+    next: string | null;
+}> {
+    const query: any = {};
+
+    // 카테고리 필터링 조건 추가
+    if (category) {
+        query.category = category; // 카테고리가 주어지면 해당 카테고리로 쿼리
+    }
+
+    // 게시글 쿼리 실행
+    const posts = await MongoosePost.find(query) // MongoDB 쿼리
+        .limit(limit)
+        .skip(offset);
+
+    // 전체 게시글 수 카운트
+    const totalCount = await MongoosePost.countDocuments(query); // 조건에 맞는 게시글 수
+
+    return {
+        totalCount,
+        results: posts,
+        prev: offset > 0 ? `/posts?limit=${limit}&offset=${Math.max(offset - limit, 0)}` : null,
+        next: posts.length === limit ? `/posts?limit=${limit}&offset=${offset + limit}` : null,
+    }
+  
+}
+  
   async save(post: Omit<IPost, "id">): Promise<IPost> {
     const newPost = new MongoosePost({
       ...post,

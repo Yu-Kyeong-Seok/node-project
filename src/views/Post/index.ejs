@@ -237,6 +237,15 @@
 
       $(".popularList").css("display", "none");
       $(".recentList").css("display", "block");
+      $(".popular").css({
+        "font-weight": "300",
+        "color": "gray"
+      });
+
+      $(".myAnswer").css({
+        "font-weight": "900",
+        "color": "black"
+      });
 
       })
       $(".popular").on("click",()=>{
@@ -245,6 +254,17 @@
 
         $(".popularList").css("display", "block");
       $(".recentList").css("display", "none");
+
+      $(".popular").css({
+        "font-weight": "900",
+        "color": "black"
+      });
+
+      $(".myAnswer").css({
+        "font-weight": "300",
+        "color": "gray"
+      });
+
       })
     </script>
   </body>

@@ -30,6 +30,7 @@
     <div class="page-container">
       <%- include('../_layouts/header.ejs') %>
       <div class="content">
+        <div class="post-wrap">
         <div class="mobile-banner">
           <p class="banner-text">
             나만의 질문 모음집을 <br />
@@ -62,10 +63,9 @@
           </a>
         </div>
 
-
         <div class="question-bar">
-          <a href="#">인기</a>
-          <a href="#" class="who">답변</a>
+          <a href="#" class="popular">인기</a>
+          <a href="#" class="myAnswer">답변</a>
         </div>
 
         <div class="post-container">
@@ -119,13 +119,11 @@
                     </p>
                     <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
                   </div>
-                  <button class="answer"> <a href="/post/detail/<%= post.results[i].postId %>">나도 답변하기</a></button>
+                  <a href="/post/detail/<%= post.results[i].postId %>" class="answer">나도 답변하기</a>
                 </div>
               </div>
             </div>
             <% } %>
-            
-
           </div>
 
           <div class="post-right">
@@ -154,41 +152,28 @@
                       <a href="#" class="game">게임</a>
                   </li>
               </ul>
+            </div>
           </div>
-
-
-          </div>
-      
+        </div>
       </div>
-
-      <footer><%- include('../_layouts/footer.ejs') %></footer>
-      <script>
-        $(document).ready(function () {
-          const banner= $(".banner")
-          const mobanner=$(".mobile-banner")
-           const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
-          const isLoggedIn=!!accessToken;
-          
-
-          //로그인시 이렇게 됩니다
-          if (isLoggedIn) {
-            banner.css('visibility', 'hidden'); 
-            mobanner.css('display', 'none'); 
-            }
-          
-          $(".hamburger-bar").click(function () {
-            $("#menu, .page_cover").addClass("open");
-          });
-
-          $(".page_cover, .close").click(function () {
-            $("#menu, .page_cover").removeClass("open");
-          });
-
-          //게시물 정렬순(인기순=좋아요 많은 순)
-          
-
-        });
-      </script>
     </div>
+    <footer><%- include('../_layouts/footer.ejs') %></footer>
+    <script>
+      $(document).ready(function () {
+        const banner= $(".banner")
+        const mobanner=$(".mobile-banner")
+          const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
+        const isLoggedIn=!!accessToken;
+        
+
+        //로그인시 이렇게 됩니다
+        if (isLoggedIn) {
+          banner.css('display', 'none'); 
+          mobanner.css('display', 'none'); 
+          } else{
+            banner.css('display', 'block'); 
+          }
+      });
+    </script>
   </body>
 </html>

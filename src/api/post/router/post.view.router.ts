@@ -17,7 +17,6 @@ const { ObjectId } = require("mongodb");
 const { MongoClient } = require("mongodb");
 
 const postViewRouter = express.Router();
-const BASE_PATH = "/views";
 
 const POST_VIEW_ROUTER = {
    /**글 상세 조회  */
@@ -73,26 +72,25 @@ postViewRouter.get(
     postViewController.postListPage(req, res, next);
   })
 
-
 postViewRouter.get(`/post/detail/:id`,  (req, res, next) => {
   postViewController.postDetailPage(req, res, next);
 });
 
 /**작성 */
-postViewRouter.get(`${BASE_PATH}/post/write`, (req, res, next) => {
+postViewRouter.get(`/post/write`, (req, res, next) => {
  postViewController.postWritePage(req, res, next);
 });
 
 /**수정 */
-postViewRouter.get(`${BASE_PATH}/post/edit/:postId`, (req, res, next) => {
+postViewRouter.get(`/post/edit/:postId`, (req, res, next) => {
   postViewController.postEditPage(req, res, next);
 });
 
 
 
  const COMMENT_VIEW_ROUTER={
-  /**댓긂 목록 조회 */
-  COMMENT_LIST:`${BASE_PATH}/post/detail/:postId`
+  /**댓글 목록 조회 */
+  COMMENT_LIST:`/post/detail/:postId`
  
 }
 

@@ -64,14 +64,47 @@ export class PostsServiceImpl implements PostService {
       limit,
       offset,
     });
+  
+    // 댓글 수 가져오는 배열
+    const commentCounts = await Promise.all(posts.results.map(post => this._commentRepository.countByPostId(post.id)));
+    
+    // 각 post에 댓글 수 추가
+    const resultsCommentCount = posts.results.map((post, index) =>
+      new PostResponseDTO(post, commentCounts[index])
+    );
+    
+    return {
+      totalCount: posts.totalCount,
+      prev: posts.prev,
+      results: resultsCommentCount,
+      next: posts.next,
+    };
+  }
+  
+  async getPopularPosts({
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  }): Promise<{
+    totalCount: number;
+    prev: string | null;
+    results: PostResponseDTO[];
+    next: string | null;
+  }> {
+    const posts = await this._postRepository.findAllWithPagination({
+      limit,
+      offset,
+    });
     const sortedPosts = posts.results.sort((a, b) => b.likeCount - a.likeCount);
-    console.log('sortedP',sortedPosts)
+    //console.log('sortedP',sortedPosts)
 
     //댓글 수 가져오는 배열
-    const commentCounts=await Promise.all(posts.results.map(post=>this._commentRepository.countByPostId(post.id)))
+    const commentCounts=await Promise.all(sortedPosts.map(post=>this._commentRepository.countByPostId(post.id)))
     
     //각 post에 댓글 수 추가
-    const resultsCommentCount=posts.results.map((post,index)=>
+    const resultsCommentCount=sortedPosts.map((post,index)=>
       new PostResponseDTO(post,commentCounts[index])
     )
     

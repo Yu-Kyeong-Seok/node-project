@@ -17,6 +17,13 @@ export interface PostService {
     next: string | null;
   }>;
 
+  getPopularPosts({limit, offset }: { limit?: number; offset?: number }): Promise<{
+    totalCount: number;
+    prev: string | null;
+    results: PostResponseDTO[];
+    next: string | null;
+  }>;
+  
   /** 게시글 조회 */
   getPostDetail(id: string): Promise<PostResponseDTO | null>;
 

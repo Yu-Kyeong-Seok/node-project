@@ -33,5 +33,7 @@ export interface PostService {
   likePost(postId:string):Promise<number>;
 
   /** 내 게시글 조회 */
-  getMyPost(id:string): Promise<IPost[]>;
+  getMyPost(id:string): Promise<PostResponseDTO[]>;
+
+  getMyPostComment(id: string): Promise<PostResponseDTO[]>;
 }

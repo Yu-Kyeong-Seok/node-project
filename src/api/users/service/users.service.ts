@@ -34,7 +34,6 @@ export class UsersServiceImpl implements UserService {
     return newList;
   }
   async getUser(id: string): Promise<GetUserResponseDTO | null> {
-    console.log("64");
     const user = await this._userRepository.findById(id);
 
     if (!user) throw new HttpException(404, "유저를 찾을 수 없습니다.");

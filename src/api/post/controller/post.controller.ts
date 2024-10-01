@@ -13,6 +13,7 @@ export default class PostController {
     this.deletePost = this.deletePost.bind(this);
     this.likePost = this.likePost.bind(this);
     this.getMyPost = this.getMyPost.bind(this);
+    this.getMyPostComment = this.getMyPostComment.bind(this);
   }
 
   /** 게시글 목록 조회 */
@@ -170,6 +171,26 @@ export default class PostController {
     try {
       const { id } = req.params;
       const posts = await this._postService.getMyPost(id)
+        
+      res.send(posts);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getMyPostComment(
+    req: Request<
+      getPostsRequest["path"],
+      getPostsResponse,
+      getPostsRequest["body"],
+      getPostsRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { id } = req.params;
+      const posts = await this._postService.getMyPostComment(id)
         
       res.send(posts);
     } catch (error) {

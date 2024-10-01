@@ -30,6 +30,8 @@ const  POST_ROUTER = {
 
     /** 내 글 목록 조회 */
     GET_MY_POSTS: '/api/post/my/:id',
+    /** 내 답변 글 목록 조회 */
+    GET_MY_POSTS_COMMENT: '/api/post/comment/my/:id',
   } as const;
 
   const postController = new PostController(
@@ -80,6 +82,12 @@ postRouter.get(
     POST_ROUTER.GET_MY_POSTS,
     authUserMiddleware,
     postController.getMyPost
+  );
+
+  postRouter.get(
+    POST_ROUTER.GET_MY_POSTS_COMMENT,
+    authUserMiddleware,
+    postController.getMyPostComment
   );
 
 export default postRouter

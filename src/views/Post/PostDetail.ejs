@@ -197,7 +197,7 @@ contents<!DOCTYPE html>
         }
     } catch (e) {
         alert("삭제요");
-          location.href = "/views/post"
+          location.href = "/"
     }
 });
 
@@ -273,8 +273,6 @@ contents<!DOCTYPE html>
             if (!res.ok) {
                 throw new Error(data.details);
             }
-            alert("좋아요가 성공적으로 등록되었습니다.");
-            console.log('dataaa',data)
             $(this).addClass("liked");
             $("#like-count").text(data.likeCount);
   

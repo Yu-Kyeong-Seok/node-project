@@ -61,7 +61,18 @@ export class MongoosePostRepository implements PostRepository {
     results: IPost[];
     next: string | null;
 }> {
+  const offsetValue = Number(offset) || 0;
+  const limitValue = Number(limit) || 10;
     const query: any = {};
+    // const list = await MongoosePost.find()
+    // .limit(limitValue)
+    // .skip(offsetValue)
+    // .populate({
+    //   path: "author",
+    //   populate: {
+    //     path: "profile",
+    //   },
+    // })
 
     // 카테고리 필터링 조건 추가
     if (category) {
@@ -70,8 +81,14 @@ export class MongoosePostRepository implements PostRepository {
 
     // 게시글 쿼리 실행
     const posts = await MongoosePost.find(query) // MongoDB 쿼리
-        .limit(limit)
-        .skip(offset);
+    .limit(limitValue)
+    .skip(offsetValue)
+    .populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      }
+})
 
     // 전체 게시글 수 카운트
     const totalCount = await MongoosePost.countDocuments(query); // 조건에 맞는 게시글 수

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/category/category.css"/>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/5a10cda3a0.js" crossorigin="anonymous"></script>
+    
+    <title>GENESIS</title>
+</head>
+<body>
+  <div class="page-container">
+    <%- include('../_layouts/header') %>
+    <div class="content">
+        <div class="category-wrap">
+            <section class="category-container">
+                <article class="category-header">
+                    <h2 class="category-title detail">
+                        <span class="<%= category.name %>">
+                            <%= category.koreanName %>
+                        </span>
+                    </h2>
+                    <!-- <input type="text" class="category-search" placeholder="원하는 단어를 검색해보세요!"> -->
+                </article>
+                <article class="category-content">
+                    <% for(i = 0; i < posts.length ; i++) { %>
+                        <div class="posts">
+                          <div class="category-bar">
+                            <div class="profile">
+                              <!-- 프로필 아이콘 -->
+                              <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div class="category">
+                              <%= posts[i].category %>
+                            </div>
+                            <div class="user">
+                              <div class="nickName">
+                               <%= posts[i].author.nickName %>
+                              </div>
+                              <div class="date">
+                                <% 
+                                const createdAt = posts[i].createdAt;
+                                let formattedDate = "날짜 없음"; // 기본값
+                                if (createdAt) {
+                                  const date = new Date(createdAt);
+                                  if (!isNaN(date)) {
+                                    formattedDate = date.toISOString().slice(0, 10);
+                                  }
+                                }
+                              %>
+                              
+                              <p>작성일: <%= formattedDate %></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="posts-contents">
+                            <a href="/post/detail/<%= posts[i].postId %>">
+                            <div class="contents-title">
+                              <%= posts[i].title %>
+                            </div>
+                          </a>
+                          </div>
+                          <div class="contents-bottom">
+                            <div class="bottom-contents">
+                              <div class="icon">
+                                <!-- 말풍선 아이콘 -->
+                                <a href="#"><i class="fa-regular fa-comments"></i></a>
+                                <p class="beautiful">
+                                  <%= posts[i].commentCount%>개
+                                </p>
+                                <p class="beautiful-mobile">아직 답변이 달리지 않았어요.</p>
+                              </div>
+                              <a href="/post/detail/<%= posts[i].postId %>" class="answer">나도 답변하기</a>
+                            </div>
+                          </div>
+                        </div>
+                        <% } %>
+                </article>
+            </section>
+            <section class="category-aside-container">
+                <a href="#" class="banner">
+                    <p class="banner-text">
+                        나만의 <br />
+                        질문 모음집을 <br />
+                        생성해보세요!
+                    </p>
+                    <span class="banner-sign-up">
+                        회원가입
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </span>
+                </a>
+                <aside class="aside-content">
+                    <!-- <div class="dumm">dumm</div> -->
+                    <div class="top3">
+                        <h3>TOP 3</h3>
+                        <ul>
+                            <li>
+                                <a href="#" class="animal">동물</a>
+                            </li>
+                            <li>
+                                <a href="#" class="gran">육아</a>
+                            </li>
+                            <li>
+                                <a href="#" class="game">게임</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#" class="food">음식</a>
+                            </li>
+                            <li>
+                                <a href="#" class="movie">영화</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </aside>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        <%- include('../_layouts/footer') %>
+    </footer>
+    <script>
+      $(document).ready(function () {
+          const banner= $(".banner")
+          const accessToken=document.cookie.split("; ").find(index=>index.startsWith('accessToken='))
+          const isLoggedIn=!!accessToken;
+          
+          //로그인시 이렇게 됩니다
+          if (isLoggedIn) {
+              banner.css('display', 'none'); 
+          }
+      });
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+.content {
+  margin-top: 120px;
+  margin-bottom: 80px;
+}
+
+.changeNumbers-container {
+  max-width: 1280px;
+  width: 100%;
+  /* height: 500px; */
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.changeNumbers-container h2 {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.number-container {
+  margin: 80px auto;
+  width: 50%;
+}
+
+.basic-number {
+  margin-bottom: 30px;
+}
+
+.number-box {
+  margin-top: 10px;
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+}
+.fixed-number {
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 5px;
+}
+.new-number::after {
+  content: "*";
+  color: red;
+}
+.change {
+  margin-top: 10px;
+  width: 100%;
+  padding: 16px;
+  font-weight: 400;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 10px;
+}
+
+.button-bar {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.checkbutton {
+  min-height: 48px;
+  width: 210px;
+  height: 48px;
+  font-size: 16px;
+  /* padding: 10px 60px; */
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: #C9C9C9;
+}
+.pupple {
+  background-color: #7B0CBF;
+}
+
+#form .msg{
+  font-size:13px;
+  color:red;
+}
+
+.hide {
+  display: none;
+  }
+
+@media (max: 768px) {
+  .button-bar {
+    flex-direction: column;
+  }
+  /* .checkbutton {
+    font-size: 14px;
+  } */
+}
+
+@media screen and (max-width:373px) {
+  .number-container {
+    margin: 5px;
+    width: 100%;
+  }
+  .changeNumbers-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .button-bar {
+    margin: 5px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .checkbutton {
+    min-height: 54px;
+    width: 130px;
+    height: 54px;
+    font-size: 14px;
+    padding: 0px;
+  }
+}

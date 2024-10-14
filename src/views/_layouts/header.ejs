@@ -1,0 +1,168 @@
+<header class="header">
+    <div class="inner pc">
+        <a href="/" class="logo">
+            <img src="/static/images/logo.png" alt="star">
+        </a>
+        <div class="gnb-content">
+            <div class="gnb">
+                <ul class="menu">
+                    <li>
+                        <a href="/" class="home">홈</a>
+                    </li>
+                    <li>
+                        <a href="/category" class="category">카테고리</a>
+                    </li>
+                    <li>
+                        <a href="/notice" class="notice">공지사항</a>
+                    </li>
+                    <li>
+                        <a href="/faq" class="faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="util">
+                <li>
+                    <i class="fa-solid fa-right-from-bracket logout"></i>
+                </li>
+                <li>
+                    <div class="user-icon" id="userIcon">
+                        <i class="fa-solid fa-user"></i>
+                        <ul class="user-dropdown">
+                            <li>
+                                <a href="/profile" class="user-profile">프로필</a>
+                            </li>
+                            <li>
+                                <a href="/profile/setting" class="user-setting">계정설정</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="search-bar">
+                  <form action ="/views/search" method="GET" class="search-bar">
+                    <i class="fas fa-search"></i>
+
+                    <input name="keyword" class="search" type="text" placeholder="질문을 검색해보세요."></input>
+                  </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="inner mobile">
+        <div id="menuToggle">
+            <button class="hamburger-bar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div class="nav">
+            <div class="page_cover" onclick="history.back()"></div>
+            <div id="menu">
+                <ul class="side_nav">
+                    <button class="close-button">X</button>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/category">카테고리</a></li>
+                    <li><a href="/notice">공지사항</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+      
+        <a href="/" class="m-logo">
+            <img src="/static/images/genesis.png" alt="logo">
+        </a>
+        <div class="user-icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+    </div>
+</header>
+<script>
+    // 페이지 로드 시 메뉴 버튼 클릭 이벤트 설정
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('click')
+        const menuButton = document.querySelector('.hamburger-bar');
+        const closeButton = document.querySelector('.close-button');
+        const menu = document.getElementById('menu');
+        const pageCover = document.querySelector('.page_cover');
+        const logoutBtn=document.querySelector('.logout');
+       // const userIcon = document.querySelector('.fa-user');
+        const userIcon = document.getElementById('userIcon');
+        console.log(userIcon)
+        const accessToken=document.cookie.split('; ').find(index=>index.startsWith('accessToken='))
+        console.log('acc',accessToken)
+
+        //토큰이 있을 경우 = 로그인 상태
+        const isLoggedIn= !!accessToken;
+        console.log('isL',isLoggedIn)
+        if(isLoggedIn){
+            logoutBtn.style.color="red";
+        }else{
+            logoutBtn.style.display="none"
+        }
+        
+        // if(accessToken){
+        //     const tokenValue=accessToken.split('=')[1].trim();
+        //     if(tokenValue && tokenValue.startsWith('Bearer ')){
+        //         logoutBtn.style.color="red"
+        //     }
+        // }else{
+        //     logoutBtn.style.display="none"
+        // }
+        // 메뉴 열기
+        menuButton.addEventListener('click', function() {
+            menu.classList.add('open');
+            pageCover.classList.add('open');
+            document.documentElement.classList.add('open'); // open 클래스 추가
+        });
+
+        // 메뉴 닫기 (X 버튼 클릭 시)
+        closeButton.addEventListener('click', function() {
+            menu.classList.remove('open');
+            pageCover.classList.remove('open');
+            document.documentElement.classList.remove('open');
+        });
+
+        // 해시 값이 변경될 때 메뉴 닫기
+        window.addEventListener('hashchange', function() {
+            if (location.hash !== '#open') {
+                menu.classList.remove('open');
+                pageCover.classList.remove('open');
+                document.documentElement.classList.remove('open');
+            }
+        });
+
+        userIcon.addEventListener('click',function(){
+            console.log('click')
+            if(isLoggedIn){
+                const $dropdown = $('.user-dropdown');
+                if ($dropdown.css('display') === 'none') {
+                    $dropdown.css('display', 'flex');
+                } else {
+                    $dropdown.css('display', 'none');
+                }
+            }else{
+                location.href='/login'
+            }
+        });
+
+        //로그아웃 구현
+        logoutBtn.addEventListener('click',async()=>{
+            try{
+                const res=await fetch('/api/users/logout',{
+                    method:"POST",
+                    credentials: 'include', 
+                })
+                if(res.ok){
+                    logoutBtn.style.display = "none";
+                    alert('로그아웃 성공입니다.')
+                    location.href='/';
+                }else {
+                // 실패했을 경우
+                alert('로그아웃에 실패했습니다.');
+               }
+            }catch (error) {
+            console.error('로그아웃 중 오류 발생:', error);
+        }
+        });
+    });
+</script>
